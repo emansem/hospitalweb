@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #8563c1;
+            --color-secondary: #f4f9f6;
+            --color-accent: #32d487;
+            --color-dark: #1c1b2e;
+            --color-light: #6dd8a7;
+            --form-bg-color: #2c2c2c;
+            --dark-color: #2e374e;
+            --color-dark-transparent: rgba(28, 27, 46, 0.5);
+            --gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+            --gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+            --gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+            --font-body: "Poppins", sans-serif;
+            --font-heading: "Inter", sans-serif;
+            --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            --shadow-4: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-secondary);
+            color: var(--color-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+        }
+
+        .profile-content {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-2);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .profile-image {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .profile-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--color-primary);
+        }
+
+        .profile-details {
+            margin-top: 2rem;
+        }
+
+        .edit-btn {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            box-shadow: var(--shadow-4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>User Profile</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="profile-content">
+            <div class="profile-image">
+                <img src="https://placekitten.com/150/150" alt="User Avatar">
+            </div>
+            <div class="profile-details">
+                <h2>John Doe</h2>
+                <p><strong>Email:</strong> johndoe@example.com</p>
+                <p><strong>Phone:</strong> (123) 456-7890</p>
+                <p><strong>Date of Birth:</strong> January 1, 1990</p>
+                <p><strong>Address:</strong> 123 Main St, Anytown, USA</p>
+                <h3>Medical History</h3>
+                <ul>
+                    <li>Allergies: None</li>
+                    <li>Medications: Lisinopril (10mg daily)</li>
+                    <li>Previous Surgeries: Appendectomy (2015)</li>
+                </ul>
+                <a href="#" class="edit-btn">Edit Profile</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

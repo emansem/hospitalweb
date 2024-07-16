@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Appointment with Dr. Jane Smith</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #1c1b2e;
+            --color-light: #6dd8a7;
+            --form-bg-color: #2c2c2c;
+            --dark-color: #2e374e;
+            --color-white: #ffffff;
+            --color-gray: #f0f0f0;
+            --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            --font-body: 'Poppins', sans-serif;
+            --font-heading: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-gray);
+            color: var(--dark-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-family: var(--font-heading);
+        }
+
+        .form-container {
+            background-color: var(--color-white);
+            border-radius: 10px;
+            box-shadow: var(--shadow-2);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--dark-color);
+            border-radius: 5px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-color);
+            color: var(--color-white);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Schedule Appointment with Dr. Jane Smith</h1>
+    </header>
+
+    <main class="container">
+        <div class="form-container">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Preferred Time</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointment-type">Appointment Type</label>
+                    <select id="appointment-type" name="appointment-type" required>
+                        <option value="">Select an option</option>
+                        <option value="new-patient">New Patient Consultation</option>
+                        <option value="follow-up">Follow-up Visit</option>
+                        <option value="annual-checkup">Annual Check-up</option>
+                        <option value="urgent-care">Urgent Care</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason for Appointment</label>
+                    <textarea id="reason" name="reason" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="insurance">Insurance Provider</label>
+                    <input type="text" id="insurance" name="insurance">
+                </div>
+                <button type="submit" class="btn">Schedule Appointment</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

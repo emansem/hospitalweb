@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe to Access Doctor Appointments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #1c1b2e;
+            --color-light: #6dd8a7;
+            --form-bg-color: #2c2c2c;
+            --dark-color: #2e374e;
+            --color-white: #ffffff;
+            --color-gray: #f0f0f0;
+            --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            --font-body: 'Poppins', sans-serif;
+            --font-heading: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-gray);
+            color: var(--dark-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+        }
+
+        .subscription-content {
+            background-color: var(--color-white);
+            border-radius: 10px;
+            box-shadow: var(--shadow-2);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .subscription-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .subscription-option {
+            flex: 1;
+            background-color: var(--color-gray);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 0 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .subscription-option:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-2);
+        }
+
+        .subscription-option h3 {
+            color: var(--color-dark);
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark-color);
+            margin: 1rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-color);
+            color: var(--color-white);
+        }
+
+        .payment-form {
+            margin-top: 2rem;
+            background-color: var(--color-gray);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--dark-color);
+            border-radius: 5px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .card-details {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .card-details > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Subscribe to Access Doctor Appointments</h1>
+    </header>
+
+    <main class="container">
+        <div class="subscription-content">
+            <h2>Choose Your Subscription Plan</h2>
+            <div class="subscription-options">
+                <div class="subscription-option">
+                    <h3>Basic Plan</h3>
+                    <p class="price">$29.99/month</p>
+                    <ul>
+                        <li>Access to general practitioners</li>
+                        <li>24/7 online chat support</li>
+                        <li>1 virtual consultation per month</li>
+                    </ul>
+                    <button class="btn" onclick="selectPlan('Basic Plan', 29.99)">Select Basic</button>
+                </div>
+                <div class="subscription-option">
+                    <h3>Standard Plan</h3>
+                    <p class="price">$49.99/month</p>
+                    <ul>
+                        <li>Access to specialists</li>
+                        <li>24/7 phone and chat support</li>
+                        <li>3 virtual consultations per month</li>
+                    </ul>
+                    <button class="btn" onclick="selectPlan('Standard Plan', 49.99)">Select Standard</button>
+                </div>
+                <div class="subscription-option">
+                    <h3>Premium Plan</h3>
+                    <p class="price">$79.99/month</p>
+                    <ul>
+                        <li>Priority access to all doctors</li>
+                        <li>24/7 phone, chat, and video support</li>
+                        <li>Unlimited virtual consultations</li>
+                    </ul>
+                    <button class="btn" onclick="selectPlan('Premium Plan', 79.99)">Select Premium</button>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <h2>Payment Information</h2>
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="full-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" name="card-number" required>
+                    </div>
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date</label>
+                            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="selected-plan">Selected Plan</label>
+                        <input type="text" id="selected-plan" name="selected-plan" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="total-amount">Total Amount</label>
+                        <input type="text" id="total-amount" name="total-amount" readonly>
+                    </div>
+                    <button type="submit" class="btn">Subscribe and Proceed to Appointment</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function selectPlan(planName, price) {
+            document.getElementById('selected-plan').value = planName;
+            document.getElementById('total-amount').value = '$' + price.toFixed(2);
+        }
+
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically handle the payment processing
+            // For this example, we'll just show an alert
+            alert('Payment processed successfully! You can now book an appointment.');
+            // Redirect to appointment booking page
+            // window.location.href = 'appointment-booking.html';
+        });
+    </script>
+</body>
+</html>
