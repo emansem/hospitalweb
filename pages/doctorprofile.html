@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Doctor Profile</title>
+    <title>Dr. Jane Smith - Professional Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="/styles/style.css" />
     <style>
         :root {
             --color-dark: #1c1b2e;
@@ -13,7 +30,6 @@
             --dark-color: #2e374e;
             --color-white: #ffffff;
             --color-gray: #f0f0f0;
-            --color-accent: #32d487;
             --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
             --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
             --font-body: 'Poppins', sans-serif;
@@ -30,304 +46,408 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            margin-top: 50px;
         }
 
         header {
             background-color: var(--color-dark);
             color: var(--color-white);
             padding: 2rem 0;
-            text-align: center;
         }
 
         h1, h2, h3 {
             font-family: var(--font-heading);
+            color: var(--color-dark);
         }
 
-        .edit-form {
+        .profile-content {
             background-color: var(--color-white);
             border-radius: 10px;
             box-shadow: var(--shadow-2);
-            padding: 2rem;
+            overflow: hidden;
             margin-top: 2rem;
         }
 
-        .form-section {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--color-gray);
-        }
-
-        .form-section:last-child {
-            border-bottom: none;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark-color);
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="url"],
-        input[type="number"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--dark-color);
-            border-radius: 5px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="tel"]:focus,
-        input[type="url"]:focus,
-        input[type="number"]:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--color-accent);
-        }
-
-        textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--color-light);
-            color: var(--dark-color);
-            padding: 0.8rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            background-color: var(--color-accent);
+        .profile-header {
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            background-color: var(--form-bg-color);
             color: var(--color-white);
         }
 
-        .image-upload {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .image-preview {
-            width: 100px;
-            height: 100px;
+        .profile-image {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             overflow: hidden;
-            margin-right: 1rem;
-            border: 2px solid var(--color-light);
+            margin-right: 2rem;
         }
 
-        .image-preview img {
+        .profile-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
+        .profile-main {
+            padding: 2rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--color-light);
+            border-radius: 10px;
+            box-shadow: var(--shadow-1);
+            color: var(--color-dark);
+            flex: 1;
+            margin: 0 0.5rem;
+        }
+
+        .btn {
             display: inline-block;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .drName{
+            color: #ffffff;
         }
 
-        .file-input-wrapper input[type=file] {
-            font-size: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            cursor: pointer;
+        .btn:hover {
+            background-color: var(--dark-color);
+            color: var(--color-white);
         }
 
-        .specialties {
+        .skills {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
         }
 
-        .specialty-tag {
+        .skill-tag {
             background-color: var(--color-light);
-            color: var(--dark-color);
+            color: var(--color-dark);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            display: flex;
-            align-items: center;
         }
 
-        .specialty-tag button {
-            background: none;
-            border: none;
-            color: var(--dark-color);
-            margin-left: 0.5rem;
-            cursor: pointer;
+        .reviews {
+            margin-top: 2rem;
+            background-color: var(--color-gray);
+            padding: 2rem;
+            border-radius: 10px;
         }
 
-        #add-specialty {
-            margin-top: 0.5rem;
+        .review {
+            background-color: var(--color-white);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-1);
         }
 
-        .working-hours {
-            display: grid;
-            grid-template-columns: auto 1fr 1fr;
-            gap: 1rem;
-            align-items: center;
+        .section {
+            margin-bottom: 2rem;
         }
 
-        .working-hours label {
-            font-weight: normal;
+        .contact-info {
+            background-color: var(--color-gray);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Edit Doctor Profile</h1>
-    </header>
+   
 
-    <main class="container">
-        <form class="edit-form" id="edit-doctor-profile-form">
-            <div class="form-section">
-                <h2>Profile Images</h2>
-                <div class="image-upload">
-                    <div class="image-preview">
-                        <img id="profile-image-preview" src="https://placekitten.com/100/100" alt="Profile Image Preview">
+   
+
+    <div class="dashboard-container">
+        <div class="siderbar-left">
+            <div class="sidebar-left__nav-top">
+                <div class="logo">
+                    <img src="/logo.png" alt="logo" />
+                </div>
+                <ul class="sidebar-left_nav-items">
+                    <li  class="sidebar-left-item active">
+                        <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
+                    </li>
+                    <li class="sidebar-left-item">
+                        <span><i class="fas fa-calendar-check"></i></span> Appointment
+                    </li>
+                    <li class="sidebar-left-item">
+                        <span><i class="fas fa-envelope"></i></span> Message
+                    </li>
+                    <li class="sidebar-left-item">
+                        <span><i class="fas fa-user-md"></i></span> Doctors
+                    </li>
+                    <li class="sidebar-left-item">
+                        <span><i class="fas fa-cog"></i></span> Settings
+                    </li>
+                    <li class="sidebar-left-item">
+                        <span><i class="fas fa-file-invoice-dollar"></i></span> Billing
+                    </li>
+                    <li class="sidebar-left-item">
+                        <span><i class="fas fa-user-circle"></i></span> Profile
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-right__nav-bottom">
+                <li class="sidebar-left-item">
+                    <span><i class="fas fa-sign-out-alt"></i></span> Logout
+                </li>
+            </div>
+        </div>
+        <div class="main-page">
+            <!---header seaction-->
+
+            <div class="header">
+                <h1 class="header-logo">Dashboard</h1>
+                <div class="header-items">
+                    <div class="search">
+                        <input type="text" placeholder="search.." />
+                        <i class="fas fa-search"></i>
                     </div>
-                    <div class="file-input-wrapper">
-                        <button type="button" class="btn">Upload Profile Image</button>
-                        <input type="file" id="profile-image" name="profile-image" accept="image/*">
+                    <div class="help header-icon">
+                        <i class="far fa-question-circle"></i>
                     </div>
-                </div>
-                <div class="image-upload">
-                    <div class="image-preview">
-                        <img id="thumbnail-image-preview" src="https://placekitten.com/100/100" alt="Thumbnail Image Preview">
+                    <div class="notice header-icon">
+                        <i class="far fas fa-bell"></i>
                     </div>
-                    <div class="file-input-wrapper">
-                        <button type="button" class="btn">Upload Thumbnail</button>
-                        <input type="file" id="thumbnail-image" name="thumbnail-image" accept="image/*">
+                    <div class="user-avater">
+                        <img src="/images/avater1.jpg" alt="" srcset="" />
                     </div>
                 </div>
             </div>
 
-            <div class="form-section">
-                <h2>Personal Information</h2>
-                <div class="form-group">
-                    <label for="full-name">Full Name</label>
-                    <input type="text" id="full-name" name="full-name" required>
+            <!---hero section seaction-->
+          
+
+            <!---appointMent section seaction-->
+            <secttion class="main-section">
+                <main class="container">
+                    <div class="profile-content">
+                        <div class="profile-header">
+                            <div class="profile-image">
+                                <img src="/images/doctor.jpg" alt="Dr. Jane Smith">
+                            </div>
+                            <div>
+                                <h2 class="drName">Dr. Jane Smith, MD, FACC</h2>
+                                <p>Board-Certified Cardiologist</p>
+                                <a href="#" class="btn">Schedule Appointment</a>
+                                <a href="#" class="btn" style="margin-left: 1rem;">Edit Profile</a>
+                            </div>
+                        </div>
+                        <div class="profile-main">
+                            <section class="section">
+                                <h3>About Dr. Jane Smith</h3>
+                                <p>Dr. Jane Smith is a highly skilled and compassionate cardiologist with over 15 years of experience in diagnosing and treating a wide range of cardiovascular conditions. She is dedicated to providing personalized care and utilizing the latest advancements in cardiac medicine to improve her patients' heart health and overall well-being.</p>
+                            </section>
+            
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <h3>500+</h3>
+                                    <p>Patients Treated</p>
+                                </div>
+                                <div class="stat-item">
+                                    <h3>4.9/5</h3>
+                                    <p>Rating</p>
+                                </div>
+                                <div class="stat-item">
+                                    <h3>250+</h3>
+                                    <p>Total Reviews</p>
+                                </div>
+                            </div>
+            
+                            <section class="section">
+                                <h3>Specializations</h3>
+                                <div class="skills">
+                                    <span class="skill-tag">Preventive Cardiology</span>
+                                    <span class="skill-tag">Heart Failure Management</span>
+                                    <span class="skill-tag">Cardiac Rehabilitation</span>
+                                    <span class="skill-tag">Echocardiography</span>
+                                    <span class="skill-tag">Nuclear Cardiology</span>
+                                </div>
+                            </section>
+            
+                            <section class="section">
+                                <h3>Education & Certifications</h3>
+                                <ul>
+                                    <li>MD, Harvard Medical School</li>
+                                    <li>Residency in Internal Medicine, Massachusetts General Hospital</li>
+                                    <li>Fellowship in Cardiovascular Disease, Cleveland Clinic</li>
+                                    <li>Board Certified in Cardiovascular Disease</li>
+                                    <li>Fellow of the American College of Cardiology (FACC)</li>
+                                </ul>
+                            </section>
+            
+                            <section class="section">
+                                <h3>Contact Information</h3>
+                                <div class="contact-info">
+                                    <p><strong>Email:</strong> dr.janesmith@example.com</p>
+                                    <p><strong>Phone:</strong> (123) 456-7890</p>
+                                    <p><strong>Office:</strong> 123 Medical Center Dr, Suite 456, Cityville, State 12345</p>
+                                </div>
+                            </section>
+            
+                            <!-- <section class="reviews">
+                                <h3>Patient Reviews</h3>
+                                <div class="review">
+                                    <h4>John D.</h4>
+                                    <p>"Dr. Smith is an excellent cardiologist. She took the time to explain my condition and treatment options thoroughly. Her expertise and bedside manner are outstanding."</p>
+                                </div>
+                                <div class="review">
+                                    <h4>Sarah M.</h4>
+                                    <p>"I've been seeing Dr. Smith for years. Her expertise and caring attitude have made a significant difference in my heart health. I highly recommend her to anyone looking for a top-notch cardiologist."</p>
+                                </div>
+                            </section> -->
+                        </div>
+                    </div>
+                </main>
+            </secttion>
+        </div>
+        <div class="sidebar-right">
+            <p class="top-doctor-heading">Top Doctors</p>
+          <div class="top-doctors">
+            <div class="top-doctor-item">
+                <div class="top-thumnail">
+                    <img src="/images/doctor.jpg" alt="" />
+                    
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="date-of-birth">Date of Birth</label>
-                    <input type="date" id="date-of-birth" name="date-of-birth">
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select id="gender" name="gender">
-                        <option value="">Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
+                <div class="doctor-info">
+                    <div class="doctor-info-name">
+                        <span class="top-doc-name"> Dr. Jessica </span>
+                       
+                        <div class="doc-hospital">
+                            <span>Abc Destrict</span>
+                            <span>-</span>
+                            <span>Hospital</span>
+                        </div>
+                        <span class="rating">
+                            <li>
+                                <i class="fas fa-star"></i>
+                                <span class="count">4.5</span>
+                                
+                            </li>
+                            <span>(79 reviews)</span>
+                        </span>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-section">
-                <h2>Professional Information</h2>
-                <div class="form-group">
-                    <label for="specialties">Specialties</label>
-                    <div id="specialties-container" class="specialties"></div>
-                    <input type="text" id="specialty-input" placeholder="Enter a specialty">
-                    <button type="button" id="add-specialty" class="btn">Add Specialty</button>
+              <div class="top-doctor-item">
+                <div class="top-thumnail">
+                    <img src="/images/doctor.jpg" alt="" />
+                    
                 </div>
-                <div class="form-group">
-                    <label for="license-number">License Number</label>
-                    <input type="text" id="license-number" name="license-number" required>
-                </div>
-                <div class="form-group">
-                    <label for="years-of-experience">Years of Experience</label>
-                    <input type="number" id="years-of-experience" name="years-of-experience" min="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="education">Education</label>
-                    <textarea id="education" name="education" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="certifications">Certifications</label>
-                    <textarea id="certifications" name="certifications"></textarea>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h2>Practice Information</h2>
-                <div class="form-group">
-                    <label for="clinic-name">Clinic/Hospital Name</label>
-                    <input type="text" id="clinic-name" name="clinic-name">
-                </div>
-                <div class="form-group">
-                    <label for="clinic-address">Clinic/Hospital Address</label>
-                    <textarea id="clinic-address" name="clinic-address"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="consultation-fee">Consultation Fee</label>
-                    <input type="number" id="consultation-fee" name="consultation-fee" min="0" step="0.01">
-                </div>
-               
-            </div>
-
-            <div class="form-section">
-                <h2>Additional Information</h2>
-                <div class="form-group">
-                    <label for="bio">Professional Bio</label>
-                    <textarea id="bio" name="bio"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="languages">Languages Spoken</label>
-                    <input type="text" id="languages" name="languages">
-                </div>
-                <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" id="website" name="website">
+                <div class="doctor-info">
+                    <div class="doctor-info-name">
+                        <span class="top-doc-name"> Dr. Jessica </span>
+                       
+                        <div class="doc-hospital">
+                            <span>Abc Destrict</span>
+                            <span>-</span>
+                            <span>Hospital</span>
+                        </div>
+                        <span class="rating">
+                            <li>
+                                <i class="fas fa-star"></i>
+                                <span class="count">4.5</span>
+                                
+                            </li>
+                            <span>(79 reviews)</span>
+                        </span>
+                    </div>
                 </div>
             </div>
+            <div class="top-doctor-item">
+                <div class="top-thumnail">
+                    <img src="/images/doctor.jpg" alt="" />
+                    
+                </div>
+                <div class="doctor-info">
+                    <div class="doctor-info-name">
+                        <span class="top-doc-name"> Dr. Jessica </span>
+                       
+                        <div class="doc-hospital">
+                            <span>Abc Destrict</span>
+                            <span>-</span>
+                            <span>Hospital</span>
+                        </div>
+                        <span class="rating">
+                            <li>
+                                <i class="fas fa-star"></i>
+                                <span class="count">4.5</span>
+                                
+                            </li>
+                            <span>(79 reviews)</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+          </div>
+          <div class="appointments">
+            <div class="apt-wrapper">
+                <div class="patient-item1">
+                    <div class="patient-avater">
+                        <img src="/images/avater1.jpg" alt="patient photo">
+                    </div>
+                    <div class="apt-time-name">
+                        <span class="patient-name">
+                            Brain Mathew
+                        </span>
+                        <span class="apt-time">
+                            <span> 10:10am - 10:00pm</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="apt-seemore">
+                    <i class="fas fa-angle-right"></i>
 
-            <button type="submit" class="btn">Save Changes</button>
-        </form>
-    </main>
 
-    <script>
-     
+                </div>
+            </div>
+            <div class="apt-wrapper">
+                <div class="patient-item1">
+                    <div class="patient-avater">
+                        <img src="/images/avater1.jpg" alt="patient photo">
+                    </div>
+                    <div class="apt-time-name">
+                        <span class="patient-name">
+                            Brain Mathew
+                        </span>
+                        <span class="apt-time">
+                            <span> 10:10am - 10:00pm</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="apt-seemore">
+                    <i class="fas fa-angle-right"></i>
 
-    
-    </script>
+
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
 </body>
 </html>
