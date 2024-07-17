@@ -3,7 +3,7 @@
 //import files
 import { users, saveUsers, userId, globalstate } from "../script.js/data.js";
 const path = window.location.pathname;
-
+const getData = JSON.parse(localStorage.getItem("users"));
 const form = document.querySelector(".form");
 const submitBtn = document.querySelector(".submitBtn");
 const reports = document.querySelector(".reports");
@@ -16,6 +16,7 @@ if (globalstate[1].pathName.includes("register.html")) {
 	callForm();
 } else if (globalstate[1].pathName.includes("dashboard.html")) {
 	getUserInfo();
+	getlistofDoctors();
 } else if (globalstate[1].pathName.includes("login.html")) {
 	callLogIn();
 }
@@ -243,8 +244,7 @@ function loggedUserIn() {
 	const existingUser = getData?.find(
 		(item) => item.phone === phone || item.password === password
 	);
-	if(existingUser){
-	
+	if (existingUser) {
 		submitBtn.innerHTML = "Please wait...";
 		form.reset();
 
@@ -253,11 +253,9 @@ function loggedUserIn() {
 
 			alert("User registered successfully!");
 		}, 1500);
-
-
-}else{
- alert('Crediential donot match');
-}
+	} else {
+		alert("Crediential donot match");
+	}
 }
 
 function callLogIn() {
@@ -267,4 +265,46 @@ function callLogIn() {
 	});
 }
 
+function getlistofDoctors() {
+	getData.forEach((user) => {
+		if (user.type === "doctor") {
+			console.log(user);
+			addDoctorstoDashboard(user);
+		}
+	});
 
+	return users;
+}
+
+function addDoctorstoDashboard(user) {
+	return (doctors.innerHTML += `
+	<a href="/pages/doctorprofile.html?id=${user.id}" target="_blank" rel="noopener noreferrer">
+	<div class="doctor-items">
+							<div class="doctor-thumnail">
+								<img src="/images/doctor.jpg" alt="" />
+								<i class="fas fa-heart"></i>
+							</div>
+							<div>
+								<div class="doctor-info-name">
+									<div class="doctor-info">
+                                        <span class="doc-name"> Dr. ${user.name} </span>
+									<span class="rating1">
+										<li>
+											<i class="fas fa-star"></i>
+											<span class="count"> ${user.stats.rating }.5</span>
+										</li>
+									</span>
+                                    </div>
+									<div class="doc-hospital">
+										<span>${user.contactInfo.office.address}</span>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+	</a>
+	
+	
+	
+	`);
+}
