@@ -221,71 +221,13 @@
                         <input type="file" id="profile-image" name="profile-image" accept="image/*">
                     </div>
                 </div>
-                <div class="image-upload">
-                    <div class="image-preview">
-                        <img id="thumbnail-image-preview" src="https://placekitten.com/100/100" alt="Thumbnail Image Preview">
-                    </div>
-                    <div class="file-input-wrapper">
-                        <button type="button" class="btn">Upload Thumbnail</button>
-                        <input type="file" id="thumbnail-image" name="thumbnail-image" accept="image/*">
-                    </div>
-                </div>
+                
+                
             </div>
 
-            <div class="form-section">
-                <h2>Personal Information</h2>
-                <div class="form-group">
-                    <label for="full-name">Full Name</label>
-                    <input type="text" id="full-name" name="full-name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="date-of-birth">Date of Birth</label>
-                    <input type="date" id="date-of-birth" name="date-of-birth">
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select id="gender" name="gender">
-                        <option value="">Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-            </div>
+         
 
-            <div class="form-section">
-                <h2>Professional Information</h2>
-                <div class="form-group">
-                    <label for="specialties">Specialties</label>
-                    <div id="specialties-container" class="specialties"></div>
-                    <input type="text" id="specialty-input" placeholder="Enter a specialty">
-                    <button type="button" id="add-specialty" class="btn">Add Specialty</button>
-                </div>
-                <div class="form-group">
-                    <label for="license-number">License Number</label>
-                    <input type="text" id="license-number" name="license-number" required>
-                </div>
-                <div class="form-group">
-                    <label for="years-of-experience">Years of Experience</label>
-                    <input type="number" id="years-of-experience" name="years-of-experience" min="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="education">Education</label>
-                    <textarea id="education" name="education" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="certifications">Certifications</label>
-                    <textarea id="certifications" name="certifications"></textarea>
-                </div>
-            </div>
+            
 
             <div class="form-section">
                 <h2>Practice Information</h2>
@@ -297,10 +239,7 @@
                     <label for="clinic-address">Clinic/Hospital Address</label>
                     <textarea id="clinic-address" name="clinic-address"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="consultation-fee">Consultation Fee</label>
-                    <input type="number" id="consultation-fee" name="consultation-fee" min="0" step="0.01">
-                </div>
+               
                
             </div>
 
@@ -314,20 +253,12 @@
                     <label for="languages">Languages Spoken</label>
                     <input type="text" id="languages" name="languages">
                 </div>
-                <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" id="website" name="website">
-                </div>
+               
             </div>
 
             <button type="submit" class="btn">Save Changes</button>
         </form>
     </main>
-
-    <script>
-     
-
-    
-    </script>
+<script type="module" src="/script.js/auth.js"></script>
 </body>
 </html>

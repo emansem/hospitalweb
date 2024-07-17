@@ -308,3 +308,27 @@ function addDoctorstoDashboard(user) {
 	
 	`);
 }
+
+
+const doctorForm = document.getElementById('edit-doctor-profile-form');
+function editDoctorProfile(){
+	
+
+// Examples of selecting form field values
+const fullName = doctorForm.elements['full-name'].value;
+const email = doctorForm.email.value;
+const phone = doctorForm.phone.value;
+const dateOfBirth = doctorForm['date-of-birth'].value;
+const gender = doctorForm.gender.value;
+const licenseNumber = doctorForm['license-number'].value;
+const yearsOfExperience = doctorForm['years-of-experience'].value;
+const education = doctorForm.education.value;
+const certifications = doctorForm.certifications.value;
+const clinicName = doctorForm['clinic-name'].value;
+const clinicAddress = doctorForm['clinic-address'].value;
+const consultationFee = doctorForm['consultation-fee'].value;
+const bio = doctorForm.bio.value;
+const languages = doctorForm.languages.value;
+const website = doctorForm.website.value;
+
+}
