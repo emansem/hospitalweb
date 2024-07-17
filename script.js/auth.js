@@ -1,4 +1,3 @@
-
 /** @format */
 
 //import files
@@ -6,25 +5,23 @@ import { users, saveUsers, userId, globalstate } from "../script.js/data.js";
 const path = window.location.pathname;
 
 const form = document.querySelector(".form");
-const submitBtn =document.querySelector('.submitBtn');
-const reports = document.querySelector('.reports');
-const doctors = document.querySelector('.doctors');
-const appointments = document.querySelector('.appointments');
-const doctorH = document.querySelector('.docctor-heading');
-const loginform = document.getElementById('loginform');
-
+const submitBtn = document.querySelector(".submitBtn");
+const reports = document.querySelector(".reports");
+const doctors = document.querySelector(".doctors");
+const appointments = document.querySelector(".appointments");
+const doctorH = document.querySelector(".docctor-heading");
+const loginform = document.getElementById("loginform");
 
 if (globalstate[1].pathName.includes("register.html")) {
 	callForm();
-}else if(globalstate[1].pathName.includes('dashboard.html')){
-getUserInfo()
-}
-else if(globalstate[1].pathName.includes('login.html')){
+} else if (globalstate[1].pathName.includes("dashboard.html")) {
+	getUserInfo();
+} else if (globalstate[1].pathName.includes("login.html")) {
 	callLogIn();
-	}
+}
 // switch () {
 // 	case value:
-		
+
 // 		break;
 
 // 	default:
@@ -172,16 +169,14 @@ function addNewUser() {
 	}
 
 	saveUsers(newUser);
-submitBtn.innerHTML = 'Please wait...'
-form.reset();
-	
-	
-	setTimeout(function(){
+	submitBtn.innerHTML = "Please wait...";
+	form.reset();
+
+	setTimeout(function () {
 		window.location.href = `/pages/dashboard.html?id =${newUser.id}`;
-		
+
 		alert("User registered successfully!");
-		
-	},1500);
+	}, 1500);
 
 	return newUser;
 }
@@ -199,91 +194,77 @@ function callForm() {
 	});
 }
 
-
-
-
-
-
-function getUserInfo(){
-	const queryString = window.location.search.split('=');
+function getUserInfo() {
+	const queryString = window.location.search.split("=");
 	const userID = queryString[1];
 	console.log(userID);
 	const getData = JSON.parse(localStorage.getItem("users"));
-	const user = getData.find((user) =>user.id === userID);
-	if(user){
+	const user = getData.find((user) => user.id === userID);
+	if (user) {
 		console.log(user);
 		heroSection(user);
-		if(user.type === 'doctor'){
-			doctors.style.display = 'none';
-			doctorH.style.display = 'none';
-		}else if(user.type === 'patient'){
-			reports.style.display = 'none';
-			appointments.style.display = 'none';
+		if (user.type === "doctor") {
+			doctors.style.display = "none";
+			doctorH.style.display = "none";
+		} else if (user.type === "patient") {
+			reports.style.display = "none";
+			appointments.style.display = "none";
 		}
 	}
 }
 
-function heroSection(user){
-const heroWrapper = document.querySelector('.hero-wrapper');
+function heroSection(user) {
+	const heroWrapper = document.querySelector(".hero-wrapper");
 	heroWrapper.innerHTML = `<div class="hero-text">
 							<p class="greet">Welcome Back,</p>
-							<h3 class="userName"><span>${user.type === 'doctor' ? 'Dr' : 'Dear'}.</span> ${user.name}</h3>
+							<h3 class="userName"><span>${user.type === "doctor" ? "Dr" : "Dear"}.</span> ${
+		user.name
+	}</h3>
 							<p class="appointMent">
-								${user.type ==='doctor'? `You have ${user.appointments.pending} total <span> appointments</span> today`: ``}
+								${
+									user.type === "doctor"
+										? `You have ${user.appointments.pending} total <span> appointments</span> today`
+										: ``
+								}
 							</p>
 						</div>
 						<div class="hero-image">
 							<img src="/images/doctor.png" alt="" srcset="" />
-						</div>`
+						</div>`;
 }
 
-function loggedUserIn(){
-
+function loggedUserIn() {
 	const phone = form.phone.value;
-	
-	const password = form.password.value;
-	console.log(password, phone)
 
-	const user = JSON.parse(localStorage.getItem("users"));
+	const password = form.password.value;
+	console.log(password, phone);
 
 	const getData = JSON.parse(localStorage.getItem("users"));
 	const existingUser = getData?.find(
-		(item) => item.phone ===phone || item.password === password
+		(item) => item.phone === phone || item.password === password
 	);
-	console.log("Existing users before adding:", users);
-	if (existingUser) {
-		if (existingUser.phone === phone) {
-			alert("Email already exists");
-		} else if (existingUser.password === password) {
-			alert("You have already used this phone number");
-		}
-		return; // Stop execution if user exists
-	}
+	if(existingUser){
+	
+		submitBtn.innerHTML = "Please wait...";
+		form.reset();
 
-	if(user){
-		if(user.phone !== phone){
-			alert('Phone number donot match')
-		}else if(user.password !==password){
-			alert('Password donot match');
-		}else{
-			submitBtn.innerHTML = 'Please wait...'
-			form.reset();
-			
-			
-			setTimeout(function(){
-				window.location.href = `/pages/dashboard.html?id =${user.id}`;
-				
-				alert("User registered successfully!");
-				
-			},1500);
-		}
-	}
-;
+		setTimeout(function () {
+			window.location.href = `/pages/dashboard.html?id =${existingUser.id}`;
+
+			alert("User registered successfully!");
+		}, 1500);
+
+
+}else{
+ alert('Crediential donot match');
+}
 }
 
-function callLogIn(){
-	loginform.addEventListener('submit', function(e){
+function callLogIn() {
+	loginform.addEventListener("submit", function (e) {
 		e.preventDefault();
-		loggedUserIn()
-	})
+		loggedUserIn();
+	});
 }
+
+
