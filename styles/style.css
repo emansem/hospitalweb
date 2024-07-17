@@ -327,9 +327,9 @@
 	display: flex;
 	justify-content: space-between;
     margin-bottom: 0.8rem;
-    align-items: center;
   
-    white-space: nowrap;
+ align-items: center;
+    
 }
 .fa-star{
     color: #ffa534;
@@ -367,6 +367,7 @@
     padding: 0.8rem 1rem;
     margin-bottom: 1rem;
     border-radius: 1rem;
+    white-space: nowrap;
 }
 .top-thumnail img{
     height: 100px;

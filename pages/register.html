@@ -47,26 +47,26 @@
 					<div class="form-fields">
 						<div>
 							<label for="name">Full Name</label>
-							<input class="form-item" name="fName" type="text" placeholder="Enter your name" />
+							<input class="form-item" name="fName" type="text" placeholder="Enter your name" required />
 						</div>
 						<div>
 							<label for="email">Email</label>
-							<input class="form-item" name="email" type="email" placeholder="Enter your emal" />
+							<input class="form-item" name="email" type="email" placeholder="Enter your emal" required/>
 						</div>
 						<div>
 							<label for="phone">Phone Number</label>
-							<input class="form-item" name="phone" type="tel" placeholder="Enter your Number" />
+							<input class="form-item" name="phone" type="tel" placeholder="Enter your Number" minlength="9" required />
 						</div>
 						<div>
 							<label for="role">Choose role</label>
-							<select class="form-item" name="userRole" id="userRole">
+							<select class="form-item" name="userRole" id="userRole" required>
 								<option value="doctor">Doctor</option>
 								<option value="patient">Patient</option>
 							</select>
 						</div>
 						<div>
 							<label for="gender">Select gender</label>
-							<select class="form-item" name="gender" id="gender">
+							<select class="form-item" name="gender" id="gender" required>
 								<option value="male">Male</option>
 								<option value="female">Female</option>
 							</select>
@@ -78,7 +78,8 @@
 							id="Password"
 								name="password"
 								type="password"
-								placeholder="Enter your passowrd"
+								minlength="7"
+								placeholder="Enter your passowrd" required
 							/>
 						</div>
 						<div>
@@ -88,7 +89,7 @@
 							id="cfpassword"
 								name="cfpassword"
 								type="password"
-								placeholder="Confirm Your Password"
+								placeholder="Confirm Your Password" required
 							/>
 						</div>
 					</div>

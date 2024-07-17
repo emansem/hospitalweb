@@ -39,29 +39,33 @@
 						</p>
 					</div>
 				</div>
-				<form action="" class="form">
+				<form  action="" id="loginform" class="form ">
 					<div class="heading">
 						<div class="form-title"></div>
 						<div class="form sub-title"></div>
 					</div>
-					<div class="form-fields">
 					
-						<div>
-							<label for="phone">Phone Number</label>
-							<input class="form-item" name="phone" type="tel" placeholder="Enter your Number" />
+						<div  class="form-fields ">
+					
+							<div>
+								<label for="phone">Phone Number</label>
+								<input class="form-item" name="phone" required type="tel" placeholder="Enter your Number" />
+							</div>
+							
+							<div>
+								<label for="passowrd">Password</label>
+								<input
+								class="form-item"
+									name="password"
+									id="password"
+									type="password"
+									required
+									placeholder="Enter your passowrd"
+								/>
+							</div>
+							
 						</div>
-						
-						<div>
-							<label for="passowrd">Password</label>
-							<input
-                            class="form-item"
-								name="passowrd"
-								type="password"
-								placeholder="Enter your passowrd"
-							/>
-						</div>
-						
-					</div>
+				
 					<div class="btn">
 						<button class="submitBtn">Login</button>
 					</div>

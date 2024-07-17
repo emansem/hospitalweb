@@ -1,9 +1,18 @@
-let unique = 0;
- export function userId() {
+
+
+
+
+export function userId() {
+  let unique = 'bg1232';
   let unique2 = "U";
-  unique += 192;
-  return (unique2 += unique);
+  for(let i = 0; i < 4; i++) {
+    let randomIndex = Math.floor(Math.random() * unique.length);
+    unique2 += unique.charAt(randomIndex); // Append the character at randomIndex in unique
+  }
+  return unique2 + unique;
 }
+
+
 
 export const users = [
   {
@@ -202,28 +211,22 @@ export const users = [
       communicationMethod: "Email",
       reminderFrequency: "Day Before",
     },
-    lastCheckup: "2024-05-10",
-    accountCreated: "2022-01-15",
-    consentForms: {
-      HIPAA: { signed: true, date: "2022-01-15" },
-      treatmentConsent: { signed: true, date: "2022-01-15" },
-    },
+    
+    accountCreated: new Date().toLocaleString(),
+   
   },
 ];
 
-
-let userSaveData = JSON.parse(localStorage.getItem("users"));
-
-if (!Array.isArray(userSaveData)) {
-  userSaveData = [];
+export function saveUsers(newUser) {
+  let saveData = JSON.parse(localStorage.getItem('users')) || [];
+  saveData = [...saveData, newUser];
+  localStorage.setItem("users", JSON.stringify(saveData));
 }
 
-userSaveData = [...users];
-
-localStorage.setItem("users", JSON.stringify(userSaveData));
 
 const getData = JSON.parse(localStorage.getItem("users"));
-console.log("Data from localStorage:", getData);
+console.log(getData);
+
 
 
 const path = window.location.pathname;
