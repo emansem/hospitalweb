@@ -19,6 +19,8 @@ if (globalstate[1].pathName.includes("register.html")) {
 	getlistofDoctors();
 } else if (globalstate[1].pathName.includes("login.html")) {
 	callLogIn();
+} else if (globalstate[1].pathName.includes("editDoctorProfile.html")) {
+	console.log("hello");
 }
 // switch () {
 // 	case value:
@@ -291,7 +293,7 @@ function addDoctorstoDashboard(user) {
 									<span class="rating1">
 										<li>
 											<i class="fas fa-star"></i>
-											<span class="count"> ${user.stats.rating }.5</span>
+											<span class="count"> ${user.stats.rating}.5</span>
 										</li>
 									</span>
                                     </div>
@@ -309,26 +311,85 @@ function addDoctorstoDashboard(user) {
 	`);
 }
 
+const doctorForm = document.getElementById("edit-doctor-profile-form");
+const profileContainer = document.querySelector(".profile-container");
+function editDoctorProfile() {
+	const clinicName = doctorForm["clinic-name"].value;
+	const bio = doctorForm.bio.value;
 
-const doctorForm = document.getElementById('edit-doctor-profile-form');
-function editDoctorProfile(){
-	
+	const imageFile = doctorForm.profileImage.files[0];
+	const reader = new FileReader();
+    let userAvatar;
+	reader.onload = function (event) {
+		 userAvatar = event.target.result;
+		console.log(userAvatar);
+		
+	};
 
-// Examples of selecting form field values
-const fullName = doctorForm.elements['full-name'].value;
-const email = doctorForm.email.value;
-const phone = doctorForm.phone.value;
-const dateOfBirth = doctorForm['date-of-birth'].value;
-const gender = doctorForm.gender.value;
-const licenseNumber = doctorForm['license-number'].value;
-const yearsOfExperience = doctorForm['years-of-experience'].value;
-const education = doctorForm.education.value;
-const certifications = doctorForm.certifications.value;
-const clinicName = doctorForm['clinic-name'].value;
-const clinicAddress = doctorForm['clinic-address'].value;
-const consultationFee = doctorForm['consultation-fee'].value;
-const bio = doctorForm.bio.value;
-const languages = doctorForm.languages.value;
-const website = doctorForm.website.value;
+	reader.readAsDataURL(imageFile);
+	const languages = doctorForm.languages.value;
+	console.log(languages, bio, userAvatar);
+}
 
+doctorForm.addEventListener("submit", function (e) {
+	e.preventDefault();
+	editDoctorProfile();
+});
+
+function profileDetails() {
+	return (profileContainer.innerHTML = ` <div class="profile-header">
+                            <div class="profile-image">
+                                <img src="/images/doctor.jpg" alt="Dr. Jane Smith">
+                            </div>
+                            <div>
+                                <h2 class="drName">Dr. Jane Smith, MD, FACC</h2>
+                                <p>Board-Certified Cardiologist</p>
+                                <a href="#" class="btn">Schedule Appointment</a>
+                                <a href="#" class="btn" style="margin-left: 1rem;">Edit Profile</a>
+                            </div>
+                        </div>
+                        <div class="profile-main">
+                            <section class="section">
+                                <h3>About Dr. Jane Smith</h3>
+                                <p>Dr. Jane Smith is a highly skilled and compassionate cardiologist with over 15 years of experience in diagnosing and treating a wide range of cardiovascular conditions. She is dedicated to providing personalized care and utilizing the latest advancements in cardiac medicine to improve her patients' heart health and overall well-being.</p>
+                            </section>
+            
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <h3>500+</h3>
+                                    <p>Patients Treated</p>
+                                </div>
+                                <div class="stat-item">
+                                    <h3>4.9/5</h3>
+                                    <p>Rating</p>
+                                </div>
+                                <div class="stat-item">
+                                    <h3>250+</h3>
+                                    <p>Total Reviews</p>
+                                </div>
+                            </div>
+            
+                           
+            
+                            <section class="section">
+                                <h3>Contact Information</h3>
+                                <div class="contact-info">
+                                    <p><strong>Email:</strong> dr.janesmith@example.com</p>
+                                    <p><strong>Phone:</strong> (123) 456-7890</p>
+                                    <p><strong>Office:</strong> 123 Medical Center Dr, Suite 456, Cityville, State 12345</p>
+                                </div>
+                            </section>
+            
+                            <!-- <section class="reviews">
+                                <h3>Patient Reviews</h3>
+                                <div class="review">
+                                    <h4>John D.</h4>
+                                    <p>"Dr. Smith is an excellent cardiologist. She took the time to explain my condition and treatment options thoroughly. Her expertise and bedside manner are outstanding."</p>
+                                </div>
+                                <div class="review">
+                                    <h4>Sarah M.</h4>
+                                    <p>"I've been seeing Dr. Smith for years. Her expertise and caring attitude have made a significant difference in my heart health. I highly recommend her to anyone looking for a top-notch cardiologist."</p>
+                                </div>
+                            </section> -->
+                        </div>`);
 }
