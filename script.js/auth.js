@@ -21,6 +21,8 @@ function addNewUser() {
   const gender = form.gender.value;
   const password = form.password.value;
   const cfpassword = form.cfpassword.value;
+  console.log(fName, email, password,gender)
+
   if(userRole === 'doctor'){
     users
   }else{
