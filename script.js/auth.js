@@ -10,7 +10,7 @@ const reports = document.querySelector(".reports");
 const doctors = document.querySelector(".doctors");
 const appointments = document.querySelector(".appointments");
 const doctorH = document.querySelector(".docctor-heading");
-const loginform = document.getElementById("loginform");
+
 
 
 // preview the image;
@@ -26,7 +26,7 @@ if (globalstate[1].pathName.includes("register.html")) {
   console.log("hello");
   getlistofDoctors();
 } else if (globalstate[1].pathName.includes("login.html")) {
-  callLogIn();
+ 
 } else if (globalstate[1].pathName.includes("editDoctorProfile.html")) {
   console.log("hello");
   previewimage();
@@ -192,36 +192,7 @@ function callForm() {
 
 
 
-function loggedUserIn() {
-  const phone = form.phone.value;
 
-  const password = form.password.value;
-  console.log(password, phone);
-
-  const getData = JSON.parse(localStorage.getItem("users"));
-  const existingUser = getData?.find(
-    (item) => item.phone === phone || item.password === password
-  );
-  if (existingUser) {
-    submitBtn.innerHTML = "Please wait...";
-    form.reset();
-
-    // setTimeout(function () {
-    //   window.location.href = `/pages/dashboard.html?id =${existingUser.id}`;
-
-    //   alert("User registered successfully!");
-    // }, 1500);
-  } else {
-    alert("Crediential donot match");
-  }
-}
-
-function callLogIn() {
-  loginform.addEventListener("submit", function (e) {
-    e.preventDefault();
-    loggedUserIn();
-  });
-}
 
 function getlistofDoctors() {
   getData.forEach((user) => {
