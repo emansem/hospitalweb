@@ -1,6 +1,9 @@
 const appoinmentCard = document.querySelector('.appointment-card');
 
 function renderAppointmentDetails(){
+    const getAppoint =JSON.parse(localStorage.getItem('appointments')) || [];
+console.log(getAppoint);
+
 
 appoinmentCard.innerHTML = ` <div class="appointment-header">
                                 <div class="patient-info">

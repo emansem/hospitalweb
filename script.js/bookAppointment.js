@@ -63,5 +63,4 @@ function  saveNewAppointment(newAppointment){
     localStorage.setItem('appointments', JSON.stringify(saveNewAppointments));
 }
 
-const getAppoint =JSON.parse(localStorage.getItem('appointments')) || [];
-console.log(getAppoint);
+

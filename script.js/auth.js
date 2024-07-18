@@ -1,4 +1,5 @@
 
+
 import { users, previewimage, saveUsers, userId, globalstate } from "../script.js/data.js";
 const path = window.location.pathname;
 const profileContainer = document.querySelector(".profile-content");
@@ -223,11 +224,11 @@ function loggedUserIn() {
     submitBtn.innerHTML = "Please wait...";
     form.reset();
 
-    setTimeout(function () {
-      window.location.href = `/pages/dashboard.html?id =${existingUser.id}`;
+    // setTimeout(function () {
+    //   window.location.href = `/pages/dashboard.html?id =${existingUser.id}`;
 
-      alert("User registered successfully!");
-    }, 1500);
+    //   alert("User registered successfully!");
+    // }, 1500);
   } else {
     alert("Crediential donot match");
   }
@@ -410,10 +411,6 @@ function profileDetails() {
                          
                         </div>`);
 }
-
-
-
-
 
 
 
