@@ -1,10 +1,8 @@
-/** @format */
 
-//import files
 import { users, saveUsers, userId, globalstate } from "../script.js/data.js";
 const path = window.location.pathname;
 const profileContainer = document.querySelector(".profile-content");
-const getData = JSON.parse(localStorage.getItem("users"));
+export const getData = JSON.parse(localStorage.getItem("users"));
 const form = document.querySelector(".form");
 const submitBtn = document.querySelector(".submitBtn");
 const reports = document.querySelector(".reports");
@@ -26,7 +24,8 @@ if (globalstate[1].pathName.includes("register.html")) {
   callLogIn();
 } else if (globalstate[1].pathName.includes("editDoctorProfile.html")) {
   console.log("hello");
-  callUpadteForm();
+  
+  callDoctorForm()
 } else if (globalstate[1].pathName.includes("doctorprofile.html")) {
   console.log("hello");
   profileDetails();
@@ -253,7 +252,7 @@ function addDoctorstoDashboard(user) {
 	<a href="/pages/doctorprofile.html?id=${user.id}" target="_blank" rel="noopener noreferrer">
 	<div class="doctor-items">
 							<div class="doctor-thumnail">
-								<img src="/images/doctor.jpg" alt="" />
+								 <img src="${user.userAvatar || 'https://shorturl.at/8TClo'}" alt="User Avatar">
 								<i class="fas fa-heart"></i>
 							</div>
 							<div>
@@ -282,27 +281,75 @@ function addDoctorstoDashboard(user) {
 }
 
 function editDoctorProfile() {
+	const queryString = window.location.search.split("=");
+	const userID = queryString[1];
+	
 	const clinicName = doctorForm["clinic-name"].value;
 	const bio = doctorForm.bio.value;
-
-	const imageFile = doctorForm.profileImage.files[0];
-	const reader = new FileReader();
-    let userAvatar;
-	reader.onload = function (event) {
-		 userAvatar = event.target.result;
-		console.log(userAvatar);
-		
-	};
-
-	reader.readAsDataURL(imageFile);
 	const languages = doctorForm.languages.value;
-	console.log(languages, bio, userAvatar);
-}
+	const imageFile = doctorForm.profileImage.files[0];
 
-doctorForm.addEventListener("submit", function (e) {
-	e.preventDefault();
-	editDoctorProfile();
-});
+	function updateUserInLocalStorage(updatedUser) {
+	 
+	  let users = JSON.parse(localStorage.getItem('users')) || [];
+	  
+	 
+	  const userIndex = users.findIndex(user => user.id === userID);
+	  
+	  if (userIndex !== -1) {
+		
+		users[userIndex] = { ...users[userIndex], ...updatedUser };
+		
+		// Save the updated users array back to localStorage
+		localStorage.setItem('users', JSON.stringify(users));
+		
+		console.log('User profile updated successfully');
+	  } else {
+		console.log('User not found');
+	  }
+	}
+  
+	
+	if (imageFile) {
+	  const reader = new FileReader();
+	  reader.onload = function (event) {
+		const userAvatar = event.target.result;
+		
+		const updateDoctor = {
+		  bio: bio,
+		  userAvatar: userAvatar,
+		  hospitalName: clinicName,
+		  languages: languages
+		};
+		
+		updateUserInLocalStorage(updateDoctor);
+	  };
+	  reader.readAsDataURL(imageFile);
+	} else {
+	  // If no new image, update without changing the avatar
+	  const updateDoctor = {
+		bio: bio,
+		hospitalName: clinicName,
+		languages: languages
+	  };
+	  updateUserInLocalStorage(updateDoctor);
+	 
+	 
+	}
+  }
+
+function callDoctorForm(){
+	doctorForm.addEventListener("submit", function (e) {
+		e.preventDefault();
+	
+		setTimeout(function(e){
+			window.location.href = `pages/doctorprofile.html?id=${userID}`;
+			alert('Account was sucessfully Updated');
+			editDoctorProfile();
+	
+		  }, 2000)
+	});
+}
 
 function profileDetails() {
   const queryString = window.location.search.split("=");
@@ -312,7 +359,7 @@ function profileDetails() {
 
   return (profileContainer.innerHTML = ` <div class="profile-header">
                             <div class="profile-image">
-                                <img src="${user.userAvatar}" alt="${user.name}">
+                                 <img src="${user.userAvatar || 'https://shorturl.at/8TClo'}" alt="User Avatar">
                             </div>
                             <div>
                                 <h2 class="drName">Dr.${user.name}</h2>
@@ -325,7 +372,7 @@ function profileDetails() {
                         <div class="profile-main">
                             <section class="section">
                                 <h3>About Dr. ${user.name}</h3>
-                                <p>Dr. Jane Smith is a highly skilled and compassionate cardiologist with over 15 years of experience in diagnosing and treating a wide range of cardiovascular conditions. She is dedicated to providing personalized care and utilizing the latest advancements in cardiac medicine to improve her patients' heart health and overall well-being.</p>
+                                <p class = 'doctorBio' >${user.bio}</p>
                             </section>
             
                             <div class="stats">
@@ -393,7 +440,7 @@ function generateSideBar() {
               user.type === "doctor"
                 ? `/pages/doctorprofile.html?id=${userID}`
                 : `/pages/userProfile.html?id=${userID}`
-            }"  target="_blank" rel="noopener noreferrer">
+            }">
             <li class="sidebar-left-item">
 							<span><i class="fas fa-user-circle"></i></span> Profile
 						</li></a>
@@ -406,3 +453,8 @@ function generateSideBar() {
 					</li>
 				</div>`;
 }
+
+
+
+
+

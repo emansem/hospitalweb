@@ -239,3 +239,10 @@ export const globalstate = [
         pathName : path,
     }
   ];
+
+  export  function formatPhone(phone){
+    const first = phone.slice(0, 3);
+    const middle = phone.slice(3, 6);
+    const last = phone.slice(6);
+    return `${first} ${middle} ${last}`
+}
