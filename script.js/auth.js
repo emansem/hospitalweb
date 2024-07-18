@@ -1,5 +1,5 @@
 
-import { users, saveUsers, userId, globalstate } from "../script.js/data.js";
+import { users, previewimage, saveUsers, userId, globalstate } from "../script.js/data.js";
 const path = window.location.pathname;
 const profileContainer = document.querySelector(".profile-content");
 export const getData = JSON.parse(localStorage.getItem("users"));
@@ -11,6 +11,10 @@ const appointments = document.querySelector(".appointments");
 const doctorH = document.querySelector(".docctor-heading");
 const loginform = document.getElementById("loginform");
 const sideBar = document.querySelector(".siderbar-left");
+
+// preview the image;
+
+
 
 const doctorForm = document.getElementById("edit-doctor-profile-form");
 if (globalstate[1].pathName.includes("register.html")) {
@@ -24,7 +28,7 @@ if (globalstate[1].pathName.includes("register.html")) {
   callLogIn();
 } else if (globalstate[1].pathName.includes("editDoctorProfile.html")) {
   console.log("hello");
-  
+  previewimage();
   callDoctorForm()
 } else if (globalstate[1].pathName.includes("doctorprofile.html")) {
   console.log("hello");
@@ -314,6 +318,7 @@ function editDoctorProfile() {
 	  const reader = new FileReader();
 	  reader.onload = function (event) {
 		const userAvatar = event.target.result;
+		document.getElementById('profile-image-preview').src = event.target.result;
 		
 		const updateDoctor = {
 		  bio: bio,
@@ -366,7 +371,7 @@ function profileDetails() {
                                 <p>${user.hospitalName}</p>
                                
                                 <a href="/pages/editDoctorProfile.html?id=${userID}" class="btn">Edit Profile</a>
-                                <a href="/ pages/appointment.html?id=${userID}" class="btn" style="margin-left: 1rem;">Book Appointments</a>
+                                <a href="/pages/appointment.html?id=${userID}" class="btn" style="margin-left: 1rem;">Book Appointments</a>
                             </div>
                         </div>
                         <div class="profile-main">

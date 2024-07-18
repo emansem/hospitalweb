@@ -246,3 +246,25 @@ export const globalstate = [
     const last = phone.slice(6);
     return `${first} ${middle} ${last}`
 }
+
+//previewimage file;
+
+ export function previewimage(){
+  document.getElementById("profileimage").addEventListener("change", function () {
+    const imageFile = this.files[0];
+  
+    if (imageFile) {
+      const reader = new FileReader();
+  
+      reader.onload = function (event) {
+        const userAvatar = event.target.result;
+  
+        document.getElementById("profile-image-preview").src = userAvatar;
+      };
+  
+      reader.readAsDataURL(imageFile);
+    } else {
+      alert("Please select an image file.");
+    }
+  });
+}

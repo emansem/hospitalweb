@@ -9,6 +9,7 @@ function renderProfile(){
   console.log(user);
 const phone =user.phoneNumber;
 console.log(phone);
+console.log(`${user.dateOfBirth === '' || user.dateOfBirth === null || user.dateOfBirth === undefined ? "Add Date of birth" : user.dateOfBirth}`);
 
 const userPhone = formatPhone(phone);
 
@@ -19,17 +20,20 @@ const userPhone = formatPhone(phone);
                 <h2>${user.name}</h2>
                 <p><strong>Email:</strong> johndoe@example.com</p>
                 <p><strong>Phone:</strong> ${userPhone}</p>
-                <p><strong>Date of Birth:</strong> January 1, 1990</p>
-                <p><strong>Address:</strong> 123 Main St, Anytown, USA</p>
-                <h3>Medical History</h3>
+                <p><strong>Date of Birth:</strong> ${user.birthDay || 'Add Date of Birth'}</p>
+                <p><strong>Address:</strong> ${user.address || 'Add address '}</p>
+                <h3>Appointment Details</h3>
                 <ul>
-                    <li>Allergies: None</li>
-                    <li>Medications: Lisinopril (10mg daily)</li>
-                    <li>Previous Surgeries: Appendectomy (2015)</li>
+                    <li>Cancelled: ${user.appointments.cancelled}</li>
+                     <li>Past: ${user.appointments.past}</li>
+                      <li>Total: ${user.appointments.total}</li>
+                       <li>Pending: ${user.appointments.upcoming}</li>
+                    
                 </ul>
-                <a href="#" class="edit-btn">Edit Profile</a>
+                <a href="/pages/editUserProfile.html?id=${userID}" class="edit-btn">Edit Profile</a>
             </div>`
 
 }
+
 
 renderProfile();

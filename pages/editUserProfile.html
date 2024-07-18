@@ -1,228 +1,187 @@
+<!-- @format -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --color-dark: #1c1b2e;
-            --color-light: #6dd8a7;
-            --form-bg-color: #2c2c2c;
-            --dark-color: #2e374e;
-            --color-white: #ffffff;
-            --color-gray: #f0f0f0;
-            --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-            --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-            --font-body: 'Poppins', sans-serif;
-            --font-heading: 'Inter', sans-serif;
-        }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Edit User Profile</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--color-dark: #1c1b2e;
+				--color-light: #6dd8a7;
+				--form-bg-color: #2c2c2c;
+				--dark-color: #2e374e;
+				--color-white: #ffffff;
+				--color-gray: #f0f0f0;
+				--shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+				--shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+				--font-body: "Poppins", sans-serif;
+				--font-heading: "Inter", sans-serif;
+			}
 
-        body {
-            font-family: var(--font-body);
-            background-color: var(--color-gray);
-            color: var(--dark-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
+			body {
+				font-family: var(--font-body);
+				background-color: var(--color-gray);
+				color: var(--dark-color);
+				line-height: 1.6;
+				margin: 0;
+				padding: 0;
+			}
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 2rem;
+			}
 
-        header {
-            background-color: var(--color-dark);
-            color: var(--color-white);
-            padding: 2rem 0;
-            text-align: center;
-        }
+			header {
+				background-color: var(--color-dark);
+				color: var(--color-white);
+				padding: 2rem 0;
+				text-align: center;
+			}
 
-        h1, h2 {
-            font-family: var(--font-heading);
-        }
+			h1,
+			h2 {
+				font-family: var(--font-heading);
+			}
 
-        .edit-form {
-            background-color: var(--color-white);
-            border-radius: 10px;
-            box-shadow: var(--shadow-2);
-            padding: 2rem;
-            margin-top: 2rem;
-        }
+			.edit-form {
+				background-color: var(--color-white);
+				border-radius: 10px;
+				box-shadow: var(--shadow-2);
+				padding: 2rem;
+				margin-top: 2rem;
+			}
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+			.form-group {
+				margin-bottom: 1.5rem;
+			}
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
+			label {
+				display: block;
+				margin-bottom: 0.5rem;
+				font-weight: 600;
+			}
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--dark-color);
-            border-radius: 5px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-        }
+			input[type="text"],
+			input[type="email"],
+			input[type="tel"],
+			input[type="date"],
+			textarea,
+			select {
+				width: 100%;
+				padding: 0.8rem;
+				border: 1px solid var(--dark-color);
+				border-radius: 5px;
+				font-family: var(--font-body);
+				font-size: 1rem;
+			}
 
-        textarea {
-            height: 100px;
-        }
+			textarea {
+				height: 100px;
+			}
 
-        .btn {
-            display: inline-block;
-            background-color: var(--color-light);
-            color: var(--color-dark);
-            padding: 0.8rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
+			.btn {
+				display: inline-block;
+				background-color: var(--color-light);
+				color: var(--color-dark);
+				padding: 0.8rem 1.5rem;
+				text-decoration: none;
+				border-radius: 5px;
+				font-weight: 600;
+				transition: all 0.3s ease;
+				border: none;
+				cursor: pointer;
+				font-size: 1rem;
+			}
 
-        .btn:hover {
-            background-color: var(--dark-color);
-            color: var(--color-white);
-        }
+			.btn:hover {
+				background-color: var(--dark-color);
+				color: var(--color-white);
+			}
 
-        .image-upload {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
+			.image-upload {
+				display: flex;
+				align-items: center;
+				margin-bottom: 1.5rem;
+			}
 
-        .image-preview {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 1rem;
-            border: 2px solid var(--color-light);
-        }
+			.image-preview {
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				overflow: hidden;
+				margin-right: 1rem;
+				border: 2px solid var(--color-light);
+			}
 
-        .image-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+			.image-preview img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
 
-        .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-        }
+			.file-input-wrapper {
+				position: relative;
+				overflow: hidden;
+				display: inline-block;
+			}
 
-        .file-input-wrapper input[type=file] {
-            font-size: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Edit User Profile</h1>
-    </header>
+			.file-input-wrapper input[type="file"] {
+				font-size: 100px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>Edit User Profile</h1>
+		</header>
 
-    <main class="container">
-        <form class="edit-form" id="edit-profile-form">
-            <div class="image-upload">
-                <div class="image-preview">
-                    <img id="profile-image-preview" src="https://placekitten.com/100/100" alt="Profile Image Preview">
-                </div>
-                <div class="file-input-wrapper">
-                    <button type="button" class="btn">Upload New Image</button>
-                    <input type="file" id="profile-image" name="profile-image" accept="image/*">
-                </div>
-            </div>
+		<main class="container">
+			<form class="edit-form" id="edit-profile-form">
+				<div class="image-upload">
+					<div class="image-preview">
+						<img
+							id="profile-image-preview"
+							src="https://placekitten.com/100/100"
+							alt="Profile Image Preview"
+						/>
+					</div>
+					<div class="file-input-wrapper">
+						<button type="button" class="btn">Upload New Image</button>
+						<input
+							type="file"
+							id="profileimage"
+							name="profileimage"
+							accept="image/*"
+						/>
+					</div>
+				</div>
 
-            <div class="form-group">
-                <label for="full-name">Full Name</label>
-                <input type="text" id="full-name" name="full-name" required>
-            </div>
+				<div class="form-group">
+					<label for="date-of-birth">Date of Birth</label>
+					<input  type="date" id="date-of-birth" name="dateofbirth" />
+				</div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+				<div class="form-group">
+					<label for="address">Address</label>
+					<textarea id="address" name="address"></textarea>
+				</div>
 
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
+				<button type="submit" class="btn">Save Changes</button>
+			</form>
+		</main>
 
-            <div class="form-group">
-                <label for="date-of-birth">Date of Birth</label>
-                <input type="date" id="date-of-birth" name="date-of-birth">
-            </div>
-
-            <div class="form-group">
-                <label for="address">Address</label>
-                <textarea id="address" name="address"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="medical-history">Medical History</label>
-                <textarea id="medical-history" name="medical-history"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="emergency-contact">Emergency Contact</label>
-                <input type="text" id="emergency-contact" name="emergency-contact">
-            </div>
-
-            <div class="form-group">
-                <label for="preferred-language">Preferred Language</label>
-                <select id="preferred-language" name="preferred-language">
-                    <option value="english">English</option>
-                    <option value="spanish">Spanish</option>
-                    <option value="french">French</option>
-                    <option value="german">German</option>
-                    <option value="chinese">Chinese</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn">Save Changes</button>
-        </form>
-    </main>
-
-    <script>
-        // Preview uploaded image
-        document.getElementById('profile-image').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('profile-image-preview').src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Handle form submission
-        document.getElementById('edit-profile-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Here you would typically handle the form submission, including image upload
-            // For this example, we'll just show an alert
-            alert('Profile updated successfully!');
-        });
-    </script>
-</body>
+		<script type="module" src="/script.js/edituser.js" ></script>
+	</body>
 </html>
