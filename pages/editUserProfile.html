@@ -5,11 +5,26 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Edit User Profile</title>
+		<title>Edit user profile</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
 			rel="stylesheet"
 		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="/styles/style.css" />
+
 		<style>
 			:root {
 				--color-dark: #1c1b2e;
@@ -28,22 +43,17 @@
 				font-family: var(--font-body);
 				background-color: var(--color-gray);
 				color: var(--dark-color);
-				line-height: 1.6;
+
 				margin: 0;
 				padding: 0;
 			}
-
+			header {
+				margin-top: 100px;
+			}
 			.container {
 				max-width: 800px;
 				margin: 0 auto;
 				padding: 2rem;
-			}
-
-			header {
-				background-color: var(--color-dark);
-				color: var(--color-white);
-				padding: 2rem 0;
-				text-align: center;
 			}
 
 			h1,
@@ -69,10 +79,7 @@
 				font-weight: 600;
 			}
 
-			input[type="text"],
-			input[type="email"],
-			input[type="tel"],
-			input[type="date"],
+			.inputGroup,
 			textarea,
 			select {
 				width: 100%;
@@ -143,45 +150,190 @@
 		</style>
 	</head>
 	<body>
-		<header>
-			<h1>Edit User Profile</h1>
-		</header>
+		<div class="dashboard-container">
+			<div class="siderbar-left"></div>
 
-		<main class="container">
-			<form class="edit-form" id="edit-profile-form">
-				<div class="image-upload">
-					<div class="image-preview">
-						<img
-							id="profile-image-preview"
-							src="https://placekitten.com/100/100"
-							alt="Profile Image Preview"
-						/>
+			<div class="main-page">
+				<!---header seaction-->
+
+				<div class="header">
+					<h1 class="header-logo">Dashboard</h1>
+					<div class="header-items">
+						<div class="search">
+							<input type="text" placeholder="search.." />
+							<i class="fas fa-search"></i>
+						</div>
+						<div class="help header-icon">
+							<i class="far fa-question-circle"></i>
+						</div>
+						<div class="notice header-icon">
+							<i class="far fas fa-bell"></i>
+						</div>
+						<div class="user-avater">
+							<img src="/images/avater1.jpg" alt="" srcset="" />
+						</div>
 					</div>
-					<div class="file-input-wrapper">
-						<button type="button" class="btn">Upload New Image</button>
-						<input
-							type="file"
-							id="profileimage"
-							name="profileimage"
-							accept="image/*"
-						/>
+				</div>
+
+				<section class="main-section">
+					<header></header>
+					<main class="container">
+						<form class="edit-form" id="edit-profile-form">
+							<div class="image-upload">
+								<div class="image-preview">
+									<img
+										id="profile-image-preview"
+										src="https://placekitten.com/100/100"
+										alt="Profile Image Preview"
+									/>
+								</div>
+								<div class="file-input-wrapper">
+									<button type="button" class="btn">Upload New Image</button>
+									<input
+										class="inputGroup"
+										type="file"
+										id="profileimage"
+										name="profileimage"
+										accept="image/*"
+									/>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="date-of-birth">Date of Birth</label>
+								<input
+									class="inputGroup"
+									type="date"
+									id="date-of-birth"
+									name="dateofbirth"
+								/>
+							</div>
+
+							<div class="form-group">
+								<label for="address">Address</label>
+								<textarea
+									class="inputGroup"
+									id="address"
+									name="address"
+								></textarea>
+							</div>
+
+							<button type="submit" class="btn">Save Changes</button>
+						</form>
+					</main>
+				</section>
+			</div>
+
+			<div class="sidebar-right">
+				<p class="top-doctor-heading">Top Doctors</p>
+				<div class="top-doctors">
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
-
-				<div class="form-group">
-					<label for="date-of-birth">Date of Birth</label>
-					<input  type="date" id="date-of-birth" name="dateofbirth" />
+				<div class="appointments">
+					<div class="apt-wrapper">
+						<div class="patient-item1">
+							<div class="patient-avater">
+								<img src="/images/avater1.jpg" alt="patient photo" />
+							</div>
+							<div class="apt-time-name">
+								<span class="patient-name"> Brain Mathew </span>
+								<span class="apt-time">
+									<span> 10:10am - 10:00pm</span>
+								</span>
+							</div>
+						</div>
+						<div class="apt-seemore">
+							<i class="fas fa-angle-right"></i>
+						</div>
+					</div>
+					<div class="apt-wrapper">
+						<div class="patient-item1">
+							<div class="patient-avater">
+								<img src="/images/avater1.jpg" alt="patient photo" />
+							</div>
+							<div class="apt-time-name">
+								<span class="patient-name"> Brain Mathew </span>
+								<span class="apt-time">
+									<span> 10:10am - 10:00pm</span>
+								</span>
+							</div>
+						</div>
+						<div class="apt-seemore">
+							<i class="fas fa-angle-right"></i>
+						</div>
+					</div>
 				</div>
-
-				<div class="form-group">
-					<label for="address">Address</label>
-					<textarea id="address" name="address"></textarea>
-				</div>
-
-				<button type="submit" class="btn">Save Changes</button>
-			</form>
-		</main>
-
-		<script type="module" src="/script.js/edituser.js" ></script>
+			</div>
+		</div>
+		<script src="/script.js/menu.js"></script>
+		<script type="module" src="/script.js/edituser.js"></script>
 	</body>
 </html>
