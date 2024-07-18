@@ -315,20 +315,25 @@ const doctorForm = document.getElementById("edit-doctor-profile-form");
 const profileContainer = document.querySelector(".profile-container");
 function editDoctorProfile() {
 	const clinicName = doctorForm["clinic-name"].value;
-	const bio = doctorForm.bio.value;
+const bio = doctorForm.bio.value;
+const languages = doctorForm.languages.value;
 
-	const imageFile = doctorForm.profileImage.files[0];
-	const reader = new FileReader();
-    let userAvatar;
-	reader.onload = function (event) {
-		 userAvatar = event.target.result;
-		console.log(userAvatar);
-		
-	};
+const imageFile = doctorForm.profileImage.files[0];
+const reader = new FileReader();
 
-	reader.readAsDataURL(imageFile);
-	const languages = doctorForm.languages.value;
-	console.log(languages, bio, userAvatar);
+reader.onload = function (event) {
+    const userAvatar = event.target.result;
+    console.log(userAvatar);
+    localStorage.setItem('src', JSON.stringify(userAvatar));
+    
+    // Move this inside the onload function
+    const userProfile = JSON.parse(localStorage.getItem('src'));
+    
+    // Log everything here
+    console.log(languages, bio, userProfile);
+};
+
+reader.readAsDataURL(imageFile);
 }
 
 doctorForm.addEventListener("submit", function (e) {
