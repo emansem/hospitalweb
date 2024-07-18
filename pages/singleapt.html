@@ -1,0 +1,409 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Appointment Details</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="/styles/style.css" />
+
+		<style>
+			:root {
+	--color-primary: #8563c1; /* Purple */
+	--color-secondary: #f4f9f6; /* Light Green */
+	--color-accent: #32d487; /* Green */
+	--color-dark: #1c1b2e; /* Dark Blue */
+	--color-light: #6dd8a7; /* Light Green */
+	--form-bg-color: #2c2c2c;
+	--dark-color: #2e374e;
+	--color-dark-transparent: rgba(28, 27, 46, 0.5);
+	/* Gradients */
+	--gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+	--gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+	--gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+
+	/* Fonts */
+	--font-body: "Poppins", sans-serif;
+	--font-heading: "Inter", sans-serif;
+	--color1-transparent: rgba(46, 55, 78, 0);
+	--color2-transparent: rgba(31, 38, 54, 0);
+	--color3-transparent: rgba(18, 24, 35, 0);
+	--color4-transparent: rgba(11, 15, 22, 0);
+	/* Box Shadows */
+	--shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	--shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	--shadow-3: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+	--shadow-4: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	--shadow-5: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+	--shadow-6: 0 20px 40px rgba(0, 0, 0, 0.35), 0 25px 20px rgba(0, 0, 0, 0.22);
+}
+
+
+/* .main-section {
+        padding: 2rem;
+        background-color: var(--color-secondary);
+        border-radius: 10px;
+        box-shadow: var(--shadow-2);
+    } */
+
+    .appointment-details {
+        max-width: 800px;
+        margin: 130px auto;
+        font-family: var(--font-body);
+    }
+
+    .appointment-details h2 {
+        color: var(--color-primary);
+        margin-bottom: 1.5rem;
+        font-family: var(--font-heading);
+    }
+
+    .appointment-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: var(--shadow-2);
+        overflow: hidden;
+    }
+
+    .appointment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        background-color: var(--color-primary);
+        color: #fff;
+    }
+
+    .patient-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .patient-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 1rem;
+        object-fit: cover;
+    }
+
+    .patient-info h3 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    .patient-info p {
+        margin: 0.25rem 0 0;
+        opacity: 0.8;
+    }
+
+    
+
+    
+
+    .appointment-body {
+        padding: 1.5rem;
+    }
+
+    .detail-row {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+
+    .detail-label {
+        flex: 0 0 120px;
+        font-weight: 600;
+        color: var(--color-dark);
+    }
+
+    .detail-value {
+        flex: 1;
+        color: var(--color-dark);
+    }
+
+    .appointment-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 1.5rem;
+        background-color: #f9f9f9;
+        gap: 1rem;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-approve {
+        background-color: var(--color-accent);
+        color: #fff;
+    }
+
+    .btn-reject {
+        background-color: #ff4d4d;
+        color: #fff;
+    }
+    .status {
+    background-color: #FFD700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1.2rem;
+    color: #1c1b2e;
+}
+.pending{
+	background-color: #FFD700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1.2rem;
+}
+.approved{
+	background-color: var(--color-accent);
+    padding: 0.3rem 0.6rem;
+    border-radius: 1.2rem;
+}
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+        .main-section {
+            padding: 1rem;
+        }
+
+        .appointment-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .appointment-status {
+            margin-top: 1rem;
+        }
+
+        .detail-row {
+            flex-direction: column;
+        }
+
+        .detail-label {
+            margin-bottom: 0.25rem;
+        }
+
+        .appointment-footer {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+		</style>
+	</head>
+	<body>
+		<div class="dashboard-container">
+			<div class="siderbar-left"></div>
+
+
+			<div class="main-page">
+				<!---header seaction-->
+
+				<div class="header">
+					<h1 class="header-logo">Dashboard</h1>
+					<div class="header-items">
+						<div class="search">
+							<input type="text" placeholder="search.." />
+							<i class="fas fa-search"></i>
+						</div>
+						<div class="help header-icon">
+							<i class="far fa-question-circle"></i>
+						</div>
+						<div class="notice header-icon">
+							<i class="far fas fa-bell"></i>
+						</div>
+						<div class="user-avater">
+							<img src="/images/avater1.jpg" alt="" srcset="" />
+						</div>
+					</div>
+				</div>
+
+				<section class="main-section">
+                    <div class="appointment-details">
+                        <h2>Appointment Details</h2>
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <div class="patient-info">
+                                    <img src="/images/patient-avatar.jpg" alt="Patient Avatar" class="patient-avatar">
+                                    <div>
+                                        <h3>John Doe</h3>
+                                        <p>Patient ID: 12345</p>
+                                    </div>
+                                </div>
+                                <span class="status"> pending</span>
+                            </div>
+                            <div class="appointment-body">
+                                <div class="detail-row">
+                                    <span class="detail-label">Date:</span>
+                                    <span class="detail-value">July 20, 2024</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Time:</span>
+                                    <span class="detail-value">2:00 PM - 3:00 PM</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Type:</span>
+                                    <span class="detail-value">New Patient Consultation</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Doctor:</span>
+                                    <span class="detail-value">Dr. Sarah Johnson</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Location:</span>
+                                    <span class="detail-value">Main Clinic, Room 305</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Reason:</span>
+                                    <span class="detail-value">Annual check-up and general health assessment</span>
+                                </div>
+                            </div>
+                            <div class="appointment-footer">
+                                <button class="btn btn-approve">Approve</button>
+                                <button class="btn btn-reject">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+			</div>
+
+
+			 <div class="sidebar-right"> 
+				<p class="top-doctor-heading">Top Doctors</p>
+				<div class="top-doctors">
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="appointments">
+					<div class="apt-wrapper">
+						<div class="patient-item1">
+							<div class="patient-avater">
+								<img src="/images/avater1.jpg" alt="patient photo" />
+							</div>
+							<div class="apt-time-name">
+								<span class="patient-name"> Brain Mathew </span>
+								<span class="apt-time">
+									<span> 10:10am - 10:00pm</span>
+								</span>
+							</div>
+						</div>
+						<div class="apt-seemore">
+							<i class="fas fa-angle-right"></i>
+						</div>
+					</div>
+					<div class="apt-wrapper">
+						<div class="patient-item1">
+							<div class="patient-avater">
+								<img src="/images/avater1.jpg" alt="patient photo" />
+							</div>
+							<div class="apt-time-name">
+								<span class="patient-name"> Brain Mathew </span>
+								<span class="apt-time">
+									<span> 10:10am - 10:00pm</span>
+								</span>
+							</div>
+						</div>
+						<div class="apt-seemore">
+							<i class="fas fa-angle-right"></i>
+						</div>
+					</div>
+				</div>
+			</div> 
+		</div>
+		<script type="module" src="/script.js/auth.js"></script>
+	</body>
+</html>

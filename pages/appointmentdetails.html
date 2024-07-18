@@ -6,7 +6,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Appointment Details</title>
-		
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -24,15 +24,185 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		/>
 		<link rel="stylesheet" href="/styles/style.css" />
+
+		<style>
+			:root {
+	--color-primary: #8563c1; /* Purple */
+	--color-secondary: #f4f9f6; /* Light Green */
+	--color-accent: #32d487; /* Green */
+	--color-dark: #1c1b2e; /* Dark Blue */
+	--color-light: #6dd8a7; /* Light Green */
+	--form-bg-color: #2c2c2c;
+	--dark-color: #2e374e;
+	--color-dark-transparent: rgba(28, 27, 46, 0.5);
+	/* Gradients */
+	--gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+	--gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+	--gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+
+	/* Fonts */
+	--font-body: "Poppins", sans-serif;
+	--font-heading: "Inter", sans-serif;
+	--color1-transparent: rgba(46, 55, 78, 0);
+	--color2-transparent: rgba(31, 38, 54, 0);
+	--color3-transparent: rgba(18, 24, 35, 0);
+	--color4-transparent: rgba(11, 15, 22, 0);
+	/* Box Shadows */
+	--shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	--shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	--shadow-3: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+	--shadow-4: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	--shadow-5: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+	--shadow-6: 0 20px 40px rgba(0, 0, 0, 0.35), 0 25px 20px rgba(0, 0, 0, 0.22);
+}
+.appointment-wrapper {
+    margin-top: 150px;
+}
+.main-section{
+	overflow-x: auto;
+}
+
+.table_body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    padding-block: 1rem;
+    border-radius: 0.2rem;
+    overflow-x: auto; 
+}
+
+.headingDetails {
+    margin-block: 30px;
+    font-size: 40px;
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    text-align: center;
+}
+
+table, th, td {
+    padding: 0.6rem;
+    border: none;
+}
+
+.seeAll {
+    background-color: #32d487;
+    padding: 0.6rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-dark);
+    font-weight: 500;
+}
+
+th {
+    font-size: 22px;
+    color: #f4f9f6;
+    letter-spacing: 0.6px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    padding-bottom: 1.8rem;
+}
+
+tbody {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+   overflow-x: auto;
+   width: 100%;
+  
+}
+
+thead {
+    background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+  
+}
+
+.status {
+    background-color: #FFD700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1.2rem;
+}
+.pending{
+	background-color: #FFD700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1.2rem;
+}
+.approved{
+	background-color: var(--color-accent);
+    padding: 0.3rem 0.6rem;
+    border-radius: 1.2rem;
+}
+
+td {
+    color: var(--color-dark);
+    font-size: 16px;
+    font-family: var(--font-body);
+    letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .headingDetails {
+        font-size: 30px;
+    }
+
+    th, td {
+        font-size: 14px;
+        padding: 0.4rem;
+    }
+
+    .seeAll {
+        padding: 0.4rem;
+        font-size: 14px;
+    }
+
+    .status {
+        padding: 0.2rem 0.4rem;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .headingDetails {
+        font-size: 24px;
+    }
+
+    th, td {
+        font-size: 12px;
+        padding: 0.3rem;
+    }
+
+    .seeAll {
+        padding: 0.3rem;
+        font-size: 12px;
+    }
+
+    .status {
+        padding: 0.1rem 0.3rem;
+        font-size: 12px;
+    }
+
+    .table_body {
+        padding-block: 0.5rem;
+    }
+}
+
+		</style>
 	</head>
 	<body>
 		<div class="dashboard-container">
-			<div class="siderbar-left">
-				
-			</div>
+			<div class="siderbar-left"></div>
+
+
 			<div class="main-page">
 				<!---header seaction-->
-				
 
 				<div class="header">
 					<h1 class="header-logo">Dashboard</h1>
@@ -53,196 +223,189 @@
 					</div>
 				</div>
 
-				<!---hero section seaction-->
-				<section class="hero">
-					<div class="hero-wrapper">
-						
-					</div>
-				</section>
+				<section class="main-section"> 
+                   
+                  <section class="appointment-wrapper">
+					<h2 class="headingDetails">Appointment Details</h2>
 
-				<!---appointMent section seaction-->
-				<secttion class="main-section">
-					<div class="reports">
-						<div class="patients reports-item">
-							<div class="report-text">
-								<li class="report-icon">
-									<i class="fas fas fa-users"></i>
-									<span>Total Patients</span>
-								</li>
-							</div>
-							<div class="report-Num">
-								<p>5363</p>
-							</div>
-						</div>
-						<div class="pending reports-item">
-							<div class="report-text">
-								<li class="report-icon">
-									<i class="fas fa-hourglass-half"></i>
+					<!---table details-->
+					<section class="table_body">
+					 <table>
+						 <thead>
+							 <tr>
+								 <th>Id</th>
+								 <th>Patients</th>
+								 
+								 <th>Time</th>
+								 <th>Status</th>
+								 <th>Type</th>
+								 <th></th>
+							 </tr>
+						 </thead>
+ 
+						 <tbody>
+							 <tr>
+								 <td>1</td>
+							 <td>
+								 <span>
+									 <img class="userAvater" src="/images/doctor.jpg" alt="" srcset="">
+								 </span>
+								 <span>Eman sem</span>
+							 </td>
+							 
+							 <td>
+								 12:90am
+							 </td>
+							 <td>
+								<span class="status"> pending</span>
+							 </td>
+							 <td>Urgent care</td>
+							 <td>
+								<a class="seeAll" href="">see more</a>
+							 </td>
+							 </tr>
+						 </tbody>
+						 <tbody>
+							<tr>
+								<td>1</td>
+							<td>
+								<span>
+									<img class="userAvater" src="/images/doctor.jpg" alt="" srcset="">
+								</span>
+								<span>Eman sem</span>
+							</td>
+							
+							<td>
+								12:90am
+							</td>
+							<td>
+							   <span class="status approved"> Approved</span>
+							</td>
+							<td>Urgent care</td>
+							<td>
+							   <a class="seeAll" href="">see more</a>
+							</td>
+							</tr>
+						</tbody>
+						 
+					 </table>
+					</section>
+					
+ 
+				  </section>
 
-									<span>Pending Appointments</span>
-								</li>
-							</div>
-							<div class="report-Num">
-								<p>543</p>
-							</div>
-						</div>
-						<div class="finished reports-item">
-							<div class="report-text">
-								<li class="report-icon">
-									<i class="fas fa-check-circle"></i>
-
-									<span>Finished Appointments</span>
-								</li>
-							</div>
-							<div class="report-Num">
-								<p>53</p>
-							</div>
-						</div>
-						<div class="earning reports-item">
-							<div class="report-text">
-								<li class="report-icon">
-									<i class="fas fas fa-dollar-sign"></i>
-
-									<span>Total Earning</span>
-								</li>
-							</div>
-							<div class="report-Num">
-								<p>$9000</p>
-							</div>
-						</div>
-					</div>
-                    <div class="docctor-heading">
-                        Our Doctors
-                    </div>
-					<div class="doctors">
-                        
-                     
-					</div>
-				</secttion>
+                </section>
 			</div>
-			<div class="sidebar-right">
-                <p class="top-doctor-heading">Top Doctors</p>
-              <div class="top-doctors">
-                <div class="top-doctor-item">
-                    <div class="top-thumnail">
-                        <img src="/images/doctor.jpg" alt="" />
-                        
-                    </div>
-                    <div class="doctor-info">
-                        <div class="doctor-info-name">
-                            <span class="top-doc-name"> Dr. Jessica </span>
-                           
-                            <div class="doc-hospital">
-                                <span>Abc Destrict</span>
-                                <span>-</span>
-                                <span>Hospital</span>
-                            </div>
-                            <span class="rating">
-                                <li>
-                                    <i class="fas fa-star"></i>
-                                    <span class="count">4.5</span>
-                                    
-                                </li>
-                                <span>(79 reviews)</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                  <div class="top-doctor-item">
-                    <div class="top-thumnail">
-                        <img src="/images/doctor.jpg" alt="" />
-                        
-                    </div>
-                    <div class="doctor-info">
-                        <div class="doctor-info-name">
-                            <span class="top-doc-name"> Dr. Jessica </span>
-                           
-                            <div class="doc-hospital">
-                                <span>Abc Destrict</span>
-                                <span>-</span>
-                                <span>Hospital</span>
-                            </div>
-                            <span class="rating">
-                                <li>
-                                    <i class="fas fa-star"></i>
-                                    <span class="count">4.5</span>
-                                    
-                                </li>
-                                <span>(79 reviews)</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="top-doctor-item">
-                    <div class="top-thumnail">
-                        <img src="/images/doctor.jpg" alt="" />
-                        
-                    </div>
-                    <div class="doctor-info">
-                        <div class="doctor-info-name">
-                            <span class="top-doc-name"> Dr. Jessica </span>
-                           
-                            <div class="doc-hospital">
-                                <span>Abc Destrict</span>
-                                <span>-</span>
-                                <span>Hospital</span>
-                            </div>
-                            <span class="rating">
-                                <li>
-                                    <i class="fas fa-star"></i>
-                                    <span class="count">4.5</span>
-                                    
-                                </li>
-                                <span>(79 reviews)</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-              </div>
-              <div class="appointments">
-                <div class="apt-wrapper">
-                    <div class="patient-item1">
-                        <div class="patient-avater">
-                            <img src="/images/avater1.jpg" alt="patient photo">
-                        </div>
-                        <div class="apt-time-name">
-                            <span class="patient-name">
-                                Brain Mathew
-                            </span>
-                            <span class="apt-time">
-                                <span> 10:10am - 10:00pm</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="apt-seemore">
-                        <i class="fas fa-angle-right"></i>
-    
-    
-                    </div>
-                </div>
-                <div class="apt-wrapper">
-                    <div class="patient-item1">
-                        <div class="patient-avater">
-                            <img src="/images/avater1.jpg" alt="patient photo">
-                        </div>
-                        <div class="apt-time-name">
-                            <span class="patient-name">
-                                Brain Mathew
-                            </span>
-                            <span class="apt-time">
-                                <span> 10:10am - 10:00pm</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="apt-seemore">
-                        <i class="fas fa-angle-right"></i>
-    
-    
-                    </div>
-                </div>
-              </div>
-            </div>
+
+
+			 <div class="sidebar-right"> 
+				<p class="top-doctor-heading">Top Doctors</p>
+				<div class="top-doctors">
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="top-doctor-item">
+						<div class="top-thumnail">
+							<img src="/images/doctor.jpg" alt="" />
+						</div>
+						<div class="doctor-info">
+							<div class="doctor-info-name">
+								<span class="top-doc-name"> Dr. Jessica </span>
+
+								<div class="doc-hospital">
+									<span>Abc Destrict</span>
+									<span>-</span>
+									<span>Hospital</span>
+								</div>
+								<span class="rating">
+									<li>
+										<i class="fas fa-star"></i>
+										<span class="count">4.5</span>
+									</li>
+									<span>(79 reviews)</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="appointments">
+					<div class="apt-wrapper">
+						<div class="patient-item1">
+							<div class="patient-avater">
+								<img src="/images/avater1.jpg" alt="patient photo" />
+							</div>
+							<div class="apt-time-name">
+								<span class="patient-name"> Brain Mathew </span>
+								<span class="apt-time">
+									<span> 10:10am - 10:00pm</span>
+								</span>
+							</div>
+						</div>
+						<div class="apt-seemore">
+							<i class="fas fa-angle-right"></i>
+						</div>
+					</div>
+					<div class="apt-wrapper">
+						<div class="patient-item1">
+							<div class="patient-avater">
+								<img src="/images/avater1.jpg" alt="patient photo" />
+							</div>
+							<div class="apt-time-name">
+								<span class="patient-name"> Brain Mathew </span>
+								<span class="apt-time">
+									<span> 10:10am - 10:00pm</span>
+								</span>
+							</div>
+						</div>
+						<div class="apt-seemore">
+							<i class="fas fa-angle-right"></i>
+						</div>
+					</div>
+				</div>
+			</div> 
 		</div>
 		<script type="module" src="/script.js/auth.js"></script>
 	</body>

@@ -439,3 +439,12 @@
     width: 30px;
     cursor: pointer;
 }
+
+.userAvater{
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-left: 0.8rem;
+	
+}
