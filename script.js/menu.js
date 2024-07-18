@@ -29,12 +29,9 @@ const sideBar = document.querySelector(".siderbar-left");
                           <li class="sidebar-left-item">
                               <span><i class="fas fa-file-invoice-dollar"></i></span> Billing
                           </li>
-  
-              <a href="${
-                user.type === "doctor"
-                  ? `/pages/doctorprofile.html?id=${userID}`
-                  : `/pages/userProfile.html?id=${userID}`
-              }">
+                        
+                        
+              <a href="">
               <li class="sidebar-left-item">
                               <span><i class="fas fa-user-circle"></i></span> Profile
                           </li></a>

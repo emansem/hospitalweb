@@ -21,8 +21,8 @@ const doctorForm = document.getElementById("edit-doctor-profile-form");
 if (globalstate[1].pathName.includes("register.html")) {
   callForm();
 } else if (globalstate[1].pathName.includes("dashboard.html")) {
-  getUserInfo();
-  generateSideBar();
+ 
+  
   console.log("hello");
   getlistofDoctors();
 } else if (globalstate[1].pathName.includes("login.html")) {
@@ -170,45 +170,27 @@ function callForm() {
   });
 }
 
-function getUserInfo() {
-  const queryString = window.location.search.split("=");
-  const userID = queryString[1];
-  console.log(userID);
-  const getData = JSON.parse(localStorage.getItem("users"));
-  const user = getData.find((user) => user.id === userID);
+// function getUserInfo() {
+//   const queryString = window.location.search.split("=");
+//   const userID = queryString[1];
+//   console.log(userID);
+//   const getData = JSON.parse(localStorage.getItem("users"));
+//   const user = getData.find((user) => user.id === userID);
 
-  if (user) {
-    console.log(user);
-    heroSection(user);
-    if (user.type === "doctor") {
-      doctors.style.display = "none";
-      doctorH.style.display = "none";
-    } else if (user.type === "patient") {
-      reports.style.display = "none";
-      appointments.style.display = "none";
-    }
-  }
-}
+//   if (user) {
+//     console.log(user);
+//     heroSection(user);
+//     if (user.type === "doctor") {
+//       doctors.style.display = "none";
+//       doctorH.style.display = "none";
+//     } else if (user.type === "patient") {
+//       reports.style.display = "none";
+//       appointments.style.display = "none";
+//     }
+//   }
+// }
 
-function heroSection(user) {
-  const heroWrapper = document.querySelector(".hero-wrapper");
-  heroWrapper.innerHTML = `<div class="hero-text">
-							<p class="greet">Welcome Back,</p>
-							<h3 class="userName"><span>${user.type === "doctor" ? "Dr" : "Dear"}.</span> ${
-    user.name
-  }</h3>
-							<p class="appointMent">
-								${
-                  user.type === "doctor"
-                    ? `You have ${user.appointments.pending} total <span> appointments</span> today`
-                    : ``
-                }
-							</p>
-						</div>
-						<div class="hero-image">
-							<img src="/images/doctor.png" alt="" srcset="" />
-						</div>`;
-}
+
 
 function loggedUserIn() {
   const phone = form.phone.value;
