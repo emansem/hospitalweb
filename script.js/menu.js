@@ -2,7 +2,9 @@
 const logUser = JSON.parse(localStorage.getItem('activeId'));
 console.log(logUser);
 
+const appointments = document.querySelector('.appointments');
 
+const topDoctor = document.querySelector('.top-doctors');
 
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
@@ -122,6 +124,7 @@ async function getLoggedUserId() {
         window.location.href ='/pages/login.html'
         return
       }
+      
     // if (error || !data || data.length === 0) {
      
     //   // alert('Unable to fetch user details. Please wait.');
@@ -131,6 +134,7 @@ async function getLoggedUserId() {
 
   console.log("userid", data[0].id);
   generateSideBar(data[0].id, data[0].type);
+
 }
 
 getLoggedUserId();
@@ -141,4 +145,86 @@ function logUserout(){
    setTimeout(function(e){
     window.location.href = '/pages/login.html';
    }, 2000);
+}
+
+async function getAppoinments(){
+  const userId = window.location.search.split("=")[1]
+  try {
+    const {data, error} = await supabase.from('appointments').select('*').eq('doctorId', userId);
+    if(error){
+        console.log(error);
+    }
+  
+    console.log(data);
+    renderRightSiderBar(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+getAppoinments();
+
+
+
+
+function renderRightSiderBar(doctor){
+
+  if(doctor){
+appointments.innerHTML += `
+<p class="top-doctor-heading">My Appointments</p>
+<div class="apt-wrapper">
+                    <div class="patient-item1">
+                        <div class="patient-avater">
+                            <img src="/images/avater1.jpg" alt="patient photo">
+                        </div>
+                        <div class="apt-time-name">
+                            <span class="patient-name">
+                                Brain Mathew
+                            </span>
+                            <span class="apt-time">
+                                <span> 10:10am - 10:00pm</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="apt-seemore">
+                        <i class="fas fa-angle-right"></i>
+    
+    
+                    </div>
+                </div>
+                `
+  }else{
+    topDoctor+= ` <p class="top-doctor-heading">Top Doctors</p>
+              <div class="top-doctors">
+                <div class="top-doctor-item">
+                    <div class="top-thumnail">
+                        <img src="/images/doctor.jpg" alt="" />
+                        
+                    </div>
+                    <div class="doctor-info">
+                        <div class="doctor-info-name">
+                            <span class="top-doc-name"> Dr. Jessica </span>
+                           
+                            <div class="doc-hospital">
+                                <span>Abc Destrict</span>
+                                <span>-</span>
+                                <span>Hospital</span>
+                            </div>
+                            <span class="rating">
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                    <span class="count">4.5</span>
+                                    
+                                </li>
+                                <span>(79 reviews)</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+             
+                
+              </div>
+             `
+  }
+   
 }
