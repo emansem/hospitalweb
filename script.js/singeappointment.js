@@ -94,6 +94,7 @@ aptBtn.addEventListener("click", function(e) {
          const reject_reason = rejectReason.value.trim()
          console.log(reject_reason);
          updateStatus('Rejected', reject_reason);
+         overlay.style.display = 'none';
          closestButton.disabled = true;
         
         }

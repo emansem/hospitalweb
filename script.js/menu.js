@@ -12,7 +12,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
 function generateSideBar(userId, type) {
- if(!userId){
+ if(logUser === null || !logUser){
   alert('please longin to continue');
   window.location.href ='/pages/login.html'
   return
@@ -96,11 +96,16 @@ function generateSideBar(userId, type) {
                           
                       </ul>
                   </div>
-                  <div class="sidebar-right__nav-bottom">
-                      <li class="sidebar-left-item">
+                  <div class="sidebar-right__nav-bottom logout">
+                      <li   class="sidebar-left-item">
                           <span><i class="fas fa-sign-out-alt"></i></span> Logout
                       </li>
                   </div>`;
+                  const logout = document.querySelector('.logout');
+                  logout.addEventListener('click', function(e){
+                    e.preventDefault();
+                    logUserout();
+                  })
 }
 
 const queryString = window.location.search.split("=");
@@ -117,15 +122,23 @@ async function getLoggedUserId() {
         window.location.href ='/pages/login.html'
         return
       }
-    if (error || !data || data.length === 0) {
+    // if (error || !data || data.length === 0) {
      
-      alert('Unable to fetch user details. Please wait.');
-      window.location.href = '/pages/login.html';
-      return;
-    }
+    //   // alert('Unable to fetch user details. Please wait.');
+    //   // window.location.href = '/pages/login.html';
+    //   return;
+    // }
 
   console.log("userid", data[0].id);
   generateSideBar(data[0].id, data[0].type);
 }
 
 getLoggedUserId();
+
+
+function logUserout(){
+  localStorage.removeItem('activeId');
+   setTimeout(function(e){
+    window.location.href = '/pages/login.html';
+   }, 2000);
+}
