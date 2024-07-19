@@ -1,5 +1,5 @@
 
-const logUser = JSON.parse(localStorage.getItem('id'));
+const logUser = JSON.parse(localStorage.getItem('activeId'));
 
 
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
@@ -21,16 +21,16 @@ async function getDoctorDetails() {
       console.log(error);
     }
    const id = data[0].id
-    profileDetails(id, data);
+    profileDetails(data);
   } catch (error) {
     console.error(error);
   }
 }
 
 getDoctorDetails();
-function profileDetails(userId,user) {
-  const activeUser = logUser.find(id=>id.id=== userId);
-  const loggedUser = logUser;
+function profileDetails( user) {
+  
+  const loggedUser = logUser.id;
   const profileContainer = document.querySelector(".profile-content");
 
   return (profileContainer.innerHTML = ` <div class="profile-header">

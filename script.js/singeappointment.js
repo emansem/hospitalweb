@@ -82,6 +82,7 @@ function renderAppointmentDetails(appointment) {
                                     e.preventDefault();
                                     const closestButton = e.target.closest('button');
                                     const btn = closestButton.textContent;
+                                    
                                     if(btn === 'Cancel'){
                                         overlay.style.display = 'none';
                                         return
@@ -89,6 +90,7 @@ function renderAppointmentDetails(appointment) {
                                      const reject_reason = rejectReason.value.trim()
                                      console.log(reject_reason);
                                      updateStatus('Rejected', reject_reason);
+                                     closestButton.disabled = true;
                                     
                                     }
                                 })

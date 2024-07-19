@@ -1,8 +1,8 @@
 /** @format */
 import { previewimage } from "../script.js/data.js";
 const updateForm = document.getElementById("edit-profile-form");
-const logUser = localStorage.getItem("id");
-const loggedUser = Number(logUser);
+const logUser = JSON.parse(localStorage.getItem('activeId'));
+const loggedUser =logUser.id;
 console.log(loggedUser);
 
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";

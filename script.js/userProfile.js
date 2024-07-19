@@ -6,9 +6,10 @@ function formatPhone(phone) {
   const last = phone.slice(6);
   return `${first} ${middle} ${last}`;
 }
-const logUser = localStorage.getItem("id");
-const loggedUser = Number(logUser);
-console.log(loggedUser);
+const logUser = JSON.parse(localStorage.getItem('activeId'));
+console.log(logUser);
+const loggedUser = logUser.id;
+
 
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
