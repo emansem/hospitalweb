@@ -1,7 +1,6 @@
 
-const logUser = localStorage.getItem('id');
-const loggedUser = Number(logUser);
-console.log(loggedUser);
+const logUser = JSON.parse(localStorage.getItem('id'));
+
 
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
@@ -21,15 +20,17 @@ async function getDoctorDetails() {
     if (error) {
       console.log(error);
     }
-    console.log(data[0].id);
-    profileDetails(data);
+   const id = data[0].id
+    profileDetails(id, data);
   } catch (error) {
     console.error(error);
   }
 }
 
 getDoctorDetails();
-function profileDetails(user) {
+function profileDetails(userId,user) {
+  const activeUser = logUser.find(id=>id.id=== userId);
+  const loggedUser = logUser;
   const profileContainer = document.querySelector(".profile-content");
 
   return (profileContainer.innerHTML = ` <div class="profile-header">

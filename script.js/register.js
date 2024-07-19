@@ -70,11 +70,21 @@ async function addNewUser() {
         if (error) throw error;
 
         console.log('User saved successfully:', data);
-
+               
+        const savedId = {
+            id: data[0].id
+        }
         const userId = data[0].id;  
-        console.log(userId);
-        localStorage.setItem('id', userId);
-
+        console.log(savedId);
+        let saveUsers = JSON.parse(localStorage.getItem('id')) || [];
+        if(!saveUsers.includes(savedId)){
+            saveUsers.push(savedId);
+            localStorage.setItem('id', JSON.stringify(saveUsers));
+        }
+        
+        localStorage.setItem('activeId', userId);
+        
+alert('You have successfully created an account!')
       
         window.location.href = `/pages/dashboard.html?id=${userId}`
     } catch (error) {
@@ -89,3 +99,4 @@ async function addNewUser() {
      addNewUser();
     });
   
+   

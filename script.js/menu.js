@@ -1,6 +1,8 @@
 // const loginform = document.getElementById("loginform");
-const logUser = localStorage.getItem("id");
-const loggedUser = Number(logUser);
+const logUser = JSON.parse(localStorage.getItem('activeId'));
+console.log(logUser);
+
+
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
@@ -9,6 +11,20 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
 function generateSideBar(userId, type) {
+ if(!userId){
+  alert('please longin to continue');
+  window.location.href ='/pages/login.html'
+  return
+ }
+ const loggedUser = logUser.id;
+ console.log('loged', loggedUser)
+  
+  if(!loggedUser){
+    alert('please longin to continue');
+     window.location.href ='/pages/login.html'
+     return
+  }
+
   console.log(userId);
 
   sideBar.innerHTML = `<div class="sidebar-left__nav-top">
@@ -102,10 +118,12 @@ async function getLoggedUserId() {
     .select("*")
     .eq("id", userId);
 
-  if (error) {
-    console.error("Error fetching user details:", error);
-    return;
-  }
+    if (error || !data || data.length === 0) {
+     
+      alert('Unable to fetch user details. Please log in again.');
+      window.location.href = '/pages/login.html';
+      return;
+    }
 
   console.log("userid", data[0].id);
   generateSideBar(data[0].id, data[0].type);
