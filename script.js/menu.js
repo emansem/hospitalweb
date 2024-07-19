@@ -41,7 +41,7 @@ function generateSideBar(userId, type) {
                          
                            <a href="${
                              userId !== loggedUser || type !== "doctor"
-                               ? `/pages/singleapt.html?id=${loggedUser}`
+                               ? `/pages/userAppointDetails.html?id=${loggedUser}`
                                : `/pages/appointmentdetails.html?id=${userId}`
                            }">
                            <li class="sidebar-left-item">

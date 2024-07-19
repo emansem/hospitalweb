@@ -14,7 +14,7 @@ console.log(appointmentId);
 const logUser = JSON.parse(localStorage.getItem('activeId'));
 console.log(logUser);
 
-const loggedUser = logUser.id;
+const loggedUser = logUser;
 
 function renderAppointmentDetails(appointment) {
    const reason = appointment[0].reason;

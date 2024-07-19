@@ -19,15 +19,15 @@ async function loggedUserIn() {
 
     const password = loginform.password.value;
     console.log(data);
-    const user = data.find((user) => user.phone === phone && user.password);
+    const user = data.find((user) => user.phone === phone || user.password === password);
 
     if (user) {
       loginform.reset();
 
       alert("SuccessFul Login!");
       window.location.href = `/pages/dashboard.html?id=${user.id}`;
-      localStorage.setItem("activeId", JSON.stringify(activeUser));
-      console.log(activeUser.id);
+      localStorage.setItem("activeId", JSON.stringify(user.id));
+      
     } else {
       alert("Wrong credentials");
     }
