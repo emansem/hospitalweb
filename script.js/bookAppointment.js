@@ -31,8 +31,7 @@ async function getDoctorName() {
   }
 }
 
-const getData = JSON.parse(localStorage.getItem("users"));
-console.log(getData);
+
 
 async function saveAppointMentDetails(doctorName) {
   const apptForm = document.getElementById("apptForm");
@@ -76,6 +75,7 @@ loggeduser = data;
 
       console.log(newAppointment);
       sendAppointment(newAppointment);
+      apptForm.reset();
     }
   } catch (error) {
     console.log(error);
@@ -104,4 +104,3 @@ apptForm.addEventListener("submit", function (e) {
   getDoctorName();
 });
 
-console.log(loggeduser);

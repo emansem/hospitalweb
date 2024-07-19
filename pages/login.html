@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Login to Your account</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -23,6 +23,37 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		/>
 		<link rel="stylesheet" href="/styles/register.css" />
+		<style>
+			/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 20px;
+  aspect-ratio: 1;
+  display: grid;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: repeating-radial-gradient(farthest-side,#0000 0%,#000 1% 10%,#0000 11% 30%);
+  -webkit-mask: repeating-conic-gradient(#000 0 36deg,#0000 0 72deg);
+  animation: l19 4s infinite linear;
+}
+.loader::after {
+  -webkit-mask: repeating-conic-gradient(#0000 0 36deg,#000 0 72deg);
+  animation-direction: reverse;
+}
+@keyframes l19 {
+  100% {transform:rotate(1turn)}
+}
+.submitBtn{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.2rem;
+}
+		</style>
 	</head>
 	<body>
 		<div class="register-container">

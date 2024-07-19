@@ -11,98 +11,151 @@ const actionBTn = document.querySelector('.actionBTn');
 const rejectReason = document.getElementById('rejectReason');
 const appointmentId = queryString[1];
 console.log(appointmentId);
+const logUser = JSON.parse(localStorage.getItem('activeId'));
+console.log(logUser);
 
-function renderAppointmentDetails(appointment) {
-  const reason = appointment[0].reason;
-  console.log(reason);
-  appoinmentCard.innerHTML = ` <div class="appointment-header">
-                                <div class="patient-info">
-                                    <img src="${
-                                      appointment[0].userAvatar ||
-                                      "https://shorturl.at/8TClo"
-                                    }" alt="Patient Avatar" class="patient-avatar">
-                                    <div>
-                                        <h3>${appointment[0].name}</h3>
-                                        <p>Patient ID: ${
-                                          appointment[0].patientid
-                                        }</p>
-                                    </div>
-                                </div>
-                                <span class="status"> ${
-                                  appointment[0].status
-                                }</span>
-                            </div>
-                            <div class="appointment-body">
-                                <div class="detail-row">
-                                    <span class="detail-label">Date:</span>
-                                    <span class="detail-value">${
-                                      appointment[0].date
-                                    }</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Time:</span>
-                                    <span class="detail-value">${
-                                      appointment[0].time
-                                    } PM</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Type:</span>
-                                    <span class="detail-value">${
-                                      appointment[0].type
-                                    }</span>
-                                </div>
-                               
-                               
-                                <div class="detail-row">
-                                    <span class="detail-label">Reason:</span>
-                                     ${reason}</span>
-                                </div>
-                            </div>
-                            <div class="appointment-footer">
-                                <button class="btn btn-approve">Approve</button>
-                                <button class="btn btn-reject">Reject</button>
-                            </div>`;
-                            const aptBtn = document.querySelector(".appointment-footer");
+const loggedUser = logUser.id;
 
-                            aptBtn.addEventListener("click", function(e) {
-                              e.preventDefault();
-                            
-                              
-                              const closestButton = e.target.closest('button');
-                              if (!closestButton) return;
-                            
-                              const btn = closestButton.textContent;
-                              console.log('Button text:', btn);
-                            
-                              if (btn === "Reject") {
-                                // updateStatus("Rejected");
-                                // closestButton.disabled = true;
-                                overlay.style.display = 'block';
-                                actionBTn.addEventListener('click', function(e){
-                                    e.preventDefault();
-                                    const closestButton = e.target.closest('button');
-                                    const btn = closestButton.textContent;
-                                    
-                                    if(btn === 'Cancel'){
-                                        overlay.style.display = 'none';
-                                        return
-                                    }else if(btn === 'Save'){
-                                     const reject_reason = rejectReason.value.trim()
-                                     console.log(reject_reason);
-                                     updateStatus('Rejected', reject_reason);
-                                     closestButton.disabled = true;
-                                    
-                                    }
-                                })
-                                
-                              
-                              } else if (btn === "Approve") {
-                                updateStatus("Approved");
-                                closestButton.disabled = true;
-                                closestButton.classList.add('.button-disabled');
-                              }
-                            });
+function renderAppointmentDetails(appointment, doctor, patient) {
+  // const reason = appointment[0].reason;
+  // console.log(reason);
+  if(loggedUser === doctor){
+    appoinmentCard.innerHTML = ` <div class="appointment-header">
+    <div class="patient-info">
+        <img src="${
+          appointment[0].userAvatar ||
+          "https://shorturl.at/8TClo"
+        }" alt="Patient Avatar" class="patient-avatar">
+        <div>
+            <h3>${appointment[0].name}</h3>
+            <p>Patient ID: ${
+              appointment[0].patientid
+            }</p>
+        </div>
+    </div>
+    <span class="status"> ${
+      appointment[0].status
+    }</span>
+</div>
+<div class="appointment-body">
+    <div class="detail-row">
+        <span class="detail-label">Date:</span>
+        <span class="detail-value">${
+          appointment[0].date
+        }</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Time:</span>
+        <span class="detail-value">${
+          appointment[0].time
+        } PM</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Type:</span>
+        <span class="detail-value">${
+          appointment[0].type
+        }</span>
+    </div>
+   
+   
+    <div class="detail-row">
+        <span class="detail-label">Reason:</span>
+         ${reason}</span>
+    </div>
+</div>
+<div class="appointment-footer">
+    <button class="btn btn-approve">Approve</button>
+    <button class="btn btn-reject">Reject</button>
+</div>`;
+const aptBtn = document.querySelector(".appointment-footer");
+
+aptBtn.addEventListener("click", function(e) {
+  e.preventDefault();
+
+  
+  const closestButton = e.target.closest('button');
+  if (!closestButton) return;
+
+  const btn = closestButton.textContent;
+  console.log('Button text:', btn);
+
+  if (btn === "Reject") {
+    // updateStatus("Rejected");
+    // closestButton.disabled = true;
+    overlay.style.display = 'block';
+    actionBTn.addEventListener('click', function(e){
+        e.preventDefault();
+        const closestButton = e.target.closest('button');
+        const btn = closestButton.textContent;
+        
+        if(btn === 'Cancel'){
+            overlay.style.display = 'none';
+            return
+        }else if(btn === 'Save'){
+         const reject_reason = rejectReason.value.trim()
+         console.log(reject_reason);
+         updateStatus('Rejected', reject_reason);
+         closestButton.disabled = true;
+        
+        }
+    })
+    
+  
+  } else if (btn === "Approve") {
+    updateStatus("Approved");
+    closestButton.disabled = true;
+    closestButton.classList.add('.button-disabled');
+  }
+});
 }
+else if(loggedUser === patient){
+  appoinmentCard.innerHTML = ` <div class="appointment-header">
+  <div class="patient-info">
+      <img src="${
+        appointment[0].userAvatar ||
+        "https://shorturl.at/8TClo"
+      }" alt="Patient Avatar" class="patient-avatar">
+      <div>
+          <h3>${appointment[0].name}</h3>
+          <p>Patient ID: ${
+            appointment[0].patientid
+          }</p>
+      </div>
+  </div>
+  <span class="status"> ${
+    appointment[0].status
+  }</span>
+</div>
+<div class="appointment-body">
+  <div class="detail-row">
+      <span class="detail-label">Date:</span>
+      <span class="detail-value">${
+        appointment[0].date
+      }</span>
+  </div>
+  <div class="detail-row">
+      <span class="detail-label">Time:</span>
+      <span class="detail-value">${
+        appointment[0].time
+      } PM</span>
+  </div>
+  <div class="detail-row">
+      <span class="detail-label">Type:</span>
+      <span class="detail-value">${
+        appointment[0].type
+      }</span>
+  </div>
+ 
+ 
+  <div class="detail-row">
+      <span class="detail-label">Reason:</span>
+       ${reason}</span>
+  </div>
+</div>
+`
+}
+  }
+
 
 async function getAppoinment() {
   const { data, error } = await supabase
@@ -113,7 +166,7 @@ async function getAppoinment() {
     console.log(error);
   }
   console.log(data);
-  renderAppointmentDetails(data);
+  renderAppointmentDetails(data, data.doctorId, data.patientid);
 }
 
 getAppoinment();
