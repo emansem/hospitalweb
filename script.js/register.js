@@ -73,6 +73,7 @@ async function addNewUser() {
 
         const userId = data[0].id;  
         console.log(userId);
+        localStorage.setItem('id', userId);
 
       
         window.location.href = `/pages/dashboard.html?id=${userId}`

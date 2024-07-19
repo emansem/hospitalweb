@@ -1,5 +1,5 @@
 /** @format */
-
+let loggeduser;
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
@@ -51,7 +51,7 @@ async function saveAppointMentDetails(doctorName) {
       console.error("Error fetching user details:", error);
       return;
     }
-
+loggeduser = data;
     console.log(data);
 
     const user = data.find((user) => user.phone === phone);
@@ -103,3 +103,5 @@ apptForm.addEventListener("submit", function (e) {
 
   getDoctorName();
 });
+
+console.log(loggeduser);

@@ -62,3 +62,52 @@ if (user) {
                           </div>`;
   }
  
+  const loggedUser = localStorage.getItem('id');
+  console.log(loggedUser);
+
+  function addDoctorstoDashboard(users) {
+
+users.forEach((doctor)=>{
+  doctors.innerHTML += `
+  <a href="/pages/doctorprofile.html?id=${doctor.id}" target="_blank" rel="noopener noreferrer">
+  <div class="doctor-items">
+              <div class="doctor-thumnail">
+                 <img src="${doctor.userAvatar || 'https://shorturl.at/8TClo'}" alt="User Avatar">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div>
+                <div class="doctor-info-name">
+                  <div class="doctor-info">
+                                        <span class="doc-name"> Dr. ${doctor.name} </span>
+                  <span class="rating1">
+                    <li>
+                      <i class="fas fa-star"></i>
+                      <span class="count"> ${doctor.rating}.5</span>
+                    </li>
+                  </span>
+                                    </div>
+                  <div class="doc-hospital">
+                    <span>${doctor.hospitalName}</span>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+  </a>
+  
+  
+  
+  `;
+})
+   
+  }
+
+  async function getDoctors(){
+    const {data, error} = await supabase.from('users').select('*').eq('type', 'doctor');
+    if(error) console.log(error);
+    console.log(data);
+    addDoctorstoDashboard(data);
+
+ 
+  }
+  getDoctors();
