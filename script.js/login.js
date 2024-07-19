@@ -20,29 +20,17 @@ async function loggedUserIn() {
     const password = loginform.password.value;
     console.log(data);
     const user = data.find((user) => user.phone === phone && user.password);
-    
-    if (saveUsers!== null) {
-        const activeUser = saveUsers.find((active) => active.id === user.id);
-        if(activeUser){
-            loginform.reset();
-            console.log(password, phone);
-            console.log(user.phone);
-         
-            alert('SuccessFul Login!');
-             window.location.href = `/pages/dashboard.html?id=${activeUser.id}`
-             localStorage.setItem('activeId', JSON.stringify(activeUser));
-            console.log(  activeUser.id);
-        }else{
-            alert('Wrong credentials'); 
-        }
-   
-        
-    }else{
-        alert('Wrong credentials')
+
+    if (user) {
+      loginform.reset();
+
+      alert("SuccessFul Login!");
+      window.location.href = `/pages/dashboard.html?id=${user.id}`;
+      localStorage.setItem("activeId", JSON.stringify(activeUser));
+      console.log(activeUser.id);
+    } else {
+      alert("Wrong credentials");
     }
-   
-    
-    
   } catch (error) {
     console.log(error);
   }
@@ -50,11 +38,11 @@ async function loggedUserIn() {
 //   s5nkolosite@gmail.com 6667767677
 
 loginform.addEventListener("submit", function (e) {
-  e.preventDefault()
-     submitBtn.innerHTML = `<span>Please wait</span><div class="loader"></div>`
+  e.preventDefault();
+  submitBtn.innerHTML = `<span>Please wait</span><div class="loader"></div>`;
   loggedUserIn();
 });
 console.log(saveUsers);
 
-const logUser = JSON.parse(localStorage.getItem('activeId'));
-console.log(logUser)
+const logUser = JSON.parse(localStorage.getItem("activeId"));
+console.log(logUser);

@@ -118,12 +118,12 @@ async function getLoggedUserId() {
     .select("*")
     .eq("id", userId);
 
-    if (error || !data || data.length === 0) {
+    // if (error || !data || data.length === 0) {
      
-      alert('Unable to fetch user details. Please log in again.');
-      window.location.href = '/pages/login.html';
-      return;
-    }
+    //   alert('Unable to fetch user details. Please wait.');
+    //   // window.location.href = '/pages/login.html';
+    //   return;
+    // }
 
   console.log("userid", data[0].id);
   generateSideBar(data[0].id, data[0].type);
