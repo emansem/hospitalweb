@@ -16,10 +16,9 @@ console.log(logUser);
 
 const loggedUser = logUser.id;
 
-function renderAppointmentDetails(appointment, doctor, patient) {
-  // const reason = appointment[0].reason;
-  // console.log(reason);
-  if(loggedUser === doctor){
+function renderAppointmentDetails(appointment) {
+   const reason = appointment[0].reason;
+
     appoinmentCard.innerHTML = ` <div class="appointment-header">
     <div class="patient-info">
         <img src="${
@@ -107,54 +106,8 @@ aptBtn.addEventListener("click", function(e) {
     closestButton.classList.add('.button-disabled');
   }
 });
+
 }
-else if(loggedUser === patient){
-  appoinmentCard.innerHTML = ` <div class="appointment-header">
-  <div class="patient-info">
-      <img src="${
-        appointment[0].userAvatar ||
-        "https://shorturl.at/8TClo"
-      }" alt="Patient Avatar" class="patient-avatar">
-      <div>
-          <h3>${appointment[0].name}</h3>
-          <p>Patient ID: ${
-            appointment[0].patientid
-          }</p>
-      </div>
-  </div>
-  <span class="status"> ${
-    appointment[0].status
-  }</span>
-</div>
-<div class="appointment-body">
-  <div class="detail-row">
-      <span class="detail-label">Date:</span>
-      <span class="detail-value">${
-        appointment[0].date
-      }</span>
-  </div>
-  <div class="detail-row">
-      <span class="detail-label">Time:</span>
-      <span class="detail-value">${
-        appointment[0].time
-      } PM</span>
-  </div>
-  <div class="detail-row">
-      <span class="detail-label">Type:</span>
-      <span class="detail-value">${
-        appointment[0].type
-      }</span>
-  </div>
- 
- 
-  <div class="detail-row">
-      <span class="detail-label">Reason:</span>
-       ${reason}</span>
-  </div>
-</div>
-`
-}
-  }
 
 
 async function getAppoinment() {
@@ -166,7 +119,7 @@ async function getAppoinment() {
     console.log(error);
   }
   console.log(data);
-  renderAppointmentDetails(data, data.doctorId, data.patientid);
+  renderAppointmentDetails(data);
 }
 
 getAppoinment();

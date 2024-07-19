@@ -3,6 +3,7 @@ const logUser = JSON.parse(localStorage.getItem('activeId'));
 console.log(logUser);
 
 
+
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
@@ -16,14 +17,8 @@ function generateSideBar(userId, type) {
   window.location.href ='/pages/login.html'
   return
  }
- const loggedUser = logUser.id;
- console.log('loged', loggedUser)
-  
-  if(!loggedUser){
-    alert('please longin to continue');
-     window.location.href ='/pages/login.html'
-     return
-  }
+ const loggedUser = logUser;
+ 
 
   console.log(userId);
 
@@ -117,13 +112,17 @@ async function getLoggedUserId() {
     .from("users")
     .select("*")
     .eq("id", userId);
-
-    // if (error || !data || data.length === 0) {
+      if(!userId){
+        alert('please longin to continue');
+        window.location.href ='/pages/login.html'
+        return
+      }
+    if (error || !data || data.length === 0) {
      
-    //   alert('Unable to fetch user details. Please wait.');
-    //   // window.location.href = '/pages/login.html';
-    //   return;
-    // }
+      alert('Unable to fetch user details. Please wait.');
+      window.location.href = '/pages/login.html';
+      return;
+    }
 
   console.log("userid", data[0].id);
   generateSideBar(data[0].id, data[0].type);
