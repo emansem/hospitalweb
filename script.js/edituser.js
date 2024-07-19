@@ -1,7 +1,7 @@
 /** @format */
 import { previewimage } from "../script.js/data.js";
 const updateForm = document.getElementById("edit-profile-form");
-const imageFile = updateForm.profileimage.files[0];
+
 
 previewimage();
 
