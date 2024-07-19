@@ -1,66 +1,105 @@
 /** @format */
 
-let idNum =0;
-function generateId(){
-    return idNum+=1
-}
-// console.log(generateId());
-// console.log(generateId());
+const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
 
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
+const supabase = createClient(supabaseUrl, supabaseKey);
+const queryString = window.location.search.split("=");
+const doctorId = queryString[1];
+
+async function getDoctorName() {
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", doctorId)
+      .single();
+    if (error) {
+      console.error("Error fetching user details:", error);
+      return;
+    }
+    const user = data;
+
+    if (user) {
+      console.log(user.name);
+      saveAppointMentDetails(user.name);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const getData = JSON.parse(localStorage.getItem("users"));
 console.log(getData);
-   
 
-function saveAppointMentDetails() {
-  
-    const apptForm = document.getElementById("apptForm");
-const queryString = window.location.search.split("=");
+async function saveAppointMentDetails(doctorName) {
+  const apptForm = document.getElementById("apptForm");
 
-	const doctorId = queryString[1];
-	const name = apptForm.name.value;
-	const email = apptForm.email.value;
-	const phone = apptForm.phone.value;
-	const time = apptForm.time.value;
-	const date = apptForm.date.value;
-	const type = apptForm.appointmenttype.value;
-	const reason = apptForm.reason.value;
+  const name = apptForm.name.value;
+  const email = apptForm.email.value;
+  const phone = apptForm.phone.value;
+  const time = apptForm.time.value;
+  const date = apptForm.date.value;
+  const type = apptForm.appointmenttype.value;
+  const reason = apptForm.reason.value;
+  try {
+    const { data, error } = await supabase.from("users").select("*");
 
-    const user = getData.find(user=>user.phoneNumber ===phone);
-    if(user){
-        console.log(user.id);
+    if (error) {
+      console.error("Error fetching user details:", error);
+      return;
     }
-    const patientid =user.id;
 
-    const newAppointment = {
-        id:generateId(),
-        doctorId:doctorId,
-        patientid:patientid,
-        name:name,
-        email:email,
-        phone:phone,
-        time:time,
-        date:date,
-        type:type,
-        doctorName:user.name,
-        status: 'Pending',
-        reason:reason
+    console.log(data);
+
+    const user = data.find((user) => user.phone === phone);
+    if (!user) {
+      console.log("user not found");
+      alert("wrong credentials");
+      return;
+    } else {
+      const newAppointment = {
+        doctorId: doctorId,
+        patientid: user.id,
+        name: name,
+        email: email,
+        phone: phone,
+        time: time,
+        date: date,
+        type: type,
+        doctorName: doctorName,
+        status: "Pending",
+        reason: reason,
+      };
+
+      console.log(newAppointment);
+      sendAppointment(newAppointment);
     }
-    saveNewAppointment(newAppointment);
-
-
-	console.log(name, email, phone, time, date, type, reason);
+  } catch (error) {
+    console.log(error);
+  }
 }
-  apptForm.addEventListener("submit", function (e) {
-	e.preventDefault();
-	saveAppointMentDetails();
+
+async function sendAppointment(newAppointment) {
+  try {
+    const { data, error } = await supabase
+      .from("appointments")
+      .insert([newAppointment])
+      .select();
+
+    if (error) throw error;
+
+    console.log("User saved successfully:", data);
+  } catch (error) {
+    console.error("Error saving user:", error);
+    alert("Error registering user. Please try again.");
+  }
+}
+
+apptForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  getDoctorName();
 });
-
-
-function  saveNewAppointment(newAppointment){
-    let saveNewAppointments = JSON.parse(localStorage.getItem('appointments'))|| [];
-    saveNewAppointments = [...saveNewAppointments, newAppointment];
-    localStorage.setItem('appointments', JSON.stringify(saveNewAppointments));
-}
-
-

@@ -115,7 +115,10 @@
         opacity: 0.8;
     }
 
-    
+    .button-disabled {
+ cursor: no-drop;
+ display: none;
+}
 
     
 
@@ -133,7 +136,45 @@
         font-weight: 600;
         color: var(--color-dark);
     }
-
+	.overlay{
+		position: fixed;
+		
+		z-index: 100;
+		top: 30%;
+		bottom: 30%;
+		left: 30%;
+		right: 30%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		display: none;
+		transition:  all 0.4s all;
+	}
+.reasonforreject{
+	padding: 2rem;
+	background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+	border-radius: 0.4rem;
+}
+.headingDetails{
+	font-size: 30px;
+	color: #f4f9f6;
+	padding: 1rem;
+	text-align: center;
+	font-family: var(--font-heading);
+	font-weight: 600;
+}
+.rejectReason{
+	font-size: 18px;
+	border-radius: 0.4rem;
+	border: none;
+	outline: none;
+	font-family: var(--font-body);
+	color: #666;
+	padding: 0.4rem 1rem;
+}
+.actionBTn{
+	margin-top: 0.4rem;
+}
     .detail-value {
         flex: 1;
         color: var(--color-dark);
@@ -161,7 +202,9 @@
         color: #fff;
     }
 
-    .btn-reject {
+    .btn-reject,
+.btn-cancel
+	{
         background-color: #ff4d4d;
         color: #fff;
     }
@@ -176,10 +219,22 @@
     padding: 0.3rem 0.6rem;
     border-radius: 1.2rem;
 }
+.btn-save,
 .approved{
 	background-color: var(--color-accent);
     padding: 0.3rem 0.6rem;
     border-radius: 1.2rem;
+}
+.btn-save,
+.btn-cancel
+{
+	padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+		margin-left: 0.2rem;
+        transition: background-color 0.3s ease;
 }
 
     .btn:hover {
@@ -252,6 +307,18 @@
                            
                         </div>
                     </div>
+					<div class="overlay">
+						<div class="reasonforreject">
+							<h2 class="headingDetails">Reason for Reject</h2>
+							<textarea required spellcheck="false"   name="rejectReason" class="rejectReason" id="rejectReason" cols="30" rows="10">
+								please provid details for rejection this appoinment
+							</textarea>
+							<div class="actionBTn">
+								<button class="btn btn-save">Save</button>
+								<button class="btn btn-cancel">Cancel</button>
+							</div>
+						</div>
+					</div>
                 </section>
 			</div>
 

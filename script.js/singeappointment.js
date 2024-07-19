@@ -1,50 +1,141 @@
-const appoinmentCard = document.querySelector('.appointment-card');
+const appoinmentCard = document.querySelector(".appointment-card");
+const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
 
-function renderAppointmentDetails(){
-    const getAppoint =JSON.parse(localStorage.getItem('appointments')) || [];
-console.log(getAppoint);
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
+const supabase = createClient(supabaseUrl, supabaseKey);
+const queryString = window.location.search.split("=");
+const overlay = document.querySelector('.overlay');
+const actionBTn = document.querySelector('.actionBTn');
+const rejectReason = document.getElementById('rejectReason');
+const appointmentId = queryString[1];
+console.log(appointmentId);
 
-
-appoinmentCard.innerHTML = ` <div class="appointment-header">
+function renderAppointmentDetails(appointment) {
+  const reason = appointment[0].reason;
+  console.log(reason);
+  appoinmentCard.innerHTML = ` <div class="appointment-header">
                                 <div class="patient-info">
-                                    <img src="/images/patient-avatar.jpg" alt="Patient Avatar" class="patient-avatar">
+                                    <img src="${
+                                      appointment[0].userAvatar ||
+                                      "https://shorturl.at/8TClo"
+                                    }" alt="Patient Avatar" class="patient-avatar">
                                     <div>
-                                        <h3>John Doe</h3>
-                                        <p>Patient ID: 12345</p>
+                                        <h3>${appointment[0].name}</h3>
+                                        <p>Patient ID: ${
+                                          appointment[0].patientid
+                                        }</p>
                                     </div>
                                 </div>
-                                <span class="status"> pending</span>
+                                <span class="status"> ${
+                                  appointment[0].status
+                                }</span>
                             </div>
                             <div class="appointment-body">
                                 <div class="detail-row">
                                     <span class="detail-label">Date:</span>
-                                    <span class="detail-value">July 20, 2024</span>
+                                    <span class="detail-value">${
+                                      appointment[0].date
+                                    }</span>
                                 </div>
                                 <div class="detail-row">
                                     <span class="detail-label">Time:</span>
-                                    <span class="detail-value">2:00 PM - 3:00 PM</span>
+                                    <span class="detail-value">${
+                                      appointment[0].time
+                                    } PM</span>
                                 </div>
                                 <div class="detail-row">
                                     <span class="detail-label">Type:</span>
-                                    <span class="detail-value">New Patient Consultation</span>
+                                    <span class="detail-value">${
+                                      appointment[0].type
+                                    }</span>
                                 </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Doctor:</span>
-                                    <span class="detail-value">Dr. Sarah Johnson</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Location:</span>
-                                    <span class="detail-value">Main Clinic, Room 305</span>
-                                </div>
+                               
+                               
                                 <div class="detail-row">
                                     <span class="detail-label">Reason:</span>
-                                    <span class="detail-value">Annual check-up and general health assessment</span>
+                                     ${reason}</span>
                                 </div>
                             </div>
                             <div class="appointment-footer">
                                 <button class="btn btn-approve">Approve</button>
                                 <button class="btn btn-reject">Reject</button>
-                            </div>`
+                            </div>`;
+                            const aptBtn = document.querySelector(".appointment-footer");
+
+                            aptBtn.addEventListener("click", function(e) {
+                              e.preventDefault();
+                            
+                              
+                              const closestButton = e.target.closest('button');
+                              if (!closestButton) return;
+                            
+                              const btn = closestButton.textContent;
+                              console.log('Button text:', btn);
+                            
+                              if (btn === "Reject") {
+                                // updateStatus("Rejected");
+                                // closestButton.disabled = true;
+                                overlay.style.display = 'block';
+                                actionBTn.addEventListener('click', function(e){
+                                    e.preventDefault();
+                                    const closestButton = e.target.closest('button');
+                                    const btn = closestButton.textContent;
+                                    if(btn === 'Cancel'){
+                                        overlay.style.display = 'none';
+                                        return
+                                    }else if(btn === 'Save'){
+                                     const reject_reason = rejectReason.value.trim()
+                                     console.log(reject_reason);
+                                     updateStatus('Rejected', reject_reason);
+                                    
+                                    }
+                                })
+                                
+                              
+                              } else if (btn === "Approve") {
+                                updateStatus("Approved");
+                                closestButton.disabled = true;
+                                closestButton.classList.add('.button-disabled');
+                              }
+                            });
 }
 
-renderAppointmentDetails();
+async function getAppoinment() {
+  const { data, error } = await supabase
+    .from("appointments")
+    .select("*")
+    .eq("id", appointmentId);
+  if (error) {
+    console.log(error);
+  }
+  console.log(data);
+  renderAppointmentDetails(data);
+}
+
+getAppoinment();
+
+async function updateStatus(status, reject_reason = null) {
+    const updateData  = {status : status};
+    if(status === 'Rejected'  && reject_reason){
+        updateData.reject_reason = reject_reason;
+        console.log(updateData);
+    }
+    
+    try {
+    const { data, error } = await supabase
+      .from("appointments")
+      .update(updateData)
+      
+      .eq("id", appointmentId);
+
+    if (error) {
+      throw error;
+    }
+
+    console.log("Status updated successfully:", data);
+  } catch (error) {
+    console.error("Error updating status:", error);
+  }
+}
