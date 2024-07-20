@@ -103,29 +103,39 @@ apptForm.addEventListener("submit", function (e) {
   getDoctorName();
 });
 
-async function updateCounts(doctorId, patientid) {
-  let total = 0;
-  total += 1;
-  // const updateData = {
-  //   appointments_pending: total,
-  //   appointments_finished: total,
-  // };
-  const { data, error } = await supabase
-    .from("users")
+// // Function to call the increment_appointments procedure
+// async function callIncrementAppointments(pendingIncrement, finishedIncrement, id1, id2) {
+//   try {
+//     const { data, error } = await supabase.rpc('increment_appointments', {
+//       pending_increment: pendingIncrement,
+//       finished_increment: finishedIncrement,
+//       id1: id1,
+//       id2: id2
+//     })
 
-    .upsert([
-      { id: doctorId, appointments_finished: total },
+//     if (error) throw error
 
-      { id: patientid, appointments_finished: total },
-    ]);
-
-  if (error) {
-    console.error("Error updating counts:", error);
-    return false;
-  }
-
-  console.log("Counts updated successfully:", data);
-  return true;
-}
-
+//     console.log('Appointments incremented successfully')
+//     return data
+//   } catch (error) {
+//     console.error('Error incrementing appointments:', error.message)
+//     return null
+//   }
+// }
 // 098766622
+
+// create or replace function increment_appointments(
+//   pending_increment int,
+//   finished_increment int,
+//   id1 int,
+//   id2 int
+// ) 
+// returns void as
+// $$
+//   update users 
+//   set 
+//     appointments_pending = appointments_pending + pending_increment,
+//     appointments_finished = appointments_finished + finished_increment
+//   where id in (id1, id2);
+// $$ 
+// language sql volatile;

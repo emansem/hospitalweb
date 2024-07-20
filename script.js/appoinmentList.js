@@ -9,7 +9,9 @@ const queryString = window.location.search.split("=");
 const userId = queryString[1];
 
 async function getAppoinments(){
+  apptTable.innerHTML = '';
   try {
+    
     const {data, error} = await supabase.from('appointments').select('*').eq('doctorId', userId);
     if(error){
         console.log(error);
@@ -25,34 +27,40 @@ getAppoinments();
 
 
 function renderAppointTable(appointments){
-   
+  
+  if(appointments.length === 0){
+    apptTable.innerHTML = '<div class ="nodata">No Appointment found 🤷‍♂️</div>';
+  }
+   else{
     appointments.forEach((appointment)=>{
-        console.log(appointment.patientid);
-        apptTable.innerHTML+=`
+      console.log(appointment.patientid);
+      apptTable.innerHTML+=`
 
-    <tbody>
-        <tr>
-            <td>1</td>
-        <td>
-           
-            <span claas='name'>${appointment.name}</span>
-        </td>
-        
-        <td>
-            ${appointment.time}
-        </td>
-        <td>
-           <span class="status"> ${appointment.status}</span>
-        </td>
-        <td>
-        ${appointment.type}</td>
-        <td>
-           <a class="seeAll" href="/pages/singleapt.html?id=${appointment.id}">see more</a>
-        </td>
-        </tr>
-    </tbody>
-    `
-    })
+  <tbody>
+      <tr>
+          <td>1</td>
+      <td>
+         
+          <span claas='name'>${appointment.name}</span>
+      </td>
+      
+      <td>
+          ${appointment.time}
+      </td>
+      <td>
+         <span class="status"> ${appointment.status}</span>
+      </td>
+      <td>
+      ${appointment.type}</td>
+      <td>
+         <a class="seeAll" href="/pages/singleapt.html?id=${appointment.id}">see more</a>
+      </td>
+      </tr>
+  </tbody>
+  `
+  })
+   }
+    
    
 }
 
