@@ -32,6 +32,7 @@ function profileDetails( user) {
   
   const loggedUser = logUser.id;
   const profileContainer = document.querySelector(".profile-content");
+  console.log('if user id is a string', user[0].id)
 
   return (profileContainer.innerHTML = ` <div class="profile-header">
                               <div class="profile-image">
@@ -46,7 +47,7 @@ function profileDetails( user) {
                                  
                                   <a href="/pages/editDoctorProfile.html?id=${
                                     user[0].id
-                                  }" class="${user[0].id !== loggedUser && user[0].type !== 'doctor' ? 'edit-btn' : 'btn'} ">Edit Profile</a>
+                                  }" class="${user[0].id !== loggedUser || user[0].type !== 'doctor' ? 'edit-btn' : 'btn'} ">Edit Profile</a>
 
 
                                   <a href="/pages/appointment.html?id=${

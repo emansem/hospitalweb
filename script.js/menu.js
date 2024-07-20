@@ -31,7 +31,7 @@ const userId = Number(id)
       </div>
       <ul class="sidebar-left_nav-items">
         <a href="${
-          userId !== loggedUser && type !== 'doctor'
+          userId !== loggedUser || type !== 'doctor'
             ? `/pages/dashboard.html?id=${loggedUser}`
             : `/pages/dashboard.html?id=${userId}`
         }">
@@ -41,7 +41,7 @@ const userId = Number(id)
         </a>
         
         <a href="${
-          userId !== loggedUser 
+          userId !== loggedUser  || type !== 'doctor'
             ? `/pages/userAppointDetails.html?id=${loggedUser}`
             : `/pages/appointmentdetails.html?id=${userId}`
         }">
@@ -67,7 +67,7 @@ const userId = Number(id)
         </a>
 
         <a href="${
-          userId !== loggedUser && type !== "doctor"
+          userId !== loggedUser || type !== "doctor"
             ? `/pages/editUserProfile.html?id=${loggedUser}`
             : `/pages/editDoctorProfile.html?id=${userId}`
         }">
@@ -83,7 +83,7 @@ const userId = Number(id)
         </a>
         
         <a href="${
-          userId !== loggedUser && type !== "doctor"
+          userId !== loggedUser || type !== "doctor"
             ? `/pages/userProfile.html?id=${loggedUser}`
             : `/pages/doctorprofile.html?id=${userId}`
         }" target="_blank" rel="noopener noreferrer">
