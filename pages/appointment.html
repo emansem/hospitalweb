@@ -1,318 +1,214 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Book Appointment</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Appointment</title>
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-		/>
-		<link rel="stylesheet" href="/styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/styles/style.css" />
 
-        <style>
-            :root {
-                --color-dark: #1c1b2e;
-                --color-light: #6dd8a7;
-                --form-bg-color: #2c2c2c;
-                --dark-color: #2e374e;
-                --color-white: #ffffff;
-                --color-gray: #f0f0f0;
-                --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-                --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-                --font-body: 'Poppins', sans-serif;
-                --font-heading: 'Inter', sans-serif;
-            }
-    
-            body {
-                font-family: var(--font-body);
-                background-color: var(--color-gray);
-                color: var(--dark-color);
-                line-height: 1.6;
-                margin: 0;
-                padding: 0;
-            }
-    
-            .container {
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 2rem;
-            }
-    
-            header {
-                background-color: var(--color-dark);
-                color: var(--color-white);
-                padding: 2rem 0;
-                text-align: center;
-                margin-top: 110px;
-            }
-    
-            h1, h2 {
-                font-family: var(--font-heading);
-            }
-    
-            .form-container {
-                background-color: var(--color-white);
-                border-radius: 10px;
-                box-shadow: var(--shadow-2);
-                padding: 2rem;
-                margin-top: 2rem;
-            }
-    
-            .form-group {
-                margin-bottom: 1.5rem;
-            }
-    
-            label {
-                display: block;
-                margin-bottom: 0.5rem;
-                font-weight: 600;
-            }
-    
-            input[type="text"],
-            input[type="email"],
-            input[type="tel"],
-            input[type="date"],
-            input[type="time"],
-            select,
-            textarea {
-                width: 100%;
-                padding: 0.8rem;
-                border: 1px solid var(--dark-color);
-                border-radius: 5px;
-                font-family: var(--font-body);
-                font-size: 1rem;
-            }
-    
-            textarea {
-                height: 100px;
-            }
-    
-            .btn {
-                display: inline-block;
-                background-color: var(--color-light);
-                color: var(--color-dark);
-                padding: 0.8rem 1.5rem;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: 600;
-                transition: all 0.3s ease;
-                border: none;
-                cursor: pointer;
-                font-size: 1rem;
-            }
-    
-            .btn:hover {
-                background-color: var(--dark-color);
-                color: var(--color-white);
-            }
-        </style>
-	</head>
-	<body>
-		<div class="dashboard-container">
-			<div class="siderbar-left"></div>
+    <style>
+      :root {
+        --color-dark: #1c1b2e;
+        --color-light: #6dd8a7;
+        --form-bg-color: #2c2c2c;
+        --dark-color: #2e374e;
+        --color-white: #ffffff;
+        --color-gray: #f0f0f0;
+        --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        --font-body: "Poppins", sans-serif;
+        --font-heading: "Inter", sans-serif;
+      }
 
+      body {
+        font-family: var(--font-body);
+        background-color: var(--color-gray);
+        color: var(--dark-color);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
 
-			<div class="main-page">
-				<!---header seaction-->
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
 
-				<div class="header">
-					<h1 class="header-logo">Dashboard</h1>
-					<div class="header-items">
-						<div class="search">
-							<input type="text" placeholder="search.." />
-							<i class="fas fa-search"></i>
-						</div>
-						<div class="help header-icon">
-							<i class="far fa-question-circle"></i>
-						</div>
-						<div class="notice header-icon">
-							<i class="far fas fa-bell"></i>
-						</div>
-						<div class="user-avater">
-							<img src="/images/avater1.jpg" alt="" srcset="" />
-						</div>
-					</div>
-				</div>
+      header {
+        background-color: var(--color-dark);
+        color: var(--color-white);
+        padding: 2rem 0;
+        text-align: center;
+        margin-top: 110px;
+      }
 
-				<section class="main-section">
-                    <header>
-                        <h1>Schedule Appointment with Dr. Jane Smith</h1>
-                    </header>
-                
-                    <main class="container">
-                        <div class="form-container">
-                            <form id="apptForm" action="#" method="post">
-                                <div class="form-group">
-                                    <label for="name">Full Name</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Registered Phone </label>
-                                    <input type="tel" id="phone" name="phone" required>
-                                </div>
-                              
-                                <div class="form-group">
-                                    <label for="time">Preferred Time</label>
-                                    <input type="time" id="time" name="time" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="date">Preferred Date</label>
-                                    <input type="date" id="date" name="date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="appointment-type">Appointment Type</label>
-                                    <select id="appointment-type" name="appointmenttype" required>
-                                        <option value="">Select an option</option>
-                                        <option value="new-patient">New Patient Consultation</option>
-                                        <option value="follow-up">Follow-up Visit</option>
-                                        <option value="annual-checkup">Annual Check-up</option>
-                                        <option value="urgent-care">Urgent Care</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="reason">Reason for Appointment</label>
-                                    <textarea id="reason" name="reason" required></textarea>
-                                </div>
-                               
-                                <button type="submit" class="btn">Schedule Appointment</button>
-                            </form>
-                        </div>
-                    </main>
-                </section>
-			</div>
+      h1,
+      h2 {
+        font-family: var(--font-heading);
+      }
 
+      .form-container {
+        background-color: var(--color-white);
+        border-radius: 10px;
+        box-shadow: var(--shadow-2);
+        padding: 2rem;
+        margin-top: 2rem;
+      }
 
-			 <div class="sidebar-right"> 
-				<p class="top-doctor-heading">Top Doctors</p>
-				<div class="top-doctors">
-					<div class="top-doctor-item">
-						<div class="top-thumnail">
-							<img src="/images/doctor.jpg" alt="" />
-						</div>
-						<div class="doctor-info">
-							<div class="doctor-info-name">
-								<span class="top-doc-name"> Dr. Jessica </span>
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
 
-								<div class="doc-hospital">
-									<span>Abc Destrict</span>
-									<span>-</span>
-									<span>Hospital</span>
-								</div>
-								<span class="rating">
-									<li>
-										<i class="fas fa-star"></i>
-										<span class="count">4.5</span>
-									</li>
-									<span>(79 reviews)</span>
-								</span>
-							</div>
-						</div>
-					</div>
-					<div class="top-doctor-item">
-						<div class="top-thumnail">
-							<img src="/images/doctor.jpg" alt="" />
-						</div>
-						<div class="doctor-info">
-							<div class="doctor-info-name">
-								<span class="top-doc-name"> Dr. Jessica </span>
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
 
-								<div class="doc-hospital">
-									<span>Abc Destrict</span>
-									<span>-</span>
-									<span>Hospital</span>
-								</div>
-								<span class="rating">
-									<li>
-										<i class="fas fa-star"></i>
-										<span class="count">4.5</span>
-									</li>
-									<span>(79 reviews)</span>
-								</span>
-							</div>
-						</div>
-					</div>
-					<div class="top-doctor-item">
-						<div class="top-thumnail">
-							<img src="/images/doctor.jpg" alt="" />
-						</div>
-						<div class="doctor-info">
-							<div class="doctor-info-name">
-								<span class="top-doc-name"> Dr. Jessica </span>
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"],
+      input[type="time"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid var(--dark-color);
+        border-radius: 5px;
+        font-family: var(--font-body);
+        font-size: 1rem;
+      }
 
-								<div class="doc-hospital">
-									<span>Abc Destrict</span>
-									<span>-</span>
-									<span>Hospital</span>
-								</div>
-								<span class="rating">
-									<li>
-										<i class="fas fa-star"></i>
-										<span class="count">4.5</span>
-									</li>
-									<span>(79 reviews)</span>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="appointments">
-					<div class="apt-wrapper">
-						<div class="patient-item1">
-							<div class="patient-avater">
-								<img src="/images/avater1.jpg" alt="patient photo" />
-							</div>
-							<div class="apt-time-name">
-								<span class="patient-name"> Brain Mathew </span>
-								<span class="apt-time">
-									<span> 10:10am - 10:00pm</span>
-								</span>
-							</div>
-						</div>
-						<div class="apt-seemore">
-							<i class="fas fa-angle-right"></i>
-						</div>
-					</div>
-					<div class="apt-wrapper">
-						<div class="patient-item1">
-							<div class="patient-avater">
-								<img src="/images/avater1.jpg" alt="patient photo" />
-							</div>
-							<div class="apt-time-name">
-								<span class="patient-name"> Brain Mathew </span>
-								<span class="apt-time">
-									<span> 10:10am - 10:00pm</span>
-								</span>
-							</div>
-						</div>
-						<div class="apt-seemore">
-							<i class="fas fa-angle-right"></i>
-						</div>
-					</div>
-				</div>
-			</div> 
-		</div>
-        <script  type="module" src="/script.js/menu.js"></script>
-		<script type="module" src="/script.js/bookAppointment.js"></script>
-	</body>
+      textarea {
+        height: 100px;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--color-light);
+        color: var(--color-dark);
+        padding: 0.8rem 1.5rem;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .btn:hover {
+        background-color: var(--dark-color);
+        color: var(--color-white);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="siderbar-left"></div>
+
+      <div class="main-page">
+        <!---header seaction-->
+
+        <div class="header">
+          <h1 class="header-logo">Dashboard</h1>
+          <div class="header-items">
+            <div class="search">
+              <input type="text" placeholder="search.." />
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="help header-icon">
+              <i class="far fa-question-circle"></i>
+            </div>
+            <div class="notice header-icon">
+              <i class="far fas fa-bell"></i>
+            </div>
+            <div class="user-avater">
+              <img src="/images/avater1.jpg" alt="" srcset="" />
+            </div>
+          </div>
+        </div>
+
+        <section class="main-section">
+          <header>
+            <h1>Schedule Appointment with Dr. Jane Smith</h1>
+          </header>
+
+          <main class="container">
+            <div class="form-container">
+              <form id="apptForm" action="#" method="post">
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Registered Phone </label>
+                  <input type="tel" id="phone" name="phone" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="time">Preferred Time</label>
+                  <input type="time" id="time" name="time" required />
+                </div>
+                <div class="form-group">
+                  <label for="date">Preferred Date</label>
+                  <input type="date" id="date" name="date" required />
+                </div>
+                <div class="form-group">
+                  <label for="appointment-type">Appointment Type</label>
+                  <select id="appointment-type" name="appointmenttype" required>
+                    <option value="">Select an option</option>
+                    <option value="new-patient">
+                      New Patient Consultation
+                    </option>
+                    <option value="follow-up">Follow-up Visit</option>
+                    <option value="annual-checkup">Annual Check-up</option>
+                    <option value="urgent-care">Urgent Care</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="reason">Reason for Appointment</label>
+                  <textarea id="reason" name="reason" required></textarea>
+                </div>
+
+                <button type="submit" class="btn">Schedule Appointment</button>
+              </form>
+            </div>
+          </main>
+        </section>
+      </div>
+
+      <div class="sidebar-right">
+        <div class="top-doctors">
+          <p class="top-doctor-heading">My Appointments</p>
+        </div>
+        <div class="appointments"></div>
+      </div>
+    </div>
+    <script type="module" src="/script.js/menu.js"></script>
+    <script type="module" src="/script.js/bookAppointment.js"></script>
+  </body>
 </html>

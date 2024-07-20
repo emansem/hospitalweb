@@ -29,19 +29,31 @@ function generateSideBar(userId, type) {
         <img src="/logo.png" alt="logo" />
       </div>
       <ul class="sidebar-left_nav-items">
-        <a href="${userId !== loggedUser ? `/pages/dashboard.html?id=${loggedUser}` : `/pages/dashboard.html?id=${userId}`}">
+        <a href="${
+          userId !== loggedUser
+            ? `/pages/dashboard.html?id=${loggedUser}`
+            : `/pages/dashboard.html?id=${userId}`
+        }">
           <li class="sidebar-left-item active">
             <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
           </li>
         </a>
         
-        <a href="${userId !== loggedUser || type !== "doctor" ? `/pages/userAppointDetails.html?id=${loggedUser}` : `/pages/appointmentdetails.html?id=${userId}`}">
+        <a href="${
+          userId !== loggedUser || type !== "doctor"
+            ? `/pages/userAppointDetails.html?id=${loggedUser}`
+            : `/pages/appointmentdetails.html?id=${userId}`
+        }">
           <li class="sidebar-left-item">
             <span><i class="fas fa-calendar-check"></i></span> Appointment
           </li>
         </a>
         
-        <a href="${userId !== loggedUser ? `/pages/messages.html?id=${loggedUser}` : `/pages/messages.html?id=${userId}`}">
+        <a href="${
+          userId !== loggedUser
+            ? `/pages/messages.html?id=${loggedUser}`
+            : `/pages/messages.html?id=${userId}`
+        }">
           <li class="sidebar-left-item">
             <span><i class="fas fa-envelope"></i></span> Message
           </li>
@@ -53,7 +65,11 @@ function generateSideBar(userId, type) {
           </li>
         </a>
 
-        <a href="${userId !== loggedUser || type !== "doctor" ? `/pages/editUserProfile.html?id=${loggedUser}` : `/pages/editDoctorProfile.html?id=${userId}`}">
+        <a href="${
+          userId !== loggedUser || type !== "doctor"
+            ? `/pages/editUserProfile.html?id=${loggedUser}`
+            : `/pages/editDoctorProfile.html?id=${userId}`
+        }">
           <li class="sidebar-left-item">
             <span><i class="fas fa-cog"></i></span> Settings
           </li>
@@ -65,7 +81,11 @@ function generateSideBar(userId, type) {
           </li>
         </a>
         
-        <a href="${userId !== loggedUser || type !== "doctor" ? `/pages/userProfile.html?id=${loggedUser}` : `/pages/doctorprofile.html?id=${userId}`}" target="_blank" rel="noopener noreferrer">
+        <a href="${
+          userId !== loggedUser || type !== "doctor"
+            ? `/pages/userProfile.html?id=${loggedUser}`
+            : `/pages/doctorprofile.html?id=${userId}`
+        }" target="_blank" rel="noopener noreferrer">
           <li class="sidebar-left-item">
             <span><i class="fas fa-user-circle"></i></span> Profile
           </li>
@@ -100,13 +120,12 @@ async function getLoggedUserId() {
     window.location.href = "/pages/login.html";
     return;
   }
-  
-if(data){
-  generateSideBar(logUser, data.type);
-}else{
-  alert("no data found");
-}
-  
+
+  if (data) {
+    generateSideBar(logUser, data.type);
+  } else {
+    alert("no data found");
+  }
 }
 
 getLoggedUserId();
@@ -116,6 +135,71 @@ function logUserout() {
   setTimeout(function (e) {
     window.location.href = "/pages/login.html";
   }, 2000);
+}
+let id;
+
+async function renderRightSiderBar(doctor) {
+  for (let item of doctor) {
+    id = item.patientid;
+    try {
+      const { data } = await supabase.from("users").select("*").eq("id", id);
+      const userPhoto = data[0].userAvatar;
+      if (doctor) {
+       
+          appointments.innerHTML += `
+      <div class="apt-wrapper">
+        <div class="patient-item1">
+          <div class="patient-avater">
+            <img src="${userPhoto || "https://shorturl.at/8TClo"}" alt="" />
+          </div>
+          <div class="apt-time-name">
+            <span class="patient-name">
+              ${item.name}
+            </span>
+            <span class="apt-time">
+              <span> ${item.time}</span>
+            </span>
+          </div>
+        </div>
+        <div class="apt-seemore">
+          <i class="fas fa-angle-right"></i>
+        </div>
+      </div>
+    `;
+      
+      } else {
+        topDoctor.innerHTML += `
+        <p class="top-doctor-heading">Top Doctors</p>
+        <div class="top-doctors">
+          <div class="top-doctor-item">
+            <div class="top-thumnail">
+              <img src="/images/doctor.jpg" alt="" />
+            </div>
+            <div class="doctor-info">
+              <div class="doctor-info-name">
+                <span class="top-doc-name"> Dr. Jessica </span>
+                <div class="doc-hospital">
+                  <span>Abc Destrict</span>
+                  <span>-</span>
+                  <span>Hospital</span>
+                </div>
+                <span class="rating">
+                  <li>
+                    <i class="fas fa-star"></i>
+                    <span class="count">4.5</span>
+                  </li>
+                  <span>(79 reviews)</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 }
 
 async function getAppoinments() {
@@ -128,7 +212,7 @@ async function getAppoinments() {
     if (error) {
       console.log(error);
     }
-    
+    // id = data;
     console.log(data);
     renderRightSiderBar(data);
   } catch (error) {
@@ -137,70 +221,3 @@ async function getAppoinments() {
 }
 
 getAppoinments();
-
-
-async function renderRightSiderBar(doctor) {
-  if (doctor) {
-    for (const item of doctor) {
-      const id = item.patientid;
-
-      try {
-        const { data } = await supabase.from("users").select("*").eq("id", id);
-        const userPhoto = data[0].userAvatar;
-
-        appointments.innerHTML += `
-          <div class="apt-wrapper">
-            <div class="patient-item1">
-              <div class="patient-avater">
-                <img src=" ${
-                  userPhoto || "https://shorturl.at/8TClo"
-                }"" alt="patient photo">
-              </div>
-              <div class="apt-time-name">
-                <span class="patient-name">
-                  ${item.name}
-                </span>
-                <span class="apt-time">
-                  <span> ${item.time}</span>
-                </span>
-              </div>
-            </div>
-            <div class="apt-seemore">
-              <i class="fas fa-angle-right"></i>
-            </div>
-          </div>
-        `;
-      } catch (error) {
-        console.error("Error fetching patient data:", error);
-      }
-    }
-  } else {
-    topDoctor += `
-      <p class="top-doctor-heading">Top Doctors</p>
-      <div class="top-doctors">
-        <div class="top-doctor-item">
-          <div class="top-thumnail">
-            <img src="/images/doctor.jpg" alt="" />
-          </div>
-          <div class="doctor-info">
-            <div class="doctor-info-name">
-              <span class="top-doc-name"> Dr. Jessica </span>
-              <div class="doc-hospital">
-                <span>Abc Destrict</span>
-                <span>-</span>
-                <span>Hospital</span>
-              </div>
-              <span class="rating">
-                <li>
-                  <i class="fas fa-star"></i>
-                  <span class="count">4.5</span>
-                </li>
-                <span>(79 reviews)</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
