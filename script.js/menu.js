@@ -30,7 +30,7 @@ function generateSideBar(userId, type) {
       </div>
       <ul class="sidebar-left_nav-items">
         <a href="${
-          userId !== loggedUser
+          userId !== loggedUser && type !== 'doctor'
             ? `/pages/dashboard.html?id=${loggedUser}`
             : `/pages/dashboard.html?id=${userId}`
         }">
@@ -40,7 +40,7 @@ function generateSideBar(userId, type) {
         </a>
         
         <a href="${
-          userId !== loggedUser || type !== "doctor"
+          userId !== loggedUser 
             ? `/pages/userAppointDetails.html?id=${loggedUser}`
             : `/pages/appointmentdetails.html?id=${userId}`
         }">
@@ -66,7 +66,7 @@ function generateSideBar(userId, type) {
         </a>
 
         <a href="${
-          userId !== loggedUser || type !== "doctor"
+          userId !== loggedUser && type !== "doctor"
             ? `/pages/editUserProfile.html?id=${loggedUser}`
             : `/pages/editDoctorProfile.html?id=${userId}`
         }">
@@ -82,7 +82,7 @@ function generateSideBar(userId, type) {
         </a>
         
         <a href="${
-          userId !== loggedUser || type !== "doctor"
+          userId !== loggedUser && type !== "doctor"
             ? `/pages/userProfile.html?id=${loggedUser}`
             : `/pages/doctorprofile.html?id=${userId}`
         }" target="_blank" rel="noopener noreferrer">
