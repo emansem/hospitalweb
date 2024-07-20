@@ -8,18 +8,13 @@ const saveUsers = JSON.parse(localStorage.getItem("id"));
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 async function loggedUserIn() {
-  try {
-    const { data, error } = await supabase.from("users").select("*");
-
-    if (error) {
-      console.error("Error fetching user details:", error);
-      return;
-    }
+  
     const phone = loginform.phone.value;
 
     const password = loginform.password.value;
-    console.log(data);
-    const user = data.find((user) => user.phone === phone || user.password === password);
+  
+    const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+	const user = getStoreUsers.find((user) => user.phone === phone && user.password ===password);
 
     if (user) {
       loginform.reset();
@@ -30,10 +25,10 @@ async function loggedUserIn() {
       
     } else {
       alert("Wrong credentials");
+      submitBtn.innerHTML = `<span>Login</span>`;
+      return
     }
-  } catch (error) {
-    console.log(error);
-  }
+ 
 }
 //   s5nkolosite@gmail.com 6667767677
 
@@ -46,3 +41,4 @@ console.log(saveUsers);
 
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 console.log(logUser);
+

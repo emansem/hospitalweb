@@ -82,7 +82,8 @@ async function addNewUser() {
 			id: data[0].id,
 			type: data[0].type,
 			phone: data[0].phone,
-            name: data[0].name
+            name: data[0].name,
+            password: data[0].password
 		};
 
 		storeAccounts(storeAccount)
