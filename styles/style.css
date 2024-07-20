@@ -418,9 +418,10 @@
   
 }
 .patient-name{
-    font-size: 20px;
+    font-size: 18px;
     margin-block: 0.6rem;
     color: #eeeeee;
+	font-family: var(--font-heading);
     letter-spacing: 0.7px;
 
 }
