@@ -1,3 +1,5 @@
+/** @format */
+
 // const loginform = document.getElementById("loginform");
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 console.log(logUser);
@@ -5,67 +7,65 @@ console.log(logUser);
 const appointments = document.querySelector(".appointments");
 
 const topDoctor = document.querySelector(".top-doctors");
-const title = document.querySelector('.title');
+const title = document.querySelector(".title");
 console.log(title);
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
 function generateSideBar(id, type) {
-  if (logUser === null || !logUser) {
-    alert("please longin to continue");
-    window.location.href = "/pages/login.html";
-    return;
-  }
-  const loggedUser = logUser;
-  console.log('logged user id', type, id, loggedUser)
+	if (logUser === null || !logUser) {
+		alert("please longin to continue");
+		window.location.href = "/pages/login.html";
+		return;
+	}
+	const loggedUser = logUser;
+	
 
-const userId = Number(id)
-console.log(userId)
-// let url;
+	const userId = Number(id);
+	console.log(userId);
+	// let url;
 
-// if (userId === loggedUser && type !== 'doctor') {
-//   url = `/pages/userAppointDetails.html?id=${loggedUser}`;
-// } else {
-//   url = `/pages/appointmentdetails.html?id=${userId}`;
-// }
+	// if (userId === loggedUser && type !== 'doctor') {
+	//   url = `/pages/userAppointDetails.html?id=${loggedUser}`;
+	// } else {
+	//   url = `/pages/appointmentdetails.html?id=${userId}`;
+	// }
 
-
-  sideBar.innerHTML = `
+	sideBar.innerHTML = `
     <div class="sidebar-left__nav-top">
       <div class="logo">
         <img src="/logo.png" alt="logo" />
       </div>
       <ul class="sidebar-left_nav-items">
         <a href="${
-           type !== 'doctor' 
-            ? `/pages/dashboard.html?id=${loggedUser}`
-            : `/pages/dashboard.html?id=${userId}`
-        }">
+					type !== "doctor"
+						? `/pages/dashboard.html?id=${loggedUser}`
+						: `/pages/dashboard.html?id=${userId}`
+				}">
           <li class="sidebar-left-item active">
             <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
           </li>
         </a>
         
         <a href="${
-       
-          type !== 'doctor'
-            ? `/pages/userAppointDetails.html?id=${loggedUser}`
-            : `/pages/appointmentdetails.html?id=${userId}`
-        }">
+					type !== "doctor"
+						? `/pages/userAppointDetails.html?id=${loggedUser}`
+						: `/pages/appointmentdetails.html?id=${userId}`
+				}">
           <li class="sidebar-left-item">
             <span><i class="fas fa-calendar-check"></i></span> Appointment
           </li>
         </a>
         
         <a href="${
-          userId !== loggedUser
-            ? `/pages/messages.html?id=${loggedUser}`
-            : `/pages/messages.html?id=${userId}`
-        }">
+					userId !== loggedUser
+						? `/pages/messages.html?id=${loggedUser}`
+						: `/pages/messages.html?id=${userId}`
+				}">
           <li class="sidebar-left-item">
             <span><i class="fas fa-envelope"></i></span> Message
           </li>
@@ -78,10 +78,10 @@ console.log(userId)
         </a>
 
         <a href="${
-          userId !== loggedUser || type !== "doctor"
-            ? `/pages/editUserProfile.html?id=${loggedUser}`
-            : `/pages/editDoctorProfile.html?id=${userId}`
-        }">
+					userId !== loggedUser || type !== "doctor"
+						? `/pages/editUserProfile.html?id=${loggedUser}`
+						: `/pages/editDoctorProfile.html?id=${userId}`
+				}">
           <li class="sidebar-left-item">
             <span><i class="fas fa-cog"></i></span> Settings
           </li>
@@ -94,10 +94,10 @@ console.log(userId)
         </a>
         
         <a href="${
-          userId !== loggedUser || type !== "doctor"
-            ? `/pages/userProfile.html?id=${loggedUser}`
-            : `/pages/doctorprofile.html?id=${userId}`
-        }" target="_blank" rel="noopener noreferrer">
+					userId !== loggedUser || type !== "doctor"
+						? `/pages/userProfile.html?id=${loggedUser}`
+						: `/pages/doctorprofile.html?id=${userId}`
+				}" target="_blank" rel="noopener noreferrer">
           <li class="sidebar-left-item">
             <span><i class="fas fa-user-circle"></i></span> Profile
           </li>
@@ -111,59 +111,74 @@ console.log(userId)
     </div>
   `;
 
-  const logout = document.querySelector(".logout");
-  logout.addEventListener("click", function (e) {
-    e.preventDefault();
-    logUserout();
-  });
+	const logout = document.querySelector(".logout");
+	logout.addEventListener("click", function (e) {
+		e.preventDefault();
+		logUserout();
+	});
 }
 
-
+async function LogUserType() {
+  console.log(logUser)
+	const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+	const user = getStoreUsers.find((user) => user.id === logUser);
+	if (user ||logUser ) {
+		console.log(user.type);
+		const type = user.type;
+		console.log(type);
+		generateSideBar(logUser, type);
+		console.log(generateSideBar());
+		return;
+	}else{
+    alert("please longin to continue");
+		window.location.href = "/pages/login.html";
+		return;
+  }
+}
+LogUserType();
 
 async function getLoggedUserId() {
-  const queryString = window.location.search.split("=");
-const userId = queryString[1];
-console.log(userId)
-console.log(userId);
-  const { data, error } = await supabase
-    .from("users")
-    .select("*")
-    .eq("id", userId);
-  if (!userId) {
-    alert("please longin to continue");
-    window.location.href = "/pages/login.html";
-    return;
-  }
+	const queryString = window.location.search.split("=");
+	const userId = queryString[1];
+	console.log(userId);
+	console.log(userId);
+	const { data, error } = await supabase
+		.from("users")
+		.select("*")
+		.eq("id", userId);
+	if (!userId) {
+		alert("please longin to continue");
+		window.location.href = "/pages/login.html";
+		return;
+	}
 
-  if (data) {
-    console.log('logging',data )
-   
-    // title.innerHTML = `Dr. Jane Smith - Professional Profile`
-  
-  } else {
-    alert("no data found");
-  }
+	if (data) {
+		console.log("logging", data);
+
+		// title.innerHTML = `Dr. Jane Smith - Professional Profile`
+	} else {
+		alert("no data found");
+	}
 }
 
 getLoggedUserId();
 
 function logUserout() {
-  localStorage.removeItem("activeId");
-  setTimeout(function (e) {
-    window.location.href = "/pages/login.html";
-  }, 2000);
+	localStorage.removeItem("activeId");
+	setTimeout(function (e) {
+		window.location.href = "/pages/login.html";
+	}, 2000);
 }
 let id;
 
 async function renderRightSiderBar(doctor) {
-  for (let item of doctor) {
-    id = item.patientid;
-    try {
-      const { data } = await supabase.from("users").select("*").eq("id", id);
-      const userPhoto = data[0].userAvatar;
-      if (doctor) {
-       
-          appointments.innerHTML += `
+	for (let item of doctor) {
+		id = item.patientid;
+		try {
+			const { data } = await supabase.from("users").select("*").eq("id", id);
+			const userPhoto = data[0].userAvatar;
+			if (doctor) {
+				appointments.innerHTML += `
       <div class="apt-wrapper">
         <div class="patient-item1">
           <div class="patient-avater">
@@ -183,9 +198,8 @@ async function renderRightSiderBar(doctor) {
         </div>
       </div>
     `;
-      
-      } else {
-        topDoctor.innerHTML += `
+			} else {
+				topDoctor.innerHTML += `
         <p class="top-doctor-heading">Top Doctors</p>
         <div class="top-doctors">
           <div class="top-doctor-item">
@@ -212,51 +226,29 @@ async function renderRightSiderBar(doctor) {
           </div>
         </div>
       `;
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  }
+			}
+		} catch (error) {
+			console.log("error", error);
+		}
+	}
 }
 
 async function getAppoinments() {
-  const userId = window.location.search.split("=")[1];
-  try {
-    const { data, error } = await supabase
-      .from("appointments")
-      .select("*")
-      .eq("doctorId", userId);
-    if (error) {
-      console.log(error);
-    }
-    // id = data;
-    console.log(data);
-    renderRightSiderBar(data);
-  } catch (error) {
-    console.log(error);
-  }
+	const userId = window.location.search.split("=")[1];
+	try {
+		const { data, error } = await supabase
+			.from("appointments")
+			.select("*")
+			.eq("doctorId", userId);
+		if (error) {
+			console.log(error);
+		}
+		// id = data;
+		console.log(data);
+		renderRightSiderBar(data);
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 getAppoinments();
-
-
-
-async function LogUserType() {
-  
-  try {
-    const { data, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("id", logUser);
-    if (error) {
-      console.log(error);
-    }
-    // id = data;
-   const type = data[0].type
-    generateSideBar(logUser, type)
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-LogUserType()
