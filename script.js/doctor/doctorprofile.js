@@ -30,11 +30,20 @@ async function getDoctorDetails() {
 getDoctorDetails();
 function profileDetails( user) {
   
-  const loggedUser = logUser.id;
+  const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+  const userType = getStoreUsers.find((user) => user.id === logUser);
+  let className;
+  if(userType.type === 'doctor'){
+className = 'btn'
+  }else{
+    className = 'edit-btn'
+  }
+  console.log(className)
+  
   const profileContainer = document.querySelector(".profile-content");
-  console.log('if user id is a string', user[0].id)
+  console.log('if user id is a string', className)
 
-  return (profileContainer.innerHTML = ` <div class="profile-header">
+  profileContainer.innerHTML = ` <div class="profile-header">
                               <div class="profile-image">
                                    <img src="${
                                      user[0].userAvatar ||
@@ -45,14 +54,12 @@ function profileDetails( user) {
                                   <h2 class="drName">Dr.${user[0].name}</h2>
                                   <p>${user[0].hospitalName}</p>
                                  
-                                  <a href="/pages/editDoctorProfile.html?id=${
-                                    user[0].id
-                                  }" class="${user[0].id !== loggedUser || user[0].type !== 'doctor' ? 'edit-btn' : 'btn'} ">Edit Profile</a>
+                                  <a href="/pages/editDoctorProfile.html?id=${user[0].id }" class="${className}">Edit Profile</a>
 
 
                                   <a href="/pages/appointment.html?id=${
                                     user[0].id
-                                  }" class="btn" style="margin-left: 1rem;">Book Appointments</a>
+                                  }" class="${userType.type === 'doctor' ? 'edit-btn': 'btn'}" style="margin-left: 1rem;">Book Appointments</a>
                               </div>
                           </div>
                           <div class="profile-main">
@@ -98,5 +105,9 @@ function profileDetails( user) {
                               </section>
               
                            
-                          </div>`);
+                          </div>`
+ 
+
+
+
 }

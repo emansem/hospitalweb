@@ -39,7 +39,7 @@ async function getUserDetails() {
 getUserDetails();
 
 function renderProfile(user) {
-  const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+  
   const phone = user[0].phone;
   const userPhone = formatPhone(phone);
 console.log('login user', user[0].id)

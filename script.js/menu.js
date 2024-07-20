@@ -16,24 +16,48 @@ const supabaseKey =
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
+ async function LogUserType() {
+	console.log('active id',logUser)
+	  const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+	  const user = getStoreUsers.find((user) => user.id === logUser);
+	  console.log('saved user',user)
+	  if (user ||logUser ) {
+		  console.log(user.type);
+		  const type = user.type;
+		  console.log(type);
+		  generateSideBar(logUser, type);
+		
+		  return;
+	  }else{
+	  alert("please longin to continue");
+		  window.location.href = "/pages/login.html";
+		  return;
+	}
+  }
+  LogUserType();
+
 function generateSideBar(id, type) {
+	
 	if (logUser === null || !logUser) {
 		alert("please longin to continue");
 		window.location.href = "/pages/login.html";
 		return;
 	}
 	const loggedUser = logUser;
-	
-
 	const userId = Number(id);
 	console.log(userId);
-	// let url;
+	
+	let url;
+	
+if(type === 'doctor'){
+	url = `/pages/appointmentdetails.html?id=${userId}`
+	console.log(url)
+}else if (type === 'patient'){
+	url= `/pages/userAppointDetails.html?id=${loggedUser}`;
+	console.log(url);
+}
 
-	// if (userId === loggedUser && type !== 'doctor') {
-	//   url = `/pages/userAppointDetails.html?id=${loggedUser}`;
-	// } else {
-	//   url = `/pages/appointmentdetails.html?id=${userId}`;
-	// }
+	
 
 	sideBar.innerHTML = `
     <div class="sidebar-left__nav-top">
@@ -51,11 +75,7 @@ function generateSideBar(id, type) {
           </li>
         </a>
         
-        <a href="${
-					type !== "doctor"
-						? `/pages/userAppointDetails.html?id=${loggedUser}`
-						: `/pages/appointmentdetails.html?id=${userId}`
-				}">
+        <a href="${url}">
           <li class="sidebar-left-item">
             <span><i class="fas fa-calendar-check"></i></span> Appointment
           </li>
@@ -78,7 +98,7 @@ function generateSideBar(id, type) {
         </a>
 
         <a href="${
-					userId !== loggedUser || type !== "doctor"
+					type !== "doctor"
 						? `/pages/editUserProfile.html?id=${loggedUser}`
 						: `/pages/editDoctorProfile.html?id=${userId}`
 				}">
@@ -118,24 +138,7 @@ function generateSideBar(id, type) {
 	});
 }
 
-async function LogUserType() {
-  console.log(logUser)
-	const getStoreUsers = JSON.parse(localStorage.getItem("id"));
-	const user = getStoreUsers.find((user) => user.id === logUser);
-	if (user ||logUser ) {
-		console.log(user.type);
-		const type = user.type;
-		console.log(type);
-		generateSideBar(logUser, type);
-		console.log(generateSideBar());
-		return;
-	}else{
-    alert("please longin to continue");
-		window.location.href = "/pages/login.html";
-		return;
-  }
-}
-LogUserType();
+
 
 async function getLoggedUserId() {
 	const queryString = window.location.search.split("=");
