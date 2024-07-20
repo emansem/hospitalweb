@@ -9,60 +9,57 @@ const queryString = window.location.search.split("=");
 
 const appointmentId = queryString[1];
 console.log(appointmentId);
-const logUser = JSON.parse(localStorage.getItem('activeId'));
+const logUser = JSON.parse(localStorage.getItem("activeId"));
 console.log(logUser);
 
-
-
 function renderAppointmentDetails(appointment) {
-    if(appointment.length === 0){
-        appoinmentCard.innerHTML = '<div class ="nodata">No Appointment found🤷‍♂️</div>';    
-    }else{
-      
-      appointment.forEach((item)=>{
-        const reason = item.reason;
-        const rejectReason =item.reject_reason;
-        appoinmentCard.innerHTML += ` <div class="appointment-header">
+  if (appointment.length === 0) {
+    appoinmentCard.innerHTML =
+      '<div class ="nodata">No Appointment found🤷‍♂️</div>';
+  } else {
+    appointment.forEach((item) => {
+      function getStatusClass(status) {
+        switch (status) {
+          case 'Approved':
+            return 'approved';
+          case 'Rejected':
+            return 'reject';
+          default:
+            return 'pendings';
+        }
+      }
+      const reason = item.reason;
+      const rejectReason = item.reject_reason;
+      appoinmentCard.innerHTML += `<div class='innerDiv'>
+        
+        <div class="appointment-header">
         <div class="patient-info">
             <img src="${
-             item.userAvatar ||
-              "https://shorturl.at/8TClo"
+              item.userAvatar || "https://shorturl.at/8TClo"
             }" alt="Patient Avatar" class="patient-avatar">
             <div>
                 <h3>${item.name}</h3>
-                <p>Patient ID: ${
-                  item.patientid
-                }</p>
+                <p>Patient ID: ${item.patientid}</p>
             </div>
         </div>
-        <span class="status"> ${
-          item.status
-        }</span>
+        <span class="${getStatusClass(item.status)}">${item.status}</span>
     </div>
     <div class="appointment-body">
         <div class="detail-row">
             <span class="detail-label">Date:</span>
-            <span class="detail-value">${
-              item.date
-            }</span>
+            <span class="detail-value">${item.date}</span>
         </div>
         <div class="detail-row">
             <span class="detail-label">Doctor:</span>
-            <span class="detail-value">${
-             item.doctorName
-            }</span>
+            <span class="detail-value">${item.doctorName}</span>
         </div>
         <div class="detail-row">
             <span class="detail-label">Time:</span>
-            <span class="detail-value">${
-            item.time
-            } PM</span>
+            <span class="detail-value">${item.time} PM</span>
         </div>
         <div class="detail-row">
             <span class="detail-label">Type:</span>
-            <span class="detail-value">${
-             item.type
-            }</span>
+            <span class="detail-value">${item.type}</span>
         </div>
        
        
@@ -71,17 +68,18 @@ function renderAppointmentDetails(appointment) {
              ${rejectReason === null ? reason : rejectReason}</span>
         </div>
     </div>
-    `
-      })
-        
-
+    </div>
+    `;
+    });
+    const statusColor = document.querySelectorAll('status');
+    statusColor.forEach((color)=>{
+      if(color.textContent ==='Pending'){
+        console.log('pending');
+      }
+    })
     
-    }
-
-
-
+  }
 }
-
 
 async function getAppoinment() {
   const { data, error } = await supabase
@@ -96,4 +94,3 @@ async function getAppoinment() {
 }
 
 getAppoinment();
-

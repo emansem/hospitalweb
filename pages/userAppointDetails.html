@@ -63,7 +63,16 @@
         border-radius: 10px;
         box-shadow: var(--shadow-2);
     } */
+    .innerDiv{
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: var(--shadow-2);
+        overflow: hidden;
+        margin-bottom: 20px;
+        flex: 1;
+       
 
+    }
     .appointment-details {
         max-width: 800px;
         margin: 130px auto;
@@ -77,10 +86,8 @@
     }
 
     .appointment-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: var(--shadow-2);
-        overflow: hidden;
+       display: flex;
+       flex-direction: column;
     }
 
     .appointment-header {
@@ -216,20 +223,21 @@
         background-color: #ff4d4d;
         color: #fff;
     }
-    .status {
-    background-color: #FFD700;
-    padding: 0.3rem 0.6rem;
-    border-radius: 1.2rem;
-    color: #1c1b2e;
-}
-.pending{
+
+.pendings{
 	background-color: #FFD700;
     padding: 0.3rem 0.6rem;
     border-radius: 1.2rem;
+    color: var(--color-dark);
 }
 .btn-save,
 .approved{
 	background-color: var(--color-accent);
+    padding: 0.3rem 0.6rem;
+    border-radius: 1.2rem;
+}
+.reject{
+    background-color: #ff4d4d;
     padding: 0.3rem 0.6rem;
     border-radius: 1.2rem;
 }
