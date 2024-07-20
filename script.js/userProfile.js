@@ -7,8 +7,8 @@ function formatPhone(phone) {
   return `${first} ${middle} ${last}`;
 }
 const logUser = JSON.parse(localStorage.getItem('activeId'));
-console.log(logUser);
-const loggedUser = logUser.id;
+console.log('active',logUser);
+const loggedUser = logUser;
 
 
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
@@ -39,9 +39,11 @@ async function getUserDetails() {
 getUserDetails();
 
 function renderProfile(user) {
+  const getStoreUsers = JSON.parse(localStorage.getItem("id"));
   const phone = user[0].phone;
   const userPhone = formatPhone(phone);
-console.log(user[0].id)
+console.log('login user', user[0].id)
+console.log('active id', loggedUser);
   userProfile.innerHTML = `<div class="profile-image">
                <img src="${
                  user[0].userAvatar || "https://shorturl.at/8TClo"
