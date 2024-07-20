@@ -13,8 +13,10 @@ const appointmentId = queryString[1];
 console.log(appointmentId);
 const logUser = JSON.parse(localStorage.getItem('activeId'));
 console.log(logUser);
+const sideBar = document.querySelector(".siderbar-left");
 
 const loggedUser = logUser;
+
 
 function renderAppointmentDetails(appointment) {
    const reason = appointment[0].reason;
@@ -67,6 +69,9 @@ function renderAppointmentDetails(appointment) {
     <button class="btn btn-reject">Reject</button>
 </div>`;
 const aptBtn = document.querySelector(".appointment-footer");
+const StatusColor = document.querySelector('.status');
+StatusColor.classList.add('btn-approve');
+localStorage.setItem('statusColorClass', 'btn-approve');
 
 aptBtn.addEventListener("click", function(e) {
   e.preventDefault();
@@ -104,7 +109,14 @@ aptBtn.addEventListener("click", function(e) {
   } else if (btn === "Approve") {
     updateStatus("Approved");
     closestButton.disabled = true;
-    closestButton.classList.add('.button-disabled');
+
+    closestButton.classList.add('button-disabled');
+    window.addEventListener('load', function() {
+      const savedClass = localStorage.getItem('statusColorClass');
+      if (savedClass) {
+          StatusColor.classList.add(savedClass);
+      }
+  });
   }
 });
 
@@ -147,4 +159,85 @@ async function updateStatus(status, reject_reason = null) {
   } catch (error) {
     console.error("Error updating status:", error);
   }
+}
+
+
+function generateSideBar() {
+  if (logUser === null || !logUser) {
+    alert("please longin to continue");
+    window.location.href = "/pages/login.html";
+    return;
+  }
+
+
+ 
+
+  sideBar.innerHTML = `
+    <div class="sidebar-left__nav-top">
+      <div class="logo">
+        <img src="/logo.png" alt="logo" />
+      </div>
+      <ul class="sidebar-left_nav-items">
+        <a href="${`/pages/dashboard.html?id=${loggedUser}`}">
+          <li class="sidebar-left-item active">
+            <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
+          </li>
+        </a>
+        
+        <a href="${`/pages/appointmentdetails.html?id=${loggedUser}`}">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-calendar-check"></i></span> Appointment
+          </li>
+        </a>
+        
+        <a href="${`/pages/messages.html?id=${loggedUser}`}">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-envelope"></i></span> Message
+          </li>
+        </a>
+        
+        <a href="/pages/doctors.html" target="_blank" rel="noopener noreferrer">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-user-md"></i></span> Doctors
+          </li>
+        </a>
+
+        <a href="${`/pages/editDoctorProfile.html?id=${loggedUser}`}">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-cog"></i></span> Settings
+          </li>
+        </a>
+        
+        <a href="/pages/billing.html">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-file-invoice-dollar"></i></span> Billing
+          </li>
+        </a>
+        
+        <a href="${ `/pages/doctorprofile.html?id=${loggedUser}`}" target="_blank" rel="noopener noreferrer">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-user-circle"></i></span> Profile
+          </li>
+        </a>
+      </ul>
+    </div>
+    <div class="sidebar-right__nav-bottom logout">
+      <li class="sidebar-left-item">
+        <span><i class="fas fa-sign-out-alt"></i></span> Logout
+      </li>
+    </div>
+  `;
+
+  const logout = document.querySelector(".logout");
+  logout.addEventListener("click", function (e) {
+    e.preventDefault();
+    logUserout();
+  });
+}
+generateSideBar()
+function logUserout() {
+  localStorage.removeItem("activeId");
+  setTimeout(function (e) {
+    window.location.href = "/pages/login.html";
+  }, 2000);
 }

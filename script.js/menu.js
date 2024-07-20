@@ -101,8 +101,12 @@ async function getLoggedUserId() {
     return;
   }
   
-
-  generateSideBar(data[0].id, data[0].type);
+if(data){
+  generateSideBar(logUser, data.type);
+}else{
+  alert("no data found");
+}
+  
 }
 
 getLoggedUserId();
