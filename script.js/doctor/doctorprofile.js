@@ -46,7 +46,7 @@ function profileDetails( user) {
                                  
                                   <a href="/pages/editDoctorProfile.html?id=${
                                     user[0].id
-                                  }" class="${user[0].id !== loggedUser? 'edit-btn' : 'btn'} ">Edit Profile</a>
+                                  }" class="${user[0].id !== loggedUser && user[0].type !== 'doctor' ? 'edit-btn' : 'btn'} ">Edit Profile</a>
 
 
                                   <a href="/pages/appointment.html?id=${

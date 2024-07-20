@@ -2,8 +2,9 @@
 import { previewimage } from "../script.js/data.js";
 const updateForm = document.getElementById("edit-doctor-profile-form");
 const doctorForm = document.getElementById("edit-doctor-profile-form");
-const logUser = localStorage.getItem("id");
-const loggedUser = Number(logUser);
+const logUser = JSON.parse(localStorage.getItem("activeId"));
+
+const loggedUser = logUser;
 console.log(loggedUser);
 
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
@@ -27,37 +28,40 @@ async function sendDoctorDetails(updatedUser) {
 }
 
 function editUserProfile() {
-	const clinicName = doctorForm["clinic-name"].value;
-	const bio = doctorForm.bio.value;
-	const languages = doctorForm.languages.value;
-	const imageFile = doctorForm.profileImage.files[0];
+  const clinicName = doctorForm["clinic-name"].value;
+  const bio = doctorForm.bio.value;
+  const languages = doctorForm.languages.value;
+  const imageFile = doctorForm.profileImage.files[0];
 
   if (imageFile) {
-    	  const reader = new FileReader();
-    	  reader.onload = function (event) {
-    		const userAvatar = event.target.result;
-    		document.getElementById('profile-image-preview').src = event.target.result;
-            
-    		const updateDoctor = {
-    		  bio: bio,
-    		  userAvatar: userAvatar,
-    		  hospitalName: clinicName,
-    		  languages: languages
-    		};
-            
-            sendDoctorDetails(updateDoctor);
-            console.log(updateDoctor)
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const userAvatar = event.target.result;
+      document.getElementById("profile-image-preview").src =
+        event.target.result;
 
-    	  };
-    	  reader.readAsDataURL(imageFile);
-    
-}
+      const updateDoctor = {
+        bio: bio,
+        userAvatar: userAvatar,
+        hospitalName: clinicName,
+        languages: languages,
+      };
+
+      sendDoctorDetails(updateDoctor);
+      console.log(updateDoctor);
+    };
+    reader.readAsDataURL(imageFile);
+  }
 }
 
 updateForm.addEventListener("submit", function (e) {
   e.preventDefault();
   editUserProfile();
   alert("Profile updated successfully!");
+  updateForm.reset();
+  setTimeout(function () {
+    window.location.href = `/pages/doctorprofile.html?id=${userID}`;
+  }, 1500);
 });
 
-console.log('hello');
+console.log("hello");
