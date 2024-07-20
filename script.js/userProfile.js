@@ -41,7 +41,7 @@ getUserDetails();
 function renderProfile(user) {
   const phone = user[0].phone;
   const userPhone = formatPhone(phone);
-
+console.log(user[0].id)
   userProfile.innerHTML = `<div class="profile-image">
                <img src="${
                  user[0].userAvatar || "https://shorturl.at/8TClo"

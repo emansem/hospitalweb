@@ -21,8 +21,18 @@ function generateSideBar(id, type) {
     return;
   }
   const loggedUser = logUser;
+  console.log('logged user id', type, id, loggedUser)
 
 const userId = Number(id)
+console.log(userId)
+// let url;
+
+// if (userId === loggedUser && type !== 'doctor') {
+//   url = `/pages/userAppointDetails.html?id=${loggedUser}`;
+// } else {
+//   url = `/pages/appointmentdetails.html?id=${userId}`;
+// }
+
 
   sideBar.innerHTML = `
     <div class="sidebar-left__nav-top">
@@ -31,7 +41,7 @@ const userId = Number(id)
       </div>
       <ul class="sidebar-left_nav-items">
         <a href="${
-          userId !== loggedUser || type !== 'doctor'
+           type !== 'doctor' 
             ? `/pages/dashboard.html?id=${loggedUser}`
             : `/pages/dashboard.html?id=${userId}`
         }">
@@ -41,7 +51,8 @@ const userId = Number(id)
         </a>
         
         <a href="${
-          userId !== loggedUser  || type !== 'doctor'
+       
+          type !== 'doctor'
             ? `/pages/userAppointDetails.html?id=${loggedUser}`
             : `/pages/appointmentdetails.html?id=${userId}`
         }">
@@ -107,11 +118,13 @@ const userId = Number(id)
   });
 }
 
-const queryString = window.location.search.split("=");
-const userId = queryString[1];
-console.log(userId);
+
 
 async function getLoggedUserId() {
+  const queryString = window.location.search.split("=");
+const userId = queryString[1];
+console.log(userId)
+console.log(userId);
   const { data, error } = await supabase
     .from("users")
     .select("*")
@@ -123,10 +136,10 @@ async function getLoggedUserId() {
   }
 
   if (data) {
-    console.log('logging', data)
+    console.log('logging',data )
    
     // title.innerHTML = `Dr. Jane Smith - Professional Profile`
-    generateSideBar(logUser, data.type);
+  
   } else {
     alert("no data found");
   }
@@ -225,3 +238,25 @@ async function getAppoinments() {
 }
 
 getAppoinments();
+
+
+
+async function LogUserType() {
+  
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", logUser);
+    if (error) {
+      console.log(error);
+    }
+    // id = data;
+   const type = data[0].type
+    generateSideBar(logUser, type)
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+LogUserType()
