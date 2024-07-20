@@ -18,49 +18,50 @@ function renderAppointmentDetails(appointment) {
     if(appointment.length === 0){
         appoinmentCard.innerHTML = '<div class ="nodata">No Appointment found🤷‍♂️</div>';    
     }else{
-        const reason = appointment[0].reason;
-        const rejectReason = appointment[0].reject_reason;
-
+      
+      appointment.forEach((item)=>{
+        const reason = item.reason;
+        const rejectReason =item.reject_reason;
         appoinmentCard.innerHTML += ` <div class="appointment-header">
         <div class="patient-info">
             <img src="${
-              appointment[0].userAvatar ||
+             item.userAvatar ||
               "https://shorturl.at/8TClo"
             }" alt="Patient Avatar" class="patient-avatar">
             <div>
-                <h3>${appointment[0].name}</h3>
+                <h3>${item.name}</h3>
                 <p>Patient ID: ${
-                  appointment[0].patientid
+                  item.patientid
                 }</p>
             </div>
         </div>
         <span class="status"> ${
-          appointment[0].status
+          item.status
         }</span>
     </div>
     <div class="appointment-body">
         <div class="detail-row">
             <span class="detail-label">Date:</span>
             <span class="detail-value">${
-              appointment[0].date
+              item.date
             }</span>
         </div>
         <div class="detail-row">
             <span class="detail-label">Doctor:</span>
             <span class="detail-value">${
-             appointment[0].doctorName
+             item.doctorName
             }</span>
         </div>
         <div class="detail-row">
             <span class="detail-label">Time:</span>
             <span class="detail-value">${
-              appointment[0].time
+            item.time
             } PM</span>
         </div>
         <div class="detail-row">
             <span class="detail-label">Type:</span>
             <span class="detail-value">${
-              appointment[0].type
+             item.type
             }</span>
         </div>
        
@@ -71,6 +72,10 @@ function renderAppointmentDetails(appointment) {
         </div>
     </div>
     `
+      })
+        
+
+    
     }
 
 

@@ -31,8 +31,6 @@ async function getDoctorName() {
   }
 }
 
-
-
 async function saveAppointMentDetails(doctorName) {
   const apptForm = document.getElementById("apptForm");
 
@@ -50,7 +48,7 @@ async function saveAppointMentDetails(doctorName) {
       console.error("Error fetching user details:", error);
       return;
     }
-loggeduser = data;
+    loggeduser = data;
     console.log(data);
 
     const user = data.find((user) => user.phone === phone);
@@ -75,7 +73,7 @@ loggeduser = data;
 
       console.log(newAppointment);
       sendAppointment(newAppointment);
-      updateCounts(doctorId);
+      updateCounts(doctorId, user.id);
       apptForm.reset();
     }
   } catch (error) {
@@ -105,24 +103,29 @@ apptForm.addEventListener("submit", function (e) {
   getDoctorName();
 });
 
-
-async function updateCounts(userId) {
+async function updateCounts(doctorId, patientid) {
   let total = 0;
-  total+=1; 
-  const updateData = {
-    appointments_pending: total,
-      appointments_finished: total
-  }
+  total += 1;
+  // const updateData = {
+  //   appointments_pending: total,
+  //   appointments_finished: total,
+  // };
   const { data, error } = await supabase
-    .from('users')  
-    .update( updateData)
-    .eq('id', userId);
+    .from("users")
+
+    .upsert([
+      { id: doctorId, appointments_finished: total },
+
+      { id: patientid, appointments_finished: total },
+    ]);
 
   if (error) {
-    console.error('Error updating counts:', error);
+    console.error("Error updating counts:", error);
     return false;
   }
 
-  console.log('Counts updated successfully:', data);
+  console.log("Counts updated successfully:", data);
   return true;
 }
+
+// 098766622
