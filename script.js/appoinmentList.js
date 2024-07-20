@@ -35,7 +35,7 @@ function renderAppointTable(appointments){
             <td>1</td>
         <td>
            
-            <span>${appointment.name}</span>
+            <span claas='name'>${appointment.name}</span>
         </td>
         
         <td>
