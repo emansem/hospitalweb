@@ -75,6 +75,7 @@ loggeduser = data;
 
       console.log(newAppointment);
       sendAppointment(newAppointment);
+      updateAppointment();
       apptForm.reset();
     }
   } catch (error) {
@@ -104,3 +105,8 @@ apptForm.addEventListener("submit", function (e) {
   getDoctorName();
 });
 
+let total = 0;
+async function updateAppointment(id){
+  total+=1;
+  console.log(total);
+}

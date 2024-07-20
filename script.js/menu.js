@@ -14,7 +14,7 @@ const supabaseKey =
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
-function generateSideBar(userId, type) {
+function generateSideBar(id, type) {
   if (logUser === null || !logUser) {
     alert("please longin to continue");
     window.location.href = "/pages/login.html";
@@ -22,7 +22,7 @@ function generateSideBar(userId, type) {
   }
   const loggedUser = logUser;
 
-  console.log(userId);
+const userId = Number(id)
 
   sideBar.innerHTML = `
     <div class="sidebar-left__nav-top">
