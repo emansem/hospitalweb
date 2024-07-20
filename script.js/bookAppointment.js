@@ -75,7 +75,7 @@ loggeduser = data;
 
       console.log(newAppointment);
       sendAppointment(newAppointment);
-      updateCounts(doctorId, user.id);
+      updateCounts(doctorId);
       apptForm.reset();
     }
   } catch (error) {
@@ -106,15 +106,17 @@ apptForm.addEventListener("submit", function (e) {
 });
 
 
-async function updateCounts(userId, doctorId) {
+async function updateCounts(userId) {
+  let total = 0;
+  total+=1; 
+  const updateData = {
+    appointments_pending: total,
+      appointments_finished: total
+  }
   const { data, error } = await supabase
-    .from('userid')  
-    .upsert([
-      { id: userId, appointments_pending : supabase.raw('appointments_pending + 1') },
-      { id: doctorId, appointments_pending : supabase.raw('appointments_pending + 1') },
-      { id: userId, appointments_finished : supabase.raw('appointments_finished + 1') },
-      { id: doctorId, appointments_finished : supabase.raw('appointments_finished + 1') }
-    ], { onConflict: 'id' });
+    .from('users')  
+    .update( updateData)
+    .eq('id', userId);
 
   if (error) {
     console.error('Error updating counts:', error);
