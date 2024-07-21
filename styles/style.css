@@ -453,6 +453,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
+}
+.requestpay{
 	display: none;
 }
 .popup__box--wrapper {

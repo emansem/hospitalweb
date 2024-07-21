@@ -1,7 +1,7 @@
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
-
+const popupWrapper = document.querySelector('.popup__wrapper');
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const reports = document.querySelector(".reports");
@@ -61,7 +61,7 @@ function heroSection(user) {
                           </div>`;
 }
 
-const loggedUser = localStorage.getItem("id");
+const loggedUser = localStorage.getItem("activeId");
 console.log(loggedUser);
 
 function addDoctorstoDashboard(users) {
@@ -166,3 +166,32 @@ function getDoctorData(user) {
 							</div>
 						</div>`
 }
+
+async function checkUserPaySatus(){
+  const {data, error} = await supabase
+  .from('users')
+  .select('*')
+  .eq('id', loggedUser);
+  if(data){
+   if(data[0].type === 'doctor' || data[0].payId === null){
+   popupWrapper.classList.remove('requestpay');
+   }
+    
+  } else{
+    console.log('error', error);
+  }
+}
+console.log(checkUserPaySatus());
+
+//send user to pay ment page;
+
+popupWrapper.addEventListener('click', function(e){
+  const targetEl = e.target.textContent;
+  console.log(targetEl);
+  if(targetEl ==='Pay Now'){
+    window.location.href = '/pages/payment.html';
+  }
+  else if (targetEl === 'Pay later'){
+    popupWrapper.classList.remove('requestpay'); 
+  }
+})

@@ -7,12 +7,12 @@ console.log(loggedId);
 
 document.addEventListener("DOMContentLoaded", function (e) {
 	
-  if (loggedId !== logUser) {
+  if (!logUser) {
     
     alert("please longin to continue");
     window.location.href = "/pages/login.html";
     return;
-  }
+  };
 });
 
 const appointments = document.querySelector(".appointments");
