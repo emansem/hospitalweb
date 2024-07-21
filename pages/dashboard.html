@@ -25,6 +25,14 @@
 		/>
 		<link rel="stylesheet" href="/styles/style.css" />
 	</head>
+	<style>
+		.top{
+        display: none;
+      }
+      .top-doct{
+        display: none;
+      }
+	</style>
 	<body>
 		<div class="dashboard-container">
 			<div class="siderbar-left">
@@ -75,11 +83,15 @@
 				</secttion>
 			</div>
 			<div class="sidebar-right">
-                <div class="top-doctors">
-                    <p class="top-doctor-heading">My Appointments</p>
-                </div>
-                <div class="appointments"></div>
-            </div>
+				<div class="top-doctors">
+					<p class="top-doctor-heading top-doct">Top Doctors</p>
+		
+				  <div class="appointments">
+					<p class="top-doctor-heading top">My Appointments</p>
+					<div class="appt"></div>
+				  </div>
+				</div>
+			  </div>
 		</div>
 		<script type="module" src="/script.js/auth.js"></script>
         <script type="module" src="/script.js/dashboard.js"></script>

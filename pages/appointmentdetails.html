@@ -154,6 +154,12 @@
         padding: 0.3rem 0.6rem;
         border-radius: 1.2rem;
       }
+      .top{
+        display: none;
+      }
+      .top-doct{
+        display: none;
+      }
 
       td {
         color: var(--color-dark);
@@ -268,9 +274,13 @@
 
       <div class="sidebar-right">
         <div class="top-doctors">
-          <p class="top-doctor-heading">My Appointments</p>
+            <p class="top-doctor-heading top-doct">Top Doctors</p>
+
+          <div class="appointments">
+            <p class="top-doctor-heading top">My Appointments</p>
+            <div class="appt"></div>
+          </div>
         </div>
-        <div class="appointments"></div>
       </div>
     </div>
     <script type="module" src="/script.js//menu.js"></script>

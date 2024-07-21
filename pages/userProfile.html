@@ -44,6 +44,12 @@
 				--shadow-4: 0 14px 28px rgba(0, 0, 0, 0.25),
 					0 10px 10px rgba(0, 0, 0, 0.22);
 			}
+			.top{
+        display: none;
+      }
+      .top-doct{
+        display: none;
+      }
 
 			body {
 				font-family: var(--font-body);
@@ -151,13 +157,15 @@
 			</div>
 
 			<div class="sidebar-right">
-				<div class="sidebar-right">
-					<div class="top-doctors">
-						<p class="top-doctor-heading">My Appointments</p>
-					</div>
-					<div class="appointments"></div>
+				<div class="top-doctors">
+					<p class="top-doctor-heading top-doct">Top Doctors</p>
+		
+				  <div class="appointments">
+					<p class="top-doctor-heading top">My Appointments</p>
+					<div class="appt"></div>
+				  </div>
 				</div>
-			</div>
+			  </div>
 		</div>
 		<script type="module" src="/script.js/menu.js"></script>
 		<script type="module" src="/script.js/userProfile.js"></script>

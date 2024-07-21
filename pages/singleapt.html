@@ -247,6 +247,12 @@ width: 600px;
 		margin-left: 0.2rem;
         transition: background-color 0.3s ease;
 }
+.top{
+        display: none;
+      }
+      .top-doct{
+        display: none;
+      }
 
     .btn:hover {
         opacity: 0.9;
@@ -334,12 +340,16 @@ width: 600px;
 			</div>
 
 
-			<div class="sidebar-right">
+            <div class="sidebar-right">
                 <div class="top-doctors">
-                    <p class="top-doctor-heading">My Appointments</p>
+                    <p class="top-doctor-heading top-doct">Top Doctors</p>
+        
+                  <div class="appointments">
+                    <p class="top-doctor-heading top">My Appointments</p>
+                    <div class="appt"></div>
+                  </div>
                 </div>
-                <div class="appointments"></div>
-            </div> 
+              </div> 
 		</div>
         
 		<script type="module" src="/script.js/singeappointment.js"></script>

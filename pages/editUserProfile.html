@@ -133,7 +133,12 @@
 				height: 100%;
 				object-fit: cover;
 			}
-
+			.top{
+        display: none;
+      }
+      .top-doct{
+        display: none;
+      }
 			.file-input-wrapper {
 				position: relative;
 				overflow: hidden;
@@ -225,11 +230,15 @@
 			</div>
 
 			<div class="sidebar-right">
-                <div class="top-doctors">
-                    <p class="top-doctor-heading">My Appointments</p>
-                </div>
-                <div class="appointments"></div>
-            </div>
+				<div class="top-doctors">
+					<p class="top-doctor-heading top-doct">Top Doctors</p>
+		
+				  <div class="appointments">
+					<p class="top-doctor-heading top">My Appointments</p>
+					<div class="appt"></div>
+				  </div>
+				</div>
+			  </div>
 		</div>
 		<script type="module" src="/script.js/menu.js"></script>
 		<script type="module" src="/script.js/edituser.js"></script>
