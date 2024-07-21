@@ -43,7 +43,8 @@ className = 'btn'
   console.log('if user id is a string', className)
 
   profileContainer.innerHTML = ` <div class="profile-header">
-  <i class="fas fa-crown"></i>
+  <span class ='premium'> <i class="fas fa-crown"></i></span>
+ 
                               <div class="profile-image">
                                    <img src="${
                                      user[0].userAvatar ||
