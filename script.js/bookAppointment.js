@@ -73,7 +73,7 @@ async function saveAppointMentDetails(doctorName) {
 
       console.log(newAppointment);
       sendAppointment(newAppointment);
-      updateCounts(doctorId, user.id);
+      callIncrementAppointments( doctorId, user.id)
       apptForm.reset();
     }
   } catch (error) {
@@ -104,24 +104,24 @@ apptForm.addEventListener("submit", function (e) {
 });
 
 // // Function to call the increment_appointments procedure
-// async function callIncrementAppointments(pendingIncrement, finishedIncrement, id1, id2) {
-//   try {
-//     const { data, error } = await supabase.rpc('increment_appointments', {
-//       pending_increment: pendingIncrement,
-//       finished_increment: finishedIncrement,
-//       id1: id1,
-//       id2: id2
-//     })
+async function callIncrementAppointments( id1, id2) {
+  try {
+    const { data, error } = await supabase.rpc('increment_appointments', {
+      pending_increment: 1,
+      finished_increment: 1,
+      id1: id1,
+      id2: id2
+    })
 
-//     if (error) throw error
+    if (error) throw error
 
-//     console.log('Appointments incremented successfully')
-//     return data
-//   } catch (error) {
-//     console.error('Error incrementing appointments:', error.message)
-//     return null
-//   }
-// }
+    console.log('Appointments incremented successfully')
+    return data
+  } catch (error) {
+    console.error('Error incrementing appointments:', error.message)
+    return null
+  }
+}
 // 098766622
 
 // create or replace function increment_appointments(
