@@ -701,3 +701,6 @@ transition: all 0.4s linear;
 .hideForm{
 	display: none;
 }
+.warn-icon{
+	font-size: 40px;
+}
