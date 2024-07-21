@@ -1,0 +1,125 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Edit user profile</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="/styles/style.css" />
+
+		<style>
+		
+			header {
+				margin-top: 150px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="dashboard-container">
+			<div class="siderbar-left"></div>
+
+			<div class="main-page">
+				<!---header seaction-->
+
+				<div class="header">
+					<h1 class="header-logo">Dashboard</h1>
+					<div class="header-items">
+						<div class="search">
+							<input type="text" placeholder="search.." />
+							<i class="fas fa-search"></i>
+						</div>
+						<div class="help header-icon">
+							<i class="far fa-question-circle"></i>
+						</div>
+						<div class="notice header-icon">
+							<i class="far fas fa-bell"></i>
+						</div>
+						<div class="user-avater">
+							<img src="/images/avater1.jpg" alt="" srcset="" />
+						</div>
+					</div>
+				</div>
+
+				<section class="main-section">
+					<header></header>
+					<main class="payment__form">
+					<div class="form-wrapper">
+                        <form class="payForm">
+                            <div class="payform__header">
+                               <h2 class="payheading">Make your payment acess the features</h2>
+                               <div class="payform__header--heading">
+                                   <span>Pay Invoice</span>
+                               </div>
+                               <div class="payform__header--logos">
+                                 <img src="/images/mtn.jpg" alt=" mtnlogo" class="pay-logo">
+                                 <img src="/images/oranglogo.png" alt="orange logo" class="pay-logo">
+
+                               </div>
+                            </div>
+                            <div class="payform__body">
+                                 <div class="payform__body--amount">
+                                   <span class="amountText">Payment amount:</span>
+                                   <span class="amount">$20</span>
+                                 </div>
+                                 <div class="payform__body--inputs">
+                                   <div>
+                                       <label class="lable" for="name">Full name</label>
+                                       <input class="pay-input" name="name" type="text">
+                                   </div>
+                                   <div>
+                                       <label class="lable" for="network">Select gateway</label>
+                                     <select class="pay-input"  name="network" id="network">
+                                       <option value="mtn">Mobile Money</option>
+                                       <option value="orange">Orange Money</option>
+                                     </select>
+                                   </div>
+                                   <div>
+                                       <label class="lable" for="phone">Phone number</label>
+                                       <input class="pay-input" name="phone" type="tel">
+                                   </div>
+                                 </div>
+                                 <div class="payform__footer">
+                                    <button class="pay-btn">Pay now</button>
+                                 </div>
+                            </div>
+                           
+                       </form>
+                    </div>
+					</main>
+				</section>
+			</div>
+
+			<div class="sidebar-right">
+				<div class="top-doctors">
+					<p class="top-doctor-heading top-doct">Top Doctors</p>
+		
+				  <div class="appointments">
+					<p class="top-doctor-heading top">My Appointments</p>
+					<div class="appt"></div>
+				  </div>
+				</div>
+			  </div>
+		</div>
+		<script type="module" src="/script.js/menu.js"></script>
+		<script type="module" src="/script.js/edituser.js"></script>
+	</body>
+</html>

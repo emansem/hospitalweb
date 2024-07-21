@@ -8,6 +8,7 @@ console.log(loggedId);
 document.addEventListener("DOMContentLoaded", function (e) {
 	
   if (loggedId !== logUser) {
+    
     alert("please longin to continue");
     window.location.href = "/pages/login.html";
     return;
