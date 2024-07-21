@@ -1,7 +1,7 @@
 /** @format */
 
 const logUser = JSON.parse(localStorage.getItem("activeId"));
-const patientid = window.location.search.split('=')[1];
+const patientid = window.location.search.split("=")[1];
 console.log(patientid);
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
@@ -50,9 +50,10 @@ function profileDetails(user) {
 																			"https://shorturl.at/8TClo"
 																		}" alt="User Avatar">
                               </div>
-                              <div>
+                              <div >
                                   <h2 class="drName">Dr.${user[0].name}</h2>
-                                  <p>${user[0].hospitalName}</p>
+                                 
+                              <div class ='action-btn'>
                                  
                                   <a href="/pages/editDoctorProfile.html?id=${
 																		user[0].id
@@ -64,9 +65,9 @@ function profileDetails(user) {
 																	}" class="${
 		userType.type === "doctor" ? "edit-btn" : "btn"
 	}" style="margin-left: 1rem;">Book Appointments</a>
-
-             <a class= "btn  upgradeBtn"  href="/pages/appointment.html" style="margin-left: 1rem;">Upgrade</a>
-                              </div>
+    <a class= "btn  upgradeBtn"  href="/pages/payment.html" style="margin-left: 1rem;">Upgrade</a></div>
+</div>
+  
                           </div>
                           <div class="profile-main">
                               <section class="section">
@@ -113,21 +114,24 @@ function profileDetails(user) {
                            
                           </div>`;
 	const premium = document.querySelector(".premium");
-  async function checkUserPaySatus(){
-    premium.style.display= 'none';
-    const {data, error} = await supabase
-    .from('payment_history')
-    .select('*')
-    .eq('user_id', logUser);
-  
-  if(data.length !==0 || patientid){
-    premium.style.display='block';
-  }
-    if(error){
-      console.log('error', error)
-    }
-  }
-  checkUserPaySatus();
+	const upgradeBtn = document.querySelector(".upgradeBtn");
+	async function checkUserPaySatus() {
+		premium.style.display = "none";
+		upgradeBtn.style.display = "none";
+		const { data, error } = await supabase
+			.from("payment_history")
+			.select("*")
+			.eq("user_id", logUser);
+
+		if (data.length !== 0 || patientid) {
+			premium.style.display = "block";
+			upgradeBtn.style.display = "none";
+		} else {
+			upgradeBtn.style.display = "block";
+		}
+		if (error) {
+			console.log("error", error);
+		}
+	}
+	checkUserPaySatus();
 }
-
-
