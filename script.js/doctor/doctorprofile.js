@@ -64,6 +64,8 @@ function profileDetails(user) {
 																	}" class="${
 		userType.type === "doctor" ? "edit-btn" : "btn"
 	}" style="margin-left: 1rem;">Book Appointments</a>
+
+             <a class= "btn  upgradeBtn"  href="/pages/appointment.html" style="margin-left: 1rem;">Upgrade</a>
                               </div>
                           </div>
                           <div class="profile-main">
