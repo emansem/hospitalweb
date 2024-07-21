@@ -1,5 +1,6 @@
 // const loginform = document.getElementById("loginform");
 const logUser = JSON.parse(localStorage.getItem("activeId"));
+const getStoreUsers = JSON.parse(localStorage.getItem("id"));
 const userId = window.location.search.split("=")[1];
 const loggedId = Number(userId);
 console.log(loggedId);
@@ -29,7 +30,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
 async function LogUserType() {
   console.log("active id", logUser);
-  const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+
   const user = getStoreUsers.find((user) => user.id === logUser);
   console.log("saved user", user);
 
@@ -182,9 +183,11 @@ async function getAppoinments() {
     if (error) {
       console.log(error);
     }
-    if (data.length !== 0 || userId !== logUser) {
+    const user = getStoreUsers.find((user) => user.id === logUser);
+    console.log("saved user", user);
+    if (data.length !== 0 || user.type === 'doctor') {
       hideAppt.style.display = "block";
-      hideDotors.display = "block";
+      hideDotors.style.display = "none";
 
       for (let item of data) {
         id = item.patientid;
