@@ -453,6 +453,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	display: none;
 }
 .popup__box--wrapper {
 	max-width: 700px;
@@ -462,6 +463,7 @@
 	border-radius: 1rem;
 	display: flex;
 	justify-content: center;
+	
 }
 .popup__header {
 	display: flex;
@@ -677,4 +679,19 @@ transition: all 0.4s linear;
 }
 .succes-icon{
 	color: var(--color-accent);
+}
+.sucess-body{
+	width: 400px;
+	text-align: center;
+	
+}
+.sucesstext{
+	line-height: 1.3;
+}
+.sucess-pay{
+	height: 350px;
+	display: none;
+}
+.success{
+	background: rgba(0, 0, 0, 0.05);
 }
