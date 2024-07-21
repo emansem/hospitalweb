@@ -668,3 +668,13 @@ margin-bottom: 1rem;
 width: 300px;
 transition: all 0.4s linear;
 }
+.sucess-pay-heaing{
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 70px;
+}
+.succes-icon{
+	color: var(--color-accent);
+}
