@@ -8,10 +8,10 @@ const reports = document.querySelector(".reports");
 const doctors = document.querySelector(".doctors");
 const appointments = document.querySelector(".appointments");
 const doctorH = document.querySelector(".docctor-heading");
-const queryString = window.location.search.split("=");
+
 const logUser = JSON.parse(localStorage.getItem("activeId"));
-const userID = queryString[1];
-console.log(userID);
+
+
 async function getUserInfo() {
   try {
     const { data, error } = await supabase
@@ -68,9 +68,7 @@ console.log(loggedUser);
 function addDoctorstoDashboard(users) {
   users.forEach((doctor) => {
     doctors.innerHTML += `
-  <a href="/pages/doctorprofile.html?id=${
-    doctor.id
-  }" target="_blank" rel="noopener noreferrer">
+  <a href="/pages/doctorprofile.html?id=${logUser}" target="_blank" rel="noopener noreferrer">
   <div class="doctor-items">
               <div class="doctor-thumnail">
                  <img src="${

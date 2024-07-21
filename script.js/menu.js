@@ -70,8 +70,8 @@ function generateSideBar(id, type) {
       <ul class="sidebar-left_nav-items">
         <a href="${
           type !== "doctor"
-            ? `/pages/dashboard.html?id=${loggedUser}`
-            : `/pages/dashboard.html?id=${userId}`
+            ? `/pages/dashboard.html`
+            : `/pages/dashboard.html`
         }">
           <li class="sidebar-left-item active">
             <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
@@ -103,7 +103,7 @@ function generateSideBar(id, type) {
         <a href="${
           type !== "doctor"
             ? `/pages/editUserProfile.html?id=${loggedUser}`
-            : `/pages/editDoctorProfile.html?id=${userId}`
+            : `/pages/editDoctorProfile.html`
         }">
           <li class="sidebar-left-item">
             <span><i class="fas fa-cog"></i></span> Settings
@@ -119,7 +119,7 @@ function generateSideBar(id, type) {
         <a href="${
           userId !== loggedUser || type !== "doctor"
             ? `/pages/userProfile.html?id=${loggedUser}`
-            : `/pages/doctorprofile.html?id=${userId}`
+            : `/pages/doctorprofile.html`
         }" target="_blank" rel="noopener noreferrer">
           <li class="sidebar-left-item">
             <span><i class="fas fa-user-circle"></i></span> Profile
