@@ -9,6 +9,7 @@ const supabaseKey =
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
+const requestPay  = document.getElementById('request-pay');
 
 async function getDoctorDetails() {
   try {
@@ -113,14 +114,20 @@ function profileDetails(user) {
               
                            
                           </div>`;
-  const btn = document.querySelector(".btn")
-  btn.addEventListener('click', function(e){
-	e.preventDefault();
-	console.log('event just happen here')
-  })
+  const btn = document.querySelector(".btn");
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    console.log("event just happen here");
+  });
 
   const premium = document.querySelector(".premium");
   const upgradeBtn = document.querySelector(".upgradeBtn");
+btn.addEventListener('click', function(e){
+	e.preventDefault();
+	reQuestPay();
+})
+
+
   async function checkUserPaySatus() {
     premium.style.display = "none";
     upgradeBtn.style.display = "none";
@@ -141,3 +148,29 @@ function profileDetails(user) {
   }
   checkUserPaySatus();
 }
+
+// ask user to pay before they can talk to a doctor
+async function reQuestPay() {
+  const { data, error } = await supabase
+  .from("users")
+  .select('*')
+  .eq("id", logUser);
+  if (data[0].type === 'patient' && data[[0]].pay_id === null ) {
+    requestPay.classList.remove('hideForm');
+
+  } else {
+	requestPay.classList.add('hideForm');
+    console.log("error", error);
+  }
+}
+
+requestPay.addEventListener('click', function(e){
+	e.preventDefault();
+	const targetEl = e.target.textContent;
+	console.log(targetEl);
+	if(targetEl === 'Maybe Later'){
+		requestPay.classList.add('hideForm');
+	}else if(targetEl === 'Subscribe Now'){
+		window.location.href = '/pages/payment.html';
+	}
+})
