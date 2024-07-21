@@ -582,7 +582,7 @@ transition: all 0.4s linear;
 	align-items: center;
 	justify-content: center;
 	max-width: 800px;
-	box-shadow: var(--shadow-1);
+	
 	border-radius: 0.4rem;
 	padding-block: 2rem;
 	padding-inline: 1rem;
@@ -612,8 +612,10 @@ transition: all 0.4s linear;
 .form-wrapper{
 	display: flex;
 	justify-content: center;
-	border: 1px solid #c1c1c1;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 	width: 500px;
+	border-radius: 1rem;
+	overflow: hidden;
 	
 
 }
