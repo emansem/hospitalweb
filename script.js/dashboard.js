@@ -10,6 +10,8 @@ const appointments = document.querySelector(".appointments");
 const doctorH = document.querySelector(".docctor-heading");
 
 const logUser = JSON.parse(localStorage.getItem("activeId"));
+const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+const patientLog = getStoreUsers.find(user=>user.id === logUser);
 
 
 async function getUserInfo() {
@@ -171,14 +173,15 @@ async function checkUserPaySatus(){
   .from('payment_history')
   .select('*')
   .eq('user_id', loggedUser);
+  console.log(data);
   
-  
-  if(data.length ===0){
+  if(data.length !==0 || patientLog.type === 'patient'){
+    popupWrapper.classList.add('requestpay');
+  }else if(data.length ===0 && patientLog.type ==='doctor'){
+    popupWrapper.classList.add('requestpay');
     setTimeout(function(e){
       popupWrapper.classList.remove('requestpay');
     },2000)
-  }else{
-    popupWrapper.classList.add('requestpay');
   }
   if(error){
     console.log('error', error)
