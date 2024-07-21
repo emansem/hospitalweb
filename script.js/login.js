@@ -20,8 +20,9 @@ async function loggedUserIn() {
       loginform.reset();
 
       alert("SuccessFul Login!");
-      window.location.href = `/pages/dashboard.html?id=${user.id}`;
+      
       localStorage.setItem("activeId", JSON.stringify(user.id));
+      window.location.href = `/pages/dashboard.html`;
       
     } else {
       alert("Wrong credentials");

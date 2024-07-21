@@ -8,15 +8,14 @@ const supabaseKey =
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
-const queryString = window.location.search.split("=");
-const doctorId = queryString[1];
+
 
 async function getDoctorDetails() {
   try {
     const { data, error } = await supabase
       .from("users")
       .select("*")
-      .eq("id", doctorId);
+      .eq("id", logUser);
     if (error) {
       console.log(error);
     }

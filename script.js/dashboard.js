@@ -9,6 +9,7 @@ const doctors = document.querySelector(".doctors");
 const appointments = document.querySelector(".appointments");
 const doctorH = document.querySelector(".docctor-heading");
 const queryString = window.location.search.split("=");
+const logUser = JSON.parse(localStorage.getItem("activeId"));
 const userID = queryString[1];
 console.log(userID);
 async function getUserInfo() {
@@ -16,7 +17,7 @@ async function getUserInfo() {
     const { data, error } = await supabase
       .from("users")
       .select("*")
-      .eq("id", userID)
+      .eq("id", logUser)
       .single();
     if (error) {
       console.error("Error fetching user details:", error);
@@ -169,16 +170,20 @@ function getDoctorData(user) {
 
 async function checkUserPaySatus(){
   const {data, error} = await supabase
-  .from('users')
+  .from('payment_history')
   .select('*')
-  .eq('id', loggedUser);
-  if(data){
-   if(data[0].type === 'doctor' || data[0].payId === null){
-   popupWrapper.classList.remove('requestpay');
-   }
-    
-  } else{
-    console.log('error', error);
+  .eq('user_id', loggedUser);
+  
+  
+  if(data.length ===0){
+    setTimeout(function(e){
+      popupWrapper.classList.remove('requestpay');
+    },2000)
+  }else{
+    popupWrapper.classList.add('requestpay');
+  }
+  if(error){
+    console.log('error', error)
   }
 }
 console.log(checkUserPaySatus());
@@ -192,6 +197,7 @@ popupWrapper.addEventListener('click', function(e){
     window.location.href = '/pages/payment.html';
   }
   else if (targetEl === 'Pay later'){
-    popupWrapper.classList.remove('requestpay'); 
+    popupWrapper.style.display ='none'; 
+    
   }
 })
