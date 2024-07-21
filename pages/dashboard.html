@@ -6,7 +6,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>DashBoard</title>
-		
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -26,21 +26,18 @@
 		<link rel="stylesheet" href="/styles/style.css" />
 	</head>
 	<style>
-		.top{
-        display: none;
-      }
-      .top-doct{
-        display: none;
-      }
+		.top {
+			display: none;
+		}
+		.top-doct {
+			display: none;
+		}
 	</style>
 	<body>
 		<div class="dashboard-container">
-			<div class="siderbar-left">
-				
-			</div>
+			<div class="siderbar-left"></div>
 			<div class="main-page">
 				<!---header seaction-->
-				
 
 				<div class="header">
 					<h1 class="header-logo">Dashboard</h1>
@@ -60,41 +57,71 @@
 						</div>
 					</div>
 				</div>
+				<!---popup section section seaction-->
+				<div class="popup__wrapper">
+					<div class="popup__box">
+						<div class="popup__header">
+							<i class="fas fa-exclamation-triangle"></i>
+							<h2 class="attention">Notice to new Doctors </h2>
+						</div>
+						<div class="popup__body">
+							<p >
+								Welcome! To be listed on our webpage, doctors are required to
+								pay <span class="fee">$20 Every Month</span>. Here are the benefits you will receive:
+							</p>
+
+							<ul class="notice__items">
+								<li class="notice_item">
+									<i class="fas fa-eye"></i>
+									<span>Gain increased visibility among potential patients and peers.</span>
+								</li>
+								<li class="notice_item">
+									<i class="fas fa-users"></i>
+									<span>Access to our professional networking opportunities.</span>
+								</li>
+								<li class="notice_item">
+									<i class="fas fa-newspaper"></i>
+									<span>Receive updates and news about medical advancements and industry trends.</span>
+								</li>
+								<li class="notice_item">
+									<i class="fas fa-bullhorn"></i>
+									<span>Utilize our platform for promoting your services and expertise.</span>
+								</li>
+								
+							</ul>
+						</div>
+						<div class="popup__footer">
+							<button class="accept footer__btn">Pay Now</button>
+							<button class="refuse footer__btn">Pay later</button>
+						</div>
+					</div>
+				</div>
 
 				<!---hero section seaction-->
 				<section class="hero">
-					<div class="hero-wrapper">
-						
-					</div>
+					<div class="hero-wrapper"></div>
 				</section>
 
 				<!---appointMent section seaction-->
 				<secttion class="main-section">
-					<div class="reports">
-						
-					</div>
-                    <div class="docctor-heading">
-                        Our Doctors
-                    </div>
-					<div class="doctors">
-                        
-                     
-					</div>
+					<div class="reports"></div>
+					<div class="docctor-heading">Our Doctors</div>
+					<div class="doctors"></div>
 				</secttion>
 			</div>
 			<div class="sidebar-right">
 				<div class="top-doctors">
 					<p class="top-doctor-heading top-doct">Top Doctors</p>
-		
-				  <div class="appointments">
-					<p class="top-doctor-heading top">My Appointments</p>
-					<div class="appt"></div>
-				  </div>
+
+					<div class="appointments">
+						<p class="top-doctor-heading top">My Appointments</p>
+						<div class="appt"></div>
+					</div>
 				</div>
-			  </div>
+			</div>
 		</div>
 		<script type="module" src="/script.js/auth.js"></script>
-        <script type="module" src="/script.js/dashboard.js"></script>
-        <script type="module" src="/script.js/menu.js"></script>
+		<script type="module" src="/script.js/dashboard.js"></script>
+		<script type="module" src="/script.js/menu.js"></script>
 	</body>
 </html>
