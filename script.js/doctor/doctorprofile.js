@@ -65,7 +65,7 @@ function profileDetails(user) {
                                    userType.type === "doctor"
                                      ? "edit-btn"
                                      : "btn"
-                                 }" style="margin-left: 1rem;">Book Appointments</div>
+                                 }" style="margin-left: 1rem;">Contact Me</div>
     <a class= "btn  upgradeBtn"  href="/pages/payment.html" style="margin-left: 1rem;">Upgrade</a></div>
 </div>
   
@@ -148,6 +148,8 @@ btn.addEventListener('click', function(e){
   }
   checkUserPaySatus();
 }
+const userId = window.location.search.split("=")[1];
+// const doctorId = Number(userId);
 
 // ask user to pay before they can talk to a doctor
 async function reQuestPay() {
@@ -157,9 +159,11 @@ async function reQuestPay() {
   .eq("id", logUser);
   if (data[0].type === 'patient' && data[[0]].pay_id === null ) {
     requestPay.classList.remove('hideForm');
+		// window.location.href = `/pages/contact-doctor.html?id =${doctorId}`;
 
   } else {
 	requestPay.classList.add('hideForm');
+  window.location.href = `/pages/contact-doctor.html?id =${doctorId}`;
     console.log("error", error);
   }
 }
@@ -171,6 +175,6 @@ requestPay.addEventListener('click', function(e){
 	if(targetEl === 'Maybe Later'){
 		requestPay.classList.add('hideForm');
 	}else if(targetEl === 'Subscribe Now'){
-		window.location.href = '/pages/payment.html';
+    window.location.href = '/pages/payment.html';
 	}
 })

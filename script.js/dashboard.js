@@ -71,7 +71,7 @@ console.log(loggedUser);
 function addDoctorstoDashboard(users) {
 	users.forEach((doctor) => {
 		doctors.innerHTML += `
-  <a href="/pages/doctorprofile.html?id=${logUser}" target="_blank" rel="noopener noreferrer">
+  <a href="/pages/doctorprofile.html?id=${doctor.id}" target="_blank" rel="noopener noreferrer">
   <div class="doctor-items">
               <div class="doctor-thumnail">
                  <img src="${
