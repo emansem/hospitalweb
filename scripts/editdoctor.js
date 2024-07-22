@@ -21,7 +21,6 @@ async function sendDoctorDetails(updatedUser) {
     .eq("id", logUser);
   if (error) console.log(error);
   console.log(data);
-  updateForm.reset();
 }
 
 function editUserProfile() {
@@ -55,7 +54,7 @@ updateForm.addEventListener("submit", function (e) {
   e.preventDefault();
   editUserProfile();
   alert("Profile updated successfully!");
-  
+  updateForm.reset();
   setTimeout(function () {
     window.location.href = `/pages/doctorprofile.html`;
   }, 1500);

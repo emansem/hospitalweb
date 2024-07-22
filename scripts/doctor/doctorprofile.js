@@ -1,9 +1,12 @@
 /** @format */
 
 // Get logged-in user ID from local storage
+const getStoreUsers = JSON.parse(localStorage.getItem("id"));
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 const queryString = window.location.search.split("=");
-const docctorId = queryString[1];
+const doctorId= queryString[1];
+
+// Supabase configuration
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
@@ -17,32 +20,45 @@ const requestPay = document.getElementById("request-pay");
 
 // Function to fetch doctor details
 async function getDoctorDetails() {
+	const checkCurrentUserType = getStoreUsers.find(
+		(user) => user.id === logUser
+	);
+	console.log(checkCurrentUserType);
 	try {
-		const { data, error } = await supabase
-			.from("users")
-			.select("*")
-			.eq("id", 58);
-		if (error) {
-			console.log(error);
+		if (checkCurrentUserType.type === "patient") {
+			const { data, error } = await supabase
+				.from("users")
+				.select("*")
+				.eq("id", doctorId);
+
+			console.log("data", data);
+
+			profileDetails(data);
+		} else if (checkCurrentUserType.type === "doctor") {
+			const { data, error } = await supabase
+				.from("users")
+				.select("*")
+				.eq("id", logUser);
+
+			console.log("data", data);
+
+			profileDetails(data);
 		}
-		console.log('data', data);
-		const id = data[0].id;
-		profileDetails(data);
 	} catch (error) {
-		console.error(error);
+		console.error("Error for fecthing doctor details", error);
 	}
 }
-console.log('hello world')
+console.log("hello world");
 getDoctorDetails();
 
 // Function to display profile details
 function profileDetails(user) {
-	console.log('usertype', user);
-	const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+	console.log("usertype", user);
+
 	const userType = getStoreUsers.find((user) => user.id === logUser);
 	let className;
 	if (userType.type === "doctor") {
-		className = "btn";
+		className = "edit__doctor--profile";
 	} else {
 		className = "edit-btn";
 	}
@@ -65,7 +81,7 @@ function profileDetails(user) {
       <div class='action-btn'>
         <a href="/pages/editDoctorProfile.html?id=${user[0].id}" class="${className}">Edit Profile</a>
         <div class="${userType.type === "doctor" ? "edit-btn" : "btn"}" style="margin-left: 1rem;">Contact Me</div>
-        <a class="btn upgradeBtn" href="/pages/payment.html" style="margin-left: 1rem;">Upgrade</a>
+        <a class="upgradeBtn" href="/pages/payment.html" style="margin-left: 1rem;">Upgrade</a>
       </div>
     </div>
   </div>
@@ -103,20 +119,27 @@ function profileDetails(user) {
 `;
 
 	const btn = document.querySelector(".btn");
-	btn.addEventListener("click", function (e) {
-		e.preventDefault();
-		console.log("event just happen here");
-	});
+	if(btn){
+
+	}
+	
 
 	const premium = document.querySelector(".premium");
 	const upgradeBtn = document.querySelector(".upgradeBtn");
-	btn.addEventListener("click", function (e) {
-		e.preventDefault();
-		reQuestPay();
-	});
+	if(btn){
+		btn.addEventListener("click", function (e) {
+			e.preventDefault();
+			reQuestPay();
+		});
+	}
+	
 
 	// Function to check user payment status
 	async function checkUserPaySatus() {
+		const user = getStoreUsers.find(user =>user.id === logUser);
+	let patientid;
+	if(user.type === 'patient') patientid = user.type;
+		
 		premium.style.display = "none";
 		upgradeBtn.style.display = "none";
 		const { data, error } = await supabase
@@ -137,9 +160,7 @@ function profileDetails(user) {
 	checkUserPaySatus();
 }
 
-// Get doctor ID from URL
-const userId = window.location.search.split("=")[1];
-const doctorId = Number(userId);
+
 
 // Function to request payment before contacting doctor
 async function reQuestPay() {
@@ -164,6 +185,6 @@ requestPay.addEventListener("click", function (e) {
 	if (targetEl === "Maybe Later") {
 		requestPay.classList.add("hideForm");
 	} else if (targetEl === "Subscribe Now") {
-		window.location.href = "/pages/payment.html";
+		window.location.href = `/pages/payment.html?id=${doctorId}`;
 	}
 });
