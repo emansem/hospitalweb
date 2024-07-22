@@ -199,9 +199,9 @@ console.log(checkUserPaySatus());
 popupWrapper.addEventListener("click", function (e) {
 	const targetEl = e.target.textContent;
 	console.log(targetEl);
-	if (targetEl === "Pay Now") {
+	if (targetEl === "Subscribe Now") {
 		window.location.href = "/pages/payment.html";
-	} else if (targetEl === "Pay later") {
+	} else if (targetEl === "Maybe Later") {
 		popupWrapper.style.display = "none";
 	}
 });

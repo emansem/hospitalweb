@@ -1,8 +1,7 @@
 /** @format */
 
 const logUser = JSON.parse(localStorage.getItem("activeId"));
-const patientid = window.location.search.split("=")[1];
-console.log(patientid);
+
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
@@ -149,7 +148,7 @@ btn.addEventListener('click', function(e){
   checkUserPaySatus();
 }
 const userId = window.location.search.split("=")[1];
-// const doctorId = Number(userId);
+const doctorId = Number(userId);
 
 // ask user to pay before they can talk to a doctor
 async function reQuestPay() {

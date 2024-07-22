@@ -8,7 +8,10 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabase = createClient(supabaseUrl, supabaseKey);
 const queryString = window.location.search.split("=");
 const doctorId = queryString[1];
-
+console.log('doctor id', doctorId);
+const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+const patientId = JSON.parse(localStorage.getItem('activeId'));
+console.log('patient id', patientId);
 async function getDoctorName() {
   try {
     const { data, error } = await supabase
@@ -34,24 +37,16 @@ async function getDoctorName() {
 async function saveAppointMentDetails(doctorName) {
   const apptForm = document.getElementById("apptForm");
 
-  const name = apptForm.name.value;
-  const email = apptForm.email.value;
-  const phone = apptForm.phone.value;
+ 
   const time = apptForm.time.value;
   const date = apptForm.date.value;
   const type = apptForm.appointmenttype.value;
   const reason = apptForm.reason.value;
   try {
-    const { data, error } = await supabase.from("users").select("*");
+    
+    const user = getStoreUsers.find((user) => user.id === patientId);
+    console.log('patient', user);
 
-    if (error) {
-      console.error("Error fetching user details:", error);
-      return;
-    }
-    loggeduser = data;
-    console.log(data);
-
-    const user = data.find((user) => user.phone === phone);
     if (!user) {
       console.log("user not found");
       alert("wrong credentials");
@@ -60,9 +55,9 @@ async function saveAppointMentDetails(doctorName) {
       const newAppointment = {
         doctorId: doctorId,
         patientid: user.id,
-        name: name,
-        email: email,
-        phone: phone,
+        name: user.name,
+        // email: email,
+        phone: user.phone,
         time: time,
         date: date,
         type: type,
@@ -139,3 +134,11 @@ async function callIncrementAppointments( id1, id2) {
 //   where id in (id1, id2);
 // $$ 
 // language sql volatile;
+const now = new Date();
+console.log(now.getDay());
+let tomrow = new Date(now);
+tomrow.setDate(now.getDate()+1);
+console.log(tomrow);
+const df = tomrow - now;
+const tomrowHours = (1000 *60 * 60);
+console.log(tomrowHours);
