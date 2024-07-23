@@ -201,9 +201,7 @@ function renderAlertMessage(date, hours) {
 }
 
 function updateCountdown(nextDate) {
-	// const now = new Date();
-	// const paidDate = Date.now();
-	// const expireDate = paidDate + 31 * 24 * 60 * 60 * 1000;
+	
 	const formattedDate = new Date(nextDate).toLocaleString("en-US", {
 		month: "long",
 		day: "2-digit",

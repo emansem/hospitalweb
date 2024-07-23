@@ -3,7 +3,7 @@ const logUser = JSON.parse(localStorage.getItem("activeId"));
 const getStoreUsers = JSON.parse(localStorage.getItem("id"));
 const userId = window.location.search.split("=")[1];
 const loggedId = Number(userId);
-console.log(loggedId);
+
 
 document.addEventListener("DOMContentLoaded", function (e) {
 	
@@ -30,14 +30,13 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
 async function LogUserType() {
-  console.log("active id", logUser);
+  
 
   const user = getStoreUsers.find((user) => user.id === logUser);
-  console.log("saved user", user);
+ 
 
-  console.log(user.type);
   const type = user.type;
-  console.log(type);
+
   generateSideBar(logUser, type);
 }
 LogUserType();
@@ -141,31 +140,8 @@ function generateSideBar(id, type) {
   });
 }
 
-// async function getLoggedUserId() {
-//   const queryString = window.location.search.split("=");
-//   const userId = queryString[1];
-//   console.log(userId);
-//   console.log(userId);
-//   const { data, error } = await supabase
-//     .from("users")
-//     .select("*")
-//     .eq("id", userId);
-//   if (!userId) {
-//     alert("please longin to continue");
-//     window.location.href = "/pages/login.html";
-//     return;
-//   }
 
-//   if (data) {
-//     console.log("logging", data);
 
-//     // title.innerHTML = `Dr. Jane Smith - Professional Profile`
-//   } else {
-//     alert("no data found");
-//   }
-// }
-
-// getLoggedUserId();
 
 function logUserout() {
   localStorage.removeItem("activeId");

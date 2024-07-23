@@ -76,33 +76,40 @@ console.log(loggedUser);
 
 // Function to add doctors to dashboard
 function addDoctorstoDashboard(users) {
-	users.forEach((doctor) => {
-		doctors.innerHTML += `
-            <a href="/pages/doctorprofile.html?id=${doctor.id}" target="_blank" rel="noopener noreferrer">
-                <div class="doctor-items">
-                    <div class="doctor-thumnail">
-                        <img src="${doctor.userAvatar || "https://shorturl.at/8TClo"}" alt="User Avatar">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div>
-                        <div class="doctor-info-name">
-                            <div class="doctor-info">
-                                <span class="doc-name"> Dr. ${doctor.name} </span>
-                                <span class="rating1">
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                        <span class="count"> ${doctor.rating}.5</span>
-                                    </li>
-                                </span>
-                            </div>
-                            <div class="doc-hospital">
-                                <span>${doctor.hospitalName}</span>
+    console.log('users', users)
+    if(users.length !==0){
+        users.forEach((doctor) => {
+        
+            doctors.innerHTML += `
+                <a href="/pages/doctorprofile.html?id=${doctor.id}" target="_blank" rel="noopener noreferrer">
+                    <div class="doctor-items">
+                        <div class="doctor-thumnail">
+                            <img src="${doctor.userAvatar || "https://shorturl.at/8TClo"}" alt="User Avatar">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div>
+                            <div class="doctor-info-name">
+                                <div class="doctor-info">
+                                    <span class="doc-name"> Dr. ${doctor.name} </span>
+                                    <span class="rating1">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <span class="count"> ${doctor.rating}.5</span>
+                                        </li>
+                                    </span>
+                                </div>
+                                <div class="doc-hospital">
+                                    <span>${doctor.hospitalName}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>`;
-	});
+                </a>`;
+        });
+    }else{
+        doctors.innerHTML = `No Doctors found`;
+    }
+	
 }
 
 // Function to fetch and display doctors
@@ -113,8 +120,8 @@ async function getDoctors() {
 		.eq("type", "doctor");
 	console.log("doctor that have paid", data);
 	if (error) console.log(error);
-
-	const paidDoctors = data.filter((user) => user.pay_id !== null);
+const presenDate = Date.now;
+	const paidDoctors = data.filter((user) => user.pay_id !== null && user.next_pay_date !== null ||presenDate < user.next_pay_date );
 	console.log("paid doctors", paidDoctors);
 	addDoctorstoDashboard(paidDoctors);
 }
