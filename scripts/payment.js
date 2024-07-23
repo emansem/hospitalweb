@@ -3,7 +3,7 @@
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
-
+import { expireDate, paidDate } from "../scripts/menu.js";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const logUser = JSON.parse(localStorage.getItem("activeId"));
@@ -19,8 +19,8 @@ const queryString = window.location.search.split("=");
 const doctorId = queryString[1];
 
 // calculate the next pay date in milli seconds
-const createdAt = Date.now();
-const expireAt = createdAt + 31 * 24 * 60 * 1000;
+const createdAt = paidDate
+  export const expireAt = expireDate
 const formattedDate = new Date(expireAt).toLocaleString("en-US", {
 	month: "long",
 	day: "2-digit",

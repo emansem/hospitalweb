@@ -4,8 +4,9 @@
 const getStoreUsers = JSON.parse(localStorage.getItem("id"));
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 const queryString = window.location.search.split("=");
-const doctorId= queryString[1];
-
+const doctorId = queryString[1];
+// the expire time and create a count down;
+import { expireDate, paidDate } from "../menu.js";
 // Supabase configuration
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
@@ -15,8 +16,9 @@ const supabaseKey =
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Get DOM element for payment request
+// Get DOM element slectors for html
 const requestPay = document.getElementById("request-pay");
+const alertWerapper = document.querySelector(".alert-wrapper");
 
 // Function to fetch doctor details
 async function getDoctorDetails() {
@@ -119,27 +121,24 @@ function profileDetails(user) {
 `;
 
 	const btn = document.querySelector(".btn");
-	if(btn){
-
+	if (btn) {
 	}
-	
 
 	const premium = document.querySelector(".premium");
 	const upgradeBtn = document.querySelector(".upgradeBtn");
-	if(btn){
+	if (btn) {
 		btn.addEventListener("click", function (e) {
 			e.preventDefault();
 			reQuestPay();
 		});
 	}
-	
 
 	// Function to check user payment status
 	async function checkUserPaySatus() {
-		const user = getStoreUsers.find(user =>user.id === logUser);
-	let patientid;
-	if(user.type === 'patient') patientid = user.type;
-		
+		const user = getStoreUsers.find((user) => user.id === logUser);
+		let patientid;
+		if (user.type === "patient") patientid = user.type;
+
 		premium.style.display = "none";
 		upgradeBtn.style.display = "none";
 		const { data, error } = await supabase
@@ -159,8 +158,6 @@ function profileDetails(user) {
 	}
 	checkUserPaySatus();
 }
-
-
 
 // Function to request payment before contacting doctor
 async function reQuestPay() {
@@ -188,3 +185,40 @@ requestPay.addEventListener("click", function (e) {
 		window.location.href = `/pages/payment.html?id=${doctorId}`;
 	}
 });
+
+// display display date notifications tohelp users know their next pay dat
+function renderAlertMessage(date, hours) {
+	return (alertWerapper.innerHTML = `<div class="alert__bar">
+                            <div class="alert__header">
+                                <i class="fas fa-exclamation-circle outlined-icon"></i>
+                                <span>Count Down for your subscription</span>
+                            </div>
+                            <div class="alert__body">
+                                <div class="alert__body--text">
+                                    <p>Time until expiration <span class="days">${date} Days and ${hours}</span>  We will automatically renew your subscription </p>
+                                </div>
+                                <div class="alert__body--btn">
+                                    <a href="#ß" class="renewBtn">Renew Now</a>
+                                </div>
+                            </div>
+                          </div>`);
+}
+renderAlertMessage();
+
+// Set expiration date (if not already set)
+if (!localStorage.getItem("expirationDate")) {
+	localStorage.setItem("expirationDate", new Date(expireDate).getTime());
+}
+
+function updateCountdown() {
+	const now = new Date();
+	const expiresAt = new Date(parseInt(localStorage.getItem("expirationDate")));
+
+	const totalHours = (expiresAt - now) / (1000 * 60 * 60);
+	const days = Math.round(totalHours / 24);
+	const hours = Math.round(totalHours % 24);
+	renderAlertMessage(days, hours);
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();

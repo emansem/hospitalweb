@@ -727,6 +727,8 @@ transition: all 0.4s linear;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.8rem;
 }
 .alert__body--text p{
 	font-size: 14px;

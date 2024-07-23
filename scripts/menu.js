@@ -260,3 +260,7 @@ async function getAppoinments() {
 }
 
 getAppoinments();
+
+// common files export them
+export const paidDate = Date.now();
+export const expireDate = paidDate + 31 * 24 * 60 * 60* 1000;
