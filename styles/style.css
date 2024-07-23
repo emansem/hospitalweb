@@ -708,8 +708,9 @@ transition: all 0.4s linear;
 .alert__bar{
 	max-width: 800px;
 	font-family: var(--font-heading);
-	border: 1px solid #ccc;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 	padding: 1rem;
+	border-radius: 0.4rem;
 }
 .alert__header{
 	display: flex;
