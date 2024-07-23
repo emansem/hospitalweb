@@ -135,6 +135,7 @@
 }
 .hero {
 	margin-top: 120px;
+	background: var();
 }
 .main-page {
 	flex: 1;
@@ -853,6 +854,9 @@ display: none;
 			margin-left: 200px;
 		
 		}
+		.reports{
+			padding: 1rem;
+		}
 	
 		
 		}
@@ -863,6 +867,21 @@ display: none;
 			margin-left: 250px;
 			padding-left: 1rem;
 		
+		}
+	
+		.popup__box--wrapper{
+			margin-inline: 1rem;
+		}
+		.attention{
+			font-size: 28px;
+			margin-left: -20px;
+		}
+		.popup__header{
+			justify-content: space-evenly;
+		}
+		.hero-wrapper{
+			padding-block: 2rem;
+		margin-top: -50px;
 		}
 		.greet {
 			font-size: 40px;
@@ -922,9 +941,12 @@ display: block;
 		font-weight: 700;
 	}
 	.hero{
-		height: 180px;
+		
 		margin-left: -10px;
 		
+	}
+	.reports{
+		padding-inline: 2rem;
 	}
 	.search input{
 		width: 90%;
