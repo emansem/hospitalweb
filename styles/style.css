@@ -760,6 +760,9 @@ transition: all 0.4s linear;
 	font-weight: 400;
 	text-overflow: clip;
 }
+.appointment_heading{
+	text-align: center;
+}
 .days{
 	color: var(--color-dark);
 	font-weight: 500;
@@ -792,7 +795,7 @@ transition: all 0.4s linear;
 	}
 body{
 	overflow-x: hidden;
-	background-color: red;
+	
 }
 .hero-image {
 display: none;
@@ -813,7 +816,7 @@ display: none;
 @media screen and (max-width: 1200px) {
 .main-page{
 	width: 100%;
-	background-color: #1c1b2e;
+	
 	overflow: hidden;
 	margin-right: 0;
 	margin-left: 250px;
