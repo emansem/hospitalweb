@@ -238,4 +238,45 @@ async function getAppoinments() {
 getAppoinments();
 
 
+// render the header to all the pages.
+const header = document.querySelector('.header');
+function renderHearder(avater){
+  return header.innerHTML = `<h1 class="header-logo">Dashboard</h1>
+					<div class="openNav">
+						<i class="fa fa-bars"></i>
+					</div>
+					<div class="header-items">
+						<div class="search">
+							<input type="text" placeholder="search.." />
+							<i class="fas fa-search"></i>
+						</div>
+						<div class="help header-icon">
+							<i class="far fa-question-circle"></i>
+						</div>
+						<div class="notice header-icon">
+							<i class="far fas fa-bell"></i>
+						</div>
+						<div class="user-avater">
+						<img src="${
+                avater || "https://shorturl.at/8TClo"
+               }" alt="User Avatar">
+						</div>
+					</div>`
+};
+renderHearder();
+/* <img src="${
+                 user[0].userAvatar || "https://shorturl.at/8TClo"
+               }" alt="User Avatar"> */
+
+async function getUserAvater(){
+  const { data, error} = await supabase.from("users").select('userAvatar').eq('id', logUser);
+  if(data){
+    console.log('this is the user photo', data);
+    renderHearder(data[0].userAvatar);
+  }else{
+    console.log('this is the error', error);
+  }
+}
+getUserAvater();
+
 

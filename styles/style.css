@@ -39,9 +39,14 @@
 	list-style: none;
 	text-decoration: none;
 }
+.user-avate{
+	margin-left: 0.8rem;
+}
 
 .user-avater img {
-	width: 50px;
+	max-width: 50px;
+	max-height: 50px;
+	min-width: 50px;
 	min-height: 50px;
 	border-radius: 50px;
 	object-fit: cover;
@@ -910,6 +915,8 @@ display: none;
 	}
 	.user-avater img {
 		width: 40px;
+		height: 40px;
+		min-width: 40px;
 		min-height: 40px;
 	}
 	.header-icon{
