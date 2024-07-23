@@ -57,6 +57,7 @@
 	width: 100%;
 	justify-content: space-between;
 }
+
 .logo img {
 	width: 150px;
 }
@@ -75,6 +76,7 @@
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 	overflow-y: scroll;
+	
 }
 
 .siderbar-left {
@@ -84,6 +86,7 @@
 	left: 0;
 	bottom: 0;
 	top: 0;
+	z-index: 100;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -150,7 +153,7 @@
 	margin-left: 250px;
 	background-color: #fff;
 	box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-	z-index: 100;
+	z-index: 99;
 	align-items: center;
 
 	height: 100px;
@@ -524,6 +527,19 @@
 	justify-content: center;
 	gap: 2rem;
 }
+.logo{
+
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.hideSideBar{
+margin-right: 1rem;
+color: var(--color-accent);
+cursor: pointer;
+display: none;
+}
 .pay-btn,
 .footer__btn {
 	background-color: var(--color-accent);
@@ -768,6 +784,7 @@ transition: all 0.4s linear;
 	display: none;
 }
 
+
 /*  the media querries for the web page */
 @media screen and (max-width: 1290px) {
 	html{
@@ -879,6 +896,9 @@ display: none;
 	.fa-bars{
 		font-size: 24px;
 		cursor: pointer;
+	}
+	.hideSideBar{
+display: block;
 	}
 	.openNav{
 		display: block;

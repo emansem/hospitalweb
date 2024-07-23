@@ -65,6 +65,7 @@ function generateSideBar(id, type) {
     <div class="sidebar-left__nav-top">
       <div class="logo">
         <img src="/logo.png" alt="logo" />
+        	<i class="fa hideSideBar fa-bars"></i>
       </div>
       <ul class="sidebar-left_nav-items">
         <a href="${
@@ -132,6 +133,7 @@ function generateSideBar(id, type) {
       </li>
     </div>
   `;
+ 
 
   const logout = document.querySelector(".logout");
   logout.addEventListener("click", function (e) {
@@ -139,7 +141,11 @@ function generateSideBar(id, type) {
     logUserout();
   });
 }
-
+const hideSideBar = document.querySelector('.hideSideBar');
+hideSideBar.addEventListener('click', function(e){
+   e.preventDefault();
+  sideBar.style.display = 'none';
+});
 
 
 
@@ -241,7 +247,7 @@ getAppoinments();
 // render the header to all the pages.
 const header = document.querySelector('.header');
 function renderHearder(avater){
-  return header.innerHTML = `<h1 class="header-logo">Dashboard</h1>
+  header.innerHTML = `<h1 class="header-logo">Dashboard</h1>
 					<div class="openNav">
 						<i class="fa fa-bars"></i>
 					</div>
@@ -262,7 +268,20 @@ function renderHearder(avater){
                }" alt="User Avatar">
 						</div>
 					</div>`
+          const openNav = document.querySelector('.openNav');
+if(openNav){
+  openNav.addEventListener('click', function(e){
+    //   e.preventDefault();
+    console.log(e.target);
+  sideBar.style.display = 'block';
+    console.log("hello");
+    })
+}else{
+console.log('hello');
+}
 };
+
+
 renderHearder();
 /* <img src="${
                  user[0].userAvatar || "https://shorturl.at/8TClo"
