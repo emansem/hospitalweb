@@ -759,6 +759,9 @@ transition: all 0.4s linear;
 .renewBtn:hover{
 	background-color: var(--yellow-dark-color);
 }
+.openNav{
+	display: none;
+}
 
 /*  the media querries for the web page */
 @media screen and (max-width: 1290px) {
@@ -775,6 +778,8 @@ display: none;
 .hero-image img {
 	height: 100px;
 }
+
+
 .hero {
 	
 	border-radius: 0;
@@ -792,9 +797,11 @@ display: none;
 	margin-left: 250px;
 
 }
+
 .sidebar-right{
 	display: none;
 }
+
 
 }
 
@@ -857,11 +864,29 @@ display: none;
 		margin-left: 0px;
 	
 	}
+	.search{
+		flex-basis: 60%;
+		margin-right: -30px;
+	}
 	.siderbar-left{
 		display: none;
 	}
+	.fa-bars{
+		font-size: 24px;
+		cursor: pointer;
+	}
+	.openNav{
+		display: block;
+		padding-inline:  1rem 2rem;
+		
+	}
+	.header-items{
+		justify-content: space-evenly;
+		margin-left: 10px;
+	}
 	.header{
 		margin-left: 0;
+		height: 70px;
 	}
 	.greet {
 		font-size: 40px;
@@ -869,10 +894,27 @@ display: none;
 		font-weight: 700;
 	}
 	.hero{
-		height: 220px;
+		height: 180px;
+		margin-left: -10px;
 		
+	}
+	.search input{
+		width: 90%;
+		font-size: 14px;
 	}
 	.hero-wrapper{
 		height: inherit;
+	}
+	.fa-search{
+		font-size: 16px;
+	}
+	.user-avater img {
+		width: 40px;
+		min-height: 40px;
+	}
+	.header-icon{
+		width: 20px;
+		height: 20px;
+		text-align: center;
 	}
 	}
