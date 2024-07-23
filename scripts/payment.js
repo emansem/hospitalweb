@@ -3,7 +3,12 @@
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
-import { expireDate, paidDate } from "../scripts/menu.js";
+	const paidDate = Date.now();
+	
+	 const expireDate = paidDate + 31 * 24 * 60 * 60* 1000;
+	const past = new Date(expireDate)
+
+
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const logUser = JSON.parse(localStorage.getItem("activeId"));
@@ -19,9 +24,8 @@ const queryString = window.location.search.split("=");
 const doctorId = queryString[1];
 
 // calculate the next pay date in milli seconds
-const createdAt = paidDate
-  export const expireAt = expireDate
-const formattedDate = new Date(expireAt).toLocaleString("en-US", {
+
+const formattedDate = new Date(expireDate).toLocaleString("en-US", {
 	month: "long",
 	day: "2-digit",
 	year: "numeric",
@@ -40,6 +44,7 @@ async function sendPaymentInfo(paymeninfo) {
 		const { data, error } = await supabase
 			.from("payment_history")
 			.insert([paymeninfo])
+			.eq('user_id', logUser)
 			.select("*");
 		if (data) {
 			setTimeout(function (e) {
@@ -79,20 +84,20 @@ payForm.addEventListener("submit", function (e) {
 		user_name: name,
 		payment_number: phone,
 		pay_id: crypto.randomUUID(),
-		next_pay_day: expireAt,
+		next_pay_day: expireDate,
 		type: user.type,
 	};
-	updateUserPayId(savePayinfo.pay_id);
+	updateUserPayId(savePayinfo.pay_id, savePayinfo.next_pay_day);
 
 	sendPaymentInfo(savePayinfo);
 });
 
 // update the user payid onhis table.
 
-async function updateUserPayId(payid) {
+async function updateUserPayId(payid, next_pay_day) {
 	const { data, error } = await supabase
 		.from("users")
-		.update({ pay_id: payid })
+		.update({ pay_id: payid, next_pay_date: next_pay_day })
 		.eq("id", logUser);
 	if (!error) {
 		console.log(data);

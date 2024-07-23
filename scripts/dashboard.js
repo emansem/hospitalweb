@@ -176,13 +176,14 @@ async function checkUserPaySatus() {
 	const { data, error } = await supabase
 		.from("users")
 		.select("*")
-		.eq("id", logUser);
+		.eq("id", 56);
 	console.log(data);
-
+    
 	if (data[0].pay_id !== null || patientLog.type === "patient") {
 		popupWrapper.classList.add("requestpay");
 	} else if (data[0].pay_id === null && patientLog.type === "doctor") {
 		popupWrapper.classList.add("requestpay");
+        console.log('datea' ,data)
 		setTimeout(function (e) {
 			popupWrapper.classList.remove("requestpay");
 		}, 2000);
@@ -192,7 +193,7 @@ async function checkUserPaySatus() {
 	}
 }
 
-console.log(checkUserPaySatus());
+checkUserPaySatus();
 
 // Event listener for popup actions
 popupWrapper.addEventListener("click", function (e) {
@@ -208,19 +209,21 @@ popupWrapper.addEventListener("click", function (e) {
 
 async function checkExpireDate(){
     try {
-        const {data, error} = await supabase.from('payment_history').select("*").eq('user_id', logUser);
+        const {data, error} = await supabase.from('users').select("*").eq('id', logUser);
         if (error) {
             console.log('Error fetching payment history:', error);
             return;
         }
-      const expireAt = data[3].next_pay_day;
+      const expireAt = data[0].next_pay_date;
       const createdAt = Date.now();
-        if(createdAt > expireAt){
+      
+      
+        if(createdAt >  new Date(expireAt)){
             console.log('You have not paid yet');
             console.log('this is the data', data)
-            updateIdtoNull(data[3].user_id);
+            updateIdtoNull(data[0].id);
         }else{
-            console.log('You have paid');
+            console.log('You have paid', data);
             
         }
         
@@ -230,7 +233,10 @@ async function checkExpireDate(){
     return false;
     
 }
-checkExpireDate();
+checkExpireDate()
+document.addEventListener('DOMContentLoaded', function(e){
+    checkExpireDate();
+})
 
 // upadet the paid to null if the user subscription have expired;
 
@@ -244,97 +250,5 @@ async function updateIdtoNull(id){
     
 }
 
-// const interId = setInterval(async function () {
-//     if (tomrowHours === 24) {
-//         await getUserNextPaymentDate();
-//         const shouldClearInterval = await checkNextPayDayValue();
-//         if (shouldClearInterval) {
-//             clearInterval(interId);
-//             return
-//         }
-//     }
-// }, 2000);
 
-
-    // const interId = setInterval(async function () {
-    //     if (tomrowHours === 24) {
-    //         await getUserNextPaymentDate();
-    //         const shouldClearInterval = await checkNextPayDayValue();
-    //         if (shouldClearInterval) {
-    //             clearInterval(interId);
-               
-    //         }
-    //     }
-    // }, 2000);
-
-
-// Get current timestamp in milliseconds
-// const createdDate = new Date();
-
-
-// // Calculate milliseconds for 31 days
-// const thirtyOneDaysInMs = 31 * 24 * 60 * 60 * 1000;
-
-// // Calculate expiration date (31 days from now)
-// const expirationDate = new Date(createdDate.getTime() + thirtyOneDaysInMs);
-
-// // Display the dates
-// console.log("Created date:", createdDate.toLocaleString());
-// console.log("Expiration date:", expirationDate.toLocaleString());
-
-// Get current time in milliseconds
-// const now = Date.now();
-// console.log("Current time in ms:", now);
-
-// // Add one day (in milliseconds)
-// const oneDayInMs = 24 * 60 * 60 * 1000;
-// const tomorrowInMs = now + oneDayInMs;
-// console.log("Tomorrow in ms:", tomorrowInMs);
-
-// // Convert back to dates
-// console.log("Current date:", new Date(now).toLocaleString());
-// console.log("Tomorrow's date:", new Date(tomorrowInMs).toLocaleString());
-// let today = new Date();
-// console.log(today);
-// let year = today.getFullYear();
-// let month = today.getMonth() + 1; // Months are 0-indexed, so we add 1
-// let day = today.getDate();
-// let hours = today.getHours();
-// let minutes = today.getMinutes();
-
-// console.log(`Year: ${year}, Month: ${month}, Day: ${day}`);
-// console.log(`Time: ${hours}:${minutes}`);
-
-// let tomorrow = new Date(today);
-// tomorrow.setDate(today.getHours() + 1);
-// console.log("Tomorrow:", tomorrow);
-
-// let nextMonth = new Date(today);
-// nextMonth.setMonth(today.getMonth() + 1);
-// console.log("Next month:", nextMonth);
-
-// let nextYear = new Date(today);
-// nextYear.setFullYear(today.getFullYear() + 1);
-// console.log("Next year:", nextYear);
-
-// const today = Date.now();
-// console.log('Current time in milliseconds:', today);
-
-// const tmro = today + 1 * 60 * 1000; // 2 minutes in the future
-// console.log('Time 2 minutes from now:', tmro);
-
-// console.log('Waiting for 2 minutes...');
-
-// const interval = setInterval(() => {
-//     const newNow = Date.now();
-//     console.log('Current time:', newNow);
-
-//     if (newNow >= tmro) {
-//         console.log('2 minutes have passed. newNow is greater than or equal to tmro');
-//         clearInterval(interval); // Stop the interval
-//     } else {
-//         console.log('Still waiting...');
-//         console.log('date now in actualdate', new Date(tmro));
-//     }
-// }, 10000); // Check every 10 seconds
 

@@ -542,8 +542,11 @@
 	font-size: 18px;
 	cursor: pointer;
 	border-radius: 1.6rem;
+	
 }
-
+.curdisable {
+display: none;
+}
 .refuse::before {
 	content: '';
 	
@@ -750,7 +753,8 @@ transition: all 0.4s linear;
 	border-radius: 0.4rem;
 	font-family: var(--font-heading);
 	transition: all 0.4s linear;
-	min-width: 100% ;
+	min-width: 200px ;text-align: center;
+	margin-top: 0.4rem;
 }
 .renewBtn:hover{
 	background-color: var(--yellow-dark-color);

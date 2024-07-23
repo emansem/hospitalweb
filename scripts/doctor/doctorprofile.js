@@ -6,7 +6,7 @@ const logUser = JSON.parse(localStorage.getItem("activeId"));
 const queryString = window.location.search.split("=");
 const doctorId = queryString[1];
 // the expire time and create a count down;
-import { expireDate, paidDate } from "../menu.js";
+
 // Supabase configuration
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
@@ -65,6 +65,8 @@ function profileDetails(user) {
 		className = "edit-btn";
 	}
 	console.log(className);
+	const pay_id = user[0].pay_id;
+	const nextTimeToPay = user[0].next_pay_date;
 
 	const profileContainer = document.querySelector(".profile-content");
 	console.log("if user id is a string", className);
@@ -132,8 +134,6 @@ function profileDetails(user) {
 			reQuestPay();
 		});
 	}
-
-	// Function to check user payment status
 	async function checkUserPaySatus() {
 		const user = getStoreUsers.find((user) => user.id === logUser);
 		let patientid;
@@ -141,23 +141,19 @@ function profileDetails(user) {
 
 		premium.style.display = "none";
 		upgradeBtn.style.display = "none";
-		const { data, error } = await supabase
-			.from("payment_history")
-			.select("*")
-			.eq("user_id", logUser);
-
-		if (data.length !== 0 || patientid) {
+		const dateNow = Date.now();
+		
+		if (dateNow < new Date(nextTimeToPay)||  pay_id !==null || patientid) {
 			premium.style.display = "block";
 			upgradeBtn.style.display = "none";
 		} else {
 			upgradeBtn.style.display = "block";
 		}
-		if (error) {
-			console.log("error", error);
-		}
 	}
 	checkUserPaySatus();
 }
+
+// Function to check user payment status
 
 // Function to request payment before contacting doctor
 async function reQuestPay() {
@@ -188,37 +184,57 @@ requestPay.addEventListener("click", function (e) {
 
 // display display date notifications tohelp users know their next pay dat
 function renderAlertMessage(date, hours) {
-	return (alertWerapper.innerHTML = `<div class="alert__bar">
+	alertWerapper.innerHTML = `<div class="alert__bar">
                             <div class="alert__header">
                                 <i class="fas fa-exclamation-circle outlined-icon"></i>
                                 <span>Count Down for your subscription</span>
                             </div>
                             <div class="alert__body">
                                 <div class="alert__body--text">
-                                    <p>Time until expiration <span class="days">${date} Days and ${hours}</span>  We will automatically renew your subscription </p>
+                                    <p>Date until expiration <span class="days">${date} </span>  We will automatically renew your subscription </p>
                                 </div>
                                 <div class="alert__body--btn">
-                                    <a href="#ß" class="renewBtn">Renew Now</a>
+                                    
                                 </div>
                             </div>
-                          </div>`);
-}
-renderAlertMessage();
-
-// Set expiration date (if not already set)
-if (!localStorage.getItem("expirationDate")) {
-	localStorage.setItem("expirationDate", new Date(expireDate).getTime());
+                          </div>`;
 }
 
-function updateCountdown() {
-	const now = new Date();
-	const expiresAt = new Date(parseInt(localStorage.getItem("expirationDate")));
-
-	const totalHours = (expiresAt - now) / (1000 * 60 * 60);
-	const days = Math.round(totalHours / 24);
-	const hours = Math.round(totalHours % 24);
-	renderAlertMessage(days, hours);
+function updateCountdown(nextDate) {
+	// const now = new Date();
+	// const paidDate = Date.now();
+	// const expireDate = paidDate + 31 * 24 * 60 * 60 * 1000;
+	const formattedDate = new Date(nextDate).toLocaleString("en-US", {
+		month: "long",
+		day: "2-digit",
+		year: "numeric",
+	});
+	renderAlertMessage(formattedDate);
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+console.log(
+	`<div class ='cursorDisable'><a href="#ß" class="renewBtn">Renew Now</a></div>`
+);
+
+async function checkExpireDate() {
+	const renew_wrapper = document.querySelector(".renew-wrapper");
+
+	const { data, error } = await supabase
+		.from("users")
+		.select("*")
+		.eq("id", logUser);
+	updateCountdown(data[0].next_pay_date);
+	const expireTime = data[0].next_pay_date;
+
+	if (error) {
+		console.log("erorfor checking expiredate.", error);
+	} else {
+		const dateNow = Date.now();
+
+		if (data[0].pay_id === null || dateNow > new Date(expireTime)) {
+			renew_wrapper.innerHTML = ` <a href="#ß" class="renewBtn">Renew Now</a>`;
+		}
+	}
+}
+
+checkExpireDate();
