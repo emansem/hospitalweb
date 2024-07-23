@@ -6,7 +6,8 @@
 	--color-accent: #32d487; /* Green */
 	--color-dark: #1c1b2e; /* Dark Blue */
 	--color-light: #6dd8a7; /* Light Green */
-	--form-bg-color: #2c2c2c;
+	--yellow-color: #f2c332;
+	--yellow-dark-color: #e3b21f;
 	--dark-color: #2e374e;
 	--color-dark-transparent: rgba(28, 27, 46, 0.5);
 	/* Gradients */
@@ -703,4 +704,51 @@ transition: all 0.4s linear;
 }
 .warn-icon{
 	font-size: 40px;
+}
+.alert__bar{
+	max-width: 800px;
+	font-family: var(--font-heading);
+	border: 1px solid #ccc;
+	padding: 1rem;
+}
+.alert__header{
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--color-dark);
+}
+.fa-exclamation-circle{
+	color: #EE204D;
+}
+.alert__body{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.alert__body--text p{
+	font-size: 14px;
+	color: #777;
+	font-weight: 400;
+	text-overflow: clip;
+}
+.days{
+	color: var(--color-dark);
+	font-weight: 500;
+}
+.renewBtn{
+	background-color: var(--yellow-color);
+	margin-top: 0.4rem;
+	display: inline-block;
+	padding: 0.4rem 1rem;
+	color: var(--color-dark);
+	font-weight: 500;
+	border-radius: 0.4rem;
+	font-family: var(--font-heading);
+	transition: all 0.4s linear;
+	min-width: 100% ;
+}
+.renewBtn:hover{
+	background-color: var(--yellow-dark-color);
 }

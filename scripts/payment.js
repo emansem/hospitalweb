@@ -48,7 +48,12 @@ async function sendPaymentInfo(paymeninfo) {
 			shownextDate.innerHTML = formattedDate;
 			cancel.addEventListener("click", function (e) {
 				sucess.classList.add("hideForm");
-				window.location.href = `/pages/doctorprofile.html?id=${doctorId}`;
+				if(user.type === 'patient'){
+					window.location.href = `/pages/doctorprofile.html?id=${doctorId}`;
+				}else{
+					window.location.href = `/pages/doctorprofile.html`;
+				}
+				
 			});
 			console.log("data", data);
 		} else {
