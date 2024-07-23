@@ -759,3 +759,120 @@ transition: all 0.4s linear;
 .renewBtn:hover{
 	background-color: var(--yellow-dark-color);
 }
+
+/*  the media querries for the web page */
+@media screen and (max-width: 1290px) {
+	html{
+		font-size: 60%;
+	}
+body{
+	overflow-x: hidden;
+	background-color: red;
+}
+.hero-image {
+display: none;
+}
+.hero-image img {
+	height: 100px;
+}
+.hero {
+	
+	border-radius: 0;
+}
+
+}
+
+/* the second media query */
+@media screen and (max-width: 1200px) {
+.main-page{
+	width: 100%;
+	background-color: #1c1b2e;
+	overflow: hidden;
+	margin-right: 0;
+	margin-left: 250px;
+
+}
+.sidebar-right{
+	display: none;
+}
+
+}
+
+
+/* mobile responsive */
+
+@media screen and (max-width: 1200px) {
+	.main-page{
+		
+		margin-right: 0;
+		margin-left: 0px;
+	
+	}
+	.sidebar-right{
+		display: none;
+	}
+
+	
+	}
+	@media screen and (max-width: 940px) {
+		.main-page{
+			
+			margin-right: 0;
+			margin-left: 200px;
+		
+		}
+	
+		
+		}
+	@media screen and (max-width: 750px) {
+		.main-page{
+			
+			margin-right: 0;
+			margin-left: 250px;
+			padding-left: 1rem;
+		
+		}
+		.greet {
+			font-size: 40px;
+			color: var(--color-secondary);
+			font-weight: 700;
+		}
+		.hero-wrapper{
+			height: 200px;
+		}
+		.header-logo{
+			display: none;
+		}
+		.header-items{
+			width: 100%;
+			flex: 1;
+		}
+		
+		
+		}
+@media screen and (max-width: 574px) {
+	.main-page{
+		
+		margin-right: 0;
+		margin-left: 0px;
+	
+	}
+	.siderbar-left{
+		display: none;
+	}
+	.header{
+		margin-left: 0;
+	}
+	.greet {
+		font-size: 40px;
+		color: var(--color-secondary);
+		font-weight: 700;
+	}
+	.hero{
+		height: 220px;
+		
+	}
+	.hero-wrapper{
+		height: inherit;
+	}
+	}
