@@ -16,33 +16,21 @@ const cancel = document.querySelector(".cancel");
 
 //get doctor id from the url and show the profile to patient;
 const queryString = window.location.search.split("=");
-const doctorId= queryString[1];
+const doctorId = queryString[1];
 
-
-//gate dates to see the next payment day;
-
-const today = new Date();
-const nextPaymentDate = new Date(
-	today.getFullYear(),
-	today.getMonth() + 1,
-	today.getDate()
-);
-const toadyDate = new Date(
-	today.getFullYear(),
-	today.getMonth(),
-	today.getDate()
-);
-
-// formate the nextpayment date;
-
-console.log(nextPaymentDate);
-const formatter = new Intl.DateTimeFormat("en-US", {
-	year: "numeric",
+// calculate the next pay date in milli seconds
+const createdAt = Date.now();
+const expireAt = createdAt + 31 * 24 * 60 * 1000;
+const formattedDate = new Date(expireAt).toLocaleString("en-US", {
 	month: "long",
-	day: "numeric",
+	day: "2-digit",
+	year: "numeric",
+	hour: "2-digit",
+	minute: "2-digit",
+	second: "2-digit",
+	hour12: true,
 });
-const dateInfo = formatter.format(nextPaymentDate);
-console.log(dateInfo);
+console.log("Expire in time format (Option 1):", formattedDate);
 
 //send user paymentinformation afters subcription
 
@@ -57,7 +45,7 @@ async function sendPaymentInfo(paymeninfo) {
 			setTimeout(function (e) {
 				sucess.classList.remove("hideForm");
 			}, 1000);
-			shownextDate.innerHTML = dateInfo;
+			shownextDate.innerHTML = formattedDate;
 			cancel.addEventListener("click", function (e) {
 				sucess.classList.add("hideForm");
 				window.location.href = `/pages/doctorprofile.html?id=${doctorId}`;
@@ -71,7 +59,6 @@ async function sendPaymentInfo(paymeninfo) {
 	}
 }
 
-console.log(nextPaymentDate - toadyDate);
 const days = 2678400000 / (1000 * 60 * 60 * 24);
 console.log(days);
 payForm.addEventListener("submit", function (e) {
@@ -87,7 +74,7 @@ payForm.addEventListener("submit", function (e) {
 		user_name: name,
 		payment_number: phone,
 		pay_id: crypto.randomUUID(),
-		next_pay_day: days,
+		next_pay_day: expireAt,
 		type: user.type,
 	};
 	updateUserPayId(savePayinfo.pay_id);
@@ -100,12 +87,11 @@ payForm.addEventListener("submit", function (e) {
 async function updateUserPayId(payid) {
 	const { data, error } = await supabase
 		.from("users")
-		.update({pay_id : payid})
+		.update({ pay_id: payid })
 		.eq("id", logUser);
 	if (!error) {
 		console.log(data);
-	}else{
-        console.log("this isthe error", error);
-    }
-	
+	} else {
+		console.log("this isthe error", error);
+	}
 }
