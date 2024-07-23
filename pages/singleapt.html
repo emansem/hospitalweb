@@ -165,6 +165,9 @@ width: 600px;
 	padding: 2rem;
 	background: linear-gradient(135deg, #1c1b2e, #2d2b41);
 	border-radius: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .headingDetails{
 	font-size: 30px;
@@ -230,11 +233,17 @@ width: 600px;
     padding: 0.3rem 0.6rem;
     border-radius: 1.2rem;
 }
+#rejectReason{
+    width: 100%;
+    resize: none;
+    height: 150px;
+}
 .btn-save,
 .approved{
 	background-color: var(--color-accent);
     padding: 0.3rem 0.6rem;
     border-radius: 1.2rem;
+    
 }
 .btn-save,
 .btn-cancel
@@ -327,8 +336,8 @@ width: 600px;
 					<div class="overlay">
 						<div class="reasonforreject">
 							<h2 class="headingDetails">Reason for Reject</h2>
-							<textarea required spellcheck="false"   name="rejectReason" class="rejectReason" id="rejectReason" cols="30" rows="10">
-								please provid details for rejection this appoinment
+							<textarea required spellcheck="false"   name="rejectReason" class="rejectReason" id="rejectReason" >
+								
 							</textarea>
 							<div class="actionBTn">
 								<button class="btn btn-save">Save</button>
