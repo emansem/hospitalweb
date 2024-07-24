@@ -4,16 +4,6 @@
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 const getStoreUsers = JSON.parse(localStorage.getItem("id"));
 
-
-
-document.addEventListener("DOMContentLoaded", function (e) {
-	if (!logUser) {
-		alert("please longin to continue");
-		window.location.href = "/pages/login.html";
-		return;
-	}
-});
-
 const appointments = document.querySelector(".appointments");
 const hideAppt = document.querySelector(".top");
 const hideDotors = document.querySelector(".top-doct");
@@ -28,18 +18,26 @@ const supabaseKey =
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
+
+// check the type of user that login and see if he have anaccount
 async function LogUserType() {
-	const user = getStoreUsers.find((user) => user.id === logUser);
-
-	const type = user.type;
-
-	generateSideBar(logUser, type);
+	const { data, error } = await supabase
+		.from("users")
+		.select("*")
+		.eq("id", logUser);
+	if (data.length !== 0) {
+		generateSideBar(logUser, data[0].type);
+	} else if (data.length === 0 || !logUser || data[0].id !== logUser) {
+		alert("please longin to continue");
+		window.location.href = "/pages/login.html";
+		return;
+	}
 }
 LogUserType();
 
 function generateSideBar(id, type) {
 	const userId = Number(id);
-
+	console.log(type, " this is the user");
 	let url;
 
 	if (type === "doctor") {
@@ -120,18 +118,18 @@ function generateSideBar(id, type) {
       </li>
     </div>
   `;
-
+	const hideSideBar = document.querySelector(".hideSideBar");
+	console.log(hideSideBar);
+	hideSideBar.addEventListener("click", function (e) {
+		e.preventDefault();
+		sideBar.style.display = "none";
+	});
 	const logout = document.querySelector(".logout");
 	logout.addEventListener("click", function (e) {
 		e.preventDefault();
 		logUserout();
 	});
 }
-const hideSideBar = document.querySelector(".hideSideBar");
-hideSideBar.addEventListener("click", function (e) {
-	e.preventDefault();
-	sideBar.style.display = "none";
-});
 
 function logUserout() {
 	localStorage.removeItem("activeId");
@@ -139,94 +137,102 @@ function logUserout() {
 		window.location.href = "/pages/login.html";
 	}, 2000);
 }
-let id;
+
 
 // fetch appoinmnet and display to the users
 async function getAppoinments() {
-  hideDotors.innerHTML = '';
-	try {
-		const { data, error } = await supabase
-			.from("appointments")
+	hideDotors.innerHTML = "";
+
+	const { data, error } = await supabase
+		.from("appointments")
+		.select("*")
+		.eq("doctorId", logUser);
+	const item = data;
+
+	if (data.length === 0) {
+		hideAppt.style.display = "block";
+		hideDotors.style.display = "none";
+    topDoctor.style.display= 'none'
+		
+	} else {
+		if (data.length !== 0 || data[0].type === "doctor") {
+			// get user profile to add to the appoinment;
+
+	async function getUserAvaterPhoto(patientID) {
+		const { data } = await supabase
+			.from("users")
 			.select("*")
-			.eq("doctorId", logUser);
-		if (error) {
-			console.log(error);
+			.eq("id", data[0].patientid);
+
+		const userPhoto = data[0].userAvatar;
+		rnederDoctorRencentAppointment(userPhoto, item);
+	}
+	getUserAvaterPhoto();
+
+			//  display doctors appoinments
 		}
-		const user = getStoreUsers.find((user) => user.id === logUser);
-
-		if (data.length !== 0 || user.type === "doctor") {
-			hideAppt.style.display = "block";
-			hideDotors.style.display = "none";
-
-			for (let item of data) {
-				id = item.patientid;
-
-				try {
-					const { data } = await supabase
-						.from("users")
-						.select("*")
-						.eq("id", id);
-					const userPhoto = data[0].userAvatar;
-					appointments.innerHTML += `
-            <div class="apt-wrapper">
-          	<div class="patient-item1">
-          	  <div class="patient-avater">
-          		<img src="${userPhoto || "https://shorturl.at/8TClo"}" alt="" />
-          	  </div>
-          	  <div class="apt-time-name">
-          		<span class="patient-name">
-          		  ${item.name}
-          		</span>
-          		<span class="apt-time">
-          		  <span> ${item.time}</span>
-          		</span>
-          	  </div>
-          	</div>
-          	<div class="apt-seemore">
-          	  <i class="fas fa-angle-right"></i>
-          	</div>
-            </div>
-          `;
-				} catch (error) {
-					console.log("error", error);
-				}
-			}
-		} else if (user.type === "patient") {
-			hideDotors.style.display = "block";
-
-			topDoctor.innerHTML = `<p class="top-doctor-heading">Top Doctors</p>
-          <div class="top-doctors">
-            <div class="top-doctor-item">
-              <div class="top-thumnail">
-                <img src="/images/doctor.jpg" alt="" />
-              </div>
-              <div class="doctor-info">
-                <div class="doctor-info-name">
-                  <span class="top-doc-name"> Dr. Jessica </span>
-                  <div class="doc-hospital">
-                    <span>Abc Destrict</span>
-                    <span>-</span>
-                    <span>Hospital</span>
-                  </div>
-                  <span class="rating">
-                    <li>
-                      <i class="fas fa-star"></i>
-                      <span class="count">4.5</span>
-                    </li>
-                    <span>(79 reviews)</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-		}
-	} catch (error) {
-		console.log(error);
 	}
 }
 
 getAppoinments();
+
+// get the best doctors with high ratings
+async function getTopDoctors() {
+	topDoctor.innerHTML = `<p class="top-doctor-heading">Top Doctors</p>
+      <div class="top-doctors">
+        <div class="top-doctor-item">
+          <div class="top-thumnail">
+            <img src="/images/doctor.jpg" alt="" />
+          </div>
+          <div class="doctor-info">
+            <div class="doctor-info-name">
+              <span class="top-doc-name"> Dr. Jessica </span>
+              <div class="doc-hospital">
+                <span>Abc Destrict</span>
+                <span>-</span>
+                <span>Hospital</span>
+              </div>
+              <span class="rating">
+                <li>
+                  <i class="fas fa-star"></i>
+                  <span class="count">4.5</span>
+                </li>
+                <span>(79 reviews)</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+}
+getTopDoctors();
+// get doctors recents appointment and render on the page.
+
+function rnederDoctorRencentAppointment(userPhoto, item) {
+  if(item.length === 0){
+    appointments.innerHTML === " No Appointment Found";
+  }
+	appointments.innerHTML += `
+  <div class="apt-wrapper">
+  <div class="patient-item1">
+    <div class="patient-avater">
+    <img src="${userPhoto || "https://shorturl.at/8TClo"}" alt="" />
+    </div>
+    <div class="apt-time-name">
+    <span class="patient-name">
+      ${item.name}
+    </span>
+    <span class="apt-time">
+      <span> ${item.time}</span>
+    </span>
+    </div>
+  </div>
+  <div class="apt-seemore">
+    <i class="fas fa-angle-right"></i>
+  </div>
+  </div>
+`;
+}
 
 // render the header to all the pages.
 const header = document.querySelector(".header");

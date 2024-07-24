@@ -57,6 +57,7 @@ getUserInfo();
 
 // Function to populate hero section
 function heroSection(user) {
+
 	const heroWrapper = document.querySelector(".hero-wrapper");
 	heroWrapper.innerHTML = `
         <div class="hero-text">
