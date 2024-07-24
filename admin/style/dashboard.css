@@ -29,7 +29,7 @@ body{
 }
 
 .reports-wrapper{
-	display: grid;
+	
 	display: grid;
 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
@@ -37,8 +37,8 @@ margin-block: 2rem;
 gap: 1rem;
 margin-right: 2rem;
 }
-.reports-heading{
-	font-size: 32px;
+.headings{
+	font-size: 28px;
 	font-family: var(--font-heading);
 	font-weight: 700;
 	color: var(--color-dark);
@@ -92,4 +92,102 @@ margin-right: 2rem;
 	color: #666;
 	font-family: var(--font-body);
 	font-size: 18px;
+}
+ /* the recnet user stylying here */
+.recents{
+	display: grid;
+	margin-right: 1.4rem;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+
+}
+.userPhoto{
+	min-width: 70px;
+	min-height: 70px;
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+	border-radius: 50%;
+	gap: 2rem;
+	vertical-align: center;
+	border: 2px solid #388E3C;
+}
+.recent-apppointments{
+
+
+padding: 1rem;
+margin-left: 1rem;
+}
+.recent-apppointments,
+.recent-users{
+	box-shadow: var(--box-shadow2);
+	padding: 1rem;
+	margin-bottom: 2rem;
+}
+.recent__users--wrapper{
+	display: flex;
+	border: 1px solid #ccc;
+justify-content: space-between;
+	padding: 1rem 0.8rem;
+	margin-right: 1rem;
+	border-radius: 0.6rem;
+	margin-top: 1rem;
+	
+}
+.recent__user--item1{
+	display: flex;
+	gap: 1rem;
+	
+}
+.user-info{
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+}
+.user-name{
+	color: #666;
+	font-size: 18px;
+	font-weight: 500;
+	font-family: var(--font-heading);
+}
+.type{
+	color: #00796B;
+	font-weight: 600;
+	font-family: var(--font-body);
+	font-size: 14px;
+
+	padding-right: 0.4rem;
+}
+.type2{
+	color: #32d487;
+}
+.user-type{
+	font-size: 16px;
+	color: #888;
+	font-family: var(--font-body);
+}
+.time{
+	font-family: var(--font-heading);
+	color: #666;
+	font-size: 14px;
+	font-weight: 500;
+}
+.recent__user--item2{
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+}
+.see-more{
+	color: #388E3C;
+	font-size: 16px;
+	font-family: var(--font-heading);
+	font-weight: 500;
+	text-decoration: underline;
+	transition: all 0.3s linear;
+}
+.see-more:hover{
+	color: #32d487;
+}
+.seeAppointment{
+	color: #FF5722;
 }
