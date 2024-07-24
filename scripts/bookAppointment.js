@@ -115,7 +115,7 @@ async function callIncrementAppointments( id1, id2) {
   try {
     const { data, error } = await supabase.rpc('increment_appointments', {
       pending_increment: 1,
-      finished_increment: 1,
+     
       id1: id1,
       id2: id2
     })
