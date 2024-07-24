@@ -25,7 +25,7 @@ function renderAppointmentDetails(appointment) {
           case 'Rejected':
             return 'reject';
           default:
-            return 'pendings';
+            return 'pending';
         }
       }
       const reason = item.reason;

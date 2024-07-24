@@ -18,16 +18,30 @@ console.log(logUser);
 const sideBar = document.querySelector(".siderbar-left");
 
 const loggedUser = logUser;
-let avatar;
-function renderAppointmentDetails(appointment) {
-	async function getUserAvater() {
-		const { data, error } = await supabase
-			.from("users")
-			.select("userAvatar")
-			.eq("id", appointment[0].patientid);
-		const reason = appointment[0].reason;
 
-		appoinmentCard.innerHTML = ` <div class="appointment-header">
+function renderAppointmentDetails(appointment) {
+	function getStatusClass(status) {
+		switch (status) {
+			case "Approved":
+				return "approved";
+			case "Rejected":
+				return "reject";
+			default:
+				return "pendings";
+		}
+	}
+	const status = appointment[0].status;
+	if (appointment) {
+		async function getUserAvater() {
+			const { data, error } = await supabase
+				.from("users")
+				.select("userAvatar")
+				.eq("id", appointment[0].patientid);
+			const reason = appointment[0].reason;
+			if (data.length === 0) {
+				appoinmentCard.innerHTML = "No Data Found";
+			} else {
+				appoinmentCard.innerHTML = ` <div class="appointment-header">
       <div class="patient-info">
           <img src="${
 						data[0].userAvatar || "https://shorturl.at/8TClo"
@@ -37,7 +51,7 @@ function renderAppointmentDetails(appointment) {
               <p>Patient ID: ${appointment[0].patientid}</p>
           </div>
       </div>
-      <span class="status"> ${appointment[0].status}</span>
+      <span class=" ${getStatusClass(status)}"> ${status}</span>
   </div>
   <div class="appointment-body">
       <div class="detail-row">
@@ -59,58 +73,65 @@ function renderAppointmentDetails(appointment) {
            ${reason}</span>
       </div>
   </div>
-  <div class="appointment-footer">
-      <button class="btn btn-approve">Approve</button>
-      <button class="btn btn-reject">Reject</button>
+  <div class="${status ==='Approved' ? 'hideBtn' : ''}">
+      <button class=" ${getClassButtons(status)}">Approve</button>
+      <button class=${status === 'Approved'? 'hideBtn' : 'reject-btn'}">Reject</button>
   </div>`;
-
-		const aptBtn = document.querySelector(".appointment-footer");
-		const StatusColor = document.querySelector(".status");
-		StatusColor.classList.add("btn-approve");
-
-		aptBtn.addEventListener("click", function (e) {
-			e.preventDefault();
-
-			const closestButton = e.target.closest("button");
-			if (!closestButton) return;
-
-			const btn = closestButton.textContent;
-			console.log("Button text:", btn);
-
-			if (btn === "Reject") {
-				// updateStatus("Rejected");
-				// closestButton.disabled = true;
-				overlay.style.display = "block";
-				actionBTn.addEventListener("click", function (e) {
-					e.preventDefault();
-					const closestButton = e.target.closest("button");
-					const btn = closestButton.textContent;
-
-					if (btn === "Cancel") {
-						overlay.style.display = "none";
-						return;
-					} else if (btn === "Save") {
-						const reject_reason = rejectReason.value.trim();
-						if (reject_reason === "") {
-							alert("Please enter a reason for rejection");
-							return;
-						}
-						console.log(reject_reason);
-						updateStatus("Rejected", reject_reason);
-						overlay.style.display = "none";
-						closestButton.disabled = true;
-					}
-				});
-			} else if (btn === "Approve") {
-				const approveBtn = document.querySelector(".btn-approve");
-
-				closestButton.innerHTML = "Please wait...";
-
-				updateStatus("Approved");
 			}
-		});
+			const approveBtn = document.querySelector(".btn-approve");
+
+			const aptBtn = document.querySelector(".appointment-footer");
+			const StatusColor = document.querySelector(".status");
+
+			aptBtn.addEventListener("click", function (e) {
+				e.preventDefault();
+
+				const closestButton = e.target.closest("button");
+				if (!closestButton) return;
+
+				const btn = closestButton.textContent;
+				console.log("Button text:", btn);
+
+				if (btn === "Reject") {
+					// updateStatus("Rejected");
+					// closestButton.disabled = true;
+					overlay.style.display = "block";
+					actionBTn.addEventListener("click", function (e) {
+						e.preventDefault();
+						const closestButton = e.target.closest("button");
+						const btn = closestButton.textContent;
+
+						if (btn === "Cancel") {
+							overlay.style.display = "none";
+							return;
+						} else if (btn === "Save") {
+							const reject_reason = rejectReason.value.trim();
+							if (reject_reason === "") {
+								alert("Please enter a reason for rejection");
+								return;
+							}
+							console.log(reject_reason);
+							updateStatus("Rejected", reject_reason);
+							overlay.style.display = "none";
+							closestButton.disabled = true;
+						}
+					});
+				} else if (btn === "Approve") {
+					closestButton.innerHTML = "Please wait...";
+
+					updateStatus("Approved");
+					setTimeout(function (e) {
+						updateStatus("Approved");
+						closestButton.innerHTML = "Done!";
+					}, 1500);
+				}
+			});
+		}
+
+		getUserAvater();
+	} else {
+		console.log(" we could not find this appointments");
 	}
-	return getUserAvater();
 }
 
 async function getAppoinment() {
@@ -126,6 +147,15 @@ async function getAppoinment() {
 }
 
 getAppoinment();
+// hide the approve and rejecte button.
+
+function getClassButtons(status) {
+	switch (status) {
+		case "Approved":
+		case "Rejected":
+			return "hideBtn";
+	}
+}
 
 async function updateStatus(status, reject_reason = null) {
 	const updateData = { status: status };
@@ -149,10 +179,13 @@ async function updateStatus(status, reject_reason = null) {
 
 		if (data[0].status === "Approved") {
 			decrement_appointments(data[0].patientid, data[0].doctorId);
+			incrementActiveAppointMents(data[0].patientid, data[0].doctorId);
 			setTimeout(function (e) {
 				alert("Appointment Was Approved SuccessFully");
 				return;
 			}, 1500);
+		} else if (data[0].status === "Rejected") {
+			decrement_appointments(data[0].patientid, data[0].doctorId);
 		}
 	} catch (error) {
 		console.error("Error updating status:", error);
@@ -245,6 +278,20 @@ async function decrement_appointments(patientid, doctorid) {
 		id1: patientid,
 		id2: doctorid,
 	});
+	if (error) {
+		console.log("error from decrement", error);
+	}
+}
+async function incrementActiveAppointMents(patientid, doctorid) {
+	const { data, error } = await supabase.rpc(
+		"increment_appointments_finished",
+		{
+			increment_amount: 1,
+
+			id1: patientid,
+			id2: doctorid,
+		}
+	);
 	if (error) {
 		console.log("error from decrement", error);
 	}
