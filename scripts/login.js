@@ -8,29 +8,48 @@ const saveUsers = JSON.parse(localStorage.getItem("id"));
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 async function loggedUserIn() {
+ 
   
     const phone = loginform.phone.value;
 
     const password = loginform.password.value;
   
-    const getStoreUsers = JSON.parse(localStorage.getItem("id"));
-	const user = getStoreUsers.find((user) => user.phone === phone && user.password ===password);
-
-    if (user) {
-      loginform.reset();
-
-      alert("SuccessFul Login!");
-      
-      localStorage.setItem("activeId", JSON.stringify(user.id));
-      window.location.href = `/pages/dashboard.html`;
-      
-    } else {
-      alert("Wrong credentials");
+    const {data, error} = await supabase.from('users').select('*').eq("phone", phone);
+    console.log(data);
+    if(data.length ===0){
+     alert("Wrong credentials");
       submitBtn.innerHTML = `<span>Login</span>`;
       return
-    }
+      
+      }else if(data[0].phone !== phone || data[0].password !== password){
+         alert("Wrong credentials");
+      submitBtn.innerHTML = `<span>Login</span>`;
+      return
+      }else{
+        
+           localStorage.setItem("activeId", JSON.stringify(data[0].id));
+           
+             alert("SuccessFul Login!");
+             loginform.reset();
+           window.location.href = `/pages/dashboard.html`;
+      }
+       
+      }
+     
+    
+   
+  
+      
+    
+     
+    
+
+
+    
+      
+   
  
-}
+
 //   s5nkolosite@gmail.com 6667767677
 
 loginform.addEventListener("submit", function (e) {

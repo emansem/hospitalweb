@@ -735,6 +735,10 @@ transition: all 0.4s linear;
 	text-align: center;
 	
 }
+.appt{
+	color: var(--color-dark);
+	font-size: 49px;
+}
 .sucesstext{
 	line-height: 1.3;
 }

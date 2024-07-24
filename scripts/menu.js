@@ -1,18 +1,17 @@
+/** @format */
+
 // const loginform = document.getElementById("loginform");
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 const getStoreUsers = JSON.parse(localStorage.getItem("id"));
-const userId = window.location.search.split("=")[1];
-const loggedId = Number(userId);
+
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
-	
-  if (!logUser) {
-    
-    alert("please longin to continue");
-    window.location.href = "/pages/login.html";
-    return;
-  };
+	if (!logUser) {
+		alert("please longin to continue");
+		window.location.href = "/pages/login.html";
+		return;
+	}
 });
 
 const appointments = document.querySelector(".appointments");
@@ -24,44 +23,34 @@ const title = document.querySelector(".title");
 console.log(title);
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
 async function LogUserType() {
-  
+	const user = getStoreUsers.find((user) => user.id === logUser);
 
-  const user = getStoreUsers.find((user) => user.id === logUser);
- 
+	const type = user.type;
 
-  const type = user.type;
-
-  generateSideBar(logUser, type);
+	generateSideBar(logUser, type);
 }
 LogUserType();
 
 function generateSideBar(id, type) {
-  if (logUser === null || !logUser) {
-    alert("please longin to continue");
-    window.location.href = "/pages/login.html";
-    return;
-  }
-  const loggedUser = logUser;
-  const userId = Number(id);
-  console.log(userId);
+	const userId = Number(id);
 
-  let url;
+	let url;
 
-  if (type === "doctor") {
-    url = `/pages/appointmentdetails.html?id=${userId}`;
-    console.log(url);
-  } else if (type === "patient") {
-    url = `/pages/userAppointDetails.html?id=${loggedUser}`;
-    console.log(url);
-  }
+	if (type === "doctor") {
+		url = `/pages/appointmentdetails.html?id=${userId}`;
+		console.log(url);
+	} else if (type === "patient") {
+		url = `/pages/userAppointDetails.html?id=${logUser}`;
+		console.log(url);
+	}
 
-  sideBar.innerHTML = `
+	sideBar.innerHTML = `
     <div class="sidebar-left__nav-top">
       <div class="logo">
         <img src="/logo.png" alt="logo" />
@@ -69,10 +58,8 @@ function generateSideBar(id, type) {
       </div>
       <ul class="sidebar-left_nav-items">
         <a href="${
-          type !== "doctor"
-            ? `/pages/dashboard.html`
-            : `/pages/dashboard.html`
-        }">
+					type !== "doctor" ? `/pages/dashboard.html` : `/pages/dashboard.html`
+				}">
           <li class="sidebar-left-item active">
             <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
           </li>
@@ -85,10 +72,10 @@ function generateSideBar(id, type) {
         </a>
         
         <a href="${
-          userId !== loggedUser
-            ? `/pages/messages.html?id=${loggedUser}`
-            : `/pages/messages.html?id=${userId}`
-        }">
+					userId !== logUser
+						? `/pages/messages.html?id=${logUser}`
+						: `/pages/messages.html?id=${userId}`
+				}">
           <li class="sidebar-left-item">
             <span><i class="fas fa-envelope"></i></span> Message
           </li>
@@ -101,10 +88,10 @@ function generateSideBar(id, type) {
         </a>
 
         <a href="${
-          type !== "doctor"
-            ? `/pages/editUserProfile.html?id=${loggedUser}`
-            : `/pages/editDoctorProfile.html`
-        }">
+					type !== "doctor"
+						? `/pages/editUserProfile.html?id=${logUser}`
+						: `/pages/editDoctorProfile.html`
+				}">
           <li class="sidebar-left-item">
             <span><i class="fas fa-cog"></i></span> Settings
           </li>
@@ -117,10 +104,10 @@ function generateSideBar(id, type) {
         </a>
         
         <a href="${
-          userId !== loggedUser || type !== "doctor"
-            ? `/pages/userProfile.html?id=${loggedUser}`
-            : `/pages/doctorprofile.html`
-        }" target="_blank" rel="noopener noreferrer">
+					userId !== logUser || type !== "doctor"
+						? `/pages/userProfile.html?id=${logUser}`
+						: `/pages/doctorprofile.html`
+				}" target="_blank" rel="noopener noreferrer">
           <li class="sidebar-left-item">
             <span><i class="fas fa-user-circle"></i></span> Profile
           </li>
@@ -133,55 +120,54 @@ function generateSideBar(id, type) {
       </li>
     </div>
   `;
- 
 
-  const logout = document.querySelector(".logout");
-  logout.addEventListener("click", function (e) {
-    e.preventDefault();
-    logUserout();
-  });
+	const logout = document.querySelector(".logout");
+	logout.addEventListener("click", function (e) {
+		e.preventDefault();
+		logUserout();
+	});
 }
-const hideSideBar = document.querySelector('.hideSideBar');
-hideSideBar.addEventListener('click', function(e){
-   e.preventDefault();
-  sideBar.style.display = 'none';
+const hideSideBar = document.querySelector(".hideSideBar");
+hideSideBar.addEventListener("click", function (e) {
+	e.preventDefault();
+	sideBar.style.display = "none";
 });
 
-
-
 function logUserout() {
-  localStorage.removeItem("activeId");
-  setTimeout(function (e) {
-    window.location.href = "/pages/login.html";
-  }, 2000);
+	localStorage.removeItem("activeId");
+	setTimeout(function (e) {
+		window.location.href = "/pages/login.html";
+	}, 2000);
 }
 let id;
 
+// fetch appoinmnet and display to the users
 async function getAppoinments() {
-  try {
-    const { data, error } = await supabase
-      .from("appointments")
-      .select("*")
-      .eq("doctorId", userId);
-    if (error) {
-      console.log(error);
-    }
-    const user = getStoreUsers.find((user) => user.id === logUser);
-    console.log("saved user", user);
-    if (data.length !== 0 || user.type === 'doctor') {
-      hideAppt.style.display = "block";
-      hideDotors.style.display = "none";
+  hideDotors.innerHTML = '';
+	try {
+		const { data, error } = await supabase
+			.from("appointments")
+			.select("*")
+			.eq("doctorId", logUser);
+		if (error) {
+			console.log(error);
+		}
+		const user = getStoreUsers.find((user) => user.id === logUser);
 
-      for (let item of data) {
-        id = item.patientid;
+		if (data.length !== 0 || user.type === "doctor") {
+			hideAppt.style.display = "block";
+			hideDotors.style.display = "none";
 
-        try {
-          const { data } = await supabase
-            .from("users")
-            .select("*")
-            .eq("id", id);
-          const userPhoto = data[0].userAvatar;
-          appointments.innerHTML += `
+			for (let item of data) {
+				id = item.patientid;
+
+				try {
+					const { data } = await supabase
+						.from("users")
+						.select("*")
+						.eq("id", id);
+					const userPhoto = data[0].userAvatar;
+					appointments.innerHTML += `
             <div class="apt-wrapper">
           	<div class="patient-item1">
           	  <div class="patient-avater">
@@ -201,53 +187,51 @@ async function getAppoinments() {
           	</div>
             </div>
           `;
-        } catch (error) {
-          console.log("error", error);
-        }
-      }
-    } else {
-      hideDotors.style.display = "block";
-      topDoctor.innerHTML = ` Coming soon`;
+				} catch (error) {
+					console.log("error", error);
+				}
+			}
+		} else if (user.type === "patient") {
+			hideDotors.style.display = "block";
 
-      //     <p class="top-doctor-heading">Top Doctors</p>
-      //     <div class="top-doctors">
-      //       <div class="top-doctor-item">
-      //         <div class="top-thumnail">
-      //           <img src="/images/doctor.jpg" alt="" />
-      //         </div>
-      //         <div class="doctor-info">
-      //           <div class="doctor-info-name">
-      //             <span class="top-doc-name"> Dr. Jessica </span>
-      //             <div class="doc-hospital">
-      //               <span>Abc Destrict</span>
-      //               <span>-</span>
-      //               <span>Hospital</span>
-      //             </div>
-      //             <span class="rating">
-      //               <li>
-      //                 <i class="fas fa-star"></i>
-      //                 <span class="count">4.5</span>
-      //               </li>
-      //               <span>(79 reviews)</span>
-      //             </span>
-      //           </div>
-      //         </div>
-      //       </div>
-      //     </div>
-      //   ;
-    }
-  } catch (error) {
-    console.log(error);
-  }
+			topDoctor.innerHTML = `<p class="top-doctor-heading">Top Doctors</p>
+          <div class="top-doctors">
+            <div class="top-doctor-item">
+              <div class="top-thumnail">
+                <img src="/images/doctor.jpg" alt="" />
+              </div>
+              <div class="doctor-info">
+                <div class="doctor-info-name">
+                  <span class="top-doc-name"> Dr. Jessica </span>
+                  <div class="doc-hospital">
+                    <span>Abc Destrict</span>
+                    <span>-</span>
+                    <span>Hospital</span>
+                  </div>
+                  <span class="rating">
+                    <li>
+                      <i class="fas fa-star"></i>
+                      <span class="count">4.5</span>
+                    </li>
+                    <span>(79 reviews)</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+		}
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 getAppoinments();
 
-
 // render the header to all the pages.
-const header = document.querySelector('.header');
-function renderHearder(avater){
-  header.innerHTML = `<h1 class="header-logo">Dashboard</h1>
+const header = document.querySelector(".header");
+function renderHearder(avater) {
+	header.innerHTML = `<h1 class="header-logo">Dashboard</h1>
 					<div class="openNav">
 						<i class="fa fa-bars"></i>
 					</div>
@@ -263,39 +247,37 @@ function renderHearder(avater){
 							<i class="far fas fa-bell"></i>
 						</div>
 						<div class="user-avater">
-						<img src="${
-                avater || "https://shorturl.at/8TClo"
-               }" alt="User Avatar">
+						<img src="${avater || "https://shorturl.at/8TClo"}" alt="User Avatar">
 						</div>
-					</div>`
-          const openNav = document.querySelector('.openNav');
-if(openNav){
-  openNav.addEventListener('click', function(e){
-    //   e.preventDefault();
-    console.log(e.target);
-  sideBar.style.display = 'block';
-    console.log("hello");
-    })
-}else{
-console.log('hello');
+					</div>`;
+	const openNav = document.querySelector(".openNav");
+	if (openNav) {
+		openNav.addEventListener("click", function (e) {
+			//   e.preventDefault();
+			console.log(e.target);
+			sideBar.style.display = "block";
+			console.log("hello");
+		});
+	} else {
+		console.log("hello");
+	}
 }
-};
-
 
 renderHearder();
 /* <img src="${
                  user[0].userAvatar || "https://shorturl.at/8TClo"
                }" alt="User Avatar"> */
 
-async function getUserAvater(){
-  const { data, error} = await supabase.from("users").select('userAvatar').eq('id', logUser);
-  if(data){
-    console.log('this is the user photo', data);
-    renderHearder(data[0].userAvatar);
-  }else{
-    console.log('this is the error', error);
-  }
+async function getUserAvater() {
+	const { data, error } = await supabase
+		.from("users")
+		.select("userAvatar")
+		.eq("id", logUser);
+	if (data) {
+		console.log("this is the user photo", data);
+		renderHearder(data[0].userAvatar);
+	} else {
+		console.log("this is the error", error);
+	}
 }
 getUserAvater();
-
-
