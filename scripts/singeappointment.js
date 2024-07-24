@@ -73,12 +73,12 @@ function renderAppointmentDetails(appointment) {
            ${reason}</span>
       </div>
   </div>
-  <div class="${status ==='Approved' ? 'hideBtn' : ''}">
+  <div class="appointment-footer">
       <button class=" ${getClassButtons(status)}">Approve</button>
-      <button class=${status === 'Approved'? 'hideBtn' : 'reject-btn'}">Reject</button>
+    <button class=" ${getClassButtons(status)}">Reject</button>
   </div>`;
 			}
-			const approveBtn = document.querySelector(".btn-approve");
+		
 
 			const aptBtn = document.querySelector(".appointment-footer");
 			const StatusColor = document.querySelector(".status");
@@ -123,6 +123,7 @@ function renderAppointmentDetails(appointment) {
 					setTimeout(function (e) {
 						updateStatus("Approved");
 						closestButton.innerHTML = "Done!";
+            getClassButtons()
 					}, 1500);
 				}
 			});
@@ -133,6 +134,7 @@ function renderAppointmentDetails(appointment) {
 		console.log(" we could not find this appointments");
 	}
 }
+const approveBtn = document.querySelector(".btn-approve");
 
 async function getAppoinment() {
 	const { data, error } = await supabase
@@ -150,12 +152,28 @@ getAppoinment();
 // hide the approve and rejecte button.
 
 function getClassButtons(status) {
+  let baseBaseBtn;
 	switch (status) {
+  
 		case "Approved":
 		case "Rejected":
-			return "hideBtn";
+		return baseBaseBtn =  "hideBtn";
+      break;
+      case "Rejected":
+		case "Approved":
+		return	baseBaseBtn = "hideBtn";
+      break;
+      case 'Pending':
+       
+    
 	}
+  if(status === 'Pending'){
+  console.log(approveBtn)
+  }
+  
 }
+
+
 
 async function updateStatus(status, reject_reason = null) {
 	const updateData = { status: status };

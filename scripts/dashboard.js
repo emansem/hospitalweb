@@ -183,7 +183,7 @@ async function checkUserPaySatus() {
 	const { data, error } = await supabase
 		.from("users")
 		.select("*")
-		.eq("id", 56);
+		.eq("id", logUser);
 	console.log(data);
     
 	if (data[0].pay_id !== null || patientLog.type === "patient") {
