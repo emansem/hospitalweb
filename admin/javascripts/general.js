@@ -1,16 +1,5 @@
 /** @format */
 
-// const loginform = document.getElementById("loginform");
-const logUser = JSON.parse(localStorage.getItem("activeId"));
-const getStoreUsers = JSON.parse(localStorage.getItem("id"));
-
-const appointments = document.querySelector(".appointments");
-const hideAppt = document.querySelector(".top");
-const hideDotors = document.querySelector(".top-doct");
-
-const topDoctor = document.querySelector(".appt");
-const title = document.querySelector(".title");
-console.log(title);
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
@@ -33,7 +22,7 @@ const sideBar = document.querySelector(".siderbar-left");
 //     }
 // 	if (data.length !== 0) {
 // 		generateSideBar(logUser, data[0].type);
-// 	} 
+// 	}
 // }
 // LogUserType();
 
@@ -64,13 +53,13 @@ const sideBar = document.querySelector(".siderbar-left");
 //             <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
 //           </li>
 //         </a>
-        
+
 //         <a href="${url}">
 //           <li class="sidebar-left-item">
 //             <span><i class="fas fa-calendar-check"></i></span> Appointment
 //           </li>
 //         </a>
-        
+
 //         <a href="${
 // 					userId !== logUser
 // 						? `/pages/messages.html?id=${logUser}`
@@ -80,7 +69,7 @@ const sideBar = document.querySelector(".siderbar-left");
 //             <span><i class="fas fa-envelope"></i></span> Message
 //           </li>
 //         </a>
-        
+
 //         <a href="/pages/doctors.html" target="_blank" rel="noopener noreferrer">
 //           <li class="sidebar-left-item">
 //             <span><i class="fas fa-user-md"></i></span> Doctors
@@ -96,13 +85,13 @@ const sideBar = document.querySelector(".siderbar-left");
 //             <span><i class="fas fa-cog"></i></span> Settings
 //           </li>
 //         </a>
-        
+
 //         <a href="/pages/billing.html">
 //           <li class="sidebar-left-item">
 //             <span><i class="fas fa-file-invoice-dollar"></i></span> Billing
 //           </li>
 //         </a>
-        
+
 //         <a href="${
 // 					userId !== logUser || type !== "doctor"
 // 						? `/pages/userProfile.html?id=${logUser}`
@@ -140,10 +129,9 @@ const sideBar = document.querySelector(".siderbar-left");
 // 	}, 2000);
 // }
 
-
 // // fetch appoinmnet and display to the users
 // async function getAppoinments(type) {
-	
+
 // 	hideDotors.innerHTML = "";
 
 // 	const { data, error } = await supabase
@@ -152,20 +140,20 @@ const sideBar = document.querySelector(".siderbar-left");
 // 		.eq("doctorId", logUser);
 // 		let patientId;
 // 	const item = data;
-	
+
 // 	if(data.length ===0){
 // 		console.log(' you dont have any appoinment')
 // 	}else{
 // 	 patientId = data[0].patientid;
 // 	}
-   
+
 // const userType = type;
 // console.log('usertype', userType)
 // 	if (data.length === 0 && userType === 'doctor') {
 // 		hideAppt.style.display = "block";
 // 		hideDotors.style.display = "none";
 //        topDoctor.style.display= 'none'
-		
+
 // 	} else {
 // 		if (data.length !== 0 || userType === "doctor") {
 // 			// get user profile to add to the appoinment;
@@ -178,18 +166,17 @@ const sideBar = document.querySelector(".siderbar-left");
 
 // 		const userPhoto = data[0].userAvatar;
 // 		renderDoctorRencentAppointment(userPhoto, item);
-  
+
 // 	}
 // 	getUserAvaterPhoto();
 
 // 			//  display doctors appoinments
 // 		}else if(data.length === 0 ){
 // 			getTopDoctors();
-    
+
 //     }
 // 	}
 // }
-
 
 // // get the best doctors with high ratings
 // async function getTopDoctors() {
@@ -251,10 +238,6 @@ const sideBar = document.querySelector(".siderbar-left");
 //     </div>
 //   `;
 //   });
-
-   
-  
-  
 
 // }
 
