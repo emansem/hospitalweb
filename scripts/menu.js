@@ -148,8 +148,14 @@ async function getAppoinments() {
 		.from("appointments")
 		.select("*")
 		.eq("doctorId", logUser);
+		let patientId;
 	const item = data;
-  const patientId = data[0].patientid;
+	if(data.length ===0){
+		console.log(' you dont have any appoinment')
+	}else{
+	 patientId = data[0].patientid;
+	}
+   
 
 	if (data.length === 0) {
 		hideAppt.style.display = "block";
@@ -164,7 +170,7 @@ async function getAppoinments() {
 		const { data } = await supabase
 			.from("users")
 			.select("*")
-			.eq("id",patientId);
+			.eq("id", patientId);
 
 		const userPhoto = data[0].userAvatar;
 		renderDoctorRencentAppointment(userPhoto, item);
