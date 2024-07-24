@@ -1,0 +1,92 @@
+/** @format */
+
+:root {
+	--color-accent: #32d487; /* Green */
+	--color-dark: #1c1b2e; /* Dark Blue */
+	--color-light: #6dd8a7; /* Light Green */
+	--yellow-color: #f2c332;
+	--yellow-dark-color: #e3b21f;
+	--dark-color: #2e374e;
+	--color-dark-transparent: rgba(28, 27, 46, 0.5);
+	/* Gradients */
+	--gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+	--gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+	--gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+	--background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+	/* Fonts */
+	--font-body: "Roboto", sans-serif;
+
+	--font-heading: "Inter", sans-serif;
+
+	/* Box Shadows */
+	--box-shadow1: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	--box-shadow2: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+	--box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+	--box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;;
+}
+
+.reports-wrapper{
+	display: grid;
+	display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+margin-block: 2rem;
+gap: 1rem;
+margin-right: 2rem;
+}
+.reports-heading{
+	font-size: 32px;
+	font-family: var(--font-heading);
+	font-weight: 700;
+	color: var(--color-dark);
+}
+.report__item{
+	box-shadow: var(--box-shadow1);
+	padding: 2rem 1rem;
+	width: 100%;
+	gap: 2rem;
+	display: flex;
+	align-items: center;
+	border-radius: 0.4rem;
+}
+.report__text{
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
+}
+.report__icons{
+	font-size: 40px;
+	font-weight: 700;
+}
+.report__icons .fa-users{
+	color:  #FF5722;
+}
+.report__icons .fa-user-md{
+	color: var(--color-accent);
+}
+.report__icons .fa-calendar-check{
+	color: #388E3C;
+}
+.report__icons .fa-file-invoice-dollar{
+	color: #FBC02D;
+}
+.report__icons .fa-users-line{
+	color: #1A237E;
+}
+.report__icons .fa-calculator{
+	color:  #7B1FA2;
+}
+.report__icons .fa-dollar-sign{
+	color: #00796B;
+}
+.report__text .count{
+	color: var(--color-dark);
+	font-size: 20px;
+	font-weight: 500;
+	font-family: var(--font-body);
+}
+.report__text .count-text{
+	color: #666;
+	font-family: var(--font-body);
+	font-size: 18px;
+}

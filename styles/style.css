@@ -817,7 +817,7 @@ transition: all 0.4s linear;
 /*  the media querries for the web page */
 @media screen and (max-width: 1290px) {
 	html{
-		font-size: 60%;
+		font-size: 80%;
 	}
 body{
 	overflow-x: hidden;
