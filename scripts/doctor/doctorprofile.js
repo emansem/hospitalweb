@@ -4,7 +4,9 @@
 const getStoreUsers = JSON.parse(localStorage.getItem("id"));
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 const queryString = window.location.search.split("=");
+const profileContainer = document.querySelector(".profile-content");
 const doctorId = queryString[1];
+
 // the expire time and create a count down;
 
 // Supabase configuration
@@ -22,14 +24,16 @@ const alertWerapper = document.querySelector(".alert-wrapper");
 
 // Function to fetch doctor details
 async function getDoctorDetails() {
-	const {data, error} =  await supabase.from('users').select('*').eq("id", logUser);
-	
+	const { data, error } = await supabase
+		.from("users")
+		.select("*")
+		.eq("id", logUser);
+
 	const checkCurrentUserType = data[0].type;
-	console.log(checkCurrentUserType)
-	
+	console.log(" i am a patient", checkCurrentUserType);
 
 	if (checkCurrentUserType === "patient") {
-		console.log('hello');
+		console.log("hello");
 		const { data, error } = await supabase
 			.from("users")
 			.select("*")
@@ -37,86 +41,140 @@ async function getDoctorDetails() {
 
 		console.log("data", data);
 
-		profileDetails(data);
+		renderDoctorProfileToUsers(data);
 	} else if (checkCurrentUserType === "doctor") {
-		console.log('data')
+		console.log("data");
 		const { data, error } = await supabase
 			.from("users")
 			.select("*")
 			.eq("id", logUser);
 
-		console.log("data", data);
-
-		profileDetails(data);
+		// login user is doctor call this function
+		renderDoctorProfile(data);
 	}
 }
 
 getDoctorDetails();
 
-// Function to display profile details
-function profileDetails(user) {
-	console.log("usertype", user);
-const userType = user[0].type;
-	
-	
-
-	const pay_id = user[0].pay_id;
-	const nextTimeToPay = user[0].next_pay_date;
-
-	const profileContainer = document.querySelector(".profile-content");
-	
-
+// Function to display profile details to users and hide somefunctions you donot want them to see
+function renderDoctorProfileToUsers(user) {
 	// Populate profile HTML
 	profileContainer.innerHTML = `
-  <div class="profile-header">
-    <span class='premium'> <i class="fas fa-crown"></i></span>
-    
-    <div class="profile-image">
-      <img src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" alt="User Avatar">
-    </div>
-    <div>
-      <h2 class="drName">Dr.${user[0].name}</h2>
-      
-      <div class='action-btn'>
-        <a href="/pages/editDoctorProfile.html" class="${userType === 'doctor'? 'edit__doctorprofile' : 'edit-btn'}">Edit Profile</a>
-        <div class="${userType === 'doctor' ? 'edit-btn' : 'btn'}" style="margin-left: 1rem;">Contact Me</div>
-        <a class="upgradeBtn" href="/pages/payment.html" style="margin-left: 1rem;">Upgrade</a>
-      </div>
-    </div>
-  </div>
-  <div class="profile-main">
-    <section class="section">
-      <h3>About Dr. ${user[0].name}</h3>
-      <p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
-    </section>
-    
-    <div class="stats">
-      <div class="stat-item">
-        <h3>${user[0].patientsTreated}+</h3>
-        <p>Patients Treated</p>
-      </div>
-      <div class="stat-item">
-        <h3>4.9/5</h3>
-        <p>Rating</p>
-      </div>
-      <div class="stat-item">
-        <h3>250+</h3>
-        <p>Total Reviews</p>
-      </div>
-    </div>
-    
-    <section class="section">
-      <h3>Contact Information</h3>
-      <div class="contact-info">
-        <p><strong>Email:</strong> ${user[0].email}</p>
-        <p><strong>Phone:</strong> ${user[0].phone}</p>
-        <p><strong>Languages:</strong> ${user[0].languages}</p>
-      </div>
-    </section>
-  </div>
+		  <div class="profile-header">
+			<span class='premium'> <i class="fas fa-crown"></i></span>
+			
+			<div class="profile-image">
+			  <img src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" alt="User Avatar">
+			</div>
+			<div>
+			  <h2 class="drName">Dr.${user[0].name}</h2>
+			  
+			  <div class='action-btn'>
+				
+				<div class='btn' style="margin-left: 1rem;">Contact Me</div>
+				
+			  </div>
+			</div>
+		  </div>
+		  <div class="profile-main">
+			<section class="section">
+			  <h3>About Dr. ${user[0].name}</h3>
+			  <p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
+			</section>
+			
+			<div class="stats">
+			  <div class="stat-item">
+				<h3>${user[0].patientsTreated}+</h3>
+				<p>Patients Treated</p>
+			  </div>
+			  <div class="stat-item">
+				<h3>4.9/5</h3>
+				<p>Rating</p>
+			  </div>
+			  <div class="stat-item">
+				<h3>250+</h3>
+				<p>Total Reviews</p>
+			  </div>
+			</div>
+			
+			<section class="section">
+			  <h3>Contact Information</h3>
+			  <div class="contact-info">
+				<p><strong>Email:</strong> ${user[0].email}</p>
+				<p><strong>Phone:</strong> ${user[0].phone}</p>
+				<p><strong>Languages:</strong> ${user[0].languages}</p>
+			  </div>
+			</section>
+		  </div>
+		
+		`;
 
-`;
+	const btn = document.querySelector(".btn");
 
+	if (btn) {
+		btn.addEventListener("click", function (e) {
+			e.preventDefault();
+			reQuestPay();
+		});
+	}
+}
+
+// render profile todoctors only because it can conflict when user visit their profile
+
+function renderDoctorProfile(user) {
+	const userType = user[0].type;
+
+	profileContainer.innerHTML = `
+	<div class="profile-header">
+	  <span class='premium'> <i class="fas fa-crown"></i></span>
+	  
+	  <div class="profile-image">
+		<img src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" alt="User Avatar">
+	  </div>
+	  <div>
+		<h2 class="drName">Dr.${user[0].name}</h2>
+		
+		<div class='action-btn'>
+		  <a href="/pages/editDoctorProfile.html" class="edit__doctorprofile">Edit Profile</a>
+		 
+		  <a class="upgradeBtn" href="/pages/payment.html" style="margin-left: 1rem;">Upgrade</a>
+		</div>
+	  </div>
+	</div>
+	<div class="profile-main">
+	  <section class="section">
+		<h3>About Dr. ${user[0].name}</h3>
+		<p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
+	  </section>
+	  
+	  <div class="stats">
+		<div class="stat-item">
+		  <h3>${user[0].patientsTreated}+</h3>
+		  <p>Patients Treated</p>
+		</div>
+		<div class="stat-item">
+		  <h3>4.9/5</h3>
+		  <p>Rating</p>
+		</div>
+		<div class="stat-item">
+		  <h3>250+</h3>
+		  <p>Total Reviews</p>
+		</div>
+	  </div>
+	  
+	  <section class="section">
+		<h3>Contact Information</h3>
+		<div class="contact-info">
+		  <p><strong>Email:</strong> ${user[0].email}</p>
+		  <p><strong>Phone:</strong> ${user[0].phone}</p>
+		  <p><strong>Languages:</strong> ${user[0].languages}</p>
+		</div>
+	  </section>
+	</div>
+  
+  `;
+	const pay_id = user[0].pay_id;
+	const nextTimeToPay = user[0].next_pay_date;
 	const btn = document.querySelector(".btn");
 	if (btn) {
 	}
@@ -129,26 +187,37 @@ const userType = user[0].type;
 			reQuestPay();
 		});
 	}
-	async function checkUserPaySatus() {
-		
-		if (userType === "patient") patientid = userType;
 
-		premium.style.display = "none";
-		upgradeBtn.style.display = "none";
-		const dateNow = Date.now();
-
-		if (dateNow < new Date(nextTimeToPay) || pay_id !== null || patientid) {
-			premium.style.display = "block";
-			upgradeBtn.style.display = "none";
-		} else {
-			upgradeBtn.style.display = "block";
-		}
-	}
-	checkUserPaySatus();
-	
-
+	checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id);
+	checkExpireDate(pay_id, nextTimeToPay);
 }
-// Function to check user payment status
+
+// check if a user have paid
+
+async function checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id) {
+	premium.style.display = "none";
+	upgradeBtn.style.display = "none";
+	const dateNow = Date.now();
+
+	if (dateNow < new Date(nextTimeToPay) || pay_id !== null) {
+		premium.style.display = "block";
+		upgradeBtn.style.display = "none";
+	} else {
+		upgradeBtn.style.display = "block";
+	}
+}
+
+// Event listener for payment request
+requestPay.addEventListener("click", function (e) {
+	e.preventDefault();
+	const targetEl = e.target.textContent;
+	console.log(targetEl);
+	if (targetEl === "Maybe Later") {
+		requestPay.classList.add("hideForm");
+	} else if (targetEl === "Subscribe Now") {
+		window.location.href = `/pages/payment.html?id=${doctorId}`;
+	}
+});
 
 // Function to request payment before contacting doctor
 async function reQuestPay() {
@@ -164,18 +233,6 @@ async function reQuestPay() {
 		console.log("error", error);
 	}
 }
-
-// Event listener for payment request
-requestPay.addEventListener("click", function (e) {
-	e.preventDefault();
-	const targetEl = e.target.textContent;
-	console.log(targetEl);
-	if (targetEl === "Maybe Later") {
-		requestPay.classList.add("hideForm");
-	} else if (targetEl === "Subscribe Now") {
-		window.location.href = `/pages/payment.html?id=${doctorId}`;
-	}
-});
 
 // display display date notifications tohelp users know their next pay dat
 function renderAlertMessage(date, hours) {
@@ -208,25 +265,15 @@ console.log(
 	`<div class ='cursorDisable'><a href="#ß" class="renewBtn">Renew Now</a></div>`
 );
 
-async function checkExpireDate() {
+// check if the user plan have expired
+async function checkExpireDate(pay_id, nextTimeToPay) {
 	const renew_wrapper = document.querySelector(".renew-wrapper");
 
-	const { data, error } = await supabase
-		.from("users")
-		.select("*")
-		.eq("id", logUser);
-	updateCountdown(data[0].next_pay_date);
-	const expireTime = data[0].next_pay_date;
+	updateCountdown(nextTimeToPay);
 
-	if (error) {
-		console.log("erorfor checking expiredate.", error);
-	} else {
-		const dateNow = Date.now();
+	const dateNow = Date.now();
 
-		if (data[0].pay_id === null || dateNow > new Date(expireTime)) {
-			renew_wrapper.innerHTML = ` <a href="#ß" class="renewBtn">Renew Now</a>`;
-		}
+	if (pay_id === null || dateNow > new Date(nextTimeToPay)) {
+		renew_wrapper.innerHTML = ` <a href="#ß" class="renewBtn">Renew Now</a>`;
 	}
 }
-
-checkExpireDate();
