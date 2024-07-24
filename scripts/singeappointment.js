@@ -120,7 +120,7 @@ function renderAppointmentDetails(appointment) {
 				} else if (btn === "Approve") {
 					closestButton.innerHTML = "Please wait...";
 
-					updateStatus("Approved");
+					
 					setTimeout(function (e) {
 						updateStatus("Approved");
 						closestButton.innerHTML = "Done!";
@@ -179,7 +179,7 @@ async function updateStatus(status, reject_reason = null) {
 		console.log("Status updated successfully:", data);
 
 		if (data[0].status === "Approved") {
-		
+			decrement_appointments(data[0].patientid, data[0].doctorId);
 			incrementActiveAppointMents(data[0].patientid, data[0].doctorId);
 			setTimeout(function (e) {
 				alert("Appointment Was Approved SuccessFully");
