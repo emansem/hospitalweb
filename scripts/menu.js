@@ -25,13 +25,14 @@ async function LogUserType() {
 		.from("users")
 		.select("*")
 		.eq("id", logUser);
+    if(error || !logUser || !data){
+      alert('Please login to continue')
+      window.location.href = "/pages/login.html";
+      return;
+    }
 	if (data.length !== 0) {
 		generateSideBar(logUser, data[0].type);
-	} else if (data.length === 0 || !logUser || data[0].id !== logUser) {
-		alert("please longin to continue");
-		window.location.href = "/pages/login.html";
-		return;
-	}
+	} 
 }
 LogUserType();
 
@@ -148,6 +149,7 @@ async function getAppoinments() {
 		.select("*")
 		.eq("doctorId", logUser);
 	const item = data;
+  const patientId = data[0].patientid;
 
 	if (data.length === 0) {
 		hideAppt.style.display = "block";
@@ -158,19 +160,22 @@ async function getAppoinments() {
 		if (data.length !== 0 || data[0].type === "doctor") {
 			// get user profile to add to the appoinment;
 
-	async function getUserAvaterPhoto(patientID) {
+	async function getUserAvaterPhoto() {
 		const { data } = await supabase
 			.from("users")
 			.select("*")
-			.eq("id", data[0].patientid);
+			.eq("id",patientId);
 
 		const userPhoto = data[0].userAvatar;
-		rnederDoctorRencentAppointment(userPhoto, item);
+		renderDoctorRencentAppointment(userPhoto, item);
+  
 	}
 	getUserAvaterPhoto();
 
 			//  display doctors appoinments
-		}
+		}else if(data[0].type === 'patient'){
+      getTopDoctors();
+    }
 	}
 }
 
@@ -205,33 +210,42 @@ async function getTopDoctors() {
       </div>
     `;
 }
-getTopDoctors();
+
 // get doctors recents appointment and render on the page.
 
-function rnederDoctorRencentAppointment(userPhoto, item) {
-  if(item.length === 0){
+function renderDoctorRencentAppointment(userPhoto, people) {
+  console.log(people)
+  if(people.length === 0){
     appointments.innerHTML === " No Appointment Found";
   }
-	appointments.innerHTML += `
-  <div class="apt-wrapper">
-  <div class="patient-item1">
-    <div class="patient-avater">
-    <img src="${userPhoto || "https://shorturl.at/8TClo"}" alt="" />
+  hideAppt.style.display = "block";
+  people.forEach(item => {
+      appointments.innerHTML += `
+    <div class="apt-wrapper">
+    <div class="patient-item1">
+      <div class="patient-avater">
+      <img src="${userPhoto || "https://shorturl.at/8TClo"}" alt="" />
+      </div>
+      <div class="apt-time-name">
+      <span class="patient-name">
+        ${item.name}
+      </span>
+      <span class="apt-time">
+        <span> ${item.time}</span>
+      </span>
+      </div>
     </div>
-    <div class="apt-time-name">
-    <span class="patient-name">
-      ${item.name}
-    </span>
-    <span class="apt-time">
-      <span> ${item.time}</span>
-    </span>
+    <div class="apt-seemore">
+      <i class="fas fa-angle-right"></i>
     </div>
-  </div>
-  <div class="apt-seemore">
-    <i class="fas fa-angle-right"></i>
-  </div>
-  </div>
-`;
+    </div>
+  `;
+  });
+
+   
+  
+  
+
 }
 
 // render the header to all the pages.

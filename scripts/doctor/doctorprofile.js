@@ -22,42 +22,42 @@ const alertWerapper = document.querySelector(".alert-wrapper");
 
 // Function to fetch doctor details
 async function getDoctorDetails() {
-	const checkCurrentUserType = getStoreUsers.find(
-		(user) => user.id === logUser
-	);
-	console.log(checkCurrentUserType);
-	try {
-		if (checkCurrentUserType.type === "patient") {
-			const { data, error } = await supabase
-				.from("users")
-				.select("*")
-				.eq("id", doctorId);
+	const {data, error} =  await supabase.from('users').select('*').eq("id", logUser);
+	
+	const checkCurrentUserType = data[0].type;
+	console.log(checkCurrentUserType)
+	
 
-			console.log("data", data);
+	if (checkCurrentUserType === "patient") {
+		console.log('hello');
+		const { data, error } = await supabase
+			.from("users")
+			.select("*")
+			.eq("id", doctorId);
 
-			profileDetails(data);
-		} else if (checkCurrentUserType.type === "doctor") {
-			const { data, error } = await supabase
-				.from("users")
-				.select("*")
-				.eq("id", logUser);
+		console.log("data", data);
 
-			console.log("data", data);
+		profileDetails(data);
+	} else if (checkCurrentUserType === "doctor") {
+		console.log('data')
+		const { data, error } = await supabase
+			.from("users")
+			.select("*")
+			.eq("id", logUser);
 
-			profileDetails(data);
-		}
-	} catch (error) {
-		console.error("Error for fecthing doctor details", error);
+		console.log("data", data);
+
+		profileDetails(data);
 	}
 }
-console.log("hello world");
+
 getDoctorDetails();
 
 // Function to display profile details
 function profileDetails(user) {
 	console.log("usertype", user);
-
-	const userType = getStoreUsers.find((user) => user.id === logUser);
+const userType = user[0].type;
+	
 	let className;
 	if (userType.type === "doctor") {
 		className = "edit__doctor--profile";
@@ -135,15 +135,14 @@ function profileDetails(user) {
 		});
 	}
 	async function checkUserPaySatus() {
-		const user = getStoreUsers.find((user) => user.id === logUser);
-		let patientid;
-		if (user.type === "patient") patientid = user.type;
+		
+		if (userType === "patient") patientid = userType;
 
 		premium.style.display = "none";
 		upgradeBtn.style.display = "none";
 		const dateNow = Date.now();
-		
-		if (dateNow < new Date(nextTimeToPay)||  pay_id !==null || patientid) {
+
+		if (dateNow < new Date(nextTimeToPay) || pay_id !== null || patientid) {
 			premium.style.display = "block";
 			upgradeBtn.style.display = "none";
 		} else {
@@ -151,8 +150,9 @@ function profileDetails(user) {
 		}
 	}
 	checkUserPaySatus();
-}
+	
 
+}
 // Function to check user payment status
 
 // Function to request payment before contacting doctor
@@ -201,7 +201,6 @@ function renderAlertMessage(date, hours) {
 }
 
 function updateCountdown(nextDate) {
-	
 	const formattedDate = new Date(nextDate).toLocaleString("en-US", {
 		month: "long",
 		day: "2-digit",
