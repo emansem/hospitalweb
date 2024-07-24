@@ -158,7 +158,7 @@ function getDoctorData(user) {
             <div class="report-text">
                 <li class="report-icon">
                     <i class="fas fa-check-circle"></i>
-                    <span>Total Appointments</span>
+                    <span>Active Appointments</span>
                 </li>
             </div>
             <div class="report-Num">
