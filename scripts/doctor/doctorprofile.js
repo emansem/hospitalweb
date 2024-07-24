@@ -58,18 +58,13 @@ function profileDetails(user) {
 	console.log("usertype", user);
 const userType = user[0].type;
 	
-	let className;
-	if (userType.type === "doctor") {
-		className = "edit__doctor--profile";
-	} else {
-		className = "edit-btn";
-	}
-	console.log(className);
+	
+
 	const pay_id = user[0].pay_id;
 	const nextTimeToPay = user[0].next_pay_date;
 
 	const profileContainer = document.querySelector(".profile-content");
-	console.log("if user id is a string", className);
+	
 
 	// Populate profile HTML
 	profileContainer.innerHTML = `
@@ -83,8 +78,8 @@ const userType = user[0].type;
       <h2 class="drName">Dr.${user[0].name}</h2>
       
       <div class='action-btn'>
-        <a href="/pages/editDoctorProfile.html?id=${user[0].id}" class="${className}">Edit Profile</a>
-        <div class="${userType.type === "doctor" ? "edit-btn" : "btn"}" style="margin-left: 1rem;">Contact Me</div>
+        <a href="/pages/editDoctorProfile.html" class="${userType === 'doctor'? 'edit__doctorprofile' : 'edit-btn'}">Edit Profile</a>
+        <div class="${userType === 'doctor' ? 'edit-btn' : 'btn'}" style="margin-left: 1rem;">Contact Me</div>
         <a class="upgradeBtn" href="/pages/payment.html" style="margin-left: 1rem;">Upgrade</a>
       </div>
     </div>
