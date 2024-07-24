@@ -84,8 +84,6 @@ function renderAppointmentDetails(appointment) {
 			}
 			const aptBtn = document.querySelector(".appointment-footer");
 
-			const StatusColor = document.querySelector(".status");
-
 			aptBtn.addEventListener("click", function (e) {
 				e.preventDefault();
 
@@ -181,7 +179,7 @@ async function updateStatus(status, reject_reason = null) {
 		console.log("Status updated successfully:", data);
 
 		if (data[0].status === "Approved") {
-			decrement_appointments(data[0].patientid, data[0].doctorId);
+		
 			incrementActiveAppointMents(data[0].patientid, data[0].doctorId);
 			setTimeout(function (e) {
 				alert("Appointment Was Approved SuccessFully");
