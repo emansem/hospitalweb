@@ -7,7 +7,7 @@ const supabaseKey =
 
 // DOM element selections
 const popupWrapper = document.querySelector(".popup__wrapper");
-const reports = document.querySelector(".reports");
+const reports = document.querySelector(".reports-wrapper");
 const doctors = document.querySelector(".doctors");
 const appointments = document.querySelector(".appointments");
 const doctorH = document.querySelector(".docctor-heading");
@@ -133,50 +133,48 @@ getDoctors();
 function getDoctorData(user) {
 	console.log(user);
 	reports.innerHTML = `
-        <div class="patients reports-item">
-            <div class="report-text">
-                <li class="report-icon">
-                    <i class="fas fas fa-users"></i>
-                    <span>Total Patients</span>
-                </li>
-            </div>
-            <div class="report-Num">
-                <p>${user.patientsTreated}</p>
-            </div>
-        </div>
-        <div class="pending reports-item">
-            <div class="report-text">
-                <li class="report-icon">
-                    <i class="fas fa-hourglass-half"></i>
-                    <span>Pending Appointments</span>
-                </li>
-            </div>
-            <div class="report-Num">
-                <p>${user.appointments_pending}</p>
-            </div>
-        </div>
-        <div class="finished reports-item">
-            <div class="report-text">
-                <li class="report-icon">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Active Appointments</span>
-                </li>
-            </div>
-            <div class="report-Num">
-                <p>${user.appointments_finished}</p>
-            </div>
-        </div>
-        <div class="earning reports-item">
-            <div class="report-text">
-                <li class="report-icon">
-                    <i class="fas fas fa-dollar-sign"></i>
-                    <span>Total Earning</span>
-                </li>
-            </div>
-            <div class="report-Num">
-                <p>$${user.totalEarnings}</p>
-            </div>
-        </div>`;
+
+	<div class="report__item item">
+								<div class="report__icons">
+									<i class="fas fa-users"></i>
+								</div>
+								<div class="report__text">
+									<span class="count"> ${user.patientsTreated}</span>
+									<span class="count-text">Total Patients</span>
+								</div>
+							</div>
+							<div class="report__item item">
+								<div class="report__icons">
+									<i class="fas fa-hourglass-half"></i>
+								</div>
+								<div class="report__text">
+									<span class="count"> ${user.appointments_pending}</span>
+									<span class="count-text">Pending Appointments</span>
+								</div>
+							</div>
+							<div class="report__item item">
+								<div class="report__icons">
+									<i class="fas fa-check-circle"></i>
+								</div>
+								<div class="report__text">
+									<span class="count"> ${user.appointments_finished}</span>
+									<span class="count-text">Active Appointments</span>
+								</div>
+							</div>
+
+							
+							<div class="report__item item">
+								<div class="report__icons">
+									<i class="fas fa-dollar-sign"></i>
+								</div>
+								<div class="report__text">
+									<span class="count"> $${user.totalEarnings}</span>
+									<span class="count-text">Total Earnings</span>
+								</div>
+							</div>
+
+
+`;
 }
 
 // Function to check user payment status
