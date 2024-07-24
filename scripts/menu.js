@@ -25,6 +25,7 @@ async function LogUserType() {
 		.from("users")
 		.select("*")
 		.eq("id", logUser);
+		getAppoinments(data[0].type)
     if(error || !logUser || !data){
       alert('Please login to continue')
       window.location.href = "/pages/login.html";
@@ -141,7 +142,8 @@ function logUserout() {
 
 
 // fetch appoinmnet and display to the users
-async function getAppoinments() {
+async function getAppoinments(type) {
+	
 	hideDotors.innerHTML = "";
 
 	const { data, error } = await supabase
@@ -150,20 +152,22 @@ async function getAppoinments() {
 		.eq("doctorId", logUser);
 		let patientId;
 	const item = data;
+	
 	if(data.length ===0){
 		console.log(' you dont have any appoinment')
 	}else{
 	 patientId = data[0].patientid;
 	}
    
-
-	if (data.length === 0) {
+const userType = type;
+console.log('usertype', userType)
+	if (data.length === 0 && userType === 'doctor') {
 		hideAppt.style.display = "block";
 		hideDotors.style.display = "none";
-    topDoctor.style.display= 'none'
+       topDoctor.style.display= 'none'
 		
 	} else {
-		if (data.length !== 0 || data[0].type === "doctor") {
+		if (data.length !== 0 || userType === "doctor") {
 			// get user profile to add to the appoinment;
 
 	async function getUserAvaterPhoto() {
@@ -179,13 +183,13 @@ async function getAppoinments() {
 	getUserAvaterPhoto();
 
 			//  display doctors appoinments
-		}else if(data[0].type === 'patient'){
-      getTopDoctors();
+		}else if(data.length === 0 ){
+			getTopDoctors();
+    
     }
 	}
 }
 
-getAppoinments();
 
 // get the best doctors with high ratings
 async function getTopDoctors() {
