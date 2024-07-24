@@ -27,9 +27,13 @@ function renderAppointmentDetails(appointment) {
 			case "Rejected":
 				return "reject";
 			default:
-				return "pendings";
+			return "pendings";
 		}
 	}
+
+	// defind the classes for displaying and hidding buttons
+	
+
 	const status = appointment[0].status;
 	if (appointment) {
 		async function getUserAvater() {
@@ -74,13 +78,12 @@ function renderAppointmentDetails(appointment) {
       </div>
   </div>
   <div class="appointment-footer">
-      <button class=" ${getClassButtons(status)}">Approve</button>
-    <button class=" ${getClassButtons(status)}">Reject</button>
+      <button class=" ${getClassButtons(status, 'approve')}">Approve</button>
+    <button class=" ${getClassButtons(status, 'reject')}">Reject</button>
   </div>`;
 			}
-		
-
 			const aptBtn = document.querySelector(".appointment-footer");
+
 			const StatusColor = document.querySelector(".status");
 
 			aptBtn.addEventListener("click", function (e) {
@@ -123,7 +126,7 @@ function renderAppointmentDetails(appointment) {
 					setTimeout(function (e) {
 						updateStatus("Approved");
 						closestButton.innerHTML = "Done!";
-            getClassButtons()
+						getClassButtons();
 					}, 1500);
 				}
 			});
@@ -134,7 +137,6 @@ function renderAppointmentDetails(appointment) {
 		console.log(" we could not find this appointments");
 	}
 }
-const approveBtn = document.querySelector(".btn-approve");
 
 async function getAppoinment() {
 	const { data, error } = await supabase
@@ -149,31 +151,14 @@ async function getAppoinment() {
 }
 
 getAppoinment();
+
 // hide the approve and rejecte button.
-
-function getClassButtons(status) {
-  let baseBaseBtn;
-	switch (status) {
-  
-		case "Approved":
-		case "Rejected":
-		return baseBaseBtn =  "hideBtn";
-      break;
-      case "Rejected":
-		case "Approved":
-		return	baseBaseBtn = "hideBtn";
-      break;
-      case 'Pending':
-       
-    
+function getClassButtons(status, buttonType) {
+	if (status === 'Pending') {
+	  return `df btn-${buttonType}`;
 	}
-  if(status === 'Pending'){
-  console.log(approveBtn)
+	return 'hideBtn';
   }
-  
-}
-
-
 
 async function updateStatus(status, reject_reason = null) {
 	const updateData = { status: status };
