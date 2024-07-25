@@ -1,0 +1,105 @@
+:root {
+	--color-accent: #32d487; /* Green */
+	--color-dark: #1c1b2e; /* Dark Blue */
+	--ccolor: #00796B;
+	--yellow-color: #f2c332;
+	--yellow-dark-color: #e3b21f;
+	--dark-color: #2e374e;
+	--color-dark-transparent: rgba(28, 27, 46, 0.5);
+	/* Gradients */
+	--gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+	--gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+	--gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+	--background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+	/* Fonts */
+	--font-body: "Roboto", sans-serif;
+
+	--font-heading: "Inter", sans-serif;
+
+	/* Box Shadows */
+	--box-shadow1: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+	--box-shadow2: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+	--box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+	--box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;;
+}
+
+
+
+.doctor-profile{
+   
+    max-width: 980px;
+    margin: 0 auto;
+    box-shadow: var(--box-shadow1);
+    border-radius: 0.5rem;
+   
+    overflow: hidden;
+}
+.doctor__profile--wrapper{
+    padding: 1rem;
+    width: 100%;
+    background: radial-gradient(circle, rgba(48,47,66,0.8) 0%, rgba(28,27,46,1) 100%);
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    align-items: center;
+
+  
+}
+.header__left--user-photo{
+    min-height: 150px;
+    min-width: 150px;
+    border-radius: 50%;
+    border: 1px solid var(--ccolor);
+    height: 100px;
+}
+.doctor__profile--header{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.heaer__right--userinfo{
+    display: flex;
+    flex-direction: column;
+}
+.verify{
+    margin-bottom: 1rem;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-heading);
+}
+.fa-check-circle{
+  color: #2287fafb;
+}
+.verify-text{
+    color: #f1f1f7d2;
+    
+}
+.name{
+font-size: 28px;
+font-weight: 500;
+color: #f1f1f5;
+font-family: var(--font-body);
+margin-bottom: 0.2rem;
+}
+.number-patients{
+    color: #f1f1f3a1;
+    font-family: var(--font-heading);
+    font-weight: 500;
+}
+.update-profile{
+    background-color: var(--color-accent);
+    padding:  1rem;
+    font-size: 18px;
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+    border-radius: 0.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.4s linear;
+}
+.update-profile:hover{
+    background-color: #6dd8a7;
+}

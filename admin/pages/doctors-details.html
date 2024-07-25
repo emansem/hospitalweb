@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DashBoard</title>
+    <title>Doctor Details</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,6 +30,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/admin/style/general.css" />
+    <link rel="stylesheet" href="/admin/style/dashboard.css">
+    <link rel="stylesheet" href="/admin/style/doctordatails.css">
   </head>
 
   <body>
@@ -127,19 +129,19 @@
           <div class="doctor-profile">
             <div class="doctor__profile--wrapper">
               <div class="doctor__profile--header">
-				<div class="header__left">
-					<div class="header__left--userphoto">
-						<img src="/images/doctor.png" alt="user-avater" class="user-photo">
+				       <div class="header__left">
+						<img  class="header__left--user-photo" src="/images/doctor.png" alt="user-avater" class="user-photo">
 					</div>
 					<div class="heaer__right--userinfo">
+            <span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verify Doctor</span></span>
 						<span class="name">Eman Sem</span>
 						<span class="number-patients">
-							1248+ Patients
+							1248+ Patients Treated
 						</span>
 					</div>
 				</div>
 			    <div class="header__right">
-					Edit Profile
+					<button class="update-profile">Update Profile</button>
 				</div>
 			
 			  </div>
