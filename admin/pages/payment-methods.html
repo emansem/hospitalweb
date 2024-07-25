@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>DashBoard</title>
+		<title>Pages</title>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,6 +30,8 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="/admin/style/general.css" />
+		<link rel="stylesheet" href="/admin/style/pages.css">
+		<link rel="stylesheet" href="/admin/style/common.css">
 	</head>
 
 	<body>
@@ -124,16 +126,57 @@
 
 				<!---appointMent section seaction-->
 				<secttion class="main-section">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-					delectus nam libero, error doloribus facere explicabo rem fugit
-					officia, consequuntur ea placeat natus aliquid quis vero at. Nihil,
-					ratione nesciunt! Lorem ipsum dolor sit amet consectetur adipisicing
-					elit. Ipsa quisquam similique cumque non, pariatur labore eaque,
-					accusantium consequatur eligendi debitis, doloremque mollitia
-					excepturi? Facilis optio quaerat aliquam eos, dolores libero?
+					<div class="edit__profile--popup hide-editForm">
+						<form action="" class="form-popup">
+						  <div class="headdings">Update About Us Page</div>
+						   <div class="form-group">
+							<label for="pagename">Page Name </label>
+							<input name="pagename"  type="text" class="form-group-item" value="About Us">
+						   </div>
+						   <div class="form-group">
+							<label for="pageLink">Provide Link</label>
+							<input name="pageLink" type="text" class="form-group-item" placeholder="Page link">
+						   </div>
+						   
+						  
+						   <div class="form-group">
+							<div class="submit-buttons">
+							  <button class="submitBtn close">Close</button>
+							<button class="submitBtn save">Save Now</button>
+							</div>
+						   
+						  
+						   </div>
+					
+						</form>
+						  
+					   </div>
+					<div class="pages">
+						<div class="pages-wrapper">
+							<div class="pages-header">
+								<div class="headings">Total Pages: <span>4</span></div>
+							<div class="action-buttons">
+								
+								<button class="actionBtn new">Add New Page</button>
+							</div>
+								
+							</div>
+							<div class="page-item">
+								<div class="page-number">0.1</div>
+								<div class="page-name"> Orange	</div>
+								<div class="status"><span>Active</span></div>
+								<div class="action-buttons">
+								
+									<button class="actionBtn edit-page">Update</button>
+									<button class="actionBtn deactive">Deactive</button>
+									<button class="actionBtn delete">Delete</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</secttion>
 			</div>
 		</div>
-        <script type="module" src="/admin/javascripts/general.js"></script>
+		<script type="module" src="/admin/javascripts/general.js"></script>
 	</body>
 </html>

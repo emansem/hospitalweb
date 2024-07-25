@@ -60,6 +60,7 @@
     border-radius: 0.2rem;
     font-size: 14px;
     cursor: pointer;
+    transition: all 0.3s linear;
 }
 .edit-page{
    background-color: #ecce24;
@@ -92,4 +93,22 @@
 }
 .edit__profile--popup{
     height: 400px;
+}
+.pages-header{
+    display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 2rem;
+}
+.headings{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-dark);
+    font-family: var(--font-heading);
+}
+.headings span{
+    color: #00796b;
+}
+.new:hover{
+    background-color: #6dd8a7;
 }
