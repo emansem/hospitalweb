@@ -103,6 +103,10 @@ margin-bottom: 0.2rem;
 .update-profile:hover{
     background-color: #6dd8a7;
 }
+.user-type{
+    color: #888;
+    font-size: 14px;
+}
 
 
 .doctor__profile--body{
@@ -120,4 +124,7 @@ margin-bottom: 0.2rem;
 }
 .recent__user--item2{
     align-items: center;
+}
+.user-name{
+    font-size: 16px;
 }
