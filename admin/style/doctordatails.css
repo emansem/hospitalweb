@@ -103,3 +103,21 @@ margin-bottom: 0.2rem;
 .update-profile:hover{
     background-color: #6dd8a7;
 }
+
+
+.doctor__profile--body{
+    padding: 2rem;
+    font-family: var(--font-body);
+}
+.content-wrapper{
+    margin-block: 1rem;
+    background-color: white;
+    box-shadow: var(--box-shadow3);
+    padding: 1rem 0.8rem;
+    display: flex;
+    border-radius: 0.4rem;
+    justify-content: space-between;
+}
+.recent__user--item2{
+    align-items: center;
+}
