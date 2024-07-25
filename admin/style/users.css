@@ -32,7 +32,7 @@
    margin: 0 auto;
 }
 .recent-users-container{
-background-color: red;
+
 width: 100px;
 }
 .recent__users--header{
@@ -66,8 +66,8 @@ width: 100px;
     display: flex;
     flex-basis: 60%;
     position: relative;
-    flex: 1;
     max-width: 60%;
+    flex: 1;
 }
 .fa-users{
     padding-left: 0.4rem;
