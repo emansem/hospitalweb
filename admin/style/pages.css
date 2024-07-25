@@ -1,0 +1,74 @@
+:root {
+	--color-accent: #32d487; /* Green */
+	--color-dark: #1c1b2e; /* Dark Blue */
+	--ccolor: #00796b;
+	--yellow-color: #f2c332;
+	--yellow-dark-color: #e3b21f;
+	--dark-color: #2e374e;
+	--color-dark-transparent: rgba(28, 27, 46, 0.5);
+	/* Gradients */
+	--gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+	--gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+	--gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+	--background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+	/* Fonts */
+	--font-body: "Roboto", sans-serif;
+
+	--font-heading: "Inter", sans-serif;
+
+	/* Box Shadows */
+	--box-shadow1: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+	--box-shadow2: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+	--box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+	--box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.pages{
+   margin-right: 2rem;
+    max-width: 1200px;
+  box-shadow: var(--box-shadow3);
+  border-radius: 0.4em;
+}
+
+.pages-wrapper{
+    padding: 1rem;
+}
+.page-item{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border: 1px solid #f1f2f1;
+    padding: 0.4rem;
+    align-items: center;
+    gap: 1rem;
+}
+.action-buttons{
+    
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+   
+}
+.actionBtn
+ {
+    padding:  0.6rem;
+    background-color: #32d487;
+    border: none;
+    outline: none;
+    color: var(--color-dark);
+    font-weight: 500;
+    font-family: var(--font-body);
+    border-radius: 0.2rem;
+    font-size: 14px;
+    cursor: pointer;
+}
+.edit-page{
+   background-color: #e3b21f;
+}
+.deactive{
+    background-color: #1c1b2e;
+    color: #f1f2f1;
+}
+.delete{
+    background-color: #e54c4ce0;
+    color: #f1f2f1;
+}
