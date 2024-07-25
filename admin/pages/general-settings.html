@@ -30,6 +30,7 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="/admin/style/general.css" />
+		<link rel="stylesheet" href="/admin/style/doctordatails.css" />
 	</head>
 
 	<body>
@@ -124,16 +125,86 @@
 
 				<!---appointMent section seaction-->
 				<secttion class="main-section">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-					delectus nam libero, error doloribus facere explicabo rem fugit
-					officia, consequuntur ea placeat natus aliquid quis vero at. Nihil,
-					ratione nesciunt! Lorem ipsum dolor sit amet consectetur adipisicing
-					elit. Ipsa quisquam similique cumque non, pariatur labore eaque,
-					accusantium consequatur eligendi debitis, doloremque mollitia
-					excepturi? Facilis optio quaerat aliquam eos, dolores libero?
+					<div class="general-settings">
+						<form action="" class="general-settings-update">
+							<div class="headings">general setting</div>
+							
+							<div class="form-group general-setting-item">
+								<div class="update-logo">
+									<div class="previewlogo">
+										<img src="/logo.png" alt="logo" />
+									</div>
+									<div>
+										<label for="logo">Update a new logo </label>
+									<input
+										name="logo"
+										type="file"
+										class="form-group-item logo"
+										
+									/>
+									</div>
+								</div>
+								<div>
+									<label for="title"> Change Website Title </label>
+									<input
+										name="title"
+										type="text"
+										class="form-group-item"
+										value="Hospital Web App"
+									/>
+								</div>
+							</div>
+							<div class="form-group general-setting-item">
+								<div>
+									<label for="newPassword">Update doctors comission % </label>
+									<input
+										name="comission"
+										type="number"
+										class="form-group-item"
+										value="80"
+									/>
+								</div>
+								<div>
+									<label for="newPassword">Update Patients charge fee </label>
+									<input
+										name="comission"
+										type="number"
+										class="form-group-item"
+										value="3"
+									/>
+								</div>
+							</div>
+							<div class="form-group general-setting-item">
+								<div>
+									<label for="message">Updat Welcome Message</label>
+										
+									<textarea  class="form-group-item" name="message" id="message">
+									Welcome to our website 
+									point1
+									point2
+									point3
+								</textarea
+									>
+								</div>
+								<div>
+									<label for="message">Updat Doctor Message</label>
+									<textarea class="form-group-item" name="message" id="message">
+									To get verification batch, you need to have 4 Appoinments and 1 review
+								</textarea
+									>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="submit-buttons">
+									<button class="submitBtn save">Submit</button>
+								</div>
+							</div>
+						</form>
+					</div>
 				</secttion>
 			</div>
 		</div>
-        <script type="module" src="/admin/javascripts/general.js"></script>
+		<script type="module" src="/admin/javascripts/general.js"></script>
 	</body>
 </html>
