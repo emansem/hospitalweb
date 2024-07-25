@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Pages</title>
+		<title>DashBoard</title>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,8 +30,7 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="/admin/style/general.css" />
-		<link rel="stylesheet" href="/admin/style/pages.css">
-		<link rel="stylesheet" href="/admin/style/common.css">
+		<link rel="stylesheet" href="/admin/style/dashboard.css" />
 	</head>
 
 	<body>
@@ -126,59 +125,42 @@
 
 				<!---appointMent section seaction-->
 				<secttion class="main-section">
-					<div class="edit__profile--popup hide-editForm">
-						<form action="" class="form-popup">
-						  <div class="headdings">Update About Us Page</div>
-						   <div class="form-group">
-							<label for="pagename">Page Name </label>
-							<input name="pagename"  type="text" class="form-group-item" value="About Us">
-						   </div>
-						   <div class="form-group">
-							<label for="pageLink">Provide Link</label>
-							<input name="pageLink" type="text" class="form-group-item" placeholder="Page link">
-						   </div>
-						   
-						  
-						   <div class="form-group">
-							<div class="submit-buttons">
-							  <button class="submitBtn close">Close</button>
-							<button class="submitBtn save">Save Now</button>
-							</div>
-						   
-						  
-						   </div>
+					<!---report sections-->
+				
+				<div class="recents">
 					
-						</form>
-						  
-					   </div>
-				<div class="page-container">
-					<div class="pages">
-						<div class="pages-wrapper">
-							<div class="pages-header">
-								<div class="headings">Total Pages: <span>4</span></div>
-							<div class="action-buttons">
-								
-								<button class="actionBtn new">Add New Page</button>
-							</div>
-								
-							</div>
-							<div class="page-item">
-								<div class="page-number">0.1</div>
-								<div class="page-name">About Us</div>
-								<div class="status"><span>Active</span></div>
-								<div class="action-buttons">
-									<a href="addnewpgae.html"  class="actionBtn view-page">Preview</a>
-									<button class="actionBtn edit-page">Update</button>
-									<button class="actionBtn deactive">Deactive</button>
-									<button class="actionBtn delete">Delete</button>
+					<div class="recent-apppointments">
+						<h3 class="headings"> Total Appointments</h3>
+						<div class="recent__users--wrapper">
+                            <div class="apt-number">
+                                1.
+                            </div>
+							<div class="recent__user--item1">
+                               
+								<div>
+									<img class="userPhoto" src="/images/user1.webp" alt="user-avater" srcset="">
 								</div>
+								<div class="user-info">
+									<span class="user-name">Eman sem</span>
+									<span class="user-type"> Received an Appointments from <a href="">Eman </a>12/09/2002</span>
+								</div>
+							</div>
+                            <span class="status">Approved</span>
+							<div class="recent__user--item2">
+								<span class="time">12 min ago</span>
+								<a href="" class="see-more seeAppointment">
+									<i class="fas fa-angle-right"></i>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
+					</div>
 				</secttion>
 			</div>
 		</div>
 		<script type="module" src="/admin/javascripts/general.js"></script>
 	</body>
 </html>
+
+<!-- https://themewagon.github.io/pluto/settings.html -->

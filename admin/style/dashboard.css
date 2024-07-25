@@ -139,12 +139,14 @@ justify-content: space-between;
 	margin-right: 1rem;
 	border-radius: 0.6rem;
 	margin-top: 1rem;
-
+align-items: center;
 	
 }
 .recent__user--item1{
 	display: flex;
 	gap: 1rem;
+	align-items: center;
+	margin-left: -100px;
 	
 	
 
@@ -161,6 +163,7 @@ justify-content: space-between;
 	gap: 0.2rem;
 	
 }
+
 .recenct__recent-status{
 	background-color: #00796B;
    
@@ -227,4 +230,20 @@ justify-content: space-between;
 }
 .recent__user--item2{
 	align-items: center;
+}
+.apt-number{
+	width: 100px;
+	color: #1c1b2e;
+	font-size: 18px;
+	font-weight: 500;
+	font-family: var(--font-heading);
+}
+.status{
+	font-family: var(--font-body);
+	color: var(--color-dark);
+	background-color: var(--color-accent);
+	padding: 0.3rem 0.6rem;
+	border-radius: 1.6rem;
+	font-weight: 560;
+	font-family: var(--font-body);
 }

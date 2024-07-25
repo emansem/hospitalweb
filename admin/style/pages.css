@@ -22,11 +22,14 @@
 	--box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 	--box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
-.pages{
-   margin-right: 2rem;
+.page-container{
+   margin: 0 auto;
     max-width: 1200px;
   box-shadow: var(--box-shadow3);
   border-radius: 0.4em;
+  padding-inline: 2rem;
+ 
+ 
 }
 
 .pages-wrapper{
@@ -37,7 +40,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     border: 1px solid #f1f2f1;
-    padding: 0.4rem;
+    padding: 0.8rem;
     align-items: center;
     gap: 1rem;
 }
@@ -50,7 +53,7 @@
 }
 .actionBtn
  {
-    padding:  0.4rem;
+    padding:  0.8rem;
     background-color: #32d487;
     border: none;
     outline: none;
@@ -58,7 +61,7 @@
     font-weight: 500;
     font-family: var(--font-body);
     border-radius: 0.2rem;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.3s linear;
 }
