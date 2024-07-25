@@ -25,10 +25,15 @@
 	--box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 	--box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;;
 }
-
+.recenct__recent-status{
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    font-weight: 400;
+  
+}
 .recent-users{
     margin-left: 1.2rem;
-   width: 1200px;
+   width: 980px;
    margin: 0 auto;
 }
 .recent-users-container{
@@ -41,6 +46,10 @@ width: 100px;
     justify-content: space-between;
     margin-inline:  2rem;
     
+}
+.recent__user--item2{
+    display: flex;
+    align-items: center;
 }
 .users{
     background-color: rgba(4, 83, 4, 0.39);
@@ -61,6 +70,9 @@ width: 100px;
    margin-inline: 1rem;
    margin-block: 1rem;
     
+}
+.recent__users--wrapper{
+    align-items: center;
 }
 .search-users{
     display: flex;
@@ -98,3 +110,7 @@ right: 0;
 padding-right: 1rem;
 transform: translateX(-50% -50);
  }
+.blocked{
+    background-color: #df3939;
+    color: #f1f1f5;
+}

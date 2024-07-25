@@ -103,10 +103,10 @@ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
 }
 .userPhoto{
-	min-width: 70px;
-	min-height: 70px;
-	width: 70px;
-	height: 70px;
+	min-width: 40px;
+	min-height: 40px;
+	width: 40px;
+	height: 40px;
 	object-fit: cover;
 	border-radius: 50%;
 	gap: 2rem;
@@ -135,7 +135,7 @@ margin-left: 1rem;
 	display: flex;
 	border: 1px solid #eeecec;
 justify-content: space-between;
-	padding: 1rem 0.8rem;
+	padding: 0.4rem 0.8rem;
 	margin-right: 1rem;
 	border-radius: 0.6rem;
 	margin-top: 1rem;
@@ -152,6 +152,7 @@ justify-content: space-between;
 .type{
 	color: var(--color-dark);
 	padding-right: 0.3rem;
+	font-size: 14px;
 }
 .user-info{
 	display: flex;
@@ -179,7 +180,7 @@ justify-content: space-between;
  }
 .user-name{
 	color: #555;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 500;
 	font-family: var(--font-heading);
 }
@@ -222,4 +223,7 @@ justify-content: space-between;
 }
 .see-more:hover{
 	color: #32d487;
+}
+.recent__user--item2{
+	align-items: center;
 }
