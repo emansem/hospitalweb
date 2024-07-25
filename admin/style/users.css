@@ -1,0 +1,100 @@
+
+/** @format */
+
+:root {
+	--color-accent: #32d487; /* Green */
+	--color-dark: #1c1b2e; /* Dark Blue */
+	--color-light: #6dd8a7; /* Light Green */
+	--yellow-color: #f2c332;
+	--yellow-dark-color: #e3b21f;
+	--dark-color: #2e374e;
+	--color-dark-transparent: rgba(28, 27, 46, 0.5);
+	/* Gradients */
+	--gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+	--gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+	--gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+	--background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+	/* Fonts */
+	--font-body: "Roboto", sans-serif;
+
+	--font-heading: "Inter", sans-serif;
+
+	/* Box Shadows */
+	--box-shadow1: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+	--box-shadow2: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+	--box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+	--box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;;
+}
+
+.recent-users{
+    margin-left: 1.2rem;
+   width: 1200px;
+   margin: 0 auto;
+}
+.recent-users-container{
+background-color: red;
+width: 100px;
+}
+.recent__users--header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline:  2rem;
+    
+}
+.users{
+    background-color: rgba(4, 83, 4, 0.39);
+    padding: 0.6rem 0.4rem;
+    font-size: 18px;
+    border-radius: 0.6rem;
+    color: #0e0e16;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    
+}
+.search-wrapper{
+   display: flex;
+   justify-content: space-between;
+   margin-inline: 1rem;
+   margin-block: 1rem;
+    
+}
+.search-users{
+    display: flex;
+    flex-basis: 60%;
+    position: relative;
+    flex: 1;
+    max-width: 60%;
+}
+.fa-users{
+    padding-left: 0.4rem;
+    font-size: 20px;
+}
+   
+ .search-users-input{
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+    font-family: var(--font-body);
+    padding: 0.1rem 0.8rem;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+ }
+ .search-users-input::placeholder{
+    font-family: inherit;
+    color: inherit;
+ }
+ .search__users-icon {
+position: absolute;
+top: 30%;
+cursor: pointer;
+right: 0;
+padding-right: 1rem;
+transform: translateX(-50% -50);
+ }
