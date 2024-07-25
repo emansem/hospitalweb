@@ -62,7 +62,7 @@
     cursor: pointer;
 }
 .edit-page{
-   background-color: #e3b21f;
+   background-color: #ecce24;
 }
 .deactive{
     background-color: #1c1b2e;
@@ -89,4 +89,7 @@
     font-size: 14px;
     color: var(--color-dark);
     font-family: var(--font-body);
+}
+.edit__profile--popup{
+    height: 400px;
 }

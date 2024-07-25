@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>DashBoard</title>
+		<title>Pages</title>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,6 +31,7 @@
 		/>
 		<link rel="stylesheet" href="/admin/style/general.css" />
 		<link rel="stylesheet" href="/admin/style/pages.css">
+		<link rel="stylesheet" href="/admin/style/common.css">
 	</head>
 
 	<body>
@@ -125,6 +126,31 @@
 
 				<!---appointMent section seaction-->
 				<secttion class="main-section">
+					<div class="edit__profile--popup hide-editForm">
+						<form action="" class="form-popup">
+						  <div class="headdings">Update About Us Page</div>
+						   <div class="form-group">
+							<label for="pagename">Page Name </label>
+							<input name="pagename"  type="text" class="form-group-item" value="About Us">
+						   </div>
+						   <div class="form-group">
+							<label for="pageLink">Provide Link</label>
+							<input name="pageLink" type="text" class="form-group-item" placeholder="Page link">
+						   </div>
+						   
+						  
+						   <div class="form-group">
+							<div class="submit-buttons">
+							  <button class="submitBtn close">Close</button>
+							<button class="submitBtn save">Save Now</button>
+							</div>
+						   
+						  
+						   </div>
+					
+						</form>
+						  
+					   </div>
 					<div class="pages">
 						<div class="pages-wrapper">
 							<div class="page-item">
