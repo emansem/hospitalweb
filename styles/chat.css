@@ -1,0 +1,209 @@
+
+:root {
+	--color-primary: #8563c1; /* Purple */
+	--color-secondary: #f4f9f6; /* Light Green */
+	--color-accent: #32d487; /* Green */
+	--color-dark: #1c1b2e; /* Dark Blue */
+	--color-light: #6dd8a7; /* Light Green */
+	--yellow-color: #f2c332;
+	--yellow-dark-color: #e3b21f;
+	--dark-color: #2e374e;
+	--color-dark-transparent: rgba(28, 27, 46, 0.5);
+	/* Gradients */
+	--gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+	--gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+	--gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+	--background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+	/* Fonts */
+	--font-body: "Roboto", sans-serif;
+
+	--font-heading: "Inter", sans-serif;
+	--color1-transparent: rgba(46, 55, 78, 0);
+	--color2-transparent: rgba(31, 38, 54, 0);
+	--color3-transparent: rgba(18, 24, 35, 0);
+	--color4-transparent: rgba(11, 15, 22, 0);
+	--box-shadow1: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+	--box-shadow2: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+	--box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+	--box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.chat-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 105px;
+    width: 100%;
+  margin-inline: auto;
+ min-height: 80vh;
+ border-top:green ;
+ position: relative;
+ border-radius: 0.4rem;
+ overflow: hidden;
+}
+.chatbox{
+ padding: 0.4rem;
+   
+   
+
+}
+.chat-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.4rem;
+    margin-top: 0.4rem;
+}
+.user-name{
+    color: #f1f2f5d0;
+}
+.message{
+    color: #777;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--font-heading);
+    letter-spacing: 0.4px;
+}
+.chat-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    
+    
+}
+.unread{
+    background-color: var(--color-accent);
+    min-width: 22px;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    color: var(--color-dark);
+    min-height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+    border-radius: 50%;
+    margin-top: 0.4rem;
+}
+.headings{
+    margin-block: 1rem;
+    color: #f2f1f1;
+    padding-left: 0.6rem;
+}
+.time{
+    color: #32d487;
+}
+.read-item{
+    color: #999;
+}
+.read{
+    opacity: 0;
+}
+.chat-history{
+    height: 100%;
+   background: var(--background);
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 450px;
+    bottom: 0;
+    padding: 1rem;
+    overflow-y: hidden;
+   
+}
+.chat-room{
+    flex-basis: 60%;
+    height: 100%;
+    background: radial-gradient(
+		circle,
+		rgba(48, 47, 66, 0.8) 0%,
+		rgba(28, 27, 46, 1) 100%
+	);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    width: calc(100% - 450px);
+    margin-left: 450px;
+    padding-top: 2rem;
+
+}
+
+.user__message--photo{
+    width: 60px;
+    min-height: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #32d487;
+    min-width: 60px
+    
+}
+.message__header{
+    display: flex;
+   align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid #888;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.4rem;
+    padding-left: 1rem;
+}
+.name{
+    font-size: 20px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    color: #fafafa;
+    margin-bottom: 0.4rem;
+}
+.user-status{
+    color: var(--color-accent);
+    font-size: 14px;
+    font-size: var(--font-body);
+    font-weight: 600;
+    margin-top: 0.2rem;
+}
+.message-wrapper{
+    position: relative;
+    height: 100%;
+}
+.message__send--box{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+ padding-inline: 1rem;
+  display: flex;
+  align-items: center;
+}
+.message-input{
+    flex: 1;
+}
+.message-input input{
+    width: 100%;
+    height: 60px;
+    padding-block: 0.8rem;
+    padding-left: 1rem;
+    font-size: 18px;
+    font-family: var(--font-heading);
+    outline: none;
+    color: #999;
+    background-color: rgba(0, 0, 0, 0.16);
+    border: none;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+.send__btn{
+    width: 100px;
+    height: 60px;
+    background-color: var(--color-accent);
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
