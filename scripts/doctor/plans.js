@@ -133,7 +133,7 @@ function renderPlans(plans) {
             <div class="${plan.status ==='active' ? 'status' : 'inactive'}"><span>${plan.status}</span></div>
          <div  id=${plan.id} class="action-buttons">
             <button class="actionBtn edit-page">Update</button>
-             <a href ='' class="actionBtn edit-page">Preview</a>
+             <a href ='/pages/preview.html?d=${plan.id}' class="actionBtn edit-page">Preview</a>
            <button  class="actionBtn delete">Delete</button>
          </div>
        `;

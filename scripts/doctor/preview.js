@@ -5,38 +5,42 @@ const supabaseKey =
 // Import and initialize Supabase client
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
-//selcet the plan wrapper to render on the web page.
+// get the plan id and search in the database;
+const queryId = location.search.split("=")[1];
 const plansWraper = document.querySelector('.plans-wrapper');
+console.log(queryId);
 
-// get all plan  and render them to the web page
+// get a plan and let the doctor review the plan.
 async function getAllPlans() {
-  
-  const { data, error } = await supabase.from("doctor__plans").select("*");
+    // document.querySelector('.paymentNumbers').innerHTML = 0;
+  const { data, error } = await supabase.from("doctor__plans").select("*").eq('id', queryId);
+  if(data[0].status === 'inactive'){
+    plansWraper.innerHTML = 'You have Deactivated this plan, to view the plan, activate the plan please!';
+    return;
+  }
   if (data && data.length !== 0) {
     console.log("data receive from plan ", data);
     const plans = data;
     console.log('this is the plans',plans);
-    const filterPlans = plans.filter(plan =>plan.status ==='active');
-    renderDoctorPlans(filterPlans);
-    console.log('plans', filterPlans)
+    // renderPlans(plans)
+    renderDoctorPlans(data)
     
    
-    //show the plan types  length /total
-    
+    // //show the plan types  length /total
+    // document.querySelector('.paymentNumbers').innerHTML =data.length;
   } else if (!data || data.length === 0) {
     console.log("we couldnot get the data");
-    plansWraper.innerHTML = 'No data found , we couldnot fetch your plan';
+    // plansContainer.innerHTML = 'No data found , Add a new plan';
   } else {
     console.log("this is the error", error);
   }
   }
-  getAllPlans();
+getAllPlans();
 
-  // render the plans on the web page  so that user can buy.
-  function renderDoctorPlans(plans){
-
-    plans.forEach(plan=> {
-        const plansInJson = plan.features
+function renderDoctorPlans(plans){
+plansWraper.innerHTML = '';
+  
+        const plansInJson = plans[0].features
         // supase return the data in form of json we convert into js
         const plansF = JSON.parse(plansInJson);
         console.log(plansF);
@@ -44,31 +48,31 @@ async function getAllPlans() {
         const plansAsObject = Object.values(plansF);
         
        
-     const planFeatues =  plansAsObject.map(item =>{
+     const planFeatures =  plansAsObject.map(item =>{
         return `   <p class="planFeatues">
                         <i class="fas fa-check-circle"></i>
                         <span> ${item}</span>
                       </p>`
      });
-        console.log(planFeatues)
+        console.log(planFeatures)
         // console.log(plansMap.map(item=>item.join(',')));
         plansWraper.innerHTML += `
         
                 <div class="plan-item">
                   <div class="plan-header">
-                    <h2 class="planName">${plan.type}</h2>
-                    <p class="planPrice">$${plan.amount}</p>
+                    <h2 class="planName">${plans[0].type}</h2>
+                    <p class="planPrice">$${plans[0].amount}</p>
                   </div>
               <div class="plan-body--wrapper">
                 <div class="plan-body">
                   
-                   ${planFeatues}
+                   ${planFeatures}
                     
                   </div>
-                  <a class="paynow" href="/pages/payment.html?id=${plan.id}">Pay Now</a>
+                  
               </div>
                   
                 </div>`
         
-    });
+    
   }
