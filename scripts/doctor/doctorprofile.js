@@ -1,7 +1,7 @@
 /** @format */
 
 // Get logged-in user ID from local storage
-const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 const queryString = window.location.search.split("=");
 const profileContainer = document.querySelector(".profile-content");
@@ -19,8 +19,8 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Get DOM element slectors for html
-const requestPay = document.getElementById("request-pay");
-const alertWerapper = document.querySelector(".alert-wrapper");
+// const requestPay = document.getElementById("request-pay");
+// const alertWerapper = document.querySelector(".alert-wrapper");
 
 // Function to fetch doctor details
 async function getDoctorDetails() {
@@ -110,14 +110,14 @@ function renderDoctorProfileToUsers(user) {
 
 	
 
-	const btn = document.querySelector(".btn");
+	// const btn = document.querySelector(".btn");
 
-	if (btn) {
-		btn.addEventListener("click", function (e) {
-			e.preventDefault();
-			reQuestPay();
-		});
-	}
+	// if (btn) {
+	// 	btn.addEventListener("click", function (e) {
+	// 		e.preventDefault();
+	// 		// reQuestPay();
+	// 	});
+	// }
 }
 
 // render profile todoctors only because it can conflict when user visit their profile
@@ -174,107 +174,106 @@ function renderDoctorProfile(user) {
 						</section>
 					  </div>`;
 
-	const pay_id = user[0].pay_id;
-	const nextTimeToPay = user[0].next_pay_date;
-	const btn = document.querySelector(".btn");
-	if (btn) {
-	}
+	// const pay_id = user[0].pay_id;
+	// const nextTimeToPay = user[0].next_pay_date;
+	// const btn = document.querySelector(".btn");
+	// if (btn) {
+	// }
 
-	const premium = document.querySelector(".premium");
-	const upgradeBtn = document.querySelector(".upgradeBtn");
-	if (btn) {
-		btn.addEventListener("click", function (e) {
-			e.preventDefault();
-			reQuestPay();
-		});
-	}
+	
+	// if (btn) {
+	// 	btn.addEventListener("click", function (e) {
+	// 		e.preventDefault();
+	// 		// reQuestPay();
+	// 	});
+	// }
 
-	checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id);
-	checkExpireDate(pay_id, nextTimeToPay);
+	// checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id);
+	// checkExpireDate(pay_id, nextTimeToPay);
 }
 
 // check if a user have paid
 
-async function checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id) {
-	premium.style.display = "none";
-	upgradeBtn.style.display = "none";
-	const dateNow = Date.now();
+// async function checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id) {
+// 	premium.style.display = "none";
+// 	upgradeBtn.style.display = "none";
+// 	const dateNow = Date.now();
 
-	if (dateNow < new Date(nextTimeToPay) || pay_id !== null) {
-		premium.style.display = "block";
-		upgradeBtn.style.display = "none";
-	} else {
-		upgradeBtn.style.display = "block";
-	}
-}
+// 	if (dateNow < new Date(nextTimeToPay) || pay_id !== null) {
+// 		premium.style.display = "block";
+// 		upgradeBtn.style.display = "none";
+// 	} else {
+// 		upgradeBtn.style.display = "block";
+// 	}
+// }
 
-// Event listener for payment request
-requestPay.addEventListener("click", function (e) {
-	e.preventDefault();
-	const targetEl = e.target.textContent;
-	console.log(targetEl);
-	if (targetEl === "Maybe Later") {
-		requestPay.classList.add("hideForm");
-	} else if (targetEl === "Subscribe Now") {
-		window.location.href = `/pages/payment.html?id=${doctorId}`;
-	}
-});
+// Event listener for payment request for patients before the coontact a doctor
+// requestPay.addEventListener("click", function (e) {
+// 	e.preventDefault();
+// 	const targetEl = e.target.textContent;
+// 	console.log(targetEl);
+// 	if (targetEl === "Maybe Later") {
+// 		requestPay.classList.add("hideForm");
+// 	} else if (targetEl === "Subscribe Now") {
+// 		window.location.href = `/pages/payment.html?id=${doctorId}`;
+// 	}
+// });
 
-// Function to request payment before contacting doctor
-async function reQuestPay() {
-	const { data, error } = await supabase
-		.from("users")
-		.select("*")
-		.eq("id", logUser);
-	if (data[0].type === "patient" && data[[0]].pay_id === null) {
-		requestPay.classList.remove("hideForm");
-	} else {
-		requestPay.classList.add("hideForm");
-		window.location.href = `/pages/contact-doctor.html?id =${doctorId}`;
-		console.log("error", error);
-	}
-}
+// // Function to request payment before contacting doctor
+// async function reQuestPay() {
+// 	const { data, error } = await supabase
+// 		.from("users")
+// 		.select("*")
+// 		.eq("id", logUser);
+// 	if (data[0].type === "patient" && data[[0]].pay_id === null) {
+// 		requestPay.classList.remove("hideForm");
+// 	} else {
+// 		requestPay.classList.add("hideForm");
+// 		window.location.href = `/pages/contact-doctor.html?id =${doctorId}`;
+// 		console.log("error", error);
+// 	}
+// }
 
 // display display date notifications tohelp users know their next pay dat
-function renderAlertMessage(date, hours) {
-	alertWerapper.innerHTML = `<div class="alert__bar">
-                            <div class="alert__header">
-                                <i class="fas fa-exclamation-circle outlined-icon"></i>
-                                <span>Count Down for your subscription</span>
-                            </div>
-                            <div class="alert__body">
-                                <div class="alert__body--text">
-                                    <p>Date until expiration <span class="days">${date} </span>  We will automatically renew your subscription </p>
-                                </div>
-                                <div class="alert__body--btn">
+// function renderAlertMessage(date, hours) {
+// 	alertWerapper.innerHTML = `<div class="alert__bar">
+//                             <div class="alert__header">
+//                                 <i class="fas fa-exclamation-circle outlined-icon"></i>
+//                                 <span>Count Down for your subscription</span>
+//                             </div>
+//                             <div class="alert__body">
+//                                 <div class="alert__body--text">
+//                                     <p>Date until expiration <span class="days">${date} </span>  We will automatically renew your subscription </p>
+//                                 </div>
+//                                 <div class="alert__body--btn">
                                     
-                                </div>
-                            </div>
-                          </div>`;
-}
+//                                 </div>
+//                             </div>
+//                           </div>`;
+// }
 
-function updateCountdown(nextDate) {
-	const formattedDate = new Date(nextDate).toLocaleString("en-US", {
-		month: "long",
-		day: "2-digit",
-		year: "numeric",
-	});
-	renderAlertMessage(formattedDate);
-}
+// function updateCountdown(nextDate) {
+// 	const formattedDate = new Date(nextDate).toLocaleString("en-US", {
+// 		month: "long",
+// 		day: "2-digit",
+// 		year: "numeric",
+// 	});
+// 	renderAlertMessage(formattedDate);
+// }
 
-console.log(
-	`<div class ='cursorDisable'><a href="#ß" class="renewBtn">Renew Now</a></div>`
-);
+// console.log(
+// 	`<div class ='cursorDisable'><a href="#ß" class="renewBtn">Renew Now</a></div>`
+// );
 
-// check if the user plan have expired
-async function checkExpireDate(pay_id, nextTimeToPay) {
-	const renew_wrapper = document.querySelector(".renew-wrapper");
+// // check if the user plan have expired
+// async function checkExpireDate(pay_id, nextTimeToPay) {
+// 	const renew_wrapper = document.querySelector(".renew-wrapper");
 
-	updateCountdown(nextTimeToPay);
+// 	updateCountdown(nextTimeToPay);
 
-	const dateNow = Date.now();
+// 	const dateNow = Date.now();
 
-	if (pay_id === null || dateNow > new Date(nextTimeToPay)) {
-		renew_wrapper.innerHTML = ` <a href="#ß" class="renewBtn">Renew Now</a>`;
-	}
-}
+// 	if (pay_id === null || dateNow > new Date(nextTimeToPay)) {
+// 		renew_wrapper.innerHTML = ` <a href="#ß" class="renewBtn">Renew Now</a>`;
+// 	}
+// }
