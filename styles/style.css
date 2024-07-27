@@ -872,6 +872,11 @@ transition: all 0.4s linear;
 .doctor-profile{
 	margin-top: 100px !important;
 }
+.plan-section{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 .plans-wrapper{
 	display: flex;
 	justify-content: center;
@@ -880,6 +885,7 @@ transition: all 0.4s linear;
 	box-shadow: var(--box-shadow2);
 	border-radius: 1rem;
 	padding-block: 2rem;
+	gap: 2rem;
 }
 .plan-item{
 	box-shadow: var(--box-shadow4);
@@ -938,6 +944,31 @@ transition: all 0.4s linear;
 }
 .paynow:hover{
 	background-color: var(--dark-color);
+}
+.heading-wrapper{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+gap: 1rem;
+	margin-bottom:2rem;
+}
+.headings{
+	font-size: 32px;
+	color: #444;
+	font-weight: 700;
+	font-family: var(--font-heading);
+}
+.plan-description{
+	display: flex;
+	flex-direction: column;
+	font-size: 18px;
+	color: #888;
+	line-height: 1.5;
+	text-align: center;
+
+	
+	font-family: var(--font-heading);
 }
 /*  the media querries for the web page */
 @media screen and (max-width: 1290px) {
