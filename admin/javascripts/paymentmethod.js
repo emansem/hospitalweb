@@ -97,7 +97,7 @@ function renderPaymentMethod(methodSave) {
     methodsItem.innerHTML = `
        <div class="page-number">${index + 1}</div>
             <div class="page-name">${method.name}</div>
-            <div class="status"><span>${method.status}</span></div>
+            <div class="${method.status ==='active' ? 'status' : 'inactive'}"><span>${method.status}</span></div>
          <div  id=${method.id} class="action-buttons">
             <button class="actionBtn edit-page">Update</button>
            <button  class="actionBtn delete">Delete</button>
@@ -154,6 +154,7 @@ async function deletPaymentMethod(id){
 
 // get all payment methods
 async function getAllPaymentMethods() {
+    document.querySelector('.paymentNumbers').innerHTML = 0;
   const { data, error } = await supabase.from("payment_methods").select("*");
   if (data && data.length !== 0) {
     console.log("data receive the payment method", data);
@@ -161,6 +162,8 @@ async function getAllPaymentMethods() {
     console.log(data);
     
     renderPaymentMethod(paymentMethods);
+    //show the payment length /total
+    document.querySelector('.paymentNumbers').innerHTML =data.length;
   } else if (!data || data.length === 0) {
     console.log("we couldnot get the data");
   } else {

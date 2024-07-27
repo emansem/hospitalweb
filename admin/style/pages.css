@@ -83,6 +83,7 @@
     background-color: #1c1b2e;
     color: #f1f2f1;
 }
+.inactive,
 .delete{
     background-color: #e54c4ce0;
     color: #f1f2f1;
@@ -97,6 +98,7 @@
 .page-name{
  color: #777;
 }
+.inactive,
 .status{
     background-color: var(--color-accent);
     padding: 0.2rem  0.4rem;
@@ -104,6 +106,16 @@
     font-size: 14px;
     color: var(--color-dark);
     font-family: var(--font-body);
+}
+.inactive{
+    padding: 0.2rem  0.4rem;
+    border-radius: 1.4rem;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #e54c4ce0;
+    color: #f1f2f1;
+    font-family: var(--font-heading);
+
 }
 .edit__profile--popup{
     height: 400px;
