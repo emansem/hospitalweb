@@ -130,78 +130,50 @@
 						<form action="" class="general-settings-update">
 							<div class="headings">general setting</div>
 							
-							<div class="form-group general-setting-item">
-								<div class="update-logo">
-									<div class="previewlogo">
-										<img src="/logo.png" alt="logo" />
+							<div class="general-settings__data">
+								<div class="form-group form-group-header">
+									<div class="logo-wrapper">
+										<div class="previewlogo">
+											<img src="/logo.png" alt="logo" />
+										</div>
+										<div  class="form-item ">
+											<label for="logo">Change logo</label>
+											<input  name="logo" type="file">
+										</div>
 									</div>
-									<div>
-										<label for="logo">Update a new logo </label>
-									<input
-										name="logo"
-										type="file"
-										class="form-group-item logo"
-										
-									/>
+									<div class="form-item doctor-comission">
+										<label for="doctorcom">Doctor Comission</label>
+										<input  name="doctorcom" type="number" value="122">
 									</div>
 								</div>
-								<div>
-									<label for="title"> Change Website Title </label>
-									<input
-										name="title"
-										type="text"
-										class="form-group-item"
-										value="Hospital Web App"
-									/>
+								<div class="form-group">
+									<div class="form-item">
+										<label for="title">Change Website Title</label>
+										<input  name="title" type="text" value="Website Name">
+									</div>
+									<div class="form-item">
+										<label for="patientfee">Update Patient Fee</label>
+										<input  name="patientfee" type="number" value="2">
+									</div>
 								</div>
-							</div>
-							<div class="form-group general-setting-item">
-								<div>
-									<label for="newPassword">Update doctors comission % </label>
-									<input
-										name="comission"
-										type="number"
-										class="form-group-item"
-										value="80"
-									/>
+								<div class="form-group">
+									<div class="form-item">
+										<label for="calltoaction">Call to Action message</label>
+										<textarea name="calltoaction" id="calltoaction">
+											welcome , text here 
+										</textarea>
+									</div>
+									<div class="form-item">
+										<label for="welcome">welcome message</label>
+										<textarea name="welcome" id="welcome">
+											welcome , text here 
+										</textarea>
+									</div>
 								</div>
-								<div>
-									<label for="newPassword">Update Patients charge fee </label>
-									<input
-										name="comission"
-										type="number"
-										class="form-group-item"
-										value="3"
-									/>
-								</div>
-							</div>
-							<div class="form-group general-setting-item">
-								<div>
-									<label for="message">Updat Welcome Message</label>
-										
-									<textarea  class="form-group-item" name="message" id="message">
-									Welcome to our website 
-									point1
-									point2
-									point3
-								</textarea
-									>
-								</div>
-								<div>
-									<label for="message">Updat Doctor Message</label>
-									<textarea class="form-group-item" name="message" id="message">
-									To get verification batch, you need to have 4 Appoinments and 1 review
-								</textarea
-									>
-								</div>
-							</div>
 
-							<div class="form-group">
-								<div class="submit-buttons">
-									<button class="submitBtn save">Submit</button>
+								<div id="submitBtn" class="form-group ">
+									<button class="submitBtn">Submit</button>
 								</div>
-							</div>
-						</form>
 					</div>
 				</secttion>
 			</div>

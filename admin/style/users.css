@@ -31,6 +31,11 @@
     font-weight: 400;
   
 }
+label{
+    font-size: 20px;
+    margin-block: 0.4rem;
+    color: #444;
+}
 .recent-users{
     margin-left: 1.2rem;
    width: 980px;
@@ -114,4 +119,8 @@ transform: translateX(-50% -50);
 .blocked{
     background-color: #df3939;
     color: #f1f1f5;
+}
+.submitBtn{
+    margin-block: 2rem;
+    margin-left: 4rem;
 }
