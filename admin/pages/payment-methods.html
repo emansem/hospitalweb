@@ -1,184 +1,216 @@
 <!-- @format -->
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Pages</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Methods</title>
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="/admin/style/general.css" />
-		<link rel="stylesheet" href="/admin/style/pages.css">
-		<link rel="stylesheet" href="/admin/style/common.css">
-	</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/admin/style/general.css" />
+    <link rel="stylesheet" href="/admin/style/pages.css" />
+    <link rel="stylesheet" href="/admin/style/common.css" />
+  </head>
 
-	<body>
-		<div class="dashboard-container">
-			<div class="siderbar-left">
-				<div class="sidebar-left__nav-top">
-					<div class="logo">
-						<img src="/logo.png" alt="logo" />
-						<i class="fa hideSideBar fa-bars"></i>
-					</div>
-					<ul class="sidebar-left_nav-items">
-						<a href="/admin/pages/index.html">
-							<li class="sidebar-left-item active">
-								<span><i class="fas fa-tachometer-alt"></i></span> Dashboard
-							</li>
-						</a>
-						<a href="./users.html">
-							<li class="sidebar-left-item">
-								<span><i class="fas fa-users"></i></span> Users
-							</li>
-						</a>
-						<a href="">
-							<li class="sidebar-left-item">
-								<span><i class="fas fa-envelope"></i></span> Message
-							</li>
-						</a>
-						<a href="./doctors.html" target="_blank" rel="noopener noreferrer">
-							<li class="sidebar-left-item">
-								<span><i class="fas fa-user-md"></i></span> Doctors
-							</li>
-						</a>
-						<a href="./general-settings.html">
-							<li class="sidebar-left-item">
-								<span><i class="fas fa-cog"></i></span> general Settings
-							</li>
-						</a>
-						<a href="./transactions.html">
-							<li class="sidebar-left-item">
-								<span><i class="fas fa-file-invoice-dollar"></i></span> Billing
-							</li>
-						</a>
-						<a href="./payment-methods.html">
-							<li class="sidebar-left-item">
-								<span><i class="fas fa-dollar-sign"></i></span> Paymenet
-							</li>
-						</a>
-						<a href="./news.html" target="_blank" rel="noopener noreferrer">
-							<li class="sidebar-left-item">
-								<span><i class="fas fa-newspaper"></i></span> News
-							</li>
-						</a>
-						<a href="./pages.html" target="_blank" rel="noopener noreferrer">
-							<li class="sidebar-left-item">
-								<span><i class="fas fa-file-alt"></i></span> Pages
-							</li>
-						</a>
-					</ul>
-				</div>
-				<div class="sidebar-right__nav-bottom logout">
-					<li class="sidebar-left-item">
-						<span><i class="fas fa-sign-out-alt"></i></span> Logout
-					</li>
-				</div>
+  <body>
+    <div class="dashboard-container">
+      <div class="siderbar-left">
+        <div class="sidebar-left__nav-top">
+          <div class="logo">
+            <img src="/logo.png" alt="logo" />
+            <i class="fa hideSideBar fa-bars"></i>
+          </div>
+          <ul class="sidebar-left_nav-items">
+            <a href="/admin/pages/index.html">
+              <li class="sidebar-left-item active">
+                <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
+              </li>
+            </a>
+            <a href="./users.html">
+              <li class="sidebar-left-item">
+                <span><i class="fas fa-users"></i></span> Users
+              </li>
+            </a>
+            <a href="">
+              <li class="sidebar-left-item">
+                <span><i class="fas fa-envelope"></i></span> Message
+              </li>
+            </a>
+            <a href="./doctors.html" target="_blank" rel="noopener noreferrer">
+              <li class="sidebar-left-item">
+                <span><i class="fas fa-user-md"></i></span> Doctors
+              </li>
+            </a>
+            <a href="./general-settings.html">
+              <li class="sidebar-left-item">
+                <span><i class="fas fa-cog"></i></span> general Settings
+              </li>
+            </a>
+            <a href="./transactions.html">
+              <li class="sidebar-left-item">
+                <span><i class="fas fa-file-invoice-dollar"></i></span> Billing
+              </li>
+            </a>
+            <a href="./payment-methods.html">
+              <li class="sidebar-left-item">
+                <span><i class="fas fa-dollar-sign"></i></span> Paymenet
+              </li>
+            </a>
+            <a href="./news.html" target="_blank" rel="noopener noreferrer">
+              <li class="sidebar-left-item">
+                <span><i class="fas fa-newspaper"></i></span> News
+              </li>
+            </a>
+            <a href="./pages.html" target="_blank" rel="noopener noreferrer">
+              <li class="sidebar-left-item">
+                <span><i class="fas fa-file-alt"></i></span> Pages
+              </li>
+            </a>
+          </ul>
+        </div>
+        <div class="sidebar-right__nav-bottom logout">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-sign-out-alt"></i></span> Logout
+          </li>
+        </div>
+      </div>
+      <div class="main-page">
+        <!---header seaction-->
+
+        <div class="header">
+          <h1 class="header-logo">Dashboard</h1>
+          <div class="openNav">
+            <i class="fa fa-bars"></i>
+          </div>
+          <div class="header-items">
+            <div class="search">
+              <input type="text" placeholder="search.." />
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="help header-icon">
+              <i class="far fa-question-circle"></i>
+            </div>
+            <div class="notice header-icon">
+              <i class="far fas fa-bell"></i>
+            </div>
+            <div class="user-avater">
+              <img src="https://shorturl.at/8TClo" alt="User Avatar" />
+            </div>
+          </div>
+        </div>
+
+        <!---hero section seaction-->
+        <section class="hero"></section>
+
+        <!---appointMent section seaction-->
+        <secttion class="main-section">
+          <div
+            id="hidAddNewMethodForm"
+            class="addNew__method--overlay">
+            <form action="" class="form-popup addNew__method--form">
+              <div class="headings">Add New Method</div>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  name="name"
+                  type="text"
+                  class="form-group-item"
+                 placeholder="Enter Method"
+                />
+              </div>
+			  
+
+              <div class="form-group">
+                <div class="submit-buttons">
+                  <span class="submitBtn close">Close</span>
+                  <button class="submitBtn save">Save Now</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+		  <!-- this is to update a new payment method -->
+
+		  <div id="hideUpdateForm"
+		  class="upadetForm-overlay">
+		  <form action="" class="form-popup updateForm">
+			<div class="headings">Add New Method</div>
+			<div class="form-group">
+			  <label for="name">Name</label>
+			  <input
+				name="name"
+				type="text"
+				class="form-group-item"
+			   placeholder="Enter Method"
+			  />
 			</div>
-			<div class="main-page">
-				<!---header seaction-->
-
-				<div class="header">
-					<h1 class="header-logo">Dashboard</h1>
-					<div class="openNav">
-						<i class="fa fa-bars"></i>
-					</div>
-					<div class="header-items">
-						<div class="search">
-							<input type="text" placeholder="search.." />
-							<i class="fas fa-search"></i>
-						</div>
-						<div class="help header-icon">
-							<i class="far fa-question-circle"></i>
-						</div>
-						<div class="notice header-icon">
-							<i class="far fas fa-bell"></i>
-						</div>
-						<div class="user-avater">
-							<img src="https://shorturl.at/8TClo" alt="User Avatar" />
-						</div>
-					</div>
-				</div>
-
-				<!---hero section seaction-->
-				<section class="hero"></section>
-
-				<!---appointMent section seaction-->
-				<secttion class="main-section">
-					<div class="edit__profile--popup hide-editForm">
-						<form action="" class="form-popup">
-						  <div class="headdings">Update or Add New Page</div>
-						   <div class="form-group">
-							<label for="pagename">Page Name </label>
-							<input name="pagename"  type="text" class="form-group-item" value="About Us">
-						   </div>
-						   <div class="form-group">
-							<label for="pageLink">Provide Link</label>
-							<input name="pageLink" type="text" class="form-group-item" placeholder="Page link">
-						   </div>
-						   
-						  
-						   <div class="form-group">
-							<div class="submit-buttons">
-							  <button class="submitBtn close">Close</button>
-							<button class="submitBtn save">Save Now</button>
-							</div>
-						   
-						  
-						   </div>
-					
-						</form>
-						  
-					   </div>
-					<div class="page-container">
-						<div class="pages">
-							<div class="pages-wrapper">
-								<div class="pages-header">
-									<div class="headings">Total Methods: <span>4</span></div>
-								<div class="action-buttons">
-									
-									<button class="actionBtn new">Add New Methods</button>
-								</div>
-									
-								</div>
-								<div class="page-item">
-									<div class="page-number">0.1</div>
-									<div class="page-name"> Orange	</div>
-									<div class="status"><span>Active</span></div>
-									<div class="action-buttons">
-									
-										<button class="actionBtn edit-page">Update</button>
-										<button class="actionBtn deactive">Deactive</button>
-										<button class="actionBtn delete">Delete</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</secttion>
+			<div class="form-group">
+			  <label for="status">Change Staus</label>
+			<select class="form-group-item" name="status" id="status">
+			  <option value="active">Active</option>
+			  <option value="inactive">Inactive</option>
+			</select>
 			</div>
+
+			<div class="form-group">
+			  <div class="submit-buttons">
+				<span class="submitBtn closUpdateForm">Close</span>
+				<button class="submitBtn save">Save Now</button>
+			  </div>
+			</div>
+		  </form>
 		</div>
-		<script type="module" src="/admin/javascripts/general.js"></script>
-	</body>
+          <div class="page-container">
+            <div class="pages">
+              <div class="pages-wrapper">
+                <div class="pages-header">
+                  <div class="headings">Total Methods: <span>4</span></div>
+                  <div class="action-buttons">
+                    <button class="actionBtn new">Add New Method</button>
+                  </div>
+                </div>
+                <div class="payment_methods-wrapper">
+                  <div class="page-item">
+                    <div class="page-number">0.1</div>
+                    <div class="page-name">Orange</div>
+                    <div class="status"><span>Active</span></div>
+                    <div class="action-buttons">
+                      <button class="actionBtn edit-page">Update</button>
+                     
+                      <button class="actionBtn delete">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+        </secttion>
+      </div>
+    </div>
+    <script type="module" src="/admin/javascripts/general.js"></script>
+    <script type="module" src="/admin/javascripts/paymentmethod.js"></script>
+  </body>
 </html>
