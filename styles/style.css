@@ -881,10 +881,11 @@ transition: all 0.4s linear;
 	display: flex;
 	justify-content: center;
 	flex-wrap:  wrap;
-	max-width: 800px;
+	max-width: 1200px;
+
 	box-shadow: var(--box-shadow2);
 	border-radius: 1rem;
-	padding-block: 2rem;
+	padding: 3rem;
 	gap: 2rem;
 }
 .plan-item{
