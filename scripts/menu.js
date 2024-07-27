@@ -25,7 +25,7 @@ async function LogUserType() {
 		.from("users")
 		.select("*")
 		.eq("id", logUser);
-		getAppoinments(data[0].type)
+		// getAppoinments(data[0].type)
     if(error || !logUser || !data){
       alert('Please login to continue')
       window.location.href = "/pages/login.html";
@@ -141,54 +141,54 @@ function logUserout() {
 }
 
 
-// fetch appoinmnet and display to the users
-async function getAppoinments(type) {
+// // fetch appoinmnet and display to the users
+// async function getAppoinments(type) {
 	
-	hideDotors.innerHTML = "";
+// 	hideDotors.innerHTML = "";
 
-	const { data, error } = await supabase
-		.from("appointments")
-		.select("*")
-		.eq("doctorId", logUser);
-		let patientId;
-	const item = data;
+// 	const { data, error } = await supabase
+// 		.from("appointments")
+// 		.select("*")
+// 		.eq("doctorId", logUser);
+// 		let patientId;
+// 	const item = data;
 	
-	if(data.length ===0){
-		console.log(' you dont have any appoinment')
-	}else{
-	 patientId = data[0].patientid;
-	}
+// 	if(data.length ===0){
+// 		console.log(' you dont have any appoinment')
+// 	}else{
+// 	 patientId = data[0].patientid;
+// 	}
    
-const userType = type;
-console.log('usertype', userType)
-	if (data.length === 0 && userType === 'doctor') {
-		hideAppt.style.display = "block";
-		hideDotors.style.display = "none";
-       topDoctor.style.display= 'none'
+// const userType = type;
+// console.log('usertype', userType)
+// 	if (data.length === 0 && userType === 'doctor') {
+// 		hideAppt.style.display = "block";
+// 		hideDotors.style.display = "none";
+//        topDoctor.style.display= 'none'
 		
-	} else {
-		if (data.length !== 0 || userType === "doctor") {
-			// get user profile to add to the appoinment;
+// 	} else {
+// 		if (data.length !== 0 || userType === "doctor") {
+// 			// get user profile to add to the appoinment;
 
-	async function getUserAvaterPhoto() {
-		const { data } = await supabase
-			.from("users")
-			.select("*")
-			.eq("id", patientId);
+// 	async function getUserAvaterPhoto() {
+// 		const { data } = await supabase
+// 			.from("users")
+// 			.select("*")
+// 			.eq("id", patientId);
 
-		const userPhoto = data[0].userAvatar;
-		renderDoctorRencentAppointment(userPhoto, item);
+// 		const userPhoto = data[0].userAvatar;
+// 		renderDoctorRencentAppointment(userPhoto, item);
   
-	}
-	getUserAvaterPhoto();
+// 	}
+// 	getUserAvaterPhoto();
 
-			//  display doctors appoinments
-		}else if(data.length === 0 ){
-			getTopDoctors();
+// 			//  display doctors appoinments
+// 		}else if(data.length === 0 ){
+// 			getTopDoctors();
     
-    }
-	}
-}
+//     }
+// 	}
+// }
 
 
 // get the best doctors with high ratings
@@ -223,40 +223,40 @@ async function getTopDoctors() {
 
 // get doctors recents appointment and render on the page.
 
-function renderDoctorRencentAppointment(userPhoto, people) {
-  console.log(people)
-  if(people.length === 0){
-    appointments.innerHTML === " No Appointment Found";
-  }
-  hideAppt.style.display = "block";
-  people.forEach(item => {
-      appointments.innerHTML += `
-    <div class="apt-wrapper">
-    <div class="patient-item1">
-      <div class="patient-avater">
-      <img src="${userPhoto || "https://shorturl.at/8TClo"}" alt="" />
-      </div>
-      <div class="apt-time-name">
-      <span class="patient-name">
-        ${item.name}
-      </span>
-      <span class="apt-time">
-        <span> ${item.time}</span>
-      </span>
-      </div>
-    </div>
-    <div class="apt-seemore">
-      <i class="fas fa-angle-right"></i>
-    </div>
-    </div>
-  `;
-  });
+// function renderDoctorRencentAppointment(userPhoto, people) {
+//   console.log(people)
+//   if(people.length === 0){
+//     appointments.innerHTML === " No Appointment Found";
+//   }
+//   hideAppt.style.display = "block";
+//   people.forEach(item => {
+//       appointments.innerHTML += `
+//     <div class="apt-wrapper">
+//     <div class="patient-item1">
+//       <div class="patient-avater">
+//       <img src="${userPhoto || "https://shorturl.at/8TClo"}" alt="" />
+//       </div>
+//       <div class="apt-time-name">
+//       <span class="patient-name">
+//         ${item.name}
+//       </span>
+//       <span class="apt-time">
+//         <span> ${item.time}</span>
+//       </span>
+//       </div>
+//     </div>
+//     <div class="apt-seemore">
+//       <i class="fas fa-angle-right"></i>
+//     </div>
+//     </div>
+//   `;
+//   });
 
    
   
   
 
-}
+// }
 
 // render the header to all the pages.
 const header = document.querySelector(".header");

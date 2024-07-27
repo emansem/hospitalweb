@@ -52,7 +52,9 @@
 	min-width: 150px;
 	border-radius: 50%;
 	border: 1px solid var(--ccolor);
-	height: 100px;
+	height: 150px;
+	object-fit: cover;
+	width: 150px;
 }
 .doctor__profile--header {
 	display: flex;
@@ -189,4 +191,31 @@
 .recent__user--item2{
 	align-items: center;
 }
-
+.profile-header-details{
+	box-shadow: var(--box-shadow3);
+	background: var(--background);
+	padding: 2rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+.profile__details-item{
+	display: flex;
+	/* align-items: center; */
+	gap: 2rem;
+	flex-direction: column;
+	padding-block: 0.4rem;
+}
+.key{
+	color: var(--color-accent);
+	font-size: 18px;
+	font-weight: 500;
+	font-family: var(--font-heading);
+}
+.value{
+	font-family: var(--font-heading);
+	color: #f2f2f1;
+	font-weight: 400;
+	letter-spacing: 0.4px;
+	font-size: 16px;
+}

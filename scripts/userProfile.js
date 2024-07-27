@@ -17,15 +17,13 @@ const supabaseKey =
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
-const queryString = window.location.search.split("=");
-const id = queryString[1];
 
 async function getUserDetails() {
   try {
     const { data, error } = await supabase
       .from("users")
       .select("*")
-      .eq("id", id);
+      .eq("id", logUser);
     if (error) {
       console.log(error);
     }
@@ -44,35 +42,65 @@ function renderProfile(user) {
   const userPhone = formatPhone(phone);
 console.log('login user', user[0].id)
 console.log('active id', loggedUser);
-  userProfile.innerHTML = `<div class="profile-image">
-               <img src="${
-                 user[0].userAvatar || "https://shorturl.at/8TClo"
-               }" alt="User Avatar">
-            </div>
-            <div class="profile-details">
-                <h2>${user[0].name}</h2>
-                <p><strong>Email:</strong> johndoe@example.com</p>
-                <p><strong>Phone:</strong> ${userPhone}</p>
-                <p><strong>Date of Birth:</strong> ${
-                  user[0].dateOfBirth || "Add Date of Birth"
-                }</p>
-                <p><strong>Address:</strong> ${
-                  user[0].address || "Add address "
-                }</p>
-                <h3>Appointment Details</h3>
-                <ul>
-                    <li>Cancelled: ${user[0].appointments_cancelled}</li>
-                    
-                      <li>Total: ${user[0].appointments_finished}</li>
-                       <li>Pending: ${user[0].appointments_pending}</li>
-                    
-                </ul>
-                <a href="/pages/editUserProfile.html?id=${
-                  user[0].id
-                }" class=" ${
-    user[0].id !== loggedUser ? "btn" : "edit-btn"
-  }">Edit Profile</a>
-            </div>`;
+  userProfile.innerHTML = 
+  `<div class="doctor__profile--wrapper">
+      <div class="doctor__profile--header">
+           <div class="header__left">
+          <img  class="header__left--user-photo" src="${
+            user[0].userAvatar || "https://shorturl.at/8TClo"
+          }" alt="user-avater" class="user-photo">
+        </div>
+        <div class="heaer__right--userinfo">
+    
+          <span class="name">${user[0].name}</span>
+          <span class="number-patients">
+            128+  Appoinments
+          </span>
+        </div>
+      </div>
+      <div class="header__right">
+        <a href=/pages/editUserProfile.html
+    }'  class=" ${
+user[0].id !== loggedUser ? "edit-btn" : "update-profile"
+}    ">Update Profile</a>
+      </div>
+  
+    
+      </div>
+  <div class="profile-header-details">
+    <div class="profile__details-item">
+    <span class="key">
+      Email:
+    </span>
+    <span class="key">
+      Date of Birth:
+    </span>
+    <span class="key">
+      Phone:
+    </span>
+    <span class="key">
+      Address:
+     </span>
+    </div>
+    <div class="profile__details-item">
+    <span class="value">
+     ${user[0].email}
+    </span>
+    <span class="value">
+    ${
+      user[0].dateOfBirth || "Add Date of Birth"
+    }
+     </span>
+     <span class="value">
+     ${userPhone}
+     </span>
+     <span class="value">
+      ${
+      user[0].address || "Add address "
+    }
+     </span>
+    </div>
+  </div>`;
 }
 
 // renderProfile();

@@ -11,8 +11,7 @@ const supabaseKey =
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
-const queryString = window.location.search.split("=");
-const userID = queryString[1];
+
 
 previewimage();
 
@@ -20,7 +19,9 @@ async function updateUserInLocalStorage(updatedUser) {
   const { data, error } = await supabase
     .from("users")
     .update(updatedUser)
-    .eq("id", userID);
+    .eq("id", logUser);
+    alert("Profile updated successfully!");
+    window.location.href ='/pages/userProfile.html'
   if (error) console.log(error);
   console.log(data);
 }
@@ -59,5 +60,5 @@ function editUserProfile() {
 updateForm.addEventListener("submit", function (e) {
   e.preventDefault();
   editUserProfile();
-  alert("Profile updated successfully!");
+  
 });
