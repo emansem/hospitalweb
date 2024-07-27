@@ -65,9 +65,9 @@ function generateSideBar(id, type) {
           </li>
         </a>
         
-        <a href="${url}">
+        <a href="/pages/plans.html">
           <li class="sidebar-left-item">
-            <span><i class="fas fa-calendar-check"></i></span> Appointment
+            <span><i class="fas fa-calendar-check"></i></span> Plans
           </li>
         </a>
         

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Plans page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		/>
+        <link rel="stylesheet" href="/admin/style/general.css" />
+        <link rel="stylesheet" href="/admin/style/pages.css" />
+        <link rel="stylesheet" href="/admin/style/common.css" />
+        <link rel="stylesheet" href="/styles/style.css" />
+    <style>
+     .page-container{
+      margin-top: 100px;
+
+     }
+     .closeForm{
+      display: none;
+     }
+     .form-popup{
+      max-height: 600px;
+     }
+       
+    </style>
+</head>
+<body>
+   
+
+   
+
+    <div class="dashboard-container">
+        <div class="siderbar-left">
+          
+          
+            </div>
+        </div>
+        <div class="main-page">
+            <!---header seaction-->
+
+            <div class="header">
+             </div>
+            
+              <!---hero section seaction-->
+              <div id="success" class="popup__wrapper success closeForm">
+                <div class="popup__box--wrapper sucess-pay">
+                  <div class="popup__box sucess-pay">
+                    <div class="popup__header sucess-pay-heaing">
+                      <i class="fas fa-check-circle succes-icon"></i>
+                    </div>
+                    <div class="popup__body sucess-body">
+                      <p class="popup__body--text sucesstext">
+                       Your Plan of <span class="fee">Monthly  </span> <span>Subscription</span>  was successfully added to your plan list.
+                       
+                      </p>
+  
+                      <button class="cancel accept footer__btn">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+       
+
+        <!---appointMent section seaction-->
+        <secttion class="main-section">
+          <div
+            id="hidAddNewMethodForm"
+            class="addNew__method--overlay">
+            <form action="" class="form-popup addNew__method--form">
+              <div class="headings">A New Plan Type</div>
+              <div class="form-group">
+                <label for="plantype">Plan Name</label>
+                <select class="form-group-item" name="plantype">
+                  <option   value="select">Select A Plan Type</option>
+                </select>
+              
+               
+              </div>
+              <div class="form-group">
+                <label for="amount">Plan amount</label>
+
+                 <input
+				     name="amount"
+				    type="number"
+				    class="form-group-item"
+			      placeholder="Enter Amount"/>
+              </div>
+              <div class="form-group">
+                <label for="optional1">Plan Features1</label>
+
+                 <input
+				     name="optional1"
+				    type="text"
+				    class="form-group-item"
+			      placeholder="Ex: 24/7 Support"/>
+              </div>
+              <div class="form-group">
+                <label for="optional2">Plan Features2</label>
+
+                 <input
+				     name="optional2"
+				    type="text"
+				    class="form-group-item"
+			      placeholder="100% Fast Reply"/>
+              </div>
+              <div class="form-group">
+                <label for="optional3">Plan Features3</label>
+
+                 <input
+				     name="optional3"
+				    type="text"
+				    class="form-group-item"
+			      placeholder="Hum bro"/>
+              </div>
+			  
+
+              <div class="form-group">
+                <div class="submit-buttons">
+                  <span class="submitBtn close">Close</span>
+                  <button class="submitBtn save">Save Now</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+		  <!-- this is to update a new payment method -->
+
+		  <div id="hideUpdateForm"
+		  class="upadetForm-overlay">
+		  <form action="" class="form-popup updateForm">
+			<div class="headings">Update Plan Type</div>
+
+      <div class="form-group">
+        <label for="plantype">Plan Name</label>
+        <select class="form-group-item" name="plantype">
+          <option   value="select">Select A Plan Type</option>
+        </select>
+      
+       
+      </div>
+      <div class="form-group">
+        <label for="amount">Plan amount</label>
+
+         <input
+     name="amount"
+    type="number"
+    class="form-group-item"
+    placeholder="Enter Amount"/>
+      </div>
+      <div class="form-group">
+        <label for="optional1">Plan Features1</label>
+
+         <input
+     name="optional1"
+    type="text"
+    class="form-group-item"
+    placeholder="Ex: 24/7 Support"/>
+      </div>
+      <div class="form-group">
+        <label for="optional2">Plan Features2</label>
+
+         <input
+     name="optional2"
+    type="text"
+    class="form-group-item"
+    placeholder="100% Fast Reply"/>
+      </div>
+      <div class="form-group">
+        <label for="optional3">Plan Features3</label>
+
+         <input
+     name="optional3"
+    type="text"
+    class="form-group-item"
+    placeholder="Hum bro"/>
+      </div>
+
+
+			<div class="form-group">
+			  <label for="status">Change Staus</label>
+			<select class="form-group-item" name="status" id="status">
+			  <option value="active">Active</option>
+			  <option value="inactive">Inactive</option>
+			</select>
+			</div>
+
+			<div class="form-group">
+			  <div class="submit-buttons">
+				<span class="submitBtn closUpdateForm">Close</span>
+				<button class="submitBtn save">Save Now</button>
+			  </div>
+			</div>
+		  </form>
+		</div>
+    <div class="main-page"></div>
+          <div class="page-container">
+            <div class="pages">
+              <div class="pages-wrapper">
+                <div class="pages-header">
+                  <div class="headings">Total Plan Types: <span class="paymentNumbers">4</span></div>
+                  <div class="action-buttons">
+                    <button class="actionBtn new"> Add New Plan</button>
+                  </div>
+                </div>
+                <div class="payment_methods-wrapper">
+                  
+                    
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+       
+          </div>
+</body>
+  
+   
+<script type="module" src="/scripts/menu.js"></script>
+    <script type="module" src="/scripts/doctor/plans.js"></script>
+</body>
+</html>

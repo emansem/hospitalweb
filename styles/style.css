@@ -872,7 +872,73 @@ transition: all 0.4s linear;
 .doctor-profile{
 	margin-top: 100px !important;
 }
+.plans-wrapper{
+	display: flex;
+	justify-content: center;
+	flex-wrap:  wrap;
+	max-width: 800px;
+	box-shadow: var(--box-shadow2);
+	border-radius: 1rem;
+	padding-block: 2rem;
+}
+.plan-item{
+	box-shadow: var(--box-shadow4);
+	padding: 1rem 1.4rem;
+	border-radius: 1rem;
+}
+.plan-header{
+	margin-block: 1rem;
+	font-family: var(--font-heading);
+	padding-bottom: 0.8rem;
+}
+.planName{
+	font-size: 18px;
+	padding-bottom: 0.4rem;
+	text-align: center;
+	font-weight: 600;
+	color: var(--color-dark);
 
+}
+.planPrice{
+	text-align: center;
+	font-size: 28px;
+	font-weight: 700;
+	color: #EE204D;
+}
+.plan-body--wrapper{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+.planFeatues{
+	display: flex;
+	gap: 0.8rem;
+	align-items: center;
+	padding-block: 0.6rem;
+	font-size: 18px;
+	color: #666;
+	font-weight: 400;
+	font-family: var(--font-heading);
+	padding-inline: 1rem;
+}
+.planFeatues .fa-check-circle{
+	color: var(--color-accent);
+}
+.paynow{
+	padding: 0.6rem 1rem;
+	background-color: var(--color-dark);
+	color: #f1f2f1;
+	margin-block: 0.8rem;
+	font-size: 16px;
+	font-weight: 500;
+	border-radius: 0.4rem;
+	font-family: var(--font-body);
+	transition: all 0.4s linear;
+}
+.paynow:hover{
+	background-color: var(--dark-color);
+}
 /*  the media querries for the web page */
 @media screen and (max-width: 1290px) {
 	html{
