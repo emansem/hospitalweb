@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>News and blog page</title>
+		<title>Total Withdrawals  | Hospital web App</title>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,8 +30,8 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="/admin/style/general.css" />
-		<link rel="stylesheet" href="/admin/style/pages.css">
-		<link rel="stylesheet" href="/admin/style/common.css">
+		<link rel="stylesheet" href="/admin/style/dashboard.css" />
+		<link rel="stylesheet" href="/admin/style/users.css" />
 	</head>
 
 	<body>
@@ -55,7 +55,7 @@
 						</a>
 						<a href="">
 							<li class="sidebar-left-item">
-								<span><i class="fas fa-envelope"></i></span> Message
+								<span><i class="fas fa-dollar"></i></span> Withdrawals
 							</li>
 						</a>
 						<a href="./doctors.html" target="_blank" rel="noopener noreferrer">
@@ -75,7 +75,7 @@
 						</a>
 						<a href="./payment-methods.html">
 							<li class="sidebar-left-item">
-								<span><i class="fas fa-dollar-sign"></i></span> Paymenet
+								<span><i class="fas fa-dollar-sign"></i></span>Deposit methods
 							</li>
 						</a>
 						<a href="./news.html" target="_blank" rel="noopener noreferrer">
@@ -125,57 +125,73 @@
 				<section class="hero"></section>
 
 				<!---appointMent section seaction-->
-				<secttion class="main-section">
-					<div class="edit__profile--popup hide-editForm">
-						<form action="" class="form-popup">
-						  <div class="headdings">Update About Us Page</div>
-						   <div class="form-group">
-							<label for="pagename">Page Name </label>
-							<input name="pagename"  type="text" class="form-group-item" value="About Us">
-						   </div>
-						   <div class="form-group">
-							<label for="pageLink">Provide Link</label>
-							<input name="pageLink" type="text" class="form-group-item" placeholder="Page link">
-						   </div>
-						   
-						  
-						   <div class="form-group">
-							<div class="submit-buttons">
-							  <button class="submitBtn close">Close</button>
-							<button class="submitBtn save">Save Now</button>
+				<secttion class="recent-users-container">
+					<div class="recent-users">
+						<div class="headings">Total Withdrawals</div>
+						<div class="search-wrapper">
+							<span class="users"> 569<i class="fa fa-dollar-sign"></i></span>
+							<div class="search-users">
+								<input
+									class="search-users-input"
+									type="text"
+									placeholder="Search Users By id or Phone.."
+								/>
+								<i class="fas search__users-icon fa-search"></i>
 							</div>
-						   
-						  
-						   </div>
-					
-						</form>
-						  
-					   </div>
-				<div class="page-container">
-					<div class="pages">
-						<div class="pages-wrapper">
-							<div class="pages-header">
-								<div class="headings">Total Pages: <span>4</span></div>
-							<div class="action-buttons">
-								
-								<button class="actionBtn new">Add New Page</button>
+						</div>
+						<div class="doctors-wrapper">
+							<div class="recent__users--wrapper">
+								<div class="recent__user--item1">
+									<div>
+										<img
+											class="userPhoto"
+											src="/images/user1.webp"
+											alt="user-avater"
+											srcset=""
+										/>
+									</div>
+									<div class="user-info">
+										<span class="user-name">Eman sem</span>
+										<span class="user-type"
+											>Date:<span class="type type2">12/09/2002</span></span
+										>
+									</div>
+								</div>
+								<div class="recenct__recent-status"><span> Approved </span></div>
+								<div class="recent__user--item2">
+									<span class="time">12 min ago</span>
+									<a class="see-more" href="">
+										<i class="fas fa-angle-right"></i
+									></a>
+								</div>
 							</div>
-								
-							</div>
-							<div class="page-item">
-								  <div class="page-number">0.1</div>
-								  <div class="page-name">How to post your </div>
-								  <div class="status"><span>Active</span></div>
-								  <div class="action-buttons">
-									<a href="addnewpgae.html"  class="actionBtn view-page">Preview</a>
-									<button class="actionBtn edit-page">Update</button>
-									<button class="actionBtn deactive">Deactive</button>
-									<button class="actionBtn delete">Delete</button>
+							<div class="recent__users--wrapper">
+								<div class="recent__user--item1">
+									<div>
+										<img
+											class="userPhoto"
+											src="/images/user1.webp"
+											alt="user-avater"
+											srcset=""
+										/>
+									</div>
+									<div class="user-info">
+										<span class="user-name">Eman sem</span>
+										<span class="user-type"
+											>Date:<span class="type type2">12/09/2002</span></span
+										>
+									</div>
+								</div>
+								<div class="recenct__recent-status blocked"><span> Failed </span></div>
+								<div class="recent__user--item2">
+									<span class="time">12 min ago</span>
+									<a class="see-more" href="">
+										<i class="fas fa-angle-right"></i
+									></a>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				</secttion>
 			</div>
 		</div>

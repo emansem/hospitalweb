@@ -41,6 +41,7 @@
 		rgba(48, 47, 66, 0.8) 0%,
 		rgba(28, 27, 46, 1) 100%
 	);
+	
 	display: flex;
 	justify-content: space-between;
 	padding: 2rem;
@@ -84,9 +85,12 @@
 	margin-bottom: 0.2rem;
 }
 .number-patients {
-	color: #f1f1f37c;
+	color: #dbdbdb;
 	font-family: var(--font-heading);
 	font-weight: 400;
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
 }
 .update-profile {
 	background-color: var(--color-accent);
@@ -119,6 +123,7 @@
 	box-shadow: var(--box-shadow3);
 	padding: 1rem 0.8rem;
 	display: flex;
+	border: 1px solid #f1f2f2;
 	border-radius: 0.4rem;
 	justify-content: space-between;
 }
@@ -184,3 +189,4 @@
 .recent__user--item2{
 	align-items: center;
 }
+
