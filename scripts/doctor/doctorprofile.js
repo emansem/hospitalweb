@@ -59,55 +59,56 @@ getDoctorDetails();
 // Function to display profile details to users and hide somefunctions you donot want them to see
 function renderDoctorProfileToUsers(user) {
 	// Populate profile HTML
-	profileContainer.innerHTML = `
-		  <div class="profile-header">
-			<span class='premium'> <i class="fas fa-crown"></i></span>
-			
-			<div class="profile-image">
-			  <img src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" alt="User Avatar">
-			</div>
-			<div>
-			  <h2 class="drName">Dr.${user[0].name}</h2>
+	profileContainer.innerHTML = 
+	` <div class="doctor__profile--wrapper">
+							<div class="doctor__profile--header">
+									 <div class="header__left">
+									  <img  class="header__left--user-photo" src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" class="${user.name}">
+								  </div>
+								  <div class="heaer__right--userinfo">
+						  <span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verify Doctor</span></span>
+									  <span class="name">Dr.${user[0].name}</span>
+									  
+								  </div>
+							  </div>
+							  <div class="header__right">
+								<div class='btn' style="margin-left: 1rem;">Contact Me</div>
+							  </div>
+						  
+							</div>
 			  
-			  <div class='action-btn'>
-				
-				<div class='btn' style="margin-left: 1rem;">Contact Me</div>
-				
-			  </div>
-			</div>
-		  </div>
-		  <div class="profile-main">
-			<section class="section">
-			  <h3>About Dr. ${user[0].name}</h3>
-			  <p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
-			</section>
-			
-			<div class="stats">
-			  <div class="stat-item">
-				<h3>${user[0].patientsTreated}+</h3>
-				<p>Patients Treated</p>
-			  </div>
-			  <div class="stat-item">
-				<h3>4.9/5</h3>
-				<p>Rating</p>
-			  </div>
-			  <div class="stat-item">
-				<h3>250+</h3>
-				<p>Total Reviews</p>
-			  </div>
-			</div>
-			
-			<section class="section">
-			  <h3>Contact Information</h3>
-			  <div class="contact-info">
-				<p><strong>Email:</strong> ${user[0].email}</p>
-				<p><strong>Phone:</strong> ${user[0].phone}</p>
-				<p><strong>Languages:</strong> ${user[0].languages}</p>
-			  </div>
-			</section>
-		  </div>
-		
-		`;
+					  <div class="profile-main">
+						<section class="section">
+						<h3>About Dr. ${user[0].name}</h3>
+						<p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
+						</section>
+						
+						<div class="stats">
+						<div class="stat-item">
+						  <h3>${user[0].patientsTreated}+</h3>
+						  <p>Patients Treated</p>
+						</div>
+						<div class="stat-item">
+						  <h3>4.9/5</h3>
+						  <p>Rating</p>
+						</div>
+						<div class="stat-item">
+						  <h3>250+</h3>
+						  <p>Total Reviews</p>
+						</div>
+						</div>
+						
+						<section class="section">
+						<h3>Contact Information</h3>
+						<div class="contact-info">
+						  <p><strong>Email:</strong> ${user[0].email}</p>
+						  <p><strong>Phone:</strong> ${user[0].phone}</p>
+						  <p><strong>Languages:</strong> ${user[0].languages}</p>
+						</div>
+						</section>
+					  </div>`;
+
+	
 
 	const btn = document.querySelector(".btn");
 
@@ -124,55 +125,55 @@ function renderDoctorProfileToUsers(user) {
 function renderDoctorProfile(user) {
 	const userType = user[0].type;
 
-	profileContainer.innerHTML = `
-	<div class="profile-header">
-	  <span class='premium'> <i class="fas fa-crown"></i></span>
-	  
-	  <div class="profile-image">
-		<img src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" alt="User Avatar">
-	  </div>
-	  <div>
-		<h2 class="drName">Dr.${user[0].name}</h2>
-		
-		<div class='action-btn'>
-		  <a href="/pages/editDoctorProfile.html" class="edit__doctorprofile">Edit Profile</a>
-		 
-		  <a class="upgradeBtn" href="/pages/payment.html" style="margin-left: 1rem;">Upgrade</a>
-		</div>
-	  </div>
-	</div>
-	<div class="profile-main">
-	  <section class="section">
-		<h3>About Dr. ${user[0].name}</h3>
-		<p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
-	  </section>
-	  
-	  <div class="stats">
-		<div class="stat-item">
-		  <h3>${user[0].patientsTreated}+</h3>
-		  <p>Patients Treated</p>
-		</div>
-		<div class="stat-item">
-		  <h3>4.9/5</h3>
-		  <p>Rating</p>
-		</div>
-		<div class="stat-item">
-		  <h3>250+</h3>
-		  <p>Total Reviews</p>
-		</div>
-	  </div>
-	  
-	  <section class="section">
-		<h3>Contact Information</h3>
-		<div class="contact-info">
-		  <p><strong>Email:</strong> ${user[0].email}</p>
-		  <p><strong>Phone:</strong> ${user[0].phone}</p>
-		  <p><strong>Languages:</strong> ${user[0].languages}</p>
-		</div>
-	  </section>
-	</div>
-  
-  `;
+	profileContainer.innerHTML = 
+	` <div class="doctor__profile--wrapper">
+							<div class="doctor__profile--header">
+									 <div class="header__left">
+									  <img  class="header__left--user-photo" src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" class="${user.name}">
+								  </div>
+								  <div class="heaer__right--userinfo">
+						  <span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verify Doctor</span></span>
+									  <span class="name">Dr.${user[0].name}</span>
+									  
+								  </div>
+							  </div>
+							  <div class="header__right">
+								  <a href="/pages/editDoctorProfile.html"  class="update-profile">Update Profile</a>
+							  </div>
+						  
+							</div>
+			  
+					  <div class="profile-main">
+						<section class="section">
+						<h3>About Dr. ${user[0].name}</h3>
+						<p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
+						</section>
+						
+						<div class="stats">
+						<div class="stat-item">
+						  <h3>${user[0].patientsTreated}+</h3>
+						  <p>Patients Treated</p>
+						</div>
+						<div class="stat-item">
+						  <h3>4.9/5</h3>
+						  <p>Rating</p>
+						</div>
+						<div class="stat-item">
+						  <h3>250+</h3>
+						  <p>Total Reviews</p>
+						</div>
+						</div>
+						
+						<section class="section">
+						<h3>Contact Information</h3>
+						<div class="contact-info">
+						  <p><strong>Email:</strong> ${user[0].email}</p>
+						  <p><strong>Phone:</strong> ${user[0].phone}</p>
+						  <p><strong>Languages:</strong> ${user[0].languages}</p>
+						</div>
+						</section>
+					  </div>`;
+
 	const pay_id = user[0].pay_id;
 	const nextTimeToPay = user[0].next_pay_date;
 	const btn = document.querySelector(".btn");

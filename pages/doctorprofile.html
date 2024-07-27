@@ -22,232 +22,10 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		/>
 		<link rel="stylesheet" href="/styles/style.css" />
+        <link rel="stylesheet" href="/styles/doctorprofile.css">
+        <link rel="stylesheet" href="/admin/style/profileDetails.css">
     <style>
-        :root {
-            --color-dark: #1c1b2e;
-            --color-light: #6dd8a7;
-            --form-bg-color: #2c2c2c;
-            --dark-color: #2e374e;
-            --color-white: #ffffff;
-            --color-gray: #f0f0f0;
-            --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-            --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-            --font-body: 'Poppins', sans-serif;
-            --font-heading: 'Inter', sans-serif;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--color-gray);
-            color: var(--dark-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .top{
-        display: none;
-      }
-      .top-doct{
-        display: none;
-      }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            /* margin-top: 50px; */
-        }
-.upgradeBtn{
-    background-color: #ffc400 !important;
-}
-.action-btn{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-}
-        header {
-           
-            margin-top: 80px
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            color: var(--color-dark);
-        }
-        
-
-        .profile-content {
-            background-color: var(--color-white);
-            border-radius: 10px;
-            box-shadow: var(--shadow-2);
-            overflow: hidden;
-            margin-top: 2rem;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            padding: 2rem;
-            background-color: var(--form-bg-color);
-            color: var(--color-white);
-            position: relative;
-        }
-        .fa-crown{
-            font-size: 30px;
-            font-weight: 800;
-            color: #ffc400;
-            text-align: center;
-           
-        }
-        .premium{
-            position: absolute;
-            background-color: var(--color-dark);
-        
-            top: 20%;
-          padding: 0.3rem;
-          border-radius: 50%;
-        }
-        .doctorBio{
-            white-space: pre-wrap;
-            
-        }
-        textarea{
-            white-space: pre-wrap;
-        }
-
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 2rem;
-        }
-
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .profile-main {
-            padding: 2rem;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin: 2rem 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background-color: var(--color-light);
-            border-radius: 10px;
-            box-shadow: var(--shadow-1);
-            color: var(--color-dark);
-            flex: 1;
-            margin: 0 0.5rem;
-        }
-       .upgradeBtn,
-        .edit__doctorprofile,
-        .btn {
-            display: inline-block;
-            background-color: var(--color-light);
-            color: var(--color-dark);
-            padding: 0.8rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-align: center;
-            cursor: pointer;
-        }
-   .cursorDisable{
-    cursor: not-allowed;
-   }
-
-        .drName{
-            color: #ffffff;
-        }
-
-        .btn:hover {
-            background-color: var(--dark-color);
-            color: var(--color-white);
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .skill-tag {
-            background-color: var(--color-light);
-            color: var(--color-dark);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .reviews {
-            margin-top: 2rem;
-            background-color: var(--color-gray);
-            padding: 2rem;
-            border-radius: 10px;
-        }
-        .edit-btn{
-            display: none;
-        }
-        .review {
-            background-color: var(--color-white);
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            box-shadow: var(--shadow-1);
-        }
-
-        .section {
-            margin-bottom: 2rem;
-        }
-
-        .contact-info {
-            background-color: var(--color-gray);
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 1rem;
-        }
-        @media screen and (max-width: 1500px) {
-				.container{
-					margin-left: 300px;
-				}
-			}
-			@media screen and (max-width: 1135px) {
-				.container{
-					margin-left: 300px;
-				}
-			}
-			@media screen and (max-width: 920px) {
-				.container{
-					margin-left: 100px;
-				}
-			}
-			@media screen and (max-width: 840px) {
-				.container{
-					margin-left: 50px;
-				}
-			}
-			@media screen and (max-width: 748px) {
-				.container{
-					margin-left: 0px;
-				}
-			}
-			@media screen and (max-width: 580px) {
-				.container{
-					margin-left: 0;
-				}
-			}
+       
     </style>
 </head>
 <body>
@@ -297,19 +75,66 @@
                     <header></header>
                       <div class="alert-wrapper"> </div> 
                       <div class="renew-wrapper"></div>
-                    <div class="profile-content"></div>
+                      <div class="doctor-profile">
+                       <div class="profile-content"></div>
+                          <div class="doctor__profile--body">
+                      <div class="headings"><span class="userName2">Eman</span> Recent History</div>
+                            <div class="content-wrapper">
+                     
+                                <div class="recent__user--item1">
+                                
+                                    <div class="user-info">
+                                        <span class="user-name">Renew subscriptions - <span class="type-of-action">40$</span> </span>
+                                        <span class="user-type">Date:<span class="type type2">12/09/2002</span></span>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="recent__user--item2">
+                                    <span class="time">12 min ago</span>
+                                    <a class="see-more" href=""> <i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </div>
+            
+                            <div class="content-wrapper">
+                                <div class="recent__user--item1">
+                                
+                                    <div class="user-info">
+                                        <span class="user-name">Received - <span class="type-of-action">Eman sem</span> From <a href="" class="userName2">Eman sem</a></span>
+                                        <span class="user-type">Date:<span class="type type2">12/09/2002</span></span>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="recent__user--item2">
+                                    <span class="time">12 min ago</span>
+                                    <a class="see-more" href=""> <i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="content-wrapper">
+                                <div class="recent__user--item1">
+                                
+                                    <div class="user-info">
+                                        <span class="user-name">Received  New- <span class="type-of-action">Appointment</span> From <a href="" class="userName2">Eman sem</a></span>
+                                        <span class="user-type">Date:<span class="type type2">12/09/2002</span></span>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="recent__user--item2">
+                                    <span class="time">12 min ago</span>
+                                    <a class="see-more" href=""> <i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </div>
+            
+                          </div>
+                          <div class="doctor__profile--footer"></div>
+                        </div>
+                
                 </main>
             </secttion>
         </div>
-        <div class="sidebar-right">
-            <div class="top-doctors">
-                <p class="top-doctor-heading top-doct">Top Doctors</p>
-    
-              <div class="appointments">
-                <p class="top-doctor-heading top">My Appointments</p>
-                <div class="appt"></div>
-              </div>
-            </div>
+       
           </div>
     </div>
   
