@@ -129,7 +129,7 @@
 					<div class="recent-users">
 						<div class="headings">Total Number of Patients</div>
 						<div class="search-wrapper">
-							<span class="users"> 569<i class="fa fa-users"></i></span>
+							<span  id="patientsCount" class="users"> 569<i class="fa fa-users"></i></span>
 							<div class="search-users">
 								<input
 									class="search-users-input"
@@ -139,62 +139,15 @@
 								<i class="fas search__users-icon fa-search"></i>
 							</div>
 						</div>
-						<div class="patients-container">
-							<div class="recent__users--wrapper">
-								<div class="recent__user--item1">
-									<div>
-										<img
-											class="userPhoto"
-											src="/images/user1.webp"
-											alt="user-avater"
-											srcset=""
-										/>
-									</div>
-									<div class="user-info">
-										<span class="user-name">Eman sem</span>
-										<span class="user-type"
-											>Date:<span class="type type2">12/09/2002</span></span
-										>
-									</div>
-								</div>
-								<div class="recenct__recent-status"><span> Active </span></div>
-								<div class="recent__user--item2">
-									<span class="time">12 min ago</span>
-									<a class="see-more" href="">
-										<i class="fas fa-angle-right"></i
-									></a>
-								</div>
-							</div>
-							<div class="recent__users--wrapper">
-								<div class="recent__user--item1">
-									<div>
-										<img
-											class="userPhoto"
-											src="/images/user1.webp"
-											alt="user-avater"
-											srcset=""
-										/>
-									</div>
-									<div class="user-info">
-										<span class="user-name">Eman sem</span>
-										<span class="user-type"
-											>Date:<span class="type type2">12/09/2002</span></span
-										>
-									</div>
-								</div>
-								<div class="recenct__recent-status blocked"><span> Blocked </span></div>
-								<div class="recent__user--item2">
-									<span class="time">12 min ago</span>
-									<a class="see-more" href="">
-										<i class="fas fa-angle-right"></i
-									></a>
-								</div>
-							</div>
+						<div class="patients-container users-container">
+							
+							
 						</div>
 					</div>
 				</secttion>
 			</div>
 		</div>
 		<script type="module" src="/admin/javascripts/general.js"></script>
+		<script type="module" src="/admin/javascripts/patients.js"></script>
 	</body>
 </html>

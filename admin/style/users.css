@@ -31,6 +31,11 @@
     font-weight: 400;
   
 }
+label{
+    font-size: 20px;
+    margin-block: 0.4rem;
+    color: #444;
+}
 .recent-users{
     margin-left: 1.2rem;
    width: 980px;
@@ -53,7 +58,8 @@ width: 100px;
 }
 .users{
     background-color: rgba(4, 83, 4, 0.39);
-    padding: 0.6rem 0.4rem;
+    min-height: 30px;
+    min-width: 70px;
     font-size: 18px;
     border-radius: 0.6rem;
     color: #0e0e16;
@@ -113,4 +119,8 @@ transform: translateX(-50% -50);
 .blocked{
     background-color: #df3939;
     color: #f1f1f5;
+}
+.submitBtn{
+    margin-block: 2rem;
+    margin-left: 4rem;
 }

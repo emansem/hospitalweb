@@ -27,6 +27,8 @@
 
 
 /* this is the popup form to dit or add content depends on what you are using it for */
+.addNew__method--overlay,
+.upadetForm-overlay,
 .edit__profile--popup{
 	position: fixed;
 	bottom: 0;
@@ -39,6 +41,11 @@ justify-content: center;
 background-color: rgba(0, 0, 0, 0.04);
 padding: 4rem;
 }
+#hidAddNewMethodForm,
+#hideUpdateForm{
+	display: none;
+}
+
 .form-popup{
 	background-color: white;
 	width: 600px;
@@ -85,6 +92,7 @@ label{
 	justify-content: center;
 	gap: 4rem;
 }
+
 .submitBtn{
 	font-size: 18px;
 	padding: 0.5rem 1rem;
@@ -96,6 +104,7 @@ label{
 	font-family: var(--font-body);
 	transition: all 0.3s linear;
 }
+.closUpdateForm,
 .close{
 	background-color: #ea3939dd;
 	color: #fff;
