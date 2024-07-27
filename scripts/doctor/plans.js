@@ -159,10 +159,11 @@ async function getAllPlanTypes() {
   const { data, error } = await supabase.from("plan_types").select("*");
   if (data && data.length !== 0) {
     console.log("data receive from plan types", data);
-    const paymentMethods = data;
+    const plantypes = data;
     console.log(data);
     
-    renderPlanTypes(paymentMethods);
+    renderPlanTypes(plantypes);
+    displayPlanTypes(plantypes);
     //show the plan types  length /total
     document.querySelector('.paymentNumbers').innerHTML =data.length;
   } else if (!data || data.length === 0) {
@@ -173,3 +174,19 @@ async function getAllPlanTypes() {
   }
 }
 getAllPlanTypes();
+
+// seleect all plans types and render them into the slect filed.
+const PlanTypeSelectInput = document.getElementById('method-type');
+console.log(PlanTypeSelectInput);
+
+// this is to get all plans types and display on the plan selct filed;
+function displayPlanTypes(plantype){
+  const options = plantype.map(item=>{
+return `<option   value="${item.id}">${item.type}</option>`
+
+
+  })
+  PlanTypeSelectInput.innerHTML = options;
+  console.log(PlanTypeSelectInput);
+
+}
