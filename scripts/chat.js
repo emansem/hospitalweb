@@ -12,8 +12,12 @@ const patientId = JSON.parse(localStorage.getItem('activeId'));
 const chatContainer = document.querySelector('.chat__container--wrapper');
 const chatRoomHeader = document.querySelector('.message__header')
 const chatbox = document.querySelector('.chatbox');
+const messageForm = document.querySelector('.message__send--box');
 const messages = document.querySelector('.messages');
 const doctorActiveId = window.location.hash.slice(1)
+// const senderMessageWrapper = document.querySelector('.sender');
+// const messagePlaceHolder= document.querySelector('.senderMessage');
+const senderWrapperContainer = document.querySelector('.senderWrapper');
 
 
 
@@ -120,3 +124,22 @@ function renderHeaderChatBoxRoom(doctor){
                     <div class="user-status">Active</div>
                 </div>`
 }
+
+// the the form value input and save the data in an array.
+
+messageForm.addEventListener('submit', function(e){
+    e.preventDefault()
+  
+   
+    const messageValue = messageForm.message.value;
+
+    const messagePlaceHolder = document.createElement('div'); // Using 'div' instead of other inline elements
+    messagePlaceHolder.innerHTML = messageValue;
+    messagePlaceHolder.classList.add('senderMessage');
+    
+    const senderMessageWrapper = document.createElement('div'); 
+    senderMessageWrapper.classList.add('sender');// Ensure this element is a block element too
+    senderMessageWrapper.appendChild(messagePlaceHolder);
+    senderWrapperContainer.insertAdjacentElement('beforeend', senderMessageWrapper);
+
+})

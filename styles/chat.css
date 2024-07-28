@@ -26,21 +26,30 @@
   --box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   --box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
+body {
+  padding: none;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+a{
+  text-decoration: none;
+}
 .chat-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 105px;
   width: 100%;
-  margin-inline: auto;
-  min-height: 80vh;
+
+  height: 100vh;
   border-top: green;
-  position: relative;
+
   border-radius: 0.4rem;
-  overflow: hidden;
 }
+
 .chatbox {
   padding: 0.4rem;
 }
+
 .chat-wrapper {
   display: flex;
   flex-direction: row;
@@ -48,9 +57,11 @@
   padding: 0.4rem;
   margin-top: 0.4rem;
 }
+
 .user-name {
   color: #f1f2f5d0;
 }
+
 .message {
   color: #777;
   font-size: 16px;
@@ -58,12 +69,14 @@
   font-family: var(--font-heading);
   letter-spacing: 0.4px;
 }
+
 .chat-item {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
 }
+
 .unread {
   background-color: var(--color-accent);
   min-width: 22px;
@@ -79,48 +92,54 @@
   border-radius: 50%;
   margin-top: 0.4rem;
 }
+
 .headings {
   margin-block: 1rem;
   color: #f2f1f1;
   padding-left: 0.6rem;
 }
+
 .time {
   color: #32d487;
 }
+
 .read-item {
   color: #999;
 }
+
 .read {
   opacity: 0;
 }
+
 .chat-history {
   height: 100%;
   background: var(--background);
+ position: fixed;
+ bottom: 0;
+ top: 0;
+ left: 0;
+ width: 400px;
+ padding: 1rem 0.8rem;
 
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 450px;
-  bottom: 0;
-  padding: 1rem;
-  overflow-y: hidden;
+ 
 }
+
 .chat-room {
-  flex-basis: 60%;
+ width: 100%;
   height: 100%;
   background: radial-gradient(
     circle,
     rgba(48, 47, 66, 0.8) 0%,
     rgba(28, 27, 46, 1) 100%
   );
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  top: 0;
-  width: calc(100% - 450px);
-  margin-left: 450px;
+  margin-left: 410px;
+  overflow-x: hidden;
+  /* padding-right: 2rem ; */
+
+
   padding-top: 2rem;
 }
+
 
 .user__message--photo {
   width: 60px;
@@ -128,19 +147,27 @@
   height: 60px;
   object-fit: cover;
   border-radius: 50%;
-  object-fit: cover;
   border: 1px solid #32d487;
   min-width: 60px;
 }
+
 .message__header {
   display: flex;
   align-items: center;
   gap: 1rem;
   border-bottom: 2px solid #888;
-  padding-bottom: 0.4rem;
+  /* padding-bottom: 0.4rem;
   margin-bottom: 0.4rem;
-  padding-left: 1rem;
+  padding-left: 1rem; */
+  padding: 1rem;
+  position: fixed;
+  margin-left: 428px;
+  background-color: #1c1b2e;
+  top: 0;
+  right: 0;
+  left: 0;
 }
+
 .name {
   font-size: 20px;
   font-family: var(--font-heading);
@@ -148,33 +175,44 @@
   color: #fafafa;
   margin-bottom: 0.4rem;
 }
+
 .user-status {
   color: var(--color-accent);
   font-size: 14px;
-  font-size: var(--font-heading);
+  font-family: var(--font-heading);
   font-weight: 500;
   margin-top: 0.2rem;
+}
+.messages{
+  margin-top: 4rem;
+  margin-bottom: 5rem;
 }
 .message-wrapper {
   position: relative;
   height: 100%;
 }
+
 .message__send--box {
-  position: absolute;
+ position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-
-  width: 100%;
+ 
   padding: 1rem;
-  display: flex;
-  align-items: center;
+ display: flex;
+ justify-content: center;
+ margin-left: 428px;
+  background: var(--background);
+
 }
-.message-input {
-  flex: 1;
-}
+
+
+
 .message-input input {
-  width: 100%;
+max-width: 700px;
+width: 600px;
+border-radius: 2.2rem;
+flex: 1;
   height: 60px;
   padding-block: 0.8rem;
   padding-left: 1rem;
@@ -184,12 +222,14 @@
   color: #999;
   background-color: rgba(0, 0, 0, 0.16);
   border: none;
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
+  
 }
+
 .send__btn {
   width: 100px;
   height: 60px;
+  display: none;
+  margin-left: -100px;
   background-color: var(--color-accent);
   border: none;
   font-size: 18px;
@@ -199,31 +239,43 @@
   border-top-right-radius: 2rem;
   border-bottom-right-radius: 2rem;
 }
+
 .messages {
   padding: 2rem;
+  overflow-y: auto; /* Changed from scroll to auto */
+  overflow-x: hidden;
 }
-.receiver {
- font-size: 18px;
+
+.senderWrapper {
   display: flex;
-  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+  text-align: right;
+}
+
+.receiver {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
   max-width: 80%;
   background: rgba(0, 0, 0, 0.05);
   padding: 0.4rem;
   border-radius: 1.8rem;
-  
 }
+
 .sender {
-  float: right;
- background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   margin-block: 0.8rem;
   padding: 0.4rem;
   border-radius: 1.8rem;
+  align-self: flex-end;
 }
-.message-text{
-    font-size: 20px;
-    font-weight: 500px;
-    padding: 0.2rem;
-    color: #999;
-    font-family: var(--font-heading);
-   
+
+.senderMessage,
+.message-text {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 0.2rem;
+  color: #999;
+  font-family: var(--font-heading);
 }
