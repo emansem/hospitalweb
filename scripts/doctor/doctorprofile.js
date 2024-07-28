@@ -72,7 +72,7 @@ function renderDoctorProfileToUsers(user) {
 								  </div>
 							  </div>
 							  <div class="header__right">
-								<div class='btn' style="margin-left: 1rem;">Contact Me</div>
+								<a href ='/pages/doctorplans.html?id=${user[0].id}' class='btn' style="margin-left: 1rem;">Contact Me</a>
 							  </div>
 						  
 							</div>

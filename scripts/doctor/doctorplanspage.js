@@ -5,13 +5,19 @@ const supabaseKey =
 // Import and initialize Supabase client
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
+const doctorPlanId = window.location.search.split("=")[1];
+console.log(doctorPlanId)
+// const doctorId = window.location.search
+// console.log(doctorId);
+
+
 //selcet the plan wrapper to render on the web page.
 const plansWraper = document.querySelector('.plans-wrapper');
 
 // get all plan  and render them to the web page
-async function getAllPlans() {
+async function getDoctorActivePlans() {
   
-  const { data, error } = await supabase.from("doctor__plans").select("*");
+  const { data, error } = await supabase.from("doctor__plans").select("*").eq('doctorId', doctorPlanId)
   if (data && data.length !== 0) {
     console.log("data receive from plan ", data);
     const plans = data;
@@ -30,7 +36,7 @@ async function getAllPlans() {
     console.log("this is the error", error);
   }
   }
-  getAllPlans();
+  getDoctorActivePlans();
 
   // render the plans on the web page  so that user can buy.
   function renderDoctorPlans(plans){

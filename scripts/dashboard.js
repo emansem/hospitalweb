@@ -121,10 +121,10 @@ async function getDoctors() {
 		.eq("type", "doctor");
 	console.log("doctor that have paid", data);
 	if (error) console.log(error);
-const presenDate = Date.now;
-	const paidDoctors = data.filter((user) => user.pay_id !== null && user.next_pay_date !== null ||presenDate < user.next_pay_date );
-	console.log("paid doctors", paidDoctors);
-	addDoctorstoDashboard(paidDoctors);
+
+	
+	;
+	addDoctorstoDashboard(data);
 }
 
 getDoctors();
@@ -178,83 +178,83 @@ function getDoctorData(user) {
 }
 
 // Function to check user payment status
-async function checkUserPaySatus() {
-	const { data, error } = await supabase
-		.from("users")
-		.select("*")
-		.eq("id", logUser);
-	console.log(data);
+// async function checkUserPaySatus() {
+// 	const { data, error } = await supabase
+// 		.from("users")
+// 		.select("*")
+// 		.eq("id", logUser);
+// 	console.log(data);
     
-	if (data[0].pay_id !== null || patientLog.type === "patient") {
-		popupWrapper.classList.add("requestpay");
-	} else if (data[0].pay_id === null && patientLog.type === "doctor") {
-		popupWrapper.classList.add("requestpay");
-        console.log('datea' ,data)
-		setTimeout(function (e) {
-			popupWrapper.classList.remove("requestpay");
-		}, 2000);
-	}
-	if (error) {
-		console.log("error", error);
-	}
-}
+// 	if (data[0].pay_id !== null || patientLog.type === "patient") {
+// 		popupWrapper.classList.add("requestpay");
+// 	} else if (data[0].pay_id === null && patientLog.type === "doctor") {
+// 		popupWrapper.classList.add("requestpay");
+//         console.log('datea' ,data)
+// 		setTimeout(function (e) {
+// 			popupWrapper.classList.remove("requestpay");
+// 		}, 2000);
+// 	}
+// 	if (error) {
+// 		console.log("error", error);
+// 	}
+// }
 
-checkUserPaySatus();
+// checkUserPaySatus();
 
-// Event listener for popup actions
-popupWrapper.addEventListener("click", function (e) {
-	const targetEl = e.target.textContent;
-	console.log(targetEl);
-	if (targetEl === "Subscribe Now") {
-		window.location.href = "/pages/payment.html";
-	} else if (targetEl === "Maybe Later") {
-		popupWrapper.style.display = "none";
-	}
-});
+// // Event listener for popup actions
+// popupWrapper.addEventListener("click", function (e) {
+// 	const targetEl = e.target.textContent;
+// 	console.log(targetEl);
+// 	if (targetEl === "Subscribe Now") {
+// 		window.location.href = "/pages/payment.html";
+// 	} else if (targetEl === "Maybe Later") {
+// 		popupWrapper.style.display = "none";
+// 	}
+// });
 
 
-async function checkExpireDate(){
-    try {
-        const {data, error} = await supabase.from('users').select("*").eq('id', logUser);
-        if (error) {
-            console.log('Error fetching payment history:', error);
-            return;
-        }
-      const expireAt = data[0].next_pay_date;
-      const createdAt = Date.now();
+// async function checkExpireDate(){
+//     try {
+//         const {data, error} = await supabase.from('users').select("*").eq('id', logUser);
+//         if (error) {
+//             console.log('Error fetching payment history:', error);
+//             return;
+//         }
+//       const expireAt = data[0].next_pay_date;
+//       const createdAt = Date.now();
       
       
-        if(createdAt >  new Date(expireAt)){
-            console.log('You have not paid yet');
-            console.log('this is the data', data)
-            updateIdtoNull(data[0].id);
-        }else{
-            console.log('You have paid', data);
+//         if(createdAt >  new Date(expireAt)){
+//             console.log('You have not paid yet');
+//             console.log('this is the data', data)
+//             updateIdtoNull(data[0].id);
+//         }else{
+//             console.log('You have paid', data);
             
-        }
+//         }
         
-    } catch (err) {
-        console.error('Error in checkNextPayDayValue:', err);
-    }
-    return false;
+//     } catch (err) {
+//         console.error('Error in checkNextPayDayValue:', err);
+//     }
+//     return false;
     
-}
-checkExpireDate()
-document.addEventListener('DOMContentLoaded', function(e){
-    checkExpireDate();
-})
+// }
+// checkExpireDate()
+// document.addEventListener('DOMContentLoaded', function(e){
+//     checkExpireDate();
+// })
 
-// upadet the paid to null if the user subscription have expired;
+// // upadet the paid to null if the user subscription have expired;
 
-async function updateIdtoNull(id){
-    const {data, error} = await supabase.from('users').update({pay_id : null}).eq('id', id);
-    console.log('hello',data)
-    if(error){
-        console.log('Error updating', error);
-    }
+// async function updateIdtoNull(id){
+//     const {data, error} = await supabase.from('users').update({pay_id : null}).eq('id', id);
+//     console.log('hello',data)
+//     if(error){
+//         console.log('Error updating', error);
+//     }
        
     
-}
+// }
 
 
 
