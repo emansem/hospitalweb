@@ -872,6 +872,7 @@ transition: all 0.4s linear;
 .doctor-profile{
 	margin-top: 100px !important;
 }
+
 .plan-section{
 	display: flex;
 	flex-direction: column;
@@ -936,12 +937,20 @@ transition: all 0.4s linear;
 	padding: 0.6rem 1rem;
 	background-color: var(--color-dark);
 	color: #f1f2f1;
-	margin-block: 0.8rem;
+	margin-block: 1rem;
 	font-size: 16px;
 	font-weight: 500;
 	border-radius: 0.4rem;
+	display: block;
+	
 	font-family: var(--font-body);
 	transition: all 0.4s linear;
+	
+}
+#active-plan{
+	background-color: #e3b21f;
+	color: var(--color-dark);
+	cursor: default;
 }
 .paynow:hover{
 	background-color: var(--dark-color);

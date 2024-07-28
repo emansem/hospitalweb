@@ -5,14 +5,14 @@
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 const queryString = window.location.search.split("=");
 const profileContainer = document.querySelector(".profile-content");
-const doctorId = queryString[1];
+const doctorId = Number(queryString[1]);
 
 // the expire time and create a count down;
 
 // Supabase configuration
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
 
 // Import and initialize Supabase client
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
@@ -24,46 +24,46 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to fetch doctor details
 async function getDoctorDetails() {
-	const { data, error } = await supabase
-		.from("users")
-		.select("*")
-		.eq("id", logUser);
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", logUser);
 
-	const checkCurrentUserType = data[0].type;
-	console.log(" i am a patient", checkCurrentUserType);
+  const checkCurrentUserType = data[0].type;
+  console.log(" i am a patient", checkCurrentUserType);
 
-	if (checkCurrentUserType === "patient") {
-		console.log("hello");
-		const { data, error } = await supabase
-			.from("users")
-			.select("*")
-			.eq("id", doctorId);
+  if (checkCurrentUserType === "patient") {
+    console.log("hello");
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", doctorId);
 
-		console.log("data", data);
+    console.log("data", data);
 
-		renderDoctorProfileToUsers(data);
-	} else if (checkCurrentUserType === "doctor") {
-		console.log("data");
-		const { data, error } = await supabase
-			.from("users")
-			.select("*")
-			.eq("id", logUser);
+    renderDoctorProfileToUsers(data);
+  } else if (checkCurrentUserType === "doctor") {
+    console.log("data");
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", logUser);
 
-		// login user is doctor call this function
-		renderDoctorProfile(data);
-	}
+    // login user is doctor call this function
+    renderDoctorProfile(data);
+  }
 }
 
 getDoctorDetails();
 
 // Function to display profile details to users and hide somefunctions you donot want them to see
 function renderDoctorProfileToUsers(user) {
-	// Populate profile HTML
-	profileContainer.innerHTML = 
-	` <div class="doctor__profile--wrapper">
+  // Populate profile HTML
+  profileContainer.innerHTML = ` <div class="doctor__profile--wrapper">
 							<div class="doctor__profile--header">
 									 <div class="header__left">
-									  <img  class="header__left--user-photo" src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" class="${user.name}">
+									  <img  class="header__left--user-photo" src="${user[0].userAvatar ||
+                      "https://shorturl.at/8TClo"}" class="${user.name}">
 								  </div>
 								  <div class="heaer__right--userinfo">
 						  <span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verify Doctor</span></span>
@@ -72,7 +72,8 @@ function renderDoctorProfileToUsers(user) {
 								  </div>
 							  </div>
 							  <div class="header__right">
-								<a href ='/pages/doctorplans.html?id=${user[0].id}' class='btn' style="margin-left: 1rem;">Contact Me</a>
+								<a href ='/pages/doctorplans.html?id=${user[0]
+                  .id}' class='btn' style="margin-left: 1rem;">Contact Me</a>
 							  </div>
 						  
 							</div>
@@ -80,7 +81,8 @@ function renderDoctorProfileToUsers(user) {
 					  <div class="profile-main">
 						<section class="section">
 						<h3>About Dr. ${user[0].name}</h3>
-						<p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
+						<p class='doctorBio'>${user[0].bio ||
+              "Please add About you so that people can i know more about"}</p>
 						</section>
 						
 						<div class="stats">
@@ -108,28 +110,26 @@ function renderDoctorProfileToUsers(user) {
 						</section>
 					  </div>`;
 
-	
+  // const btn = document.querySelector(".btn");
 
-	// const btn = document.querySelector(".btn");
-
-	// if (btn) {
-	// 	btn.addEventListener("click", function (e) {
-	// 		e.preventDefault();
-	// 		// reQuestPay();
-	// 	});
-	// }
+  // if (btn) {
+  // 	btn.addEventListener("click", function (e) {
+  // 		e.preventDefault();
+  // 		// reQuestPay();
+  // 	});
+  // }
 }
 
 // render profile todoctors only because it can conflict when user visit their profile
 
 function renderDoctorProfile(user) {
-	const userType = user[0].type;
+  const userType = user[0].type;
 
-	profileContainer.innerHTML = 
-	` <div class="doctor__profile--wrapper">
+  profileContainer.innerHTML = ` <div class="doctor__profile--wrapper">
 							<div class="doctor__profile--header">
 									 <div class="header__left">
-									  <img  class="header__left--user-photo" src="${user[0].userAvatar || "https://shorturl.at/8TClo"}" class="${user.name}">
+									  <img  class="header__left--user-photo" src="${user[0].userAvatar ||
+                      "https://shorturl.at/8TClo"}" class="${user.name}">
 								  </div>
 								  <div class="heaer__right--userinfo">
 						  <span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verify Doctor</span></span>
@@ -146,7 +146,8 @@ function renderDoctorProfile(user) {
 					  <div class="profile-main">
 						<section class="section">
 						<h3>About Dr. ${user[0].name}</h3>
-						<p class='doctorBio'>${user[0].bio || "Please add About you so that people can i know more about"}</p>
+						<p class='doctorBio'>${user[0].bio ||
+              "Please add About you so that people can i know more about"}</p>
 						</section>
 						
 						<div class="stats">
@@ -174,106 +175,88 @@ function renderDoctorProfile(user) {
 						</section>
 					  </div>`;
 
-	// const pay_id = user[0].pay_id;
-	// const nextTimeToPay = user[0].next_pay_date;
-	// const btn = document.querySelector(".btn");
-	// if (btn) {
-	// }
+  // const pay_id = user[0].pay_id;
+  // const nextTimeToPay = user[0].next_pay_date;
+  // const btn = document.querySelector(".btn");
+  // if (btn) {
+  // }
 
-	
-	// if (btn) {
-	// 	btn.addEventListener("click", function (e) {
-	// 		e.preventDefault();
-	// 		// reQuestPay();
-	// 	});
-	// }
+  // if (btn) {
+  // 	btn.addEventListener("click", function (e) {
+  // 		e.preventDefault();
+  // 		// reQuestPay();
+  // 	});
+  // }
 
-	// checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id);
-	// checkExpireDate(pay_id, nextTimeToPay);
+  // checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id);
+  // checkExpireDate(pay_id, nextTimeToPay);
 }
 
-// check if a user have paid
+// we have to get all the subscription for the patient and check.
 
-// async function checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id) {
-// 	premium.style.display = "none";
-// 	upgradeBtn.style.display = "none";
-// 	const dateNow = Date.now();
+async function getPatientSubsciptions() {
+  const { data, error } = await supabase
+    .from("subscriptions")
+    .select("*")
+    .eq("patientid", logUser);
+  console.log("this is the patient sub", data);
 
-// 	if (dateNow < new Date(nextTimeToPay) || pay_id !== null) {
-// 		premium.style.display = "block";
-// 		upgradeBtn.style.display = "none";
-// 	} else {
-// 		upgradeBtn.style.display = "block";
-// 	}
-// }
+  if (data && data.length !== 0) {
+    const activeSubscription = data.filter(
+      subscription => subscription.pay_id !== null
+    );
+    const subscriptionDoctorid = Number(activeSubscription[0].doctorid);
+    if (activeSubscription) {
+      allVariablesForToCompare(activeSubscription);
+    }
+  }
+  if (error) {
+    console.log("we got an error fetching the patient subscriptions", error);
+  }
+}
+getPatientSubsciptions();
 
-// Event listener for payment request for patients before the coontact a doctor
-// requestPay.addEventListener("click", function (e) {
-// 	e.preventDefault();
-// 	const targetEl = e.target.textContent;
-// 	console.log(targetEl);
-// 	if (targetEl === "Maybe Later") {
-// 		requestPay.classList.add("hideForm");
-// 	} else if (targetEl === "Subscribe Now") {
-// 		window.location.href = `/pages/payment.html?id=${doctorId}`;
-// 	}
-// });
+//store all variables to check user plan and give them the access;
 
-// // Function to request payment before contacting doctor
-// async function reQuestPay() {
-// 	const { data, error } = await supabase
-// 		.from("users")
-// 		.select("*")
-// 		.eq("id", logUser);
-// 	if (data[0].type === "patient" && data[[0]].pay_id === null) {
-// 		requestPay.classList.remove("hideForm");
-// 	} else {
-// 		requestPay.classList.add("hideForm");
-// 		window.location.href = `/pages/contact-doctor.html?id =${doctorId}`;
-// 		console.log("error", error);
-// 	}
-// }
+function allVariablesForToCompare(subcription) {
+  const payOnce = "Pay per contact";
+  const monthlySubscription = "Monthly";
+  const typeOfSubscription = subcription[0].type;
+  const doctorSubsciptionId = Number(subcription[0].doctorid);
+  const next_pay_date = subcription[0].next_pay_date;
+  checkIfPatientBoughtAplan(
+    payOnce,
+    monthlySubscription,
+    typeOfSubscription,
+    doctorSubsciptionId,
+    next_pay_date
+  );
+}
 
-// display display date notifications tohelp users know their next pay dat
-// function renderAlertMessage(date, hours) {
-// 	alertWerapper.innerHTML = `<div class="alert__bar">
-//                             <div class="alert__header">
-//                                 <i class="fas fa-exclamation-circle outlined-icon"></i>
-//                                 <span>Count Down for your subscription</span>
-//                             </div>
-//                             <div class="alert__body">
-//                                 <div class="alert__body--text">
-//                                     <p>Date until expiration <span class="days">${date} </span>  We will automatically renew your subscription </p>
-//                                 </div>
-//                                 <div class="alert__body--btn">
-                                    
-//                                 </div>
-//                             </div>
-//                           </div>`;
-// }
+// check if the the patient have purchase a plan or not if he has, then check if the plan havae expired or doctor id is the doctor he subscribed and type plan he did purchase;
 
-// function updateCountdown(nextDate) {
-// 	const formattedDate = new Date(nextDate).toLocaleString("en-US", {
-// 		month: "long",
-// 		day: "2-digit",
-// 		year: "numeric",
-// 	});
-// 	renderAlertMessage(formattedDate);
-// }
-
-// console.log(
-// 	`<div class ='cursorDisable'><a href="#ß" class="renewBtn">Renew Now</a></div>`
-// );
-
-// // check if the user plan have expired
-// async function checkExpireDate(pay_id, nextTimeToPay) {
-// 	const renew_wrapper = document.querySelector(".renew-wrapper");
-
-// 	updateCountdown(nextTimeToPay);
-
-// 	const dateNow = Date.now();
-
-// 	if (pay_id === null || dateNow > new Date(nextTimeToPay)) {
-// 		renew_wrapper.innerHTML = ` <a href="#ß" class="renewBtn">Renew Now</a>`;
-// 	}
-// }
+function checkIfPatientBoughtAplan(
+  payOnce,
+  monthlySubscription,
+  typeOfSubscription,
+  doctorSubsciptionId,
+  next_pay_date
+) {
+  if (
+    typeOfSubscription === payOnce &&
+    doctorSubsciptionId === doctorId &&
+    Date.now() < next_pay_date
+  ) {
+    alert("you have a 24hrs plan");
+    return;
+  } else if (
+    typeOfSubscription === monthlySubscription &&
+    doctorSubsciptionId === doctorId &&
+    Date.now() < next_pay_date
+  ) {
+    alert("alert you have a monthly subscription");
+    return;
+  } else {
+    alert(" you donot have a plan with this doctor");
+  }
+}
