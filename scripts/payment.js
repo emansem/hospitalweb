@@ -6,7 +6,7 @@ const supabaseKey =
 	const paidDate = Date.now();
 	
 	 const expireDate = paidDate + 31 * 24 * 60 * 60* 1000;
-	const past = new Date(expireDate)
+	// const past = new Date(expireDate)
 
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
@@ -19,9 +19,9 @@ const user = getStoreUsers.find((user) => user.id === logUser);
 const shownextDate = document.getElementById("nextDate");
 const cancel = document.querySelector(".cancel");
 
-//get doctor id from the url and show the profile to patient;
-const queryString = window.location.search.split("=");
-const doctorId = queryString[1];
+//get plan id to fetch and get the doctor data to save  on the subscription page;
+const planId = window.location.search.split("=")[1];
+console.log(planId)
 
 // calculate the next pay date in milli seconds
 
@@ -42,10 +42,11 @@ async function sendPaymentInfo(paymeninfo) {
 	shownextDate.innerHTML = "";
 	try {
 		const { data, error } = await supabase
-			.from("payment_history")
+			.from("subscriptions")
 			.insert([paymeninfo])
-			.eq('user_id', logUser)
+			.eq('patientId', logUser)
 			.select("*");
+			console.log('this is the subscription table')
 		if (data) {
 			setTimeout(function (e) {
 				sucess.classList.remove("hideForm");
@@ -54,9 +55,10 @@ async function sendPaymentInfo(paymeninfo) {
 			cancel.addEventListener("click", function (e) {
 				sucess.classList.add("hideForm");
 				if(user.type === 'patient'){
-					window.location.href = `/pages/doctorprofile.html?id=${doctorId}`;
+
+					// window.location.href = `/pages/doctorprofile.html?id=${doctorId}`;
 				}else{
-					window.location.href = `/pages/doctorprofile.html`;
+					// window.location.href = `/pages/doctorprofile.html`;
 				}
 				
 			});
@@ -70,29 +72,31 @@ async function sendPaymentInfo(paymeninfo) {
 }
 
 const days = 2678400000 / (1000 * 60 * 60 * 24);
-console.log(days);
-payForm.addEventListener("submit", function (e) {
-	e.preventDefault();
-	const name = payForm.name.value;
-	const phone = payForm.phone.value;
-	const paymentMethod = payForm.network.value;
 
-	const savePayinfo = {
-		payment_method: paymentMethod,
-		user_id: logUser,
-		amount: 20,
-		user_name: name,
-		payment_number: phone,
+// this is the vent to submit the payment form
+const plandetails = JSON.parse(localStorage.getItem('plandetails'));
+payForm.addEventListener("submit", function (e) {
+const doctorId = plandetails.doctorId
+	const planName = plandetails.planName;
+	e.preventDefault();
+  const paymentMethod = payForm.network.value;
+ const savePayinfo = {
+		method: paymentMethod,
+		patientid: logUser,
+		amount: plandetails.amount,
+		doctorid: doctorId,
+		
 		pay_id: crypto.randomUUID(),
-		next_pay_day: expireDate,
-		type: user.type,
+		next_pay_date: expireDate,
+		type: planName,
+		planId:planId,
 	};
-	updateUserPayId(savePayinfo.pay_id, savePayinfo.next_pay_day);
+	updateUserPayId(savePayinfo.pay_id, savePayinfo.next_pay_date);
 
 	sendPaymentInfo(savePayinfo);
 });
 
-// update the user payid onhis table.
+// update the patientid on the users table just for reference, but is not needed;
 
 async function updateUserPayId(payid, next_pay_day) {
 	const { data, error } = await supabase
@@ -105,3 +109,56 @@ async function updateUserPayId(payid, next_pay_day) {
 		console.log("this isthe error", error);
 	}
 }
+
+// get the doctor id and plan name to keep and amount to display;
+
+async function getPlanDetils(){
+	const {data, error} = await supabase.from("doctor__plans").select("*").eq('id',planId);
+	if(data && data.length !==0){
+		console.log('this is the plan details', data)
+		const doctorPlanId = data[0].doctorId;
+		const planName = data[0].type;
+		console.log(doctorPlanId, planName);
+		const plandetails = {
+			planName: planName,
+			doctorId:doctorPlanId,
+			amount:data[0].amount
+		}
+		const paymentAmountWrapper = document.querySelector('.payform__body--amount');
+		paymentAmountWrapper.innerHTML =`<span class="amountText">Payment amount:</span>
+                    <span class="amount">$${data[0].amount}</span>`
+		localStorage.setItem('plandetails', JSON.stringify(plandetails))
+		
+	}
+	if(error){
+		console.log('this is the error for the plan details')
+	}
+}
+getPlanDetils();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
