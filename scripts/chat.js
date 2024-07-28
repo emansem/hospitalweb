@@ -10,6 +10,9 @@ const patientId = JSON.parse(localStorage.getItem('activeId'));
 
 // selct the wrappers to send on the web page
 const chatContainer = document.querySelector('.chat__container--wrapper');
+const chatRoomHeader = document.querySelector('.message__header')
+const chatbox = document.querySelector('.chatbox');
+const messages = document.querySelector('.messages');
 const doctorActiveId = window.location.hash.slice(1)
 
 
@@ -19,14 +22,14 @@ const doctorActiveId = window.location.hash.slice(1)
 function renderSideBarChat(doctors){
     doctors.forEach(doctor=>{
         chatContainer.innerHTML+=`<a href="#${doctor.id}">
-        <div class="chat-wrapper">
+        <div  id=${doctor.id}  class="chat-wrapper">
         <div class="recent__user--item">
-            <div>
-                <img class="userPhoto" src="${doctor.userAvatar}" alt="user-avater" srcset="">
+            <div id=${doctor.id} class='chatid'>
+                <img class="userPhoto" src="${doctor.userAvatar || 'https://shorturl.at/8TClo'}" alt="user-avater" srcset="">
             </div>
-            <div class="user-info">
-                <span class="user-name">${doctor.name}</span>
-                <span class="message">i hope you are doing well?</span>
+            <div  id=${doctor.id} class="user-info">
+                <span  id=${doctor.id} class="user-name">${doctor.name}</span>
+                <span  id=${doctor.id} class="message">i hope you are doing well?</span>
             </div>
         </div>
         <div class="chat-item">
@@ -37,6 +40,13 @@ function renderSideBarChat(doctors){
     </div>
     </a>`
     })
+    const userForm = document.querySelector('.user-info')
+userForm.addEventListener('click', function(e){
+e.preventDefault()
+const id = e.target.getAttribute('id');
+getActiveChatIdData(id)
+
+})
     
 
 }
@@ -80,17 +90,33 @@ async function getDoctorsData(doctorid){
 }
 
 // the doctor data and render on the chat room
-async function getActiveChatIdData(){
-    const {data, error} = await supabase.from("users").select("*").eq('id', doctorActiveId );
+async function getActiveChatIdData(id){
+    chatRoomHeader.innerHTML = '';
+    const {data, error} = await supabase.from("users").select("*").eq('id', id );
     if(data && data.length !==0){
         console.log(data);
-        // renderSideBarChat(data);
+        renderHeaderChatBoxRoom(data);
+      
     }else{
         console.log('no data here');
+     
+        messages.innerHTML = `<div class='headings'>No Data Found click on a doctor profile to start chating</div>`;
     }
     if(error){
         console.log('error here', error);
     }
 
 }
-getActiveChatIdData();
+
+
+//render the chatheader box room when the user click on the chat box.
+
+function renderHeaderChatBoxRoom(doctor){
+    chatRoomHeader.innerHTML = `<div class="message__header--photo">
+                    <img src="${doctor[0].userAvatar || 'https://shorturl.at/8TClo'}" alt="${doctor[0].name}" class="user__message--photo">
+                </div>
+                <div class="message__header--name">
+                    <span class="name">${doctor[0].name}</span>
+                    <div class="user-status">Active</div>
+                </div>`
+}
