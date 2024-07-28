@@ -23,14 +23,14 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // const alertWerapper = document.querySelector(".alert-wrapper");
 
 // Function to fetch doctor details
-async function getDoctorDetails() {
+async function getDoctorDetails(conditon) {
   const { data, error } = await supabase
     .from("users")
     .select("*")
     .eq("id", logUser);
 
   const checkCurrentUserType = data[0].type;
-  console.log(" i am a patient", checkCurrentUserType);
+
 
   if (checkCurrentUserType === "patient") {
     console.log("hello");
@@ -41,7 +41,7 @@ async function getDoctorDetails() {
 
     console.log("data", data);
 
-    renderDoctorProfileToUsers(data);
+    renderDoctorProfileToUsers(data, conditon);
   } else if (checkCurrentUserType === "doctor") {
     console.log("data");
     const { data, error } = await supabase
@@ -57,7 +57,7 @@ async function getDoctorDetails() {
 getDoctorDetails();
 
 // Function to display profile details to users and hide somefunctions you donot want them to see
-function renderDoctorProfileToUsers(user) {
+function renderDoctorProfileToUsers(user, conditon) {
   // Populate profile HTML
   profileContainer.innerHTML = ` <div class="doctor__profile--wrapper">
 							<div class="doctor__profile--header">
@@ -72,8 +72,7 @@ function renderDoctorProfileToUsers(user) {
 								  </div>
 							  </div>
 							  <div class="header__right">
-								<a href ='/pages/doctorplans.html?id=${user[0]
-                  .id}' class='btn' style="margin-left: 1rem;">Contact Me</a>
+								${conditon}
 							  </div>
 						  
 							</div>
@@ -235,28 +234,26 @@ function allVariablesForToCompare(subcription) {
 
 // check if the the patient have purchase a plan or not if he has, then check if the plan havae expired or doctor id is the doctor he subscribed and type plan he did purchase;
 
-function checkIfPatientBoughtAplan(
-  payOnce,
-  monthlySubscription,
-  typeOfSubscription,
-  doctorSubsciptionId,
-  next_pay_date
-) {
-  if (
-    typeOfSubscription === payOnce &&
-    doctorSubsciptionId === doctorId &&
-    Date.now() < next_pay_date
-  ) {
-    alert("you have a 24hrs plan");
-    return;
-  } else if (
-    typeOfSubscription === monthlySubscription &&
-    doctorSubsciptionId === doctorId &&
-    Date.now() < next_pay_date
-  ) {
-    alert("alert you have a monthly subscription");
-    return;
-  } else {
-    alert(" you donot have a plan with this doctor");
-  }
-}
+	function checkIfPatientBoughtAplan(payOnce,monthlySubscription,typeOfSubscription,doctorSubsciptionId,next_pay_date) {
+		let contactBtb;
+			if (
+				typeOfSubscription === payOnce &&
+				doctorSubsciptionId === doctorId &&
+				Date.now() < next_pay_date
+			) {
+				contactBtb = `<a href ='/pages/chats.htmls.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Chat Now</a>`
+				return getDoctorDetails(contactBtb);
+			} else if (
+				typeOfSubscription === monthlySubscription &&
+				doctorSubsciptionId === doctorId &&
+				Date.now() < next_pay_date
+			) {
+				contactBtb = `<a href ='/pages/chats.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Chat Now</a>`
+				return getDoctorDetails(contactBtb);
+				
+			} else {
+				contactBtb = `<a href ='/pages/doctorplans.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Contact Me</a>`
+				return getDoctorDetails(contactBtb);
+				
+			}
+			}
