@@ -291,3 +291,6 @@ margin-right: 0.4rem;
   color: #999;
   font-family: var(--font-heading);
 }
+.receiver{
+  margin-top: 1rem;
+}
