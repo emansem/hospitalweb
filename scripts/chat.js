@@ -14,7 +14,8 @@ const chatRoomHeader = document.querySelector('.message__header')
 const chatbox = document.querySelector('.chatbox');
 const messageForm = document.querySelector('.message__send--box');
 const messages = document.querySelector('.messages');
-const doctorActiveId = window.location.hash.slice(1)
+const doctorActiveId = window.location.hash.slice(1);
+
 // const senderMessageWrapper = document.querySelector('.sender');
 // const messagePlaceHolder= document.querySelector('.senderMessage');
 const senderWrapperContainer = document.querySelector('.senderWrapper');
@@ -44,13 +45,11 @@ function renderSideBarChat(doctors){
     </div>
     </a>`
     })
-    const userForm = document.querySelector('.user-info')
-userForm.addEventListener('click', function(e){
-e.preventDefault()
-const id = e.target.getAttribute('id');
-getActiveChatIdData(id)
 
-})
+
+
+
+
     
 
 }
@@ -94,9 +93,9 @@ async function getDoctorsData(doctorid){
 }
 
 // the doctor data and render on the chat room
-async function getActiveChatIdData(id){
+async function getActiveChatIdData(){
     chatRoomHeader.innerHTML = '';
-    const {data, error} = await supabase.from("users").select("*").eq('id', id );
+    const {data, error} = await supabase.from("users").select("*").eq('id', doctorActiveId );
     if(data && data.length !==0){
         console.log(data);
         renderHeaderChatBoxRoom(data);
@@ -111,7 +110,7 @@ async function getActiveChatIdData(id){
     }
 
 }
-
+getActiveChatIdData()
 
 //render the chatheader box room when the user click on the chat box.
 
@@ -129,17 +128,58 @@ function renderHeaderChatBoxRoom(doctor){
 
 messageForm.addEventListener('submit', function(e){
     e.preventDefault()
+  const messageValue = messageForm.message.value;
+savePatientMessage(messageValue);
+// location.reload();
   
+});
+
+
+async function savePatientMessage(message){
+
+  const doctorid=  localStorage.getItem('doctorId')
+    const patientMessages = {
+        patientid:patientId,
+        doctorId:doctorid,
+        message:message,
+        }
+    const {data, error} = await supabase.from('patient_message').insert([patientMessages]).select()
+    if(error){
+        console.log('error here', error);
+    }
+    if(data){
+        console.log('message saved', data);
+        setTimeout(function(e){
+            location.reload();
+        }, 200)
+      
+    }
+}
+
+// render the patien message on his page when he sent a message
+function renderAllPatientSentMessage(message){
+    message.forEach(message=>{
+        senderWrapperContainer.innerHTML+=` <div class="sender">
+                  <p class="message-text senderMessage">${message.message}</p>
+              </div>`
+    })
+}
+
+// get all the message on the database and render on the page
+
+async function getAllMessages(){
+    senderWrapperContainer.innerHTML= ``;
    
-    const messageValue = messageForm.message.value;
-
-    const messagePlaceHolder = document.createElement('div'); // Using 'div' instead of other inline elements
-    messagePlaceHolder.innerHTML = messageValue;
-    messagePlaceHolder.classList.add('senderMessage');
-    
-    const senderMessageWrapper = document.createElement('div'); 
-    senderMessageWrapper.classList.add('sender');// Ensure this element is a block element too
-    senderMessageWrapper.appendChild(messagePlaceHolder);
-    senderWrapperContainer.insertAdjacentElement('beforeend', senderMessageWrapper);
-
-})
+        const {data, error} = await supabase.from('patient_message').select("*").eq("patientid", patientId);
+        if(error){
+            console.log('error here', error);
+        }
+        if(data){
+            console.log('message saved', data);
+           
+            renderAllPatientSentMessage(data);
+            messageForm.reset()
+            
+        }
+    }
+getAllMessages()
