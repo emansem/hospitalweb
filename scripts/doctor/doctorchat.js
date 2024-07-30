@@ -12,6 +12,7 @@ const messageForm = document.querySelector('#messageForm');
 const idQuery = window.location.hash.slice(1)
 const patientId = Number(idQuery);
 const chatwindow = document.querySelector('.chatwindow');
+const chatInput = document.getElementById('chat-input');
 
 
 //Note: some codes you might find the same variables names for the patient here because they are using the same codes to do the same thing.
@@ -236,10 +237,12 @@ async function fetchMessagesFromServer() {
       //we check if the active patient has send the  message if not we donot display the message and wait untill he has a message wth this logged user.
       const filterActiveChatId = data.find(doctorChat =>doctorChat.receiverID === doctorID);
       if(filterActiveChatId){
-        renderMessages(data);
+        
+        return renderMessages(data);
       }else{
         //show this if no message or active id found
         chatwindow.innerHTML = `You donot have any conversation here, Click A profile to start Chatting`;
+        chatInput.setAttribute('readonly',true);
       }
         
     }

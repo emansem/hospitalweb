@@ -190,10 +190,12 @@ async function getPatientSubsciptions() {
     const activeSubscription = data.filter(
       subscription => subscription.pay_id !== null
     );
-    const subscriptionDoctorid = Number(activeSubscription[0].doctorid);
+  
     if (activeSubscription) {
       allVariablesForToCompare(activeSubscription);
     }
+  }else{
+	allVariablesForToCompare(data);
   }
   if (error) {
     console.log("we got an error fetching the patient subscriptions", error);
@@ -204,45 +206,60 @@ getPatientSubsciptions();
 //store all variables to check user plan and give them the access;
 
 function allVariablesForToCompare(subcription) {
-  const payOnce = "Pay per contact";
-  const monthlySubscription = "Monthly";
-  const typeOfSubscription = subcription[0].type;
-  const doctorSubsciptionId = Number(subcription[0].doctorid);
-  const next_pay_date = subcription[0].next_pay_date;
-  checkIfPatientBoughtAplan(
-    payOnce,
-    monthlySubscription,
-    typeOfSubscription,
-    doctorSubsciptionId,
-    next_pay_date
-  );
+	if(subcription.length ===0){
+		let contactBtb;
+				contactBtb = `<a href ='/pages/doctorplans.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Contact Me</a>`
+				getDoctorDetails(contactBtb);
+				
+		return;
+	}else{
+		const payOnce = "Pay per contact";
+		const monthlySubscription = "Monthly";
+		const typeOfSubscription = subcription[0].type;
+		const doctorSubsciptionId = Number(subcription[0].doctorid);
+		const next_pay_date = subcription[0].next_pay_date;
+		checkIfPatientBoughtAplan(
+		  payOnce,
+		  monthlySubscription,
+		  typeOfSubscription,
+		  doctorSubsciptionId,
+		  next_pay_date,
+		  subcription
+		);
+	}
+
 }
 
 // check if the the patient have purchase a plan or not if he has, then check if the plan havae expired or doctor id is the doctor he subscribed and type plan he did purchase;
 
-	function checkIfPatientBoughtAplan(payOnce,monthlySubscription,typeOfSubscription,doctorSubsciptionId,next_pay_date) {
-		
+	function checkIfPatientBoughtAplan(payOnce,monthlySubscription,typeOfSubscription,doctorSubsciptionId,next_pay_date, subcription) {
+	console.log('usersubscription', subcription)
 			if (
 				typeOfSubscription === payOnce &&
 				doctorSubsciptionId === doctorId &&
 				Date.now() < next_pay_date
 			) {
 				let contactBtb;
-				contactBtb = `<a href ='/pages/doctorchatroom.html' class='btn' style="margin-left: 1rem;">Chat Now</a>`
-				return getDoctorDetails(contactBtb);
+				contactBtb = `<a href ='/pages/patientchatroom.html' class='btn' style="margin-left: 1rem;">Chat Now</a>`
+				getDoctorDetails(contactBtb);
 			} else if (
 				typeOfSubscription === monthlySubscription &&
 				doctorSubsciptionId === doctorId &&
 				Date.now() < next_pay_date
 			) {
 				let contactBtb;
-				contactBtb = `<a href ='/pages/doctorchatroom.html' class='btn' style="margin-left: 1rem;">Chat Now</a>`
-				return getDoctorDetails(contactBtb);
+				contactBtb = `<a href ='/pages/patientchatroom.html' class='btn' style="margin-left: 1rem;">Chat Now</a>`
+				getDoctorDetails(contactBtb);
 				
-			} else {
+			}else if(subcription.length === 0){
+				alert('you donot have any plan with this doctos')
+			}
+			
+			else {
 				let contactBtb;
-				contactBtb = `<a href ='/pages/doctorplans.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Contact Me</a>`
-				return getDoctorDetails(contactBtb);
+				
+			   getDoctorDetails(`<a href ='/pages/doctorplans.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Contact Me</a>`);
+				
 				
 			}
 			}

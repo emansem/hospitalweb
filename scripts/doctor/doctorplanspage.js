@@ -77,7 +77,7 @@ async function getDoctorActivePlans() {
                     
                   </div>
                   <div class='planButonWrapper'>
-                  <a class="paynow" href="/pages/payment.html?id=${plan.id}">Pay Now</a>
+                  <a class="paynow" href="/pages/payment.html?id=${plan.id}.${doctorPlanId}">Pay Now</a>
                       </div>
                   
               </div>
@@ -117,6 +117,7 @@ async function getDoctorActivePlans() {
         updatePlanStatus(activeSubsciption[0].type, planNames, planBtnWrapper);
      
       }else{
+        chatInput.re
         console.log(' you currently donot have any subscription');
       }
      
