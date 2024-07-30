@@ -233,7 +233,7 @@ async function fetchMessagesFromServer() {
         .order('time', { ascending: true });
     if (data) {
       const filterActiveChatId = data.find(doctorChat =>doctorChat.receiverID === doctorID);
-      if(filterActiveChatId){
+      if(filterActiveChatId && loggedUser){
         renderMessages(data);
       }else{
         chatwindow.innerHTML = `You donot have any conversation here, Click A profile to start Chatting`;
