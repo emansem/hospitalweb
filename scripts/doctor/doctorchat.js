@@ -6,22 +6,24 @@ const supabaseKey =
 // Import and initialize Supabase client
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
-const patientId = JSON.parse(localStorage.getItem("activeId"));
-const loggedUser = patientId;
+const doctorID = JSON.parse(localStorage.getItem("activeId"));
+const loggedUser = doctorID;
 const messageForm = document.querySelector('#messageForm');
-const doctorID = window.location.hash.slice(1);console.log(doctorID);
+const idQuery = window.location.hash.slice(1)
+const patientId = Number(idQuery);
 const chatwindow = document.querySelector('.chatwindow');
 
 
+//Note: some codes you might find the same variables names for the patient here because they are using the same codes to do the same thing.
 
 
 
 
-// Populate doctor list on the side bar
-function renderDoctorList(doctors) {
+// Populate PATIENT list on the side bar
+function renderPatientList(patients) {
     const patientList = document.getElementById('patient-list');
     patientList.innerHTML = '';
-    doctors.forEach(doctor => {
+    patients.forEach(doctor => {
         const listItem = document.createElement('li');
         const doctorLinkId = document.createElement('a');
         doctorLinkId.href = `#${doctor.id}`
@@ -36,18 +38,22 @@ function renderDoctorList(doctors) {
        
         patientList.appendChild(listItem);
     });
-    const doctorItiem = document.querySelectorAll('.patient-item');
-    getDoctorWrapperItem(doctorItiem)
+    const patientContainer = document.querySelectorAll('.patient-item');
+    getPatientListWrapper(patientContainer)
 
 }
-//function get the doctorlist wrapper to get id and fetch to get thier profile at the top
-function getDoctorWrapperItem(item){
+//fget the patient list container for each to add eventlister to  
+//it we can get the id for the each patient and fetch and display their data messages, profile and so on
+function getPatientListWrapper(item){
     item.forEach(item=>{
         item.addEventListener('click', function(e){
-           const doctorActiveId  = this.getAttribute('data-id');
+           const activeID  = this.getAttribute('data-id');
            console.log(doctorActiveId);
-           getDoctorProfileDetails(doctorActiveId);
+           getPatientProfileDetails(activeID);
            fetchMessagesFromServer();
+           setTimeout(function(){
+            location.reload()
+           }, 100)
         })
     })
 
@@ -55,21 +61,18 @@ function getDoctorWrapperItem(item){
 
 
 
-// Send a new message
-function sendMessage() {
-  
-}
 
-// get the active doctor profiles and display on the side bar.
+// get the patients that have subscribe to the doctor and display on the side bar for easy acess. 
+//we are getting  but their profile info from the users database 
 
-async function getDoctorDetails(activeDoctorID){
+async function getAllPatientsDetails(id){
     const { data, error } = await supabase
     .from("users")
     .select("*")
-    .eq("id", activeDoctorID);
+    .eq("id", id);
   if (data && data.length !== 0) {
     console.log(data);
-    renderDoctorList(data);
+   renderPatientList(data);
     //this the profile and name
     // renderHeaderChatBoxRoom(data);
   } else {
@@ -82,19 +85,19 @@ async function getDoctorDetails(activeDoctorID){
   }
 }
 
-// get all the doctors that have   subscription with the patient..
+// get all the patients  that have   subscription with the doctor..
 
-async function getAllDoctorsActiveId() {
+async function getAllPatients() {
     const { data, error } = await supabase
       .from("subscriptions")
       .select("*")
-      .eq("patientid", loggedUser);
+      .eq("doctorid", loggedUser);
       console.log(data)
     if (data && data.length !== 0) {
       if (data[0].next_pay_date > Date.now()) {
-        data.forEach((doctor) => {
-            getDoctorDetails(doctor.doctorid)
-        //  getPatientsInformation(patient.patientid);
+        data.forEach((patient) => {
+            getAllPatientsDetails(patient.patientid)
+        
         });
       }
     } else {
@@ -105,16 +108,15 @@ async function getAllDoctorsActiveId() {
     }
   }
   
-getAllDoctorsActiveId()
+getAllPatients()
 
-const localSaveMessage = [];
-console.log(localSaveMessage);
-//fetch in the users table and get all the patients data and display on the side bar page
-async function getDoctorProfileDetails(doctorId) {
+
+//fetch in the users table and get  the patients data  to display the  header.
+async function getPatientProfileDetails(activeID) {
     const { data, error } = await supabase
       .from("users")
       .select("*")
-      .eq("id", doctorId);
+      .eq("id", activeID);
     if (data && data.length !== 0) {
     updateChatHeader(data);
     console.log(data);
@@ -127,13 +129,13 @@ async function getDoctorProfileDetails(doctorId) {
   }
 
 // Update chat header with selected patient's info
-function updateChatHeader(activeDoctor) {
+function updateChatHeader(activePatient) {
     const chatHeader = document.getElementById('chat-header');
-    if (activeDoctor) {
+    if (activePatient) {
         chatHeader.innerHTML = `
-            <img src="${activeDoctor[0].userAvatar}" alt="${activeDoctor[0].name}">
+            <img src="${activePatient[0].userAvatar}" alt="${activePatient[0].name}">
             <div>
-                <div class="name">${activeDoctor[0].name}</div>
+                <div class="name">${activePatient[0].name}</div>
                 <div class="status">Online</div>
             </div>
         `;
@@ -146,7 +148,7 @@ function messageDetails(){
     const messageInput = messageForm.messageInput.value;
     const message  = {
         senderID : loggedUser,
-        receiverID:doctorID,
+        receiverID:patientId,
         message:messageInput,
     }
   sendNewMessage(message)
@@ -160,8 +162,12 @@ async function sendNewMessage(message){
       .insert([message])
       .select();
     if (data && data.length !== 0) {
-  renderMessages(data)
+  
     console.log(data);
+    //get the new message and append it immedtaily on the web page
+    appendMessages(data[0]);
+    //clear the input field afte you append;
+    messageForm.messageInput.value = '';
     } else {
       console.log("no data here");
     }
@@ -178,7 +184,7 @@ messageForm.addEventListener("submit",function(e){
 })
 
 
-//receive a new message 
+//receive a new message in realtime
 
 async function receiveNewMessage(){
 supabase
@@ -186,33 +192,56 @@ supabase
    .on('INSERT', payload=>{
     console.log('new message', payload.new);
     localSaveMessage.push(payload.new);
+    //apend the newly insert message to the message box 
+    appendMessages(payload.new)
    fetchMessagesFromServer();
    })
    .subscribe();
 
 }
 
-function renderMessages(messages) {
-    const chatWindow = document.getElementById('chat-window');
-    chatwindow.innerHTML = '';
-    messages.forEach(message => {
-        const messageElement = document.createElement('div');
-        messageElement.className = message.senderID === loggedUser ? 'message sender' : 'message receiver';
-        console.log(message.senderID);
-        messageElement.innerText = message.message;
-        chatwindow.appendChild(messageElement);
-    });
+//render the message to chat box, the sender in the right and the receiver to the left also clear the container not to duplicate them
+function appendMessages(message) {
+  
+  const messageElement = document.createElement('div');
+  messageElement.className = message.senderID === loggedUser ? 'message sender' : 'message receiver';
+  console.log(message.senderID);
+  messageElement.innerText = message.message;
+  chatwindow.appendChild(messageElement);
+
+  //scroll to the bottom to see new chat;
+
+  chatwindow.scrollTop = chatwindow.scrollHeight;
+
+   
+}
+
+// Function to render all messages by appending each one to the chat window
+function renderMessages(messages){
+  console.log(messages);
+  messages.forEach(message => {
+   appendMessages(message);
+});
+
 }
 
 
-
+//fetch the message from the server for the login user and display the message container for the reciver and sender.
 async function fetchMessagesFromServer() {
     const { data, error } = await supabase
         .from('chat_room')
         .select('*')
         .order('time', { ascending: true });
     if (data) {
+      //we check if the active patient has send the  message if not we donot display the message and wait untill he has a message wth this logged user.
+      const filterActiveChatId = data.find(doctorChat =>doctorChat.receiverID === doctorID);
+      if(filterActiveChatId){
         renderMessages(data);
+      }else{
+        //show this if no message or active id found
+        chatwindow.innerHTML = `You donot have any conversation here, Click A profile to start Chatting`;
+      }
+        
     }
     if (error) {
         console.error('Error fetching messages:', error);
@@ -220,6 +249,8 @@ async function fetchMessagesFromServer() {
 }
 
 receiveNewMessage();
+getDoctorProfileDetails(doctorID);
+fetchMessagesFromServer()
 
 
 
@@ -227,4 +258,4 @@ receiveNewMessage();
 
 
 
-
+//end of the chat app it was fun bro alot to improve later

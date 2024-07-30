@@ -9,7 +9,8 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const patientId = JSON.parse(localStorage.getItem("activeId"));
 const loggedUser = patientId;
 const messageForm = document.querySelector('#messageForm');
-const doctorID = window.location.hash.slice(1);console.log(doctorID);
+const idQuery = window.location.hash.slice(1)
+const doctorID = Number(idQuery);
 const chatwindow = document.querySelector('.chatwindow');
 
 
@@ -48,6 +49,9 @@ function getDoctorWrapperItem(item){
            console.log(doctorActiveId);
            getDoctorProfileDetails(doctorActiveId);
            fetchMessagesFromServer();
+           setTimeout(function(){
+            location.reload()
+           }, 100)
         })
     })
 
@@ -160,8 +164,10 @@ async function sendNewMessage(message){
       .insert([message])
       .select();
     if (data && data.length !== 0) {
-  renderMessages(data)
+  
     console.log(data);
+    appendMessages(data[0]);
+    messageForm.messageInput.value = '';
     } else {
       console.log("no data here");
     }
@@ -178,7 +184,7 @@ messageForm.addEventListener("submit",function(e){
 })
 
 
-//receive a new message 
+//receive a new message in realtime
 
 async function receiveNewMessage(){
 supabase
@@ -186,33 +192,53 @@ supabase
    .on('INSERT', payload=>{
     console.log('new message', payload.new);
     localSaveMessage.push(payload.new);
+    appendMessages(payload.new)
    fetchMessagesFromServer();
    })
    .subscribe();
 
 }
 
-function renderMessages(messages) {
-    const chatWindow = document.getElementById('chat-window');
-    chatwindow.innerHTML = '';
-    messages.forEach(message => {
-        const messageElement = document.createElement('div');
-        messageElement.className = message.senderID === loggedUser ? 'message sender' : 'message receiver';
-        console.log(message.senderID);
-        messageElement.innerText = message.message;
-        chatwindow.appendChild(messageElement);
-    });
+//render the message to chat box, the sender in the right and the receiver to the left also clear the container not to duplicate them
+function appendMessages(message) {
+  // onst chatWindow = document.getElementById('chat-window');
+  // chatwindow.innerHTML = '';
+  const messageElement = document.createElement('div');
+  messageElement.className = message.senderID === loggedUser ? 'message sender' : 'message receiver';
+  console.log(message.senderID);
+  messageElement.innerText = message.message;
+  chatwindow.appendChild(messageElement);
+
+  chatwindow.scrollTop = chatwindow.scrollHeight;
+
+   
+}
+
+// Function to render all messages by appending each one to the chat window
+
+function renderMessages(messages){
+  console.log(messages);
+  messages.forEach(message => {
+   appendMessages(message);
+});
+
 }
 
 
-
+//fetch the message from the server for the login user and display.
 async function fetchMessagesFromServer() {
     const { data, error } = await supabase
         .from('chat_room')
         .select('*')
         .order('time', { ascending: true });
     if (data) {
+      const filterActiveChatId = data.find(doctorChat =>doctorChat.receiverID === doctorID);
+      if(filterActiveChatId){
         renderMessages(data);
+      }else{
+        chatwindow.innerHTML = `You donot have any conversation here, Click A profile to start Chatting`;
+      }
+        
     }
     if (error) {
         console.error('Error fetching messages:', error);
@@ -220,7 +246,8 @@ async function fetchMessagesFromServer() {
 }
 
 receiveNewMessage();
-
+getDoctorProfileDetails(doctorID);
+fetchMessagesFromServer()
 
 
 
