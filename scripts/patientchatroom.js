@@ -15,6 +15,7 @@ const idQuery = window.location.hash.slice(1);
 const doctorID = Number(idQuery);
 const chatwindow = document.querySelector(".chatwindow");
 const chatInput = document.getElementById("chat-input");
+const sendBtn = document.querySelector(".sendBtn");
 
 // Populate doctor list on the side bar
 function renderDoctorList(doctors) {
@@ -45,7 +46,7 @@ function getDoctorWrapperItem(item) {
 			const doctorActiveId = this.getAttribute("data-id");
 			console.log(doctorActiveId);
 			getDoctorProfileDetails(doctorActiveId);
-			fetchMessagesFromServer();
+			getNewChatId();
 			setTimeout(function () {
 				location.reload();
 			}, 100);
@@ -54,15 +55,15 @@ function getDoctorWrapperItem(item) {
 }
 
 // Send a new message
-function sendMessage() {}
 
 // get the active doctor profiles and display on the side bar.
 
-async function getDoctorDetails(activeDoctorID) {
+async function getDoctorDetails(doctorsID) {
+	console.log(doctorsID);
 	const { data, error } = await supabase
 		.from("users")
 		.select("*")
-		.eq("id", activeDoctorID);
+		.eq("id", doctorsID);
 	if (data && data.length !== 0) {
 		console.log(data);
 		renderDoctorList(data);
@@ -84,10 +85,12 @@ async function getAllDoctorsActiveId() {
 		.select("*")
 		.eq("patientid", loggedUser);
 	console.log(data);
+	console.log(data);
 	if (data && data.length !== 0) {
 		if (data[0].next_pay_date > Date.now()) {
 			data.forEach((doctor) => {
 				getDoctorDetails(doctor.doctorid);
+				console.log(doctor.doctorid);
 				//  getPatientsInformation(patient.patientid);
 			});
 		}
@@ -101,8 +104,6 @@ async function getAllDoctorsActiveId() {
 
 getAllDoctorsActiveId();
 
-const localSaveMessage = [];
-console.log(localSaveMessage);
 //fetch in the users table and get all the patients data and display on the side bar page
 async function getDoctorProfileDetails(doctorId) {
 	const { data, error } = await supabase
@@ -122,6 +123,7 @@ async function getDoctorProfileDetails(doctorId) {
 
 // Update chat header with selected patient's info
 function updateChatHeader(activeDoctor) {
+ 
 	const chatHeader = document.getElementById("chat-header");
 	if (activeDoctor) {
 		chatHeader.innerHTML = `
@@ -135,15 +137,32 @@ function updateChatHeader(activeDoctor) {
 		chatHeader.innerHTML = "Select a patient to start chatting";
 	}
 }
-//message details and form ininput to store the data,
-function messageDetails() {
+//message details and form ininput to store the data, and get the id for the user chat id too
+async function messageDetails() {
+	const { data, error } = await supabase
+		.from("unique_chatID")
+		.select("*")
+		.eq("patientid", loggedUser);
+	if (error) {
+		console.log("this is the error for inserting a new chat", error);
+	}
+	if (data && data.length !== 0) {
+		console.log("the inserting for a id", data);
+	}
 	const messageInput = messageForm.messageInput.value;
-	const message = {
-		senderID: loggedUser,
-		receiverID: doctorID,
-		message: messageInput,
-	};
-	sendNewMessage(message);
+	if (messageInput === "") {
+		chatwindow.innerHTML = `You cannot submit a empty message`;
+		return;
+	} else {
+		const message = {
+			senderID: loggedUser,
+			receiverID: doctorID,
+			message: messageInput,
+			chatID: data[0].id,
+			payID: data[0].pay_id,
+		};
+		sendNewMessage(message);
+	}
 }
 
 //send a new message to the server.
@@ -186,7 +205,6 @@ async function receiveNewMessage() {
 
 //render the message to chat box, the sender in the right and the receiver to the left also clear the container not to duplicate them
 function appendMessages(message) {
-	
 	const messageElement = document.createElement("div");
 	messageElement.className =
 		message.senderID === loggedUser ? "message sender" : "message receiver";
@@ -207,26 +225,64 @@ function renderMessages(messages) {
 }
 
 //fetch the message from the server for the login user and display.
-async function fetchMessagesFromServer() {
+async function fetchMessagesFromServer(payID, chatID, date) {
 	const { data, error } = await supabase
 		.from("chat_room")
 		.select("*")
 		.order("time", { ascending: true });
-	if (data) {
-		const filterActiveChatId = data.find(
-			(doctorChat) => doctorChat.receiverID === doctorID && doctorChat.senderID === loggedUser);
-		if (filterActiveChatId) {
-			renderMessages(data);
-		} else {
-			chatwindow.innerHTML = `You donot have any conversation here, Click A profile to start Chatting`;
-			// chatInput.setAttribute("readonly", true);
-		}
-	}
+	validateMessages(data, payID, chatID, date);
+	console.log("this is the messages from the server", data);
 	if (error) {
 		console.error("Error fetching messages:", error);
 	}
 }
 
+//validate the messages check if the doctor and patient have any relation ship.
+function validateMessages(data, payID, chatID, date) {
+	console.log(payID, chatID, data[0].payID, chatID);
+
+	if (data && data.length !== 0) {
+		const messageFilter = data.filter(
+			(message) => message.payID === payID && message.chatID === chatID
+		);
+
+		if (messageFilter.length === 0) {
+			chatwindow.innerHTML = `Start a new chat with the doctor`;
+		}
+		//check if the expire date has passeif it has then just close the chat.
+		else if (Date.now() > date) {
+			chatwindow.innerHTML = `Sorry Your Time have expire with the doctor `;
+			chatInput.setAttribute("readonly", true);
+			sendBtn.disabled = true;
+			sendBtn.style.background = "#ccc";
+		} else {
+			renderMessages(messageFilter);
+		}
+	} else {
+		chatwindow.innerHTML = `Click the window to start chatting`;
+	}
+}
+
+async function getNewChatId() {
+	const { data, error } = await supabase
+		.from("unique_chatID")
+		.select("*")
+		.eq("patientid", loggedUser);
+	if (error) {
+		console.log("this is the error for inserting a new chat", error);
+	}
+	if (data && data.length !== 0) {
+		console.log(data);
+		const chatID = data[0].id;
+		const payID = data[0].pay_id;
+		const date = data[0].expireDate;
+
+		await fetchMessagesFromServer(payID, chatID, date);
+	}
+}
+
+getNewChatId();
+
 receiveNewMessage();
+
 getDoctorProfileDetails(doctorID);
-fetchMessagesFromServer();

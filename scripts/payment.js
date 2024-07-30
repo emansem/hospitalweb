@@ -34,9 +34,9 @@ async function checkIfUserHavePlanWithADoctor(subscription) {
 	const doctorIdSub = data[0].doctorid;
   const patientId = data[0].patientid
 		const id = data[0].id;
-		if (doctorIdSub ===doctorId && patientId === logUser ) {
+		if (doctorIdSub === doctorId && patientId === logUser ) {
 			//UPDATE THE subscription DETAILS INSTEAD
-			updatePlanIfAlreadyPurchase(subscription, id);
+			// updatePlanIfAlreadyPurchase(subscription, id);
       return;
 		}
 	} else {
@@ -87,7 +87,7 @@ function allInputFields() {
 	//get the time in 24hrs and and next payment payment payment date;
 	const plandetails = JSON.parse(localStorage.getItem("plandetails"));
 	const timeNow = Date.now();
-	const oneDay = timeNow + 10 * 60 * 1000;
+	const oneDay = timeNow +24 * 60 * 60 * 1000;
 	const next_pay_date = timeNow + 30 * 24 * 60 * 60 * 1000;
 	
 	const planName = plandetails.planName;
@@ -108,6 +108,7 @@ function allInputFields() {
 		};
 		checkIfUserHavePlanWithADoctor(savePayinfo);
 		updateUserPayId(savePayinfo.pay_id, savePayinfo.next_pay_date);
+    createChatId(savePayinfo.pay_id, oneDay);
 		// this is to check if the plan name is Monthly we save the time on only for monthly.
 	} else if (planName === "Monthly") {
 		const saveMonthlyPay = {
@@ -122,6 +123,7 @@ function allInputFields() {
 		};
 		checkIfUserHavePlanWithADoctor(saveMonthlyPay);
 		updateUserPayId(saveMonthlyPay.pay_id, saveMonthlyPay.next_pay_date);
+    createChatId(saveMonthlyPay.pay_id, next_pay_date);
 	}
 
 	//doctor history input fields
@@ -275,4 +277,25 @@ async function createNewHistoryForDoctor(history) {
 	if (error) {
 		console.error("this is the  error  for inserting an new history", error);
 	}
+}
+
+//create a chat room id for each doctor
+
+async function createChatId(payid, date){
+  const usersInfo = {
+    pay_id:payid,
+    doctorid: doctorId,
+    patientid:logUser,
+    message:'hello',
+    expireDate: date
+
+  }
+  const {data,error} = await supabase.from("unique_chatID").insert([usersInfo]).select();
+  if(error){
+    console.log('this is the error for inserting a new chat', error)
+  }
+  if(data && data.length !==0){
+    console.log('the inserting for a id', data);
+  }
+
 }
