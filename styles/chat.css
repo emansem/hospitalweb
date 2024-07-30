@@ -183,12 +183,7 @@ a{
   font-weight: 500;
   margin-top: 0.2rem;
 }
-.messages{
-  margin-top: 4rem;
-  padding-bottom: 5rem;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+
 .message-wrapper {
   position: relative;
   height: 100%;
@@ -206,9 +201,7 @@ a{
   background: var(--background);
 
 }
-.bottom{
-  margin-top: 400px;
-}
+
 
 .box-wraper{
   width: 100%;
@@ -250,39 +243,51 @@ margin-right: 0.4rem;
 
 }
 
+/* Styles for the messages container */
 .messages {
-  padding: 2rem;
-  overflow-y: auto; /* Changed from scroll to auto */
-  overflow-x: hidden;
+  padding: 0rem 2rem;
+  width: 100%;
+  margin-block: 1rem;
+  margin-bottom: 20rem;
+  overflow-y: scroll;
 }
 
+/* Styles for the scrollable wrapper that contains the messages */
 .senderWrapper {
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  text-align: right;
+  /* max-height: 700px; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  margin-bottom: 20rem;
+  margin-top: 1rem;
+}
+
+/* Styles for the custom scrollbar */
+
+
+.sender, .receiver {
+ width: 100%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .receiver {
-  font-size: 18px;
-  display: flex;
-  flex-direction: column;
-  max-width: 80%;
-  background: rgba(0, 0, 0, 0.05);
-  padding: 0.4rem;
-  border-radius: 1.8rem;
+float: left;
+  background-color: #FFFFFF;
+  max-width: 500px;;
 }
 
 .sender {
-  background-color: rgba(0, 0, 0, 0.1);
-  margin-block: 0.8rem;
-  padding: 0.4rem;
-  border-radius: 1.8rem;
-  align-self: flex-end;
+  background-color: #DCF8C6;
+  align-items: flex-end;
+  max-width: 500px;;
+float: right;
+margin-right: 3rem;
+ 
+
 }
-.sender:last-child{
-  margin-bottom: 10rem;
-}
+
 .senderMessage,
 .message-text {
   font-size: 20px;
@@ -290,7 +295,4 @@ margin-right: 0.4rem;
   padding: 0.2rem;
   color: #999;
   font-family: var(--font-heading);
-}
-.receiver{
-  margin-top: 1rem;
 }

@@ -235,12 +235,13 @@ function allVariablesForToCompare(subcription) {
 // check if the the patient have purchase a plan or not if he has, then check if the plan havae expired or doctor id is the doctor he subscribed and type plan he did purchase;
 
 	function checkIfPatientBoughtAplan(payOnce,monthlySubscription,typeOfSubscription,doctorSubsciptionId,next_pay_date) {
-		let contactBtb;
+		
 			if (
 				typeOfSubscription === payOnce &&
 				doctorSubsciptionId === doctorId &&
 				Date.now() < next_pay_date
 			) {
+				let contactBtb;
 				contactBtb = `<a href ='/pages/chats.htmls.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Chat Now</a>`
 				return getDoctorDetails(contactBtb);
 			} else if (
@@ -248,10 +249,12 @@ function allVariablesForToCompare(subcription) {
 				doctorSubsciptionId === doctorId &&
 				Date.now() < next_pay_date
 			) {
+				let contactBtb;
 				contactBtb = `<a href ='/pages/chats.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Chat Now</a>`
 				return getDoctorDetails(contactBtb);
 				
 			} else {
+				let contactBtb;
 				contactBtb = `<a href ='/pages/doctorplans.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Contact Me</a>`
 				return getDoctorDetails(contactBtb);
 				
