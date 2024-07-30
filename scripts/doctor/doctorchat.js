@@ -39,8 +39,8 @@ getAllPatients();
 //get all the patient details from the users database;
 
 async function getAllPatientsDetails(patientID) {
-	console.log("Input patient IDs:", patientID);
-	console.log(patientID);
+
+
 
 	const { data, error } = await supabase
 		.from("users")
@@ -53,7 +53,7 @@ async function getAllPatientsDetails(patientID) {
 }
 //create a html details for the pateints.
 function createPatientListItem(patient) {
-	console.log(patient);
+
 	const listItem = document.createElement("li");
 	listItem.className = "patient-item";
 	listItem.id = patient.id;
@@ -69,14 +69,14 @@ function createPatientListItem(patient) {
 //render the pateints on the web page.
 
 function renderPatientList(patients) {
-	console.log(patients);
+
 	patients.forEach((patient) => {
 		const listItem = createPatientListItem(patient);
 
 		patientList.appendChild(listItem);
 	});
 	const patientItem = document.querySelectorAll(".patient-item");
-	console.log(patientItem);
+
 	getParentElForPatientList(patientItem);
 }
 
@@ -166,8 +166,7 @@ async function sendNewMessage(message) {
 		if (error) throw error;
 		if (data && data.length !== 0) {
 			console.log(data);
-			//append the recent message you just sent.
-			appendMessages(data[0]);
+			
 			messageForm.messageInput.value = "";
 		} else {
 			console.log("no data here");
@@ -192,7 +191,7 @@ async function receiveNewMessage() {
 		.on("INSERT", (payload) => {
 			console.log("new message", payload.new);
 			localSaveMessage.push(payload.new);
-			appendMessages(payload.new);
+			// appendMessages(payload.new);
 			fetchMessagesFromServer();
 		})
 		.subscribe();
@@ -216,6 +215,7 @@ function renderMessages(messages) {
 	console.log(messages);
 	messages.forEach((message) => {
 		appendMessages(message);
+    console.log(message)
 	});
 }
 
@@ -224,6 +224,7 @@ async function fetchMessagesFromServer(payID, chatID, date) {
 	const { data, error } = await supabase
 		.from("chat_room")
 		.select("*")
+
 		.order("time", { ascending: true });
 	validateMessages(data, payID, chatID, date);
 	console.log("this is the messages from the server", data);
@@ -235,27 +236,34 @@ async function fetchMessagesFromServer(payID, chatID, date) {
 //validate the messages check if the doctor and patient have any relation ship.
 function validateMessages(data, payID, chatID, date) {
 	console.log(payID, chatID, data[0].payID, chatID);
-     console.log(data);
-     if (data && data.length !== 0) {
-  const messageFilter = data.filter(
-    (message) => message.payID === payID && message.chatID === chatID
-  );
 
-  if (messageFilter.length === 0) {
-    chatwindow.innerHTML = `Start a new chat with the doctor`;
-  }
-  //check if the expire date has passeif it has then just close the chat.
-  else if (Date.now() > date) {
-    chatwindow.innerHTML = `Sorry Your Time have expire with the doctor `;
-    chatInput.setAttribute("readonly", true);
-    sendBtn.disabled = true;
-    sendBtn.style.background = "#ccc";
-  } else {
-    renderMessages(messageFilter);
-  }
-} else {
-  chatwindow.innerHTML = `Click the window to start chatting`;
+  data.forEach(message=>{
+if(message.payID ===payID && message.senderID ===loggedUser &&  message.receiverID ===patientId){
+appendMessages(message)
 }
+  })
+  const findMessage = data.find(message=>message.senderID ===patientId || message.senderID === loggedUser);
+  if(findMessage){
+   appendMessages(findMessage)
+  }
+//      console.log(data);
+//      if (data && data.length !== 0) {
+ 
+//   if (data.length === 0) {
+//     chatwindow.innerHTML = `Start a new chat with the doctor`;
+//   }
+//   //check if the expire date has passeif it has then just close the chat.
+//   else if (Date.now() > date) {
+//     chatwindow.innerHTML = `Sorry Your Time have expire with the doctor `;
+//     chatInput.setAttribute("readonly", true);
+//     sendBtn.disabled = true;
+//     sendBtn.style.background = "#ccc";
+//   } else if( loggedUser === patientId && payID === data) {
+   
+//   }
+// } else {
+//   chatwindow.innerHTML = `Click the window to start chatting`;
+// }
 
 }
 
@@ -263,7 +271,8 @@ async function getNewChatId(activeChatId) {
 	const { data, error } = await supabase
 		.from("unique_chatID")
 		.select("*")
-		.eq("patientid", activeChatId);
+		.eq("patientid", activeChatId)
+    .eq('doctorid', loggedUser)
     
 	if (error) {
 		console.log("this is the error for inserting a new chat", error);
