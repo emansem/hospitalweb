@@ -174,21 +174,7 @@ function renderDoctorProfile(user) {
 						</section>
 					  </div>`;
 
-  // const pay_id = user[0].pay_id;
-  // const nextTimeToPay = user[0].next_pay_date;
-  // const btn = document.querySelector(".btn");
-  // if (btn) {
-  // }
 
-  // if (btn) {
-  // 	btn.addEventListener("click", function (e) {
-  // 		e.preventDefault();
-  // 		// reQuestPay();
-  // 	});
-  // }
-
-  // checkUserPaySatus(premium, upgradeBtn, nextTimeToPay, pay_id);
-  // checkExpireDate(pay_id, nextTimeToPay);
 }
 
 // we have to get all the subscription for the patient and check.
@@ -242,7 +228,7 @@ function allVariablesForToCompare(subcription) {
 				Date.now() < next_pay_date
 			) {
 				let contactBtb;
-				contactBtb = `<a href ='/pages/chats.htmls.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Chat Now</a>`
+				contactBtb = `<a href ='/pages/doctorchatroom.html' class='btn' style="margin-left: 1rem;">Chat Now</a>`
 				return getDoctorDetails(contactBtb);
 			} else if (
 				typeOfSubscription === monthlySubscription &&
@@ -250,7 +236,7 @@ function allVariablesForToCompare(subcription) {
 				Date.now() < next_pay_date
 			) {
 				let contactBtb;
-				contactBtb = `<a href ='/pages/chats.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Chat Now</a>`
+				contactBtb = `<a href ='/pages/doctorchatroom.html' class='btn' style="margin-left: 1rem;">Chat Now</a>`
 				return getDoctorDetails(contactBtb);
 				
 			} else {
