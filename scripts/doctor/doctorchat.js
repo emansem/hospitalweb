@@ -254,12 +254,10 @@ if(filterMessages.length === 0){
 }else if(filterMessages !==0){
   renderMessages(filterMessages)
   return
-}else if(Date.now() > date ){
- chatwindow.innerHTML =  `<div class='headings' >You cannot this doctor,<br>Your plan have expire, renew it</div>`
-return
+}
 }
 
-}
+
 
 //get patient and doctor unique chat id
 async function getNewChatId(activeChatId, loginUser) {

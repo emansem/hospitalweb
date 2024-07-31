@@ -16,6 +16,7 @@ const doctorID = Number(idQuery);
 const chatwindow = document.querySelector(".chatwindow");
 const doctorList = document.querySelector(".patient-list");
 const chatInput = document.getElementById("chat-input");
+const sendBtn = document.querySelector('.sendBtn');
 
 
 
@@ -238,8 +239,23 @@ async function fetchMessagesFromServer(chatID, date) {
 function validateMessages(chatID, date, messages) {
 //loop through the message.
 const filterMessages =  messages.filter(message=>message.chatID === chatID);
-console.log(filterMessages)
-renderMessages(filterMessages);
+
+
+if(filterMessages.length === 0){
+	chatwindow.innerHTML = `<div class='headings' >You have no message</div>`
+	return;
+  }else if(Date.now() > date){
+   chatwindow.innerHTML =  `<div class='headings' >You cannot text this doctor again <br>Your plan have expire, renew it</div>`
+   chatInput.setAttribute('readonly', true);
+   sendBtn.disabled =true;
+   sendBtn.style.background ='#ccc'
+   
+  return
+  }
+  else if(filterMessages !==0){
+	renderMessages(filterMessages)
+	return
+  }
 
 
 }
@@ -260,6 +276,7 @@ async function getNewChatId(activeChatId, loginUser) {
 		const chatID = data[0].payID;
     const date = data[0].expireDate
 	console.log(chatID)
+	console.log('this is the expiredate now', date);
 	
 
 	
@@ -271,3 +288,29 @@ getNewChatId(doctorID, loggedUser);
 getActiveDoctorMessageAndProfile(doctorID);
 
 receiveNewMessage();
+//verify who is login
+async function getUser(){
+	const {data,error} = await supabase.from("users").select('type').eq('id', loggedUser);
+   if(data[0].type === 'patient'){
+   return
+   }else{
+	window.location.href = '/pages/doctorchatroom.html'
+	return;
+  }
+
+  }
+  getUser();
+const timeNow = Date.now()
+  const tenMinutesLater = timeNow + 10 * 60 * 1000; // Calculate the time 10 minutes from now
+
+// To check if the time has expired
+if (Date.now() > tenMinutesLater) {
+    console.log("The time has expired.");
+} else {
+    console.log("The time has not expired yet.");
+}
+if(Date.now() > 1722437578745){
+	console.log('your plan has expire')
+}else{
+	console.log('you are subscribe')
+}
