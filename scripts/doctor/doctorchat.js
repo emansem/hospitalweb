@@ -132,7 +132,7 @@ async function messageDetails() {
 		const { data, error } = await supabase
 			.from("unique_chatID")
 			.select("*")
-			.eq("doctorid", loggedUser);
+			.eq("patientid", patientId);
 		if (error) throw error;
 		if (data && data.length !== 0) {
 			console.log("the inserting for a id", data);
@@ -147,9 +147,10 @@ async function messageDetails() {
 			receiverID: patientId,
 			message: messageInput,
 			chatID: data[0].id,
-			payID: data[0].pay_id,
+		
 		};
 		await sendNewMessage(message);
+    console.log('chat-id', message.chatID)
 	} catch (error) {
 		console.error("Error in messageDetails:", error);
 	}
@@ -220,13 +221,13 @@ function renderMessages(messages) {
 }
 
 //fetch the message from the server for the login user and display.
-async function fetchMessagesFromServer(payID, chatID, date) {
+async function fetchMessagesFromServer(chatID, date) {
 	const { data, error } = await supabase
 		.from("chat_room")
 		.select("*")
 
 		.order("time", { ascending: true });
-	validateMessages(data, payID, chatID, date);
+	validateMessages(chatID, date, data);
 	console.log("this is the messages from the server", data);
 	if (error) {
 		console.error("Error fetching messages:", error);
@@ -234,36 +235,11 @@ async function fetchMessagesFromServer(payID, chatID, date) {
 }
 
 //validate the messages check if the doctor and patient have any relation ship.
-function validateMessages(data, payID, chatID, date) {
-	console.log(payID, chatID, data[0].payID, chatID);
-
-  data.forEach(message=>{
-if(message.payID ===payID && message.senderID ===loggedUser &&  message.receiverID ===patientId){
-appendMessages(message)
-}
-  })
-  const findMessage = data.find(message=>message.senderID ===patientId || message.senderID === loggedUser);
-  if(findMessage){
-   appendMessages(findMessage)
-  }
-//      console.log(data);
-//      if (data && data.length !== 0) {
- 
-//   if (data.length === 0) {
-//     chatwindow.innerHTML = `Start a new chat with the doctor`;
-//   }
-//   //check if the expire date has passeif it has then just close the chat.
-//   else if (Date.now() > date) {
-//     chatwindow.innerHTML = `Sorry Your Time have expire with the doctor `;
-//     chatInput.setAttribute("readonly", true);
-//     sendBtn.disabled = true;
-//     sendBtn.style.background = "#ccc";
-//   } else if( loggedUser === patientId && payID === data) {
-   
-//   }
-// } else {
-//   chatwindow.innerHTML = `Click the window to start chatting`;
-// }
+function validateMessages(chatID, date, messages) {
+	//loop through the message.
+ const filterMessages =  messages.filter(message=>message.chatID === chatID);
+ console.log(filterMessages)
+ renderMessages(filterMessages)
 
 }
 
@@ -272,7 +248,7 @@ async function getNewChatId(activeChatId) {
 		.from("unique_chatID")
 		.select("*")
 		.eq("patientid", activeChatId)
-    .eq('doctorid', loggedUser)
+   
     
 	if (error) {
 		console.log("this is the error for inserting a new chat", error);
@@ -280,11 +256,11 @@ async function getNewChatId(activeChatId) {
 	if (data && data.length !== 0) {
 		console.log(data);
 		const chatID = data[0].id;
-		const payID = data[0].pay_id;
-		const date = data[0].expireDate;
-    console.log(data,payID ,chatID)
+    const date = data[0].expireDate
+    console.log(chatID)
+	
 
-		await fetchMessagesFromServer(payID, chatID, date);
+		await fetchMessagesFromServer(chatID, date);
 	}
 }
 
