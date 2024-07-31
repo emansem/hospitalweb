@@ -8,10 +8,10 @@ const supabaseKey =
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const logUser = JSON.parse(localStorage.getItem("activeId"));
-const getStoreUsers = JSON.parse(localStorage.getItem("id"));
+
 const payForm = document.querySelector(".payForm");
 const sucess = document.querySelector(".success");
-const user = getStoreUsers.find((user) => user.id === logUser);
+
 const shownextDate = document.getElementById("nextDate");
 const cancel = document.querySelector(".cancel");
 const plandetails = JSON.parse(localStorage.getItem("plandetails"));
@@ -21,6 +21,8 @@ const doctorInfo = window.location.search.split("=")[1];
 const planId = doctorInfo.split(".")[0];
 const doctorIdString = doctorInfo.split(".")[1];
 const doctorId = Number(doctorIdString);
+const paymentMethods = document.querySelector('.paymentMethods');
+const paymentAmountWrapper = document.querySelector(".payform__body--amount");
 
 async function checkIfUserHavePlanWithADoctor(subscription) {
 	const { data, error } = await supabase
@@ -215,12 +217,9 @@ async function getPlanDetils() {
 			doctorId: doctorPlanId,
 			amount: data[0].amount,
 		};
-		const paymentAmountWrapper = document.querySelector(
-			".payform__body--amount"
-		);
-		paymentAmountWrapper.innerHTML = `<span class="amountText">Payment amount:</span>
-                    <span class="amount">$${data[0].amount}</span>`;
+		getChargesAndCommissions(data[0].amount);
 		localStorage.setItem("plandetails", JSON.stringify(plandetails));
+		
 	}
 	if (error) {
 		console.log("this is the error for the plan details");
@@ -262,6 +261,59 @@ async function createNewHistoryForDoctor(history) {
 	}
 }
 
+//add the payment so that the users can select.
+async function getAllPaymentMethods(){
+	paymentMethods.innerHTML = '';
+	const {data, error} = await supabase.from('payment_methods').select('*');
+	if(data.length !==0){
+		console.log('this is are the payment methods', data);
+		const paymetMethod =data.map(method=>{
+			return `<option value="mtn">${method.name}</option>`
+		});
+		console.log(paymetMethod);
+		paymentMethods.innerHTML+= paymetMethod;
+
+	}
+	if(error){
+		console.log(error);
+	}
+}
+getAllPaymentMethods();
+
+//fetch all and apply users charges 
+async function getChargesAndCommissions(amount){
+	const {data, error} = await supabase.from('general_settings').select('*');
+	if(data.length !==0){
+		console.log('here is the general settings',data);
+		const patientCharges = data[0].patient_charges;
+		const doctorCommission = data[0].doctors_comission;
+		renderAmountAndCharges(patientCharges, amount);
+	}
+	if(error){
+		console.log('this is the error fetching general settings', error);
+	}
+}
 
 
+//render the amount and charges on the web page
+async function renderAmountAndCharges(charges, amount){
+	const patientCharge = (amount / 100)* amount;
+	const totalAmount = patientCharge + amount
+		paymentAmountWrapper.innerHTML = ` <div>
+                    <span class="amountText">Payment amount:</span>
+                    <span class="amount">$${amount}</span>
+                   </div>
+                 <div>
+                  <span class="amountText">We charge ${charges}%:</span>
+                  <span class="amount">$${patientCharge}</span>
+                 </div>
+                 <div>
+                  <span class="amountText">Total:</span>
+                  <span class="amount">$${totalAmount}</span>
+                 </div>`;
+}
 
+//update the doctors balance 
+async function updateDoctorsBalance(){
+	const {data, error} = await supabase.re
+}

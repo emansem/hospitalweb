@@ -748,17 +748,27 @@ transition: all 0.4s linear;
 }
 .payform__body--amount{
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 	gap: 1rem;
 	color: var(--color-accent);
 	font-family: var(--font-heading);
-	font-size: 18px;
+	
 	background-color: var(--color-dark);
-	padding: 0.3rem 1rem;
+	padding: 0.6rem 1rem;
 	border-radius: 1.6rem;
 }
+.payform__body--amount div{
+	display:  flex;
+	gap: 1rem;
+}
 .amount{
-	color: var(--color-light);
+color: #ccc;
+	font-size: 16px;
+}
+.amountText{
+	font-size: 18px;
+	
+	
 }
 .pay-input{
 	width: 300px;
