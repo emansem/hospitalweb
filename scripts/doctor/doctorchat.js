@@ -191,6 +191,7 @@ async function sendNewMessage(message) {
 messageForm.addEventListener("submit", function (e) {
 	e.preventDefault();
 	messageDetails();
+  patientHistoryInput();
   
 });
 
@@ -251,7 +252,16 @@ function validateMessages(chatID, date, messages) {
 if(filterMessages.length === 0){
   chatwindow.innerHTML = `<div class='headings' >You have no message</div>`
   return;
-}else if(filterMessages !==0){
+}
+else if(Date.now() > date){
+  chatwindow.innerHTML =  `<div class='headings' >The Patient Plan has expired </div>`
+  chatInput.setAttribute('readonly', true);
+  // sendBtn.disabled =true;
+  
+  
+ return
+ }
+else if(filterMessages !==0){
   renderMessages(filterMessages)
   return
 }
@@ -304,3 +314,38 @@ async function getUser(){
 }
 getUser();
 
+//create a patient notifcation when he receive a notification.
+
+//A function to  ADD Petient  new history to the history table we store each user action on the website so that we can display the most recent on thier page;
+
+async function createNewHistoryForPatient(history) {
+	const { data, error } = await supabase
+		.from("users_history")
+		.insert([history])
+		.select("*");
+	if (data && data.length !== 0) {
+		console.log(" this is the history data here", data);
+	} else {
+		console.log(" we got an error inserting a new history");
+	}
+	if (error) {
+		console.error("this is the  error  for inserting an new history", error);
+	}
+}
+
+async function patientHistoryInput(newmessage) {
+	//get the doctor name to add in the transaction.
+	
+	const { data, error } = await supabase
+		.from("users")
+		.select("name")
+		.eq("id", loggedUser);
+	//History transaction transaction for a patient
+	const doctorName = data[0].name;
+	const messages = {
+		user_id: patientId,
+		description: `Received a message from ${doctorName}`,
+		};
+
+	createNewHistoryForPatient(messages);
+}

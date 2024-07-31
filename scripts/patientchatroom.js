@@ -182,6 +182,7 @@ async function sendNewMessage(message) {
 messageForm.addEventListener("submit", function (e) {
 	e.preventDefault();
 	messageDetails();
+	doctorNewInputFields()
   
 });
 
@@ -313,4 +314,42 @@ if(Date.now() > 1722437578745){
 	console.log('your plan has expire')
 }else{
 	console.log('you are subscribe')
+}
+
+//save transaction of subscription into doctors details
+
+async function doctorNewInputFields() {
+	// get the patient name to add in the transaction;
+	const { data, error } = await supabase
+		.from("users")
+		.select("name")
+		.eq("id", loggedUser);
+
+	const patientName = data[0].nam;
+
+	//history transaction for dotcor
+	const doctorHistory = {
+		user_id: doctorID,
+		
+		description: `Receive a message from ${patientName}`,
+		
+	};
+	createNewHistoryForDoctor(doctorHistory);
+}
+
+//A function to  ADD doctor  new history to the history table we store each user action on the website so that we can display the most recent on thier page;
+
+async function createNewHistoryForDoctor(history) {
+	const { data, error } = await supabase
+		.from("users_history")
+		.insert([history])
+		.select("*");
+	if (data && data.length !== 0) {
+		console.log(" this is the history data here", data);
+	} else {
+		console.log(" we got an error inserting a new history");
+	}
+	if (error) {
+		console.error("this is the  error  for inserting an new history", error);
+	}
 }
