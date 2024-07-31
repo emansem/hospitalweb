@@ -8,57 +8,47 @@ const saveUsers = JSON.parse(localStorage.getItem("id"));
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 async function loggedUserIn() {
- 
-  
-    const phone = loginform.phone.value;
+  const email = loginform.email.value;
 
-    const password = loginform.password.value;
-  
-    const {data, error} = await supabase.from('users').select('*').eq("phone", phone);
-    console.log(data);
-    if(data.length ===0){
-     alert("Wrong credentials");
-      submitBtn.innerHTML = `<span>Login</span>`;
-      return
-      
-      }else if(data[0].phone !== phone || data[0].password !== password){
-         alert("Wrong credentials");
-      submitBtn.innerHTML = `<span>Login</span>`;
-      return
-      }else{
-        
-           localStorage.setItem("activeId", JSON.stringify(data[0].id));
-           
-             alert("SuccessFul Login!");
-             loginform.reset();
-           window.location.href = `/pages/dashboard.html`;
-      }
-       
-      }
-     
-    
-   
-  
-      
-    
-     
-    
+  const password = loginform.password.value;
 
+  signInUser(password, email);
+  saveLoginUser(email)
+}
+//sigin a new  using supase base auth.
 
-    
-      
-   
- 
+async function signInUser(password, email) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+  if (error) {
+    console.error("Error logging in:", error.message);
+    alert("Login failed. Please check your credentials and try again.");
+    submitBtn.innerHTML = `<span>Sign In</div>`;
+    return;
+  }
+  console.log("login successful", data);
+  location.href = `/pages/dashboard.html`;
+  const jwtToken = data.session.access_token;
+  localStorage.setItem("accessToken", jwtToken);
+}
 
 //   s5nkolosite@gmail.com 6667767677
 
-loginform.addEventListener("submit", function (e) {
+loginform.addEventListener("submit", function(e) {
   e.preventDefault();
   submitBtn.innerHTML = `<span>Please wait</span><div class="loader"></div>`;
   loggedUserIn();
 });
 console.log(saveUsers);
 
-const logUser = JSON.parse(localStorage.getItem("activeId"));
-console.log(logUser);
+//save the login user in the local storage
 
+async function saveLoginUser(email){
+  const {data, error} = await supabase.from('users').select("*").eq("email", email);
+  if(data){
+    console.log(data)
+    localStorage.setItem('activeId', data[0].id);
+  }
+}

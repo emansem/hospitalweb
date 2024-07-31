@@ -268,10 +268,12 @@ async function getNewChatId() {
 		.from("unique_chatID")
 		.select("*")
 		.eq("patientid", loggedUser);
+		console.log(data)
 	if (error) {
 		console.log("this is the error for inserting a new chat", error);
 	}
 	if (data && data.length !== 0) {
+
 		console.log(data);
 		const chatID = data[0].id;
 		const payID = data[0].pay_id;

@@ -2,11 +2,7 @@
 
 // const loginform = document.getElementById("loginform");
 const logUser = JSON.parse(localStorage.getItem("activeId"));
-const getStoreUsers = JSON.parse(localStorage.getItem("id"));
 
-const appointments = document.querySelector(".appointments");
-const hideAppt = document.querySelector(".top");
-const hideDotors = document.querySelector(".top-doct");
 
 const topDoctor = document.querySelector(".appt");
 const title = document.querySelector(".title");
@@ -18,19 +14,32 @@ const supabaseKey =
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
+//validate the users 
+function validateUsers(){
+const accessToken = localStorage.getItem('accessToken');
+console.log(accessToken);
+if(accessToken){
+	console.log('good job');
+}
+else{
+	alert('Please login to continue')
+	window.location.href = "/pages/login.html";
+	return;
+}
+return accessToken;
+}
+validateUsers();
+
 
 // check the type of user that login and see if he have anaccount
+
 async function LogUserType() {
 	const { data, error } = await supabase
 		.from("users")
 		.select("*")
 		.eq("id", logUser);
 		// getAppoinments(data[0].type)
-    if(error || !logUser || !data){
-      alert('Please login to continue')
-      window.location.href = "/pages/login.html";
-      return;
-    }
+   
 	if (data.length !== 0) {
 		generateSideBar(logUser, data[0].type);
 	} 
@@ -134,61 +143,13 @@ function generateSideBar(id, type) {
 }
 
 function logUserout() {
-	localStorage.removeItem("activeId");
+	localStorage.removeItem("accessToken");
 	setTimeout(function (e) {
 		window.location.href = "/pages/login.html";
-	}, 2000);
+	}, 1000);
 }
 
 
-// // fetch appoinmnet and display to the users
-// async function getAppoinments(type) {
-	
-// 	hideDotors.innerHTML = "";
-
-// 	const { data, error } = await supabase
-// 		.from("appointments")
-// 		.select("*")
-// 		.eq("doctorId", logUser);
-// 		let patientId;
-// 	const item = data;
-	
-// 	if(data.length ===0){
-// 		console.log(' you dont have any appoinment')
-// 	}else{
-// 	 patientId = data[0].patientid;
-// 	}
-   
-// const userType = type;
-// console.log('usertype', userType)
-// 	if (data.length === 0 && userType === 'doctor') {
-// 		hideAppt.style.display = "block";
-// 		hideDotors.style.display = "none";
-//        topDoctor.style.display= 'none'
-		
-// 	} else {
-// 		if (data.length !== 0 || userType === "doctor") {
-// 			// get user profile to add to the appoinment;
-
-// 	async function getUserAvaterPhoto() {
-// 		const { data } = await supabase
-// 			.from("users")
-// 			.select("*")
-// 			.eq("id", patientId);
-
-// 		const userPhoto = data[0].userAvatar;
-// 		renderDoctorRencentAppointment(userPhoto, item);
-  
-// 	}
-// 	getUserAvaterPhoto();
-
-// 			//  display doctors appoinments
-// 		}else if(data.length === 0 ){
-// 			getTopDoctors();
-    
-//     }
-// 	}
-// }
 
 
 // get the best doctors with high ratings
