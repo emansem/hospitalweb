@@ -53,7 +53,7 @@ async function getAllPatientsDetails(patientID) {
 }
 //create a html details for the pateints.
 function createPatientListItem(patient) {
-
+  
 	const listItem = document.createElement("li");
 	listItem.className = "patient-item";
 	listItem.id = patient.id;
@@ -69,7 +69,10 @@ function createPatientListItem(patient) {
 //render the pateints on the web page.
 
 function renderPatientList(patients) {
-
+if(patients.length === 0){
+  patientList.innerHTML = 'No patient Found';
+  return
+}
 	patients.forEach((patient) => {
 		const listItem = createPatientListItem(patient);
 
@@ -108,19 +111,25 @@ async function getActivePatientMessageAndProfile(activeChatId) {
 //update the top header for for the patient
 
 function updateChatHeader(activePatient) {
-	const chatHeader = document.getElementById("chat-header");
-	if (activePatient) {
-		chatHeader.innerHTML = `
-     <img src="${activePatient[0].userAvatar || "https://shorturl.at/8TClo"}" alt="${activePatient.name}">
-      <div>
-        <div class="name">${activePatient[0].name}</div>
-        <div class="status">Online</div>
-      </div>
-    `;
-	} else {
-		chatHeader.innerHTML = "Select a patient to start chatting";
-		document.addEventListener;
-	}
+  if(activePatient.length === 0){
+    return;
+
+  }else{
+    const chatHeader = document.getElementById("chat-header");
+    if (activePatient) {
+      chatHeader.innerHTML = `
+       <img src="${activePatient[0].userAvatar || "https://shorturl.at/8TClo"}" alt="${activePatient.name}">
+        <div>
+          <div class="name">${activePatient[0].name}</div>
+          <div class="status">Online</div>
+        </div>
+      `;
+    } else {
+      chatHeader.innerHTML = "Select a patient to start chatting";
+      document.addEventListener;
+    }
+  }
+
 }
 
 //call the functiont get it all the time not only they click
@@ -201,7 +210,7 @@ async function receiveNewMessage() {
 
 //render the message to chat box, the sender in the right and the receiver to the left also clear the container not to duplicate them
 function appendMessages(message) {
-	const messageElement = document.createElement("div");
+const messageElement = document.createElement("div");
 	messageElement.className =
 		message.senderID === loggedUser ? "message sender" : "message receiver";
 	console.log(message.senderID);
@@ -214,7 +223,7 @@ function appendMessages(message) {
 // Function to render all messages by appending each one to the chat window
 
 function renderMessages(messages) {
-	console.log(messages);
+  console.log(messages);
 	messages.forEach((message) => {
 		appendMessages(message);
     console.log(message)
@@ -239,11 +248,20 @@ async function fetchMessagesFromServer(chatID, date) {
 function validateMessages(chatID, date, messages) {
 	//loop through the message.
  const filterMessages =  messages.filter(message=>message.chatID === chatID);
- console.log(filterMessages)
- renderMessages(filterMessages)
+if(filterMessages.length === 0){
+  chatwindow.innerHTML = `<div class='headings' >You have no message</div>`
+  return;
+}else if(filterMessages !==0){
+  renderMessages(filterMessages)
+  return
+}else if(Date.now() > date ){
+ chatwindow.innerHTML =  `<div class='headings' >You cannot this doctor,<br>Your plan have expire, renew it</div>`
+return
+}
 
 }
 
+//get patient and doctor unique chat id
 async function getNewChatId(activeChatId, loginUser) {
 	const { data, error } = await supabase
 		.from("unique_chatID")
@@ -273,4 +291,18 @@ getActivePatientMessageAndProfile(patientId);
 receiveNewMessage();
 
 //login
-console.log('this is the login user',loggedUser)
+console.log('this is the login user',loggedUser);
+
+//check if a user is login or not;
+
+async function getUser(){
+  const {data,error} = await supabase.from("users").select('type').eq('id', loggedUser);
+ if(data[0].type === 'doctor'){
+ return
+ }else{
+  window.location.href = '/pages/patientchatroom.html'
+  return;
+}
+}
+getUser();
+

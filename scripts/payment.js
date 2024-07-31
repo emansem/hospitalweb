@@ -84,7 +84,7 @@ function allInputFields() {
 	//get the time in 24hrs and and next payment payment payment date;
 	const plandetails = JSON.parse(localStorage.getItem("plandetails"));
 	const timeNow = Date.now();
-	const oneDay = timeNow +24 * 60 * 60 * 1000;
+	const oneDay = timeNow + 10 * 60 * 1000;
 	const next_pay_date = timeNow + 30 * 24 * 60 * 60 * 1000;
 	
 	const planName = plandetails.planName;
