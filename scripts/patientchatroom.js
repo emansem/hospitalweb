@@ -129,7 +129,7 @@ async function getActiveDoctorMessageAndProfile(activeChatId) {
 async function messageDetails() {
 	try {
 		const { data, error } = await supabase
-			.from("unique_chatID")
+			.from("subscriptions")
 			.select("*")
 			.eq("doctorid", doctorID)
 			.eq("patientid", loggedUser);
@@ -147,7 +147,7 @@ async function messageDetails() {
 			senderID: loggedUser,
 			receiverID: doctorID,
 			message: messageInput,
-			chatID:data[0].payID
+			chatID:data[0].pay_id
 			
 		
 		};
@@ -263,7 +263,7 @@ if(filterMessages.length === 0){
 
 async function getNewChatId(activeChatId, loginUser) {
 	const { data, error } = await supabase
-		.from("unique_chatID")
+		.from("subscriptions")
 		.select("*")
 		.eq("doctorid", activeChatId)
 		.eq("patientid", loginUser)
@@ -273,15 +273,12 @@ async function getNewChatId(activeChatId, loginUser) {
 		console.log("this is the error for inserting a new chat", error);
 	}
 	if (data && data.length !== 0) {
-		console.log(data);
-		const chatID = data[0].payID;
-    const date = data[0].expireDate
+		
+		const chatID = data[0].pay_id;
+        const date = data[0].next_pay_date;
 	console.log(chatID)
 	console.log('this is the expiredate now', date);
-	
-
-	
-    await fetchMessagesFromServer(chatID, date);
+	await fetchMessagesFromServer(chatID, date);
 	}
 }
 
@@ -301,20 +298,7 @@ async function getUser(){
 
   }
   getUser();
-const timeNow = Date.now()
-  const tenMinutesLater = timeNow + 10 * 60 * 1000; // Calculate the time 10 minutes from now
 
-// To check if the time has expired
-if (Date.now() > tenMinutesLater) {
-    console.log("The time has expired.");
-} else {
-    console.log("The time has not expired yet.");
-}
-if(Date.now() > 1722437578745){
-	console.log('your plan has expire')
-}else{
-	console.log('you are subscribe')
-}
 
 //save transaction of subscription into doctors details
 

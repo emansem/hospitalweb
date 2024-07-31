@@ -139,7 +139,7 @@ function updateChatHeader(activePatient) {
 async function messageDetails() {
 	try {
 		const { data, error } = await supabase
-			.from("unique_chatID")
+			.from("subscriptions")
 			.select("*")
 			.eq("patientid", patientId)
       .eq('doctorid', loggedUser)
@@ -156,11 +156,11 @@ async function messageDetails() {
 			senderID: loggedUser,
 			receiverID: patientId,
 			message: messageInput,
-			chatID: data[0].payID,
+			chatID: data[0].pay_id,
 		
 		};
 		await sendNewMessage(message);
-    console.log('chat-id', message.chatID)
+    console.log('chat-id', message.chatID);
 	} catch (error) {
 		console.error("Error in messageDetails:", error);
 	}
@@ -272,7 +272,7 @@ else if(filterMessages !==0){
 //get patient and doctor unique chat id
 async function getNewChatId(activeChatId, loginUser) {
 	const { data, error } = await supabase
-		.from("unique_chatID")
+		.from("subscriptions")
 		.select("*")
 		.eq("patientid", activeChatId)
     .eq('doctorid',loginUser)
@@ -283,10 +283,10 @@ async function getNewChatId(activeChatId, loginUser) {
 	}
 	if (data && data.length !== 0) {
 		console.log(data);
-		const chatID = data[0].payID;
-    const date = data[0].expireDate
+		const chatID = data[0].pay_id;
+    const date = data[0].next_pay_date
     console.log(chatID)
-    const doctorId = data[0].doctorId
+   
 	
 
 		await fetchMessagesFromServer(chatID, date);
@@ -333,7 +333,7 @@ async function createNewHistoryForPatient(history) {
 	}
 }
 
-async function patientHistoryInput(newmessage) {
+async function patientHistoryInput() {
 	//get the doctor name to add in the transaction.
 	
 	const { data, error } = await supabase

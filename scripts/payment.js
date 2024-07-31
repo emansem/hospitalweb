@@ -104,8 +104,7 @@ function allInputFields() {
 			planId: planId,
 		};
 		checkIfUserHavePlanWithADoctor(savePayinfo);
-	
-    createChatId(oneDay,savePayinfo.pay_id);
+
 		// this is to check if the plan name is Monthly we save the time on only for monthly.
 	} else if (planName === "Monthly") {
 		const saveMonthlyPay = {
@@ -119,8 +118,7 @@ function allInputFields() {
 			planId: planId,
 		};
 		checkIfUserHavePlanWithADoctor(saveMonthlyPay);
-	
-    createChatId(next_pay_date, saveMonthlyPay.pay_id);
+
 	}
 
 	//doctor history input fields
@@ -264,24 +262,6 @@ async function createNewHistoryForDoctor(history) {
 	}
 }
 
-//create a chat room id for each doctor
 
-async function createChatId( date , pay_id){
-  const usersInfo = {
-    doctorid: doctorId,
-    patientid:logUser,
-   expireDate: date,
-   payID :pay_id
-
-  }
-  const {data,error} = await supabase.from("unique_chatID").insert([usersInfo]).select();
-  if(error){
-    console.log('this is the error for inserting a new chat', error)
-  }
-  if(data && data.length !==0){
-    console.log('the inserting for a id', data);
-  }
-
-}
 
 
