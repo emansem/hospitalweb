@@ -8,8 +8,8 @@ const supabaseKey =
 // Import and initialize Supabase client
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
-const patientID = JSON.parse(localStorage.getItem("activeId"));
-const loggedUser = doctorID;
+const loggedUser = JSON.parse(localStorage.getItem("activeId"));
+
 const messageForm = document.querySelector("#messageForm");
 const idQuery = window.location.hash.slice(1);
 const doctorID = Number(idQuery);
@@ -85,7 +85,7 @@ function getParentElForDoctorList(doctorsEl) {
 			const activeChatId = this.getAttribute("id");
 			console.log(activeChatId);
 			getActiveDoctorMessageAndProfile(activeChatId);
-      getNewChatId(activeChatId)
+      getNewChatId(loggedUser)
      
 		});
 	});
@@ -96,7 +96,7 @@ async function messageDetails() {
 		const { data, error } = await supabase
 			.from("unique_chatID")
 			.select("*")
-			.eq("doctorid", doctorID);
+			.eq("patientid", loggedUser);
 		if (error) throw error;
 		if (data && data.length !== 0) {
 			
@@ -118,6 +118,35 @@ async function messageDetails() {
 	} catch (error) {
 		console.error("Error in messageDetails:", error);
 	}
+}
+
+function updateChatHeader(activePatient) {
+	console.log(activePatient)
+	const chatHeader = document.getElementById("chat-header");
+	if (activePatient) {
+		chatHeader.innerHTML = `
+     <img src="${activePatient.userAvatar || "https://shorturl.at/8TClo"}" alt="${activePatient.name}">
+      <div>
+        <div class="name">${activePatient[0].name}</div>
+        <div class="status">Online</div>
+      </div>
+    `;
+	} else {
+		chatHeader.innerHTML = "Select a patient to start chatting";
+		document.addEventListener;
+	}
+}
+
+//get the profile image for the active patients and render messages.
+async function getActiveDoctorMessageAndProfile(activeChatId) {
+	const { data, error } = await supabase
+		.from("users")
+		.select("*")
+		.eq("id", activeChatId);
+	if (error) {
+		console.log("this is the error for fetching the data", error);
+	}
+	updateChatHeader(data);
 }
 
 //after the getting the messages, just send the message to the server
@@ -200,6 +229,7 @@ async function fetchMessagesFromServer(chatID, date) {
 
 //validate the messages check if the doctor and patient have any relation ship.
 function validateMessages(chatID, date, messages) {
+	console.log(chatID)
 //loop through the message.
  const filterMessages =  messages.filter(message=>message.chatID === chatID);
  console.log(filterMessages)
@@ -211,7 +241,7 @@ async function getNewChatId(activeChatId) {
 	const { data, error } = await supabase
 		.from("unique_chatID")
 		.select("*")
-		.eq("doctorid", activeChatId)
+		.eq("patientid", activeChatId)
    
     
 	if (error) {
@@ -228,7 +258,7 @@ async function getNewChatId(activeChatId) {
 	}
 }
 
-getNewChatId(doctorID);
-getActivePatientMessageAndProfile(doctorID);
+getNewChatId(loggedUser);
+getActiveDoctorMessageAndProfile(doctorID);
 
 receiveNewMessage();
