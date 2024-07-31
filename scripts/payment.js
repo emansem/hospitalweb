@@ -27,27 +27,28 @@ async function checkIfUserHavePlanWithADoctor(subscription) {
 		.from("subscriptions")
 		.select("*")
 		.eq("patientid", logUser);
-	if (data && data.length !== 0) {
-		console.log(" this is the user data", data[0].id);
-		//filter out the plan that have the doctor id and update if you found on else just create a new subscription.
-
-	const doctorIdSub = data[0].doctorid;
-  const patientId = data[0].patientid
-		const id = data[0].id;
-		if (doctorIdSub === doctorId && patientId === logUser ) {
-			//UPDATE THE subscription DETAILS INSTEAD
-			// updatePlanIfAlreadyPurchase(subscription, id);
-      return;
+		console.log(data);
+		
+		if(data.length !==0){
+			const id = data[0].id;
+			if(doctorId === data[0].doctorid  ){
+				
+				updatePlanIfAlreadyPurchase(subscription, id);
+				console.log('you have and id already')
+		
+			 }else if(data[0].doctorid === doctorId && logUser === data[0].patientid){
+			updatePlanIfAlreadyPurchase(subscription, id)
+			}
+			else if(doctorId !== data[0].doctorid){
+				sendPaymentInfo(subscription)
+			
 		}
-	} else {
-		sendPaymentInfo(subscription);
-    return;
-	}
-
-	if (error) {
-		console.log("this is the error for fetching the data", error);
-	}
+   }else{
+	sendPaymentInfo(subscription)
+   }
 }
+
+
 
 //send user paymentinformation afters subcription
 
@@ -67,11 +68,7 @@ async function sendPaymentInfo(paymeninfo) {
 			shownextDate.innerHTML = ``;
 			cancel.addEventListener("click", function (e) {
 				sucess.classList.add("hideForm");
-				if (user.type === "patient") {
-					// window.location.href = `/pages/doctorprofile.html?id=${doctorId}`;
-				} else {
-					// window.location.href = `/pages/doctorprofile.html`;
-				}
+				
 			});
 			console.log("data", data);
 		} else {
@@ -107,8 +104,8 @@ function allInputFields() {
 			planId: planId,
 		};
 		checkIfUserHavePlanWithADoctor(savePayinfo);
-		updateUserPayId(savePayinfo.pay_id, savePayinfo.next_pay_date);
-    createChatId(oneDay);
+	
+    createChatId(oneDay,savePayinfo.pay_id);
 		// this is to check if the plan name is Monthly we save the time on only for monthly.
 	} else if (planName === "Monthly") {
 		const saveMonthlyPay = {
@@ -122,8 +119,8 @@ function allInputFields() {
 			planId: planId,
 		};
 		checkIfUserHavePlanWithADoctor(saveMonthlyPay);
-		updateUserPayId(saveMonthlyPay.pay_id, saveMonthlyPay.next_pay_date);
-    createChatId(next_pay_date);
+	
+    createChatId(next_pay_date, saveMonthlyPay.pay_id);
 	}
 
 	//doctor history input fields
@@ -201,19 +198,7 @@ async function doctorNewInputFields(doctorId, amount) {
 	createNewHistoryForDoctor(doctorHistory);
 }
 
-// update the patientid on the users table just for reference, but is not needed;
 
-async function updateUserPayId(payid, next_pay_day) {
-	const { data, error } = await supabase
-		.from("users")
-		.update({ pay_id: payid, next_pay_date: next_pay_day })
-		.eq("id", logUser);
-	if (!error) {
-		console.log(error);
-	} else {
-		console.log("this isthe error", error);
-	}
-}
 
 // get the doctor id and plan name to keep and amount to display;
 
@@ -281,11 +266,12 @@ async function createNewHistoryForDoctor(history) {
 
 //create a chat room id for each doctor
 
-async function createChatId(date){
+async function createChatId( date , pay_id){
   const usersInfo = {
     doctorid: doctorId,
     patientid:logUser,
-   expireDate: date
+   expireDate: date,
+   payID :pay_id
 
   }
   const {data,error} = await supabase.from("unique_chatID").insert([usersInfo]).select();

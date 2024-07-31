@@ -21,7 +21,7 @@ async function updateUserInLocalStorage(updatedUser) {
     .update(updatedUser)
     .eq("id", logUser);
     alert("Profile updated successfully!");
-    window.location.href ='/pages/userProfile.html'
+    // window.location.href ='/pages/userProfile.html'
   if (error) console.log(error);
   console.log(data);
 }

@@ -87,7 +87,7 @@ function getParentElForPatientList(patientWrapper) {
 			const activeChatId = this.getAttribute("id");
 			console.log(activeChatId);
 			getActivePatientMessageAndProfile(activeChatId);
-      getNewChatId(activeChatId)
+      getNewChatId(activeChatId, loggedUser)
      
 		});
 	});
@@ -111,7 +111,7 @@ function updateChatHeader(activePatient) {
 	const chatHeader = document.getElementById("chat-header");
 	if (activePatient) {
 		chatHeader.innerHTML = `
-     <img src="${activePatient.userAvatar || "https://shorturl.at/8TClo"}" alt="${activePatient.name}">
+     <img src="${activePatient[0].userAvatar || "https://shorturl.at/8TClo"}" alt="${activePatient.name}">
       <div>
         <div class="name">${activePatient[0].name}</div>
         <div class="status">Online</div>
@@ -132,7 +132,8 @@ async function messageDetails() {
 		const { data, error } = await supabase
 			.from("unique_chatID")
 			.select("*")
-			.eq("patientid", patientId);
+			.eq("patientid", patientId)
+      .eq('doctorid', loggedUser)
 		if (error) throw error;
 		if (data && data.length !== 0) {
 			console.log("the inserting for a id", data);
@@ -146,7 +147,7 @@ async function messageDetails() {
 			senderID: loggedUser,
 			receiverID: patientId,
 			message: messageInput,
-			chatID: data[0].id,
+			chatID: data[0].payID,
 		
 		};
 		await sendNewMessage(message);
@@ -243,11 +244,12 @@ function validateMessages(chatID, date, messages) {
 
 }
 
-async function getNewChatId(activeChatId) {
+async function getNewChatId(activeChatId, loginUser) {
 	const { data, error } = await supabase
 		.from("unique_chatID")
 		.select("*")
 		.eq("patientid", activeChatId)
+    .eq('doctorid',loginUser)
    
     
 	if (error) {
@@ -255,17 +257,20 @@ async function getNewChatId(activeChatId) {
 	}
 	if (data && data.length !== 0) {
 		console.log(data);
-		const chatID = data[0].id;
+		const chatID = data[0].payID;
     const date = data[0].expireDate
     console.log(chatID)
+    const doctorId = data[0].doctorId
 	
 
 		await fetchMessagesFromServer(chatID, date);
 	}
 }
 
-getNewChatId(patientId);
+getNewChatId(patientId, loggedUser);
 getActivePatientMessageAndProfile(patientId);
 
 receiveNewMessage();
 
+//login
+console.log('this is the login user',loggedUser)

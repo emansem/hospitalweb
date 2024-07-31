@@ -85,47 +85,23 @@ function getParentElForDoctorList(doctorsEl) {
 			const activeChatId = this.getAttribute("id");
 			console.log(activeChatId);
 			getActiveDoctorMessageAndProfile(activeChatId);
-      getNewChatId(loggedUser)
+         setTimeout(function(){
+			location.reload()
+			getNewChatId(activeChatId, loggedUser)
+		 },200)
      
 		});
 	});
 }
 
-async function messageDetails() {
-	try {
-		const { data, error } = await supabase
-			.from("unique_chatID")
-			.select("*")
-			.eq("patientid", loggedUser);
-		if (error) throw error;
-		if (data && data.length !== 0) {
-			
-		}
-		const messageInput = messageForm.messageInput.value;
-		if (messageInput === "") {
-			chatwindow.innerHTML = `You cannot submit a empty message`;
-			return;
-		}
-		const message = {
-			senderID: loggedUser,
-			receiverID: doctorID,
-			message: messageInput,
-			chatID: data[0].id,
-		
-		};
-		await sendNewMessage(message);
-      console.log('chat-id', message.chatID)
-	} catch (error) {
-		console.error("Error in messageDetails:", error);
-	}
-}
+
 
 function updateChatHeader(activePatient) {
 	console.log(activePatient)
 	const chatHeader = document.getElementById("chat-header");
 	if (activePatient) {
 		chatHeader.innerHTML = `
-     <img src="${activePatient.userAvatar || "https://shorturl.at/8TClo"}" alt="${activePatient.name}">
+     <img src="${activePatient[0].userAvatar || "https://shorturl.at/8TClo"}" alt="${activePatient.name}">
       <div>
         <div class="name">${activePatient[0].name}</div>
         <div class="status">Online</div>
@@ -149,7 +125,37 @@ async function getActiveDoctorMessageAndProfile(activeChatId) {
 	updateChatHeader(data);
 }
 
-//after the getting the messages, just send the message to the server
+async function messageDetails() {
+	try {
+		const { data, error } = await supabase
+			.from("unique_chatID")
+			.select("*")
+			.eq("doctorid", doctorID)
+			.eq("patientid", loggedUser);
+		
+		if (error) throw error;
+		if (data && data.length !== 0) {
+			
+		}
+		const messageInput = messageForm.messageInput.value;
+		if (messageInput === "") {
+			chatwindow.innerHTML = `You cannot submit a empty message`;
+			return;
+		}
+		const message = {
+			senderID: loggedUser,
+			receiverID: doctorID,
+			message: messageInput,
+			chatID:data[0].payID
+			
+		
+		};
+		await sendNewMessage(message);
+      console.log('chat-id', message.chatID)
+	} catch (error) {
+		console.error("Error in messageDetails:", error);
+	}
+}
 
 async function sendNewMessage(message) {
 	try {
@@ -161,6 +167,7 @@ async function sendNewMessage(message) {
 		if (data && data.length !== 0) {
 			console.log(data);
 			appendMessages(data[0]);
+			console.log('we just receive a new message', message)
 			messageForm.messageInput.value = "";
 		} else {
 			console.log("no data here");
@@ -229,19 +236,20 @@ async function fetchMessagesFromServer(chatID, date) {
 
 //validate the messages check if the doctor and patient have any relation ship.
 function validateMessages(chatID, date, messages) {
-	console.log(chatID)
 //loop through the message.
- const filterMessages =  messages.filter(message=>message.chatID === chatID);
- console.log(filterMessages)
- renderMessages(filterMessages);
+const filterMessages =  messages.filter(message=>message.chatID === chatID);
+console.log(filterMessages)
+renderMessages(filterMessages);
+
 
 }
 
-async function getNewChatId(activeChatId) {
+async function getNewChatId(activeChatId, loginUser) {
 	const { data, error } = await supabase
 		.from("unique_chatID")
 		.select("*")
-		.eq("patientid", activeChatId)
+		.eq("doctorid", activeChatId)
+		.eq("patientid", loginUser)
    
     
 	if (error) {
@@ -249,16 +257,17 @@ async function getNewChatId(activeChatId) {
 	}
 	if (data && data.length !== 0) {
 		console.log(data);
-		const chatID = data[0].id;
+		const chatID = data[0].payID;
     const date = data[0].expireDate
-    console.log(chatID)
+	console.log(chatID)
 	
 
-		await fetchMessagesFromServer(chatID, date);
+	
+    await fetchMessagesFromServer(chatID, date);
 	}
 }
 
-getNewChatId(loggedUser);
+getNewChatId(doctorID, loggedUser);
 getActiveDoctorMessageAndProfile(doctorID);
 
 receiveNewMessage();

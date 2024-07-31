@@ -17,7 +17,7 @@ const sideBar = document.querySelector(".siderbar-left");
 //validate the users 
 function validateUsers(){
 const accessToken = localStorage.getItem('accessToken');
-console.log(accessToken);
+
 if(accessToken){
 	console.log('good job');
 }
