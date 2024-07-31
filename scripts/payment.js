@@ -23,6 +23,7 @@ const doctorIdString = doctorInfo.split(".")[1];
 const doctorId = Number(doctorIdString);
 const paymentMethods = document.querySelector('.paymentMethods');
 const paymentAmountWrapper = document.querySelector(".payform__body--amount");
+const doctor_name = document.querySelector('.fee');
 
 async function checkIfUserHavePlanWithADoctor(subscription) {
 	const { data, error } = await supabase
@@ -55,7 +56,7 @@ async function checkIfUserHavePlanWithADoctor(subscription) {
 //send user paymentinformation afters subcription
 
 async function sendPaymentInfo(paymeninfo) {
-	shownextDate.innerHTML = "";
+
 	try {
 		const { data, error } = await supabase
 			.from("subscriptions")
@@ -64,10 +65,13 @@ async function sendPaymentInfo(paymeninfo) {
 			.select("*");
 		console.log("this is the subscription table", data);
 		if (data) {
+			sucess.classList.remove("hideForm");
+			payForm.reset()
 			setTimeout(function (e) {
-				sucess.classList.remove("hideForm");
+				
+				window.location.href=`/pages/patientchatroom.html`
 			}, 1000);
-			shownextDate.innerHTML = ``;
+			
 			cancel.addEventListener("click", function (e) {
 				sucess.classList.add("hideForm");
 				
@@ -86,7 +90,7 @@ function allInputFields() {
 	//get the time in 24hrs and and next payment payment payment date;
 	const plandetails = JSON.parse(localStorage.getItem("plandetails"));
 	const timeNow = Date.now();
-	const oneDay = timeNow + 10 * 60 * 1000;
+	const oneDay = timeNow + 2 * 60 * 1000;
 	const next_pay_date = timeNow + 30 * 24 * 60 * 60 * 1000;
 	
 	const planName = plandetails.planName;
@@ -106,6 +110,7 @@ function allInputFields() {
 			planId: planId,
 		};
 		checkIfUserHavePlanWithADoctor(savePayinfo);
+		updateDoctorsBalance(savePayinfo.amount)
 
 		// this is to check if the plan name is Monthly we save the time on only for monthly.
 	} else if (planName === "Monthly") {
@@ -120,6 +125,7 @@ function allInputFields() {
 			planId: planId,
 		};
 		checkIfUserHavePlanWithADoctor(saveMonthlyPay);
+		updateDoctorsBalance(saveMonthlyPay.amount)
 
 	}
 
@@ -172,6 +178,7 @@ async function patientHistoryInput(amount) {
 		user_name: doctorName,
 		amount: amount,
 	};
+	doctor_name.innerHTML = `Dr ${doctorName}`;
 
 	createNewHistoryForPatient(patientHistory);
 }
@@ -314,6 +321,20 @@ async function renderAmountAndCharges(charges, amount){
 }
 
 //update the doctors balance 
-async function updateDoctorsBalance(){
-	const {data, error} = await supabase.re
+async function updateDoctorsBalance( amount) {
+	const balance = Math.floor(80/100 *(amount));
+    try {
+        const { data, error } = await supabase.rpc('increment_balance', {
+            user_id: doctorId,
+            amount: balance
+        });
+        if (error) {
+            console.error('Error incrementing the user balance:', error);
+        } else {
+            console.log('User balance incremented successfully:', balance);
+        }
+    } catch (err) {
+        console.error('Unexpected error:', err);
+    }
 }
+console.log(doctorId)
