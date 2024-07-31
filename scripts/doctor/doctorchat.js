@@ -167,7 +167,7 @@ async function sendNewMessage(message) {
 		if (error) throw error;
 		if (data && data.length !== 0) {
 			console.log(data);
-			
+			appendMessages(data[0]);
 			messageForm.messageInput.value = "";
 		} else {
 			console.log("no data here");
