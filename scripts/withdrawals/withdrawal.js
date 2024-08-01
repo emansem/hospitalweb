@@ -313,7 +313,7 @@ const pin = withdrawalFormSubmit.pin.value
 		return;
 	} else {
 		console.log(withdrawalInformation);
-		createNewWithdrawalAccount(withdrawalInformation);
+		createNewWithdrawalAccount(withdrawalInformation);decrementUserBalance(withdrawalInformation.amount);
 	}
 }
 //insert a new withdrawal details in the withdrawal page
@@ -341,3 +341,66 @@ async function createNewWithdrawalAccount(withddrawalDetails) {
 }
 
 console.log(withdrawalMethodSelect);
+
+
+//restrict users for acessing this web page.
+
+async function checkUserType(){
+	const {data, error} = await supabase.from('users').select('*').eq('id', loggedUser);
+	if(data && data.length !==0){
+		console.log('this is user data', data);
+		if(data[0].type === 'patient'){
+			location.href = `/pages/404page.html`
+			return
+		}else{
+			return;
+		}
+		
+	}else{
+		console.log('no user found');
+	}
+	if(error){
+		console.error('this is the error for the user', error);
+	}
+
+}
+
+
+document.addEventListener('DOMContentLoaded', checkUserType)
+
+
+checkUserType();
+
+//reduce the balance  each time  user make a withdrawal.
+async function decrementUserBalance(amount){
+	const {data, error} = await supabase.rpc('decrement_balance', {
+		user_id:loggedUser,
+		balance:amount
+	});
+	if(data && data.length !==0){
+		console.log('this is the user return balance')
+	}else{
+		console.log('there is no data here bro')
+	}
+	if(error){
+		console.error('we got an error sir', error);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
