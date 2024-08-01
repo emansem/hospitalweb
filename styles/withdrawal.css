@@ -1,0 +1,167 @@
+/** @format */
+
+:root {
+	--color-primary: #8563c1; /* Purple */
+	--color-secondary: #f4f9f6; /* Light Green */
+	--color-accent: #32d487; /* Green */
+	--color-dark: #1c1b2e; /* Dark Blue */
+	--color-light: #6dd8a7; /* Light Green */
+	--yellow-color: #f2c332;
+	--yellow-dark-color: #e3b21f;
+	--dark-color: #2e374e;
+	--color-dark-transparent: rgba(28, 27, 46, 0.5);
+	/* Gradients */
+	--gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+	--gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+	--gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+	--background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+	/* Fonts */
+	--font-body: "Roboto", sans-serif;
+
+	--font-heading: "Inter", sans-serif;
+	--color1-transparent: rgba(46, 55, 78, 0);
+	--color2-transparent: rgba(31, 38, 54, 0);
+	--color3-transparent: rgba(18, 24, 35, 0);
+	--color4-transparent: rgba(11, 15, 22, 0);
+	--box-shadow1: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+	--box-shadow2: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+	--box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+	--box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px; /* Box Shadows */
+}
+
+.withdrawal__container {
+	margin-right: 1.2rem;
+	box-shadow: var(--box-shadow2);
+}
+.withdrawal__reports,
+.withdrawal__account {
+	display: flex;
+	justify-content: center;
+	padding-block: 1rem;
+	width: 100%;
+}
+.withdrawal__setup--gateway {
+	box-shadow: var(--box-shadow3);
+	padding: 1rem;
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 60%;
+	text-align: center;
+	display: none;
+}
+.withdrawal__account--infor {
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.importport--notice {
+	font-size: 18px;
+	color: #444;
+	font-family: var(--font-heading);
+}
+.setup__gateway--btn {
+	width: 30%;
+	background-color: #1c1b2e;
+	color: var(--color-secondary);
+	border-radius: 2rem;
+	border: none;
+	height: 30px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: var(--font-body);
+	transition: all 0.3s linear;
+}
+.setup__gateway--btn:hover {
+	background-color: var(--dark-color);
+}
+.withdrawal__report--items {
+	width: 90%;
+
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem;
+	margin-block: 2rem;
+	gap: 2rem;
+	align-items: center;
+}
+.withdrawal__reports--item {
+	padding: 2rem;
+	box-shadow: rgba(0, 0, 0, 0.083) 0px 1px 4px;
+
+	text-align: center;
+	width: 100%;
+	border-radius: 0.8rem;
+	height: 100px;
+}
+.reports-item-text {
+	color: #333;
+	font-weight: 500;
+	white-space: nowrap;
+	font-size: 18px;
+	font-family: var(--font-heading);
+	margin-bottom: 0.4rem;
+}
+.report__withdrawal--amount {
+	font-size: 16px;
+	color: #666;
+	font-weight: 400;
+	font-family: var(--font-body);
+}
+.withdrawal__account--items {
+	width: 60%;
+	display: flex;
+	justify-content: space-between;
+	background: var(--background);
+	border-radius: 0.4rem;
+	padding: 1rem;
+	align-items: center;
+    
+}
+.withdrawal__items {
+	width: 90%;
+    
+}
+.account-item {
+	padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.list-names{
+    font-size: 17px;
+    color: #f4f9f6c9;
+    font-family: var(--font-heading);
+    font-weight: 500;
+
+}
+.list-value{
+    color: #32d487;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--font-body);
+}
+
+
+
+
+
+
+@media screen and (max-width: 940px) {
+   
+    .withdrawal__setup--gateway,
+    .withdrawal__account--items{
+        width: 100%;
+    }
+    .withdrawal__report--items{
+        flex-direction: column;
+    }
+    .withdrawal__account--items{
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+    

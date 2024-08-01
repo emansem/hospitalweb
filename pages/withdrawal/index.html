@@ -1,100 +1,125 @@
 <!-- @format -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manage your withdrawal | Create or Update</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Manage your withdrawal | Create or Update</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-   
-    <link rel="stylesheet" href="/styles/style.css" />
-  </head>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
 
-  <body>
-    <div class="dashboard-container">
-      <div class="siderbar-left"></div>
-      <div class="main-page">
-        <!---header seaction-->
+		<link rel="stylesheet" href="/styles/style.css" />
+		<link rel="stylesheet" href="/styles/withdrawal.css" />
+	</head>
 
-        <div class="header"></div>
+	<body>
+		<div class="dashboard-container">
+			<div class="siderbar-left"></div>
+			<div class="main-page">
+				<!---header seaction-->
 
-        <!---hero section seaction-->
-        <section class="hero"></section>
+				<div class="header"></div>
 
-        <!---appointMent section seaction-->
-        <!-- <div class="recents"> -->
+				<!---hero section seaction-->
+				<section class="hero"></section>
 
-        <div class="withdrawal-wrapper">
-          <h3 class="headings plan-heading">Manage your withdrawals</h3>
+				<div class="withdrawal-wrapper">
+					<h3 class="headings plan-heading">Manage your withdrawals</h3>
 
-          <div class="withdrawal__container">
-           
-            <div class="withdrawal__account">
-                <div class="withdrawal__setup--gateway">
-                    <p class="importport--notice">No withdrawal method found setup a new gateway</p>
-                    <button class="setup__gateway--btn">Add now</button>
-                    
-                </div>
-            </div>
-            <div class="withdrawal__reports">
-                <div class="withdrawal__reports--item">
-                    
-                    <div class="report-contents">
-                        <h3 class="reports-item-text">Total Balance</h3>
-                        <span class="report__withdrawal--amount">$888</span>
-                    </div>
-                </div>
-                <div class="withdrawal__reports--item">
-                    <div class="report-contents">
-                        <h3 class="reports-item-text">Total Withdrawal</h3>
-                        <span class="report__withdrawal--amount">$700</span>
-                    </div>
-                </div>
-                <div class="withdrawal__reports--item">
-                    <div class="report-contents">
-                        <h3 class="reports-item-text">Approved Withdrawal</h3>
-                        <span class="report__withdrawal--amount">$500</span>
-                    </div>
-                </div>
-                <div class="withdrawal__reports--item">
-                    <div class="report-contents">
-                        <h3 class="reports-item-text">Faild Withdrawal</h3>
-                        <span class="report__withdrawal--amount">$50</span>
-                    </div>
-                </div>
-            </div>
-            <div class="withdrawal__history"></div>
-      
-          </div>
-        </div>
+					<div class="withdrawal__container">
+						<div class="withdrawal__account">
+							<div class="withdrawal__setup--gateway">
+								<p class="importport--notice">
+									No withdrawal method found setup a new gateway
+								</p>
+								<div>
+									<button class="setup__gateway--btn">Add now</button>
+								</div>
+							</div>
+							<div class="withdrawal__account--infor">
+								<p class="importport--notice">Withdrawal Account Details</p>
 
-        <!-- </div> -->
-      </div>
-    </div>
-    <script type="module" src="/scripts/menu.js"></script>
-    
-  </body>
+								<div class="withdrawal__account--items">
+									<div class="withdrawal__items">
+										<div class="withdrawal__account--item">
+											<div class="account-item">
+												<span class="list-names">Name:</span>
+												<span class="list-value">Eman Bung Sem</span>
+											</div>
+											<div class="account-item">
+												<span class="list-names">Account Number:</span>
+												<span class="list-value">6890xxxx90089</span>
+											</div>
+											<div class="account-item">
+												<span class="list-names">Method name:</span>
+
+												<span class="list-value">Orange Money</span>
+											</div>
+										</div>
+									</div>
+									<div>
+										<button class="">Add now</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="withdrawal__reports">
+							<div class="withdrawal__report--items">
+								<div class="withdrawal__reports--item">
+									<div class="report-contents">
+										<h3 class="reports-item-text">Total Balance</h3>
+										<span class="report__withdrawal--amount">$888</span>
+									</div>
+								</div>
+								<div class="withdrawal__reports--item">
+									<div class="report-contents">
+										<h3 class="reports-item-text">Total Withdrawal</h3>
+										<span class="report__withdrawal--amount">$700</span>
+									</div>
+								</div>
+								<div class="withdrawal__reports--item">
+									<div class="report-contents">
+										<h3 class="reports-item-text">Approved Withdrawal</h3>
+										<span class="report__withdrawal--amount">$500</span>
+									</div>
+								</div>
+								<div class="withdrawal__reports--item">
+									<div class="report-contents">
+										<h3 class="reports-item-text">Faild Withdrawal</h3>
+										<span class="report__withdrawal--amount">$50</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="withdrawal__history"></div>
+					</div>
+				</div>
+
+				<!-- </div> -->
+			</div>
+		</div>
+		<script type="module" src="/scripts/menu.js"></script>
+	</body>
 </html>
