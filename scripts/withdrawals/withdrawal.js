@@ -30,6 +30,7 @@ const balance = document.querySelector(".balance");
 const withdrawalReports = document.querySelector(".withdrawal__reports");
 const sucessfulWithdrawalPopup = document.querySelector(".sucessfu-withdrawal");
 const withdrawalFormSubmit = document.querySelector(".withdrawalForm");
+const withdrawalHistoryContainer = document.querySelector('.withdrawalContainer');
 
 //get the payment methods and add to the select input.
 
@@ -293,6 +294,7 @@ async function getTotalWithdrawal() {
 			
 		}
 		renderReport(sum, totalWithdrawal);
+		renderWithdrawalHistory(data);
 
 	} else {
 		console.log("there is no data");
@@ -401,7 +403,29 @@ async function decrementUserBalance(amount){
 	}
 }
 
+//render all the withdrawal history on the doctor page.
 
+
+function renderWithdrawalHistory(histories){
+	
+histories.forEach(withdrawalHistory=>{
+	const dateNow =  withdrawalHistory.created_at.split('T')[0];
+	console.log(dateNow);
+	withdrawalHistoryContainer.innerHTML+=` <div class="content-wrapper">
+                     
+                                    <div class="recent__user--item1">
+                                    
+                                        <div class="user-info">
+                                            <span class="user-name">${withdrawalHistory.description}- <span class="type-of-action">FCFA${withdrawalHistory.amount}</span> </span>
+                                          <span class="user-type">Date:<span class="type type2">${dateNow}</span></span>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>`
+})
+}
 
 
 
