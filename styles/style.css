@@ -990,6 +990,111 @@ gap: 1rem;
 	
 	font-family: var(--font-heading);
 }
+.plan-wrapper{
+	flex-wrap: wrap;
+display: flex;
+
+}
+.plan-head .name{
+	font-size: 24px;
+	color: #555;
+	
+	font-weight: 600;
+	font-family: var(--font-heading);
+	
+
+}
+.plan-item{
+	position: relative;
+	overflow: hidden;
+	box-shadow: var(--box-shadow2);
+}
+.plan-head, .plan-list-item{
+	padding: 1rem;
+}
+.state{
+	position: absolute;
+	top: 8%;
+	text-align: center;
+	width: 120px;
+	background-color: #ff2600ea;
+	right: -10%;
+	padding: 0.2rem;
+	overflow: hidden;
+	color: #f2f2f1;
+	font-size: 16px;
+	font-weight: 500;
+	font-family: var(--font-heading);
+	
+	transform: rotate(50deg);
+	
+
+
+}
+.value:last-child{
+	margin-bottom: 2px;
+}
+.active-plan{
+	background-color: #00796B;
+}
+.expired-btn{
+	display: none;
+}
+.plan-heading{
+	text-align: center;
+	margin-block: 2rem;
+}
+
+.plan-text{
+	font-size: 20px;
+	font-weight: 500;
+	color: var(--color-dark);
+	line-height: 1.4;
+}
+.plan-list-item{
+	display: flex;
+	justify-content: center;
+	
+	align-items: center;
+	gap: 1rem;
+	font-family: var(--font-body);
+}
+.item{
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	gap: 1rem;
+}
+.value{
+	font-size: 16px;
+	color: #555;
+	font-weight: 400;
+	line-height: 1.7;
+}
+.item:last-child{
+	margin-top: 5px;
+	text-align: left;
+}
+.plan-button{
+	display: flex;
+	justify-content: center;
+	margin-block: 1rem;
+}
+.renew{
+	background-color: #388E3C;
+	border: none;
+	height: 50px;
+	width: 200px;
+	border-radius: 2rem;
+	font-size: 18px;
+	font-weight: 500;
+	font-family: var(--font-heading);
+	
+	
+}
+.renew a{
+	color: #f1f2f1;
+}
 /*  the media querries for the web page */
 @media screen and (max-width: 1290px) {
 	html{
