@@ -49,6 +49,12 @@
 	gap: 1rem;
 	width: 60%;
 	text-align: center;
+	
+}
+.hideSetupAccount{
+	display: none;
+}
+#hideWithdraw{
 	display: none;
 }
 .withdrawal__account--infor {
@@ -304,3 +310,4 @@ label {
 		width: 80%;
 	}
 }
+
