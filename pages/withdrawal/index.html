@@ -61,7 +61,7 @@
 
                         </div>
                         <div class="gateaway__form--items">
-                            <label for="phone">Choose Method</label>
+                            <label for="method">Choose Method</label>
                             <select  class="gateway__form-item" name="method" id="method">
                             <option value="Orange">Orange Money</option>
                            </select>
@@ -79,6 +79,40 @@
                       </div>
                    </div>
                 </div>
+
+                <!-- withdrwal here we do the withdrawal form. -->
+                <div class="content__popup-wrapper withdrawal-form hide-withdrawal">
+                    <div class="geteway--container">
+                     <form action="" class="setup-gateway">
+                       <div class="gate-way--headings">
+                        <h3 class="headings-gateway">Make a withdrawal</h3>
+                        <h3 class="headings-gateway">Total Balance : <span class="fee">$600</span></h3>
+                       </div>
+                         
+                         <div class="gateaway__form--items">
+                             <label for="amount">Withdrawal Amount</label>
+                             <input  name="amount" class="gateway__form-item" type="number" placeholder="Withdrawal Amount" required>
+ 
+                         </div>
+                         <div class="gateaway__form--items">
+                             <label for="phone">Select Method</label>
+                             <select  class="gateway__form-item" name="method" id="method">
+                             <option value="Orange">Orange Money</option>
+                            </select>
+                         </div>
+                         <div class="gateaway__form--items">
+                             <label for="pincode">Set secured pin code</label>
+                             <input class="gateway__form-item" name="pin" type="number" placeholder="Enter pin code" required>
+                          
+                         </div>
+                       
+                     </form>
+                     <div class="gateaway__form--btn">
+                         <button class="addMethod-btn cancel-Btn">Cancel</button>
+                         <button class="addMethod-btn add-Btn">Withdraw</button>
+                       </div>
+                    </div>
+                 </div>
 
 				<div class="withdrawal-wrapper">
 					<h3 class="headings plan-heading">Manage your withdrawals</h3>

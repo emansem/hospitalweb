@@ -57,7 +57,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-    gap: 1.2rem;
+	gap: 1.2rem;
 }
 .importport--notice {
 	font-size: 18px;
@@ -120,50 +120,46 @@
 	border-radius: 0.4rem;
 	padding: 1rem;
 	align-items: center;
-    
 }
 .withdrawal__items {
 	width: 90%;
-    
 }
 .account-item {
 	padding-top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
 }
-.list-names{
-    font-size: 17px;
-    color: #f4f9f6c9;
-    font-family: var(--font-heading);
-    font-weight: 500;
+.list-names {
+	font-size: 17px;
+	color: #f4f9f6c9;
+	font-family: var(--font-heading);
+	font-weight: 500;
+}
+.list-value {
+	color: #32d487;
+	font-size: 14px;
+	font-weight: 400;
+	font-family: var(--font-body);
+}
 
+.withdrawalBtn {
+	width: 120px;
+	background-color: var(--color-accent);
+	height: 30px;
+	border-radius: 2rem;
+	border: none;
+	font-size: 16px;
+	font-family: var(--font-heading);
+	color: var(--color-dark);
+	margin-block: 0.8rem;
+	cursor: pointer;
+	transition: all 0.4s linear;
 }
-.list-value{
-    color: #32d487;
-    font-size: 14px;
-    font-weight: 400;
-    font-family: var(--font-body);
+.setup__gateway--btn:hover {
+	background-color: var(--color-light);
 }
-
-
-.withdrawalBtn{
-    width: 120px;
-    background-color: var(--color-accent);
-    height: 30px;
-    border-radius: 2rem;
-    border: none;
-    font-size: 16px;
-    font-family: var(--font-heading);
-    color: var(--color-dark);
-    margin-block: 0.8rem;
-    cursor: pointer;
-    transition: all 0.4s linear;
-}
-.setup__gateway--btn:hover{
-    background-color: var(--color-light);
-}
-.withdrawal__history{
+.withdrawal__history {
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -172,23 +168,21 @@
 	padding: 0.6rem;
 	align-items: center;
 }
-.withrawal__history--wrapper{
+.withrawal__history--wrapper {
 	width: 80%;
 	display: flex;
 	justify-content: center;
 	padding: 1rem;
-	
-	
 }
 
-.approved{
-	color:#27925e
+.approved {
+	color: #27925e;
 }
-.failed{
+.failed {
 	color: #c73838;
 }
 
-.content__popup-wrapper{
+.content__popup-wrapper {
 	background-color: var();
 	position: fixed;
 	top: 0;
@@ -200,10 +194,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background:rgba(0, 0, 0, 0.7);
+	background: rgba(0, 0, 0, 0.7);
 	gap: 2rem;
 }
-.geteway--container{
+.geteway--container {
 	box-shadow: var(--box-shadow1);
 	background-color: #f7f7f7;
 	padding: 2rem 0;
@@ -214,15 +208,14 @@
 	width: 30%;
 	border-radius: 1rem;
 }
-form{
-	
+form {
 	width: 80%;
 }
-.gateaway__form--items{
+.gateaway__form--items {
 	width: 100%;
 	margin-block: 1rem;
 }
-label{
+label {
 	display: block;
 	font-size: 18px;
 	color: var(--color-dark);
@@ -230,7 +223,7 @@ label{
 	font-family: var(--font-body);
 	font-weight: 500;
 }
-.gateway__form-item{
+.gateway__form-item {
 	width: 100%;
 	height: 40px;
 	padding: 0.3rem 0.6rem;
@@ -241,9 +234,8 @@ label{
 	border-radius: 0.4rem;
 	border: 1px solid #ccc;
 	outline: none;
-	
 }
-.addMethod-btn{
+.addMethod-btn {
 	height: 40px;
 	width: 130px;
 	font-size: 16px;
@@ -254,46 +246,58 @@ label{
 	font-family: var(--font-body);
 	background-color: var(--color-accent);
 }
-.gateaway__form--btn{
+.gateaway__form--btn {
 	display: flex;
 	justify-content: center;
 	gap: 1rem;
 	align-items: center;
-	
 }
-.add-Btn{
+.add-Btn {
 	transition: all 0.4s linear;
 }
-.add-Btn:hover{
+.add-Btn:hover {
 	background-color: var(--color-light);
 }
-.cancel-Btn{
+.cancel-Btn {
 	transition: all 0.4s linear;
 	background-color: #c73838d9;
 	color: #f1f7f1;
 }
-.cancel-Btn:hover{
+.cancel-Btn:hover {
 	background-color: #c14e4e;
 }
+.hide-setup-popup{
+	display: none;
+}
+.gate-way--headings{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.8rem;
+}
+.headings-gateway{
+	text-align: center;
+	color: var(--color-dark);
+	font-size: 20px;
+	font-weight: 500;
+	font-family: var(--font-heading);
+}
 @media screen and (max-width: 940px) {
-   
-    .withdrawal__setup--gateway,
-    .withdrawal__account--items{
-        width: 100%;
-    }
-    .withdrawal__report--items{
-        flex-direction: column;
-    }
-    .withdrawal__account--items{
-        flex-direction: column;
-        gap: 1rem;
-    }
-	.withrawal__history--wrapper{
+	.withdrawal__setup--gateway,
+	.withdrawal__account--items {
 		width: 100%;
 	}
-	.geteway--container{
-		
+	.withdrawal__report--items {
+		flex-direction: column;
+	}
+	.withdrawal__account--items {
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.withrawal__history--wrapper {
+		width: 100%;
+	}
+	.geteway--container {
 		width: 80%;
 	}
 }
-    
