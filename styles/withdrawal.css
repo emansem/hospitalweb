@@ -19,7 +19,7 @@
 	--font-body: "Roboto", sans-serif;
 
 	--font-heading: "Inter", sans-serif;
-	--color1-transparent: rgba(46, 55, 78, 0);
+	--background-color-white: #f7f7f7;
 	--color2-transparent: rgba(31, 38, 54, 0);
 	--color3-transparent: rgba(18, 24, 35, 0);
 	--color4-transparent: rgba(11, 15, 22, 0);
@@ -163,9 +163,97 @@
 .setup__gateway--btn:hover{
     background-color: var(--color-light);
 }
+.withdrawal__history{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	border: 1px solid #ccc;
+	padding: 0.6rem;
+	align-items: center;
+}
+.withrawal__history--wrapper{
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+	
+	
+}
 
+.approved{
+	color:#27925e
+}
+.failed{
+	color: #c73838;
+}
 
-
+.content__popup-wrapper{
+	background-color: var();
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	height: 100%;
+	z-index: 100;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background:rgba(0, 0, 0, 0.7);
+	gap: 2rem;
+}
+.geteway--container{
+	box-shadow: var(--box-shadow1);
+	background-color: #f7f7f7;
+	padding: 2rem 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.2rem;
+	width: 30%;
+	border-radius: 1rem;
+}
+form{
+	
+	width: 80%;
+}
+.gateaway__form--items{
+	width: 100%;
+	margin-block: 1rem;
+}
+label{
+	display: block;
+	font-size: 18px;
+	color: var(--color-dark);
+	margin-bottom: 0.4rem;
+	font-family: var(--font-body);
+	font-weight: 500;
+}
+.gateway__form-item{
+	width: 100%;
+	height: 40px;
+	padding: 0.3rem 0.6rem;
+	font-size: 16px;
+	font-weight: 400;
+	color: #555;
+	font-family: var(--font-heading);
+	border-radius: 0.4rem;
+	border: 1px solid #ccc;
+	outline: none;
+	
+}
+.addMethod-btn{
+	height: 40px;
+	width: 130px;
+	font-size: 16px;
+	font-weight: 400;
+	border: none;
+	cursor: pointer;
+	border-radius: 2rem;
+	font-family: var(--font-body);
+	background-color: var(--color-accent);
+}
 @media screen and (max-width: 940px) {
    
     .withdrawal__setup--gateway,
@@ -179,5 +267,12 @@
         flex-direction: column;
         gap: 1rem;
     }
+	.withrawal__history--wrapper{
+		width: 100%;
+	}
+	.geteway--container{
+		
+		width: 80%;
+	}
 }
     

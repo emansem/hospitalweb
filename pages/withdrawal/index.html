@@ -32,6 +32,7 @@
 
 		<link rel="stylesheet" href="/styles/style.css" />
 		<link rel="stylesheet" href="/styles/withdrawal.css" />
+        <link rel="stylesheet" href="/admin/style/profileDetails.css">
 	</head>
 
 	<body>
@@ -44,6 +45,40 @@
 
 				<!---hero section seaction-->
 				<section class="hero"></section>
+                <!-- here  we manage the popup form -->
+                <div class="content__popup-wrapper hide-setup-popup">
+                   <div class="geteway--container">
+                    <form action="" class="setup-gateway">
+                        <h3 class="headings-gateway">Add withdrawal account</h3>
+                        <div class="gateaway__form--items">
+                            <label for="name">Full Name</label>
+                            <input class="gateway__form-item" name="name" type="text" placeholder="Enter your name" required>
+                            
+                        </div>
+                        <div class="gateaway__form--items">
+                            <label for="phone">Account Number</label>
+                            <input  name="phone" class="gateway__form-item" type="number" placeholder="Account details" required>
+
+                        </div>
+                        <div class="gateaway__form--items">
+                            <label for="phone">Choose Method</label>
+                            <select  class="gateway__form-item" name="method" id="method">
+                            <option value="Orange">Orange Money</option>
+                           </select>
+                        </div>
+                        <div class="gateaway__form--items">
+                            <label for="pincode">Set secured pin code</label>
+                            <input class="gateway__form-item" name="pin" type="number" placeholder="Enter pin code" required>
+                         
+                        </div>
+                      
+                    </form>
+                    <div class="gateaway__form--btn">
+                        <button class="addMethod-btn cancel-Btn">Cancel</button>
+                        <button class="addMethod-btn cancel-Btn">Add Now</button>
+                      </div>
+                   </div>
+                </div>
 
 				<div class="withdrawal-wrapper">
 					<h3 class="headings plan-heading">Manage your withdrawals</h3>
@@ -80,7 +115,7 @@
 										</div>
 									</div>
 									<div>
-										<button class="withdrawalBtn">Withdraw</button>
+										<button class="withdrawalBtn ">Withdraw</button>
 									</div>
 								</div>
 							</div>
@@ -113,10 +148,48 @@
 								</div>
 							</div>
 						</div>
-						<div class="withdrawal__history"></div>
+						<div class="withdrawal__history">
+                            <div class="headings"><span class="userName2">Withdraw</span> Recent History</div>
+                           <div class="withrawal__history--wrapper">
+                           
+                            <div>
+                                <div class="content-wrapper">
+                     
+                                    <div class="recent__user--item1">
+                                    
+                                        <div class="user-info">
+                                            <span class="user-name">Withdrawal <span class="approved">Approved</span> - <span class="type-of-action">40$</span> </span>
+                                            <span class="user-type">Date:<span class="type type2">12/09/2002</span></span>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>
+                
+                                <div class="content-wrapper">
+                                    <div class="recent__user--item1">
+                                    
+                                        <div class="user-info">
+                                            <span class="user-name">Withdrawal <span class="failed">Failed</span> - <span class="failed">40$</span> </span>
+                                            <span class="user-type">Date:<span class="type type2">12/09/2002</span></span>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                  
+                                </div>
+                                
+                            </div>
+                           </div>
+            
+                          </div>
+                         
+                        </div>
+                        </div>
 					</div>
 				</div>
-
+               
 				<!-- </div> -->
 			</div>
 		</div>
