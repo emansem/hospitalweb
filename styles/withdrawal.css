@@ -254,6 +254,27 @@ label{
 	font-family: var(--font-body);
 	background-color: var(--color-accent);
 }
+.gateaway__form--btn{
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	align-items: center;
+	
+}
+.add-Btn{
+	transition: all 0.4s linear;
+}
+.add-Btn:hover{
+	background-color: var(--color-light);
+}
+.cancel-Btn{
+	transition: all 0.4s linear;
+	background-color: #c73838d9;
+	color: #f1f7f1;
+}
+.cancel-Btn:hover{
+	background-color: #c14e4e;
+}
 @media screen and (max-width: 940px) {
    
     .withdrawal__setup--gateway,
