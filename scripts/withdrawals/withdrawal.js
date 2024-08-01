@@ -230,7 +230,7 @@ withdrawalButtons.addEventListener("click", function (e) {
 
 //render the reports on the web page
 
-async function renderReport(totalWithdrawAmount) {
+async function renderReport(withdrawalBalance,total) {
 	const { data, error } = await supabase
 		.from("users")
 		.select("totalEarnings")
@@ -246,7 +246,7 @@ async function renderReport(totalWithdrawAmount) {
 	const totalWithdrawal = new Intl.NumberFormat("en-US", {
 		style: "currency",
 		currency: currency,
-	}).format(totalWithdrawAmount);
+	}).format(withdrawalBalance);
 	balance.innerHTML = formatCurrency;
 	localStorage.setItem("amount", data[0].totalEarnings);
 	console.log(formatCurrency);
@@ -259,19 +259,26 @@ async function renderReport(totalWithdrawAmount) {
 								</div>
 								<div class="withdrawal__reports--item">
 									<div class="report-contents">
-										<h3 class="reports-item-text">Total Withdrawal</h3>
+										<h3 class="reports-item-text">Approved Withdrawal </h3>
 										<span class="report__withdrawal--amount">${totalWithdrawal}</span>
+									</div>
+								</div>
+								<div class="withdrawal__reports--item">
+									<div class="report-contents">
+										<h3 class="reports-item-text">Total Withdrawal</h3>
+										<span class="report__withdrawal--amount">${total}</span>
 									</div>
 								</div>
 							
 								
 							</div>`;
 }
-renderReport();
+
 
 //fetch the total withdrawal the doctor have made alredy
 
 async function getTotalWithdrawal() {
+
 	const { data, error } = await supabase
 		.from("withdrawals")
 		.select("*")
@@ -279,7 +286,14 @@ async function getTotalWithdrawal() {
 	if (data || data.length !== 0) {
 		console.log("this is the data", data);
 		const totalWithdrawal = data.length;
-		renderReport(totalWithdrawal);
+		
+		let sum = 0
+		for(let  amount of data){
+			sum += amount.amount
+			
+		}
+		renderReport(sum, totalWithdrawal);
+
 	} else {
 		console.log("there is no data");
 	}
