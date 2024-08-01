@@ -57,6 +57,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+    gap: 1.2rem;
 }
 .importport--notice {
 	font-size: 18px;
@@ -146,7 +147,22 @@
 }
 
 
-
+.withdrawalBtn{
+    width: 120px;
+    background-color: var(--color-accent);
+    height: 30px;
+    border-radius: 2rem;
+    border: none;
+    font-size: 16px;
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+    margin-block: 0.8rem;
+    cursor: pointer;
+    transition: all 0.4s linear;
+}
+.setup__gateway--btn:hover{
+    background-color: var(--color-light);
+}
 
 
 
