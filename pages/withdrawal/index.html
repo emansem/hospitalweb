@@ -46,6 +46,23 @@
 				<!---hero section seaction-->
 				<section class="hero"></section>
                 <!-- here  we manage the popup form -->
+				<div id="success" class="popup__wrapper success hideForm  ">
+					<div class="popup__box--wrapper sucess-pay">
+					  <div class="popup__box sucess-pay">
+						<div class="popup__header sucess-pay-heaing">
+						  <i class="fas fa-check-circle succes-icon"></i>
+						</div>
+						<div class="popup__body sucess-body ">
+						  <p class="popup__body--text sucesstext">
+							Congratulations! Your payment <br>Method Was Added successfully.
+							
+						  </p>
+						  
+						  <button class="cancel accept footer__btn">Cancel</button>
+						</div>
+					  </div>
+					</div>
+				  </div>
                 <div class="content__popup-wrapper    setupGateWay hide-setup-popup">
                    <div class="geteway--container">
                     <form action="" class="setup-gateway">
@@ -68,7 +85,7 @@
                         </div>
                         <div class="gateaway__form--items">
                             <label for="pincode">Set secured pin code</label>
-                            <input class="gateway__form-item" name="pin" type="number" placeholder="Enter pin code" required>
+                            <input class="gateway__form-item" name="pin" type="number" placeholder="5 digits" required>
                          
                         </div>
                       
@@ -86,7 +103,7 @@
                      <form id="withdrawalForm" action="" class="setup-gateway">
                        <div class="gate-way--headings">
                         <h3 class="headings-gateway">Make a withdrawal</h3>
-                        <h3 class="headings-gateway">Total Balance : <span class="fee">$600</span></h3>
+                        <h3 class="headings-gateway ">Total Balance : <span class="fee balance">$600</span></h3>
                        </div>
                          
                          <div class="gateaway__form--items">
@@ -96,7 +113,7 @@
                          </div>
                          <div class="gateaway__form--items">
                              <label for="phone">Select Method</label>
-                             <select  class="gateway__form-item" name="method" id="method">
+                             <select  class="gateway__form-item" name="method" id="withdrawalMethod">
                              <option value="Orange">Orange Money</option>
                             </select>
                          </div>
@@ -107,7 +124,7 @@
                          </div>
                        
                      </form>
-                     <div class="gateaway__form--btn">
+                     <div class="gateaway__form--btn withdrawalButtons">
                          <button class="addMethod-btn cancel-Btn">Cancel</button>
                          <button class="addMethod-btn add-Btn">Withdraw</button>
                        </div>
@@ -128,30 +145,7 @@
 								</div>
 							</div>
 							<div id="hideWithdraw"  class="withdrawal__account--infor">
-								<p class="importport--notice">Withdrawal Account Details</p>
-
-								<div  class="withdrawal__account--items ">
-									<div class="withdrawal__items">
-										<div class="withdrawal__account--item">
-											<div class="account-item">
-												<span class="list-names">Name:</span>
-												<span class="list-value">Eman Bung Sem</span>
-											</div>
-											<div class="account-item">
-												<span class="list-names">Account Number:</span>
-												<span class="list-value">6890xxxx90089</span>
-											</div>
-											<div class="account-item">
-												<span class="list-names">Method name:</span>
-
-												<span class="list-value">Orange Money</span>
-											</div>
-										</div>
-									</div>
-									<div>
-										<button class="withdrawalBtn ">Withdraw</button>
-									</div>
-								</div>
+								
 							</div>
 						</div>
 						<div class="withdrawal__reports">
