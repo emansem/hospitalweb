@@ -28,7 +28,9 @@ const withdrawalMethodSelect = document.querySelector("#withdrawalMethod");
 const withdrawalButtons = document.querySelector(".withdrawalButtons");
 const balance = document.querySelector(".balance");
 const withdrawalReports = document.querySelector(".withdrawal__reports");
-const sucessfulWithdrawalPopup = document.querySelector('.sucessfu-withdrawal');
+const sucessfulWithdrawalPopup = document.querySelector(".sucessfu-withdrawal");
+const withdrawalFormSubmit = document.querySelector(".withdrawalForm");
+
 //get the payment methods and add to the select input.
 
 async function getAllPaymentMethods() {
@@ -155,7 +157,7 @@ function renderWithdrawalDetails(withdrawalDetails) {
 
 	const formate1 = phoneNum.slice(0, 3).join("");
 	const formate2 = phoneNum.slice(5, 8).join("");
-	withdrawalMethodSelect.innerHTML = `<option value="${phone}">${withdrawalDetails[0].method}---${formate1}xxx${formate2}</option>`;
+	withdrawalMethodSelect.innerHTML = `<option value="${withdrawalDetails[0].method}">${withdrawalDetails[0].method}---${formate1}xxx${formate2}</option>`;
 
 	withdrawlaDetailsContainer.innerHTML = `<p class="importport--notice">Withdrawal Account Details</p>
 
@@ -197,7 +199,7 @@ async function getWithdrawalAccountDetails() {
 	} else {
 		console.log("this is your data here boss", data);
 		renderWithdrawalDetails(data);
-        parseInt(localStorage.setItem('pin', data[0].pin))
+		parseInt(localStorage.setItem("pin", data[0].pin));
 	}
 	if (error) {
 		console.error("You got and error here bro", error);
@@ -219,10 +221,11 @@ withdrawalButtons.addEventListener("click", function (e) {
 	const withdrawaalBtn = e.target.textContent;
 	if (withdrawaalBtn === "Cancel") {
 		withdrawalContainer.classList.add("hide-withdrawal");
-        return
-	}else if(withdrawaalBtn ==='Withdraw'){
-        getWithdrawalInputDetails()
-    }
+		return;
+	} else if (withdrawaalBtn === "Withdraw") {
+		getWithdrawalInputDetails();
+		
+	}
 });
 
 //render the reports on the web page
@@ -290,34 +293,45 @@ getTotalWithdrawal();
 
 function getWithdrawalInputDetails() {
 	const totalAmount = localStorage.getItem("amount");
-    const pindCode = localStorage.getItem('pin');
-    const withdrawalPassword = Number(pindCode);
-   
+	const pindCode = localStorage.getItem("pin");
+	const withdrawalPassword = Number(pindCode);
+const pin = withdrawalFormSubmit.pin.value
 	const myBalance = Number(totalAmount);
 	const withdrawalInformation = {
-		method: withdrawForm.method.value,
-		pin: withdrawForm.pin.value,
-		amount: withdrawForm.amount.value,
-        doctorid:loggedUser,
-        description:'Withdrawal Was succesful'
+		method: withdrawalFormSubmit.method.value,
+		
+		amount: withdrawalFormSubmit.amount.value,
+		doctorid: loggedUser,
+		description: "Withdrawal Was succesful",
 	};
-    if(withdrawalInformation.amount > myBalance || myBalance < 0){
-        alert('You Donot have insufficient Balance');
-        return
-    }else{
-createNewWithdrawalAccount(withdrawalInformation)
-    }
+	const curreentPin = Number(pin);
+	if (withdrawalInformation.amount > myBalance || myBalance < 0) {
+		alert("You Donot have insufficient Balance");
+		return;
+	} else if (curreentPin !== withdrawalPassword) {
+		alert("Your Pin code is correct");
+		return;
+	} else {
+		console.log(withdrawalInformation);
+		createNewWithdrawalAccount(withdrawalInformation);
+	}
 }
 //insert a new withdrawal details in the withdrawal page
 
-async function createNewWithdrawalAccount(withddrawalDetails){
-    const { data, error } = await supabase
-		.from("gateway_setup")
+async function createNewWithdrawalAccount(withddrawalDetails) {
+	const { data, error } = await supabase
+		.from("withdrawals")
 		.insert([withddrawalDetails])
 		.select();
 	if (data && data.length !== 0) {
+        setTimeout(() => {
+			withdrawalContainer.classList.add("hide-withdrawal");
+		}, 500);
+		setTimeout(() => {
+			sucessfulWithdrawalPopup.classList.remove("hideForm");
+		}, 1200);
 		console.log("this is the withdrawal  here ", data);
-        withdrawForm.reset();
+		withdrawForm.reset();
 	} else {
 		console.log("you have no data", data);
 	}
@@ -326,3 +340,4 @@ async function createNewWithdrawalAccount(withddrawalDetails){
 	}
 }
 
+console.log(withdrawalMethodSelect);
