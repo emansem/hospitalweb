@@ -28,6 +28,7 @@ const withdrawalMethodSelect = document.querySelector("#withdrawalMethod");
 const withdrawalButtons = document.querySelector(".withdrawalButtons");
 const balance = document.querySelector(".balance");
 const withdrawalReports = document.querySelector(".withdrawal__reports");
+const sucessfulWithdrawalPopup = document.querySelector('.sucessfu-withdrawal');
 //get the payment methods and add to the select input.
 
 async function getAllPaymentMethods() {
@@ -196,6 +197,7 @@ async function getWithdrawalAccountDetails() {
 	} else {
 		console.log("this is your data here boss", data);
 		renderWithdrawalDetails(data);
+        parseInt(localStorage.setItem('pin', data[0].pin))
 	}
 	if (error) {
 		console.error("You got and error here bro", error);
@@ -288,6 +290,9 @@ getTotalWithdrawal();
 
 function getWithdrawalInputDetails() {
 	const totalAmount = localStorage.getItem("amount");
+    const pindCode = localStorage.getItem('pin');
+    const withdrawalPassword = Number(pindCode);
+   
 	const myBalance = Number(totalAmount);
 	const withdrawalInformation = {
 		method: withdrawForm.method.value,
@@ -296,7 +301,7 @@ function getWithdrawalInputDetails() {
         doctorid:loggedUser,
         description:'Withdrawal Was succesful'
 	};
-    if(withdrawalInformation.amount > myBalance){
+    if(withdrawalInformation.amount > myBalance || myBalance < 0){
         alert('You Donot have insufficient Balance');
         return
     }else{
@@ -320,3 +325,4 @@ async function createNewWithdrawalAccount(withddrawalDetails){
 		console.error(error);
 	}
 }
+
