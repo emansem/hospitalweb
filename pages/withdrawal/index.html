@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manage Your Plan Here</title>
+    <title>Manage your withdrawal | Create or Update</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,8 +29,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/admin/style/general.css" />
-    <link rel="stylesheet" href="/admin/style/dashboard.css" />
+   
     <link rel="stylesheet" href="/styles/style.css" />
   </head>
 
@@ -48,11 +47,46 @@
         <!---appointMent section seaction-->
         <!-- <div class="recents"> -->
 
-        <div class="recent-users">
-          <h3 class="headings plan-heading">Manage your plans</h3>
+        <div class="withdrawal-wrapper">
+          <h3 class="headings plan-heading">Manage your withdrawals</h3>
 
-          <div class="plans-wrapper plan-wrap">
+          <div class="withdrawal__container">
            
+            <div class="withdrawal__account">
+                <div class="withdrawal__setup--gateway">
+                    <p class="importport--notice">No withdrawal method found setup a new gateway</p>
+                    <button class="setup__gateway--btn">Add now</button>
+                    
+                </div>
+            </div>
+            <div class="withdrawal__reports">
+                <div class="withdrawal__reports--item">
+                    
+                    <div class="report-contents">
+                        <h3 class="reports-item-text">Total Balance</h3>
+                        <span class="report__withdrawal--amount">$888</span>
+                    </div>
+                </div>
+                <div class="withdrawal__reports--item">
+                    <div class="report-contents">
+                        <h3 class="reports-item-text">Total Withdrawal</h3>
+                        <span class="report__withdrawal--amount">$700</span>
+                    </div>
+                </div>
+                <div class="withdrawal__reports--item">
+                    <div class="report-contents">
+                        <h3 class="reports-item-text">Approved Withdrawal</h3>
+                        <span class="report__withdrawal--amount">$500</span>
+                    </div>
+                </div>
+                <div class="withdrawal__reports--item">
+                    <div class="report-contents">
+                        <h3 class="reports-item-text">Faild Withdrawal</h3>
+                        <span class="report__withdrawal--amount">$50</span>
+                    </div>
+                </div>
+            </div>
+            <div class="withdrawal__history"></div>
       
           </div>
         </div>
@@ -61,6 +95,6 @@
       </div>
     </div>
     <script type="module" src="/scripts/menu.js"></script>
-    <script type="module" src="/scripts/manageplan.js"></script>
+    
   </body>
 </html>
