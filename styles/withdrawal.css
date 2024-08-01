@@ -275,6 +275,9 @@ label {
 	align-items: center;
 	gap: 0.8rem;
 }
+.hide-withdrawal{	
+	display: none;
+}
 .headings-gateway{
 	text-align: center;
 	color: var(--color-dark);
