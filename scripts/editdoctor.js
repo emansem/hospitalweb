@@ -10,17 +10,34 @@ const supabaseKey =
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
+const loading = document.querySelector('.loading');
 
 
 previewimage();
 
 async function sendDoctorDetails(updatedUser) {
+  loading.classList.add('hide');
   const { data, error } = await supabase
     .from("users")
     .update(updatedUser)
-    .eq("id", logUser);
+    .eq("id", logUser)
+    .select();
   if (error) console.log(error);
-  console.log(data);
+  if(data && data.length !==0){
+    console.log('this is your data here', data);
+    loading.classList.remove('hide');
+    alert("Profile updated successfully!");
+  updateForm.reset();
+  setTimeout(function () {
+    window.location.href = `/pages/doctorprofile.html`;
+  }, 1500);
+  }else{
+    console.log('there is no date here')
+  }
+
+  if(error){
+    console.error('there is an error in the code', error);
+  }
 }
 
 function editUserProfile() {
@@ -51,13 +68,11 @@ function editUserProfile() {
 }
 
 updateForm.addEventListener("submit", function (e) {
+  
   e.preventDefault();
+  
   editUserProfile();
-  alert("Profile updated successfully!");
-  updateForm.reset();
-  setTimeout(function () {
-    window.location.href = `/pages/doctorprofile.html`;
-  }, 1500);
+  
 });
 
 console.log("hello");

@@ -66,7 +66,7 @@ function renderDoctorProfileToUsers(user, conditon) {
                       "https://shorturl.at/8TClo"}" class="${user.name}">
 								  </div>
 								  <div class="heaer__right--userinfo">
-						  <span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verify Doctor</span></span>
+						          ${verifiedDoctor()}
 									  <span class="name">Dr.${user[0].name}</span>
 									  
 								  </div>
@@ -131,7 +131,7 @@ function renderDoctorProfile(user) {
                       "https://shorturl.at/8TClo"}" class="${user.name}">
 								  </div>
 								  <div class="heaer__right--userinfo">
-						  <span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verify Doctor</span></span>
+						           ${verifiedDoctor()}
 									  <span class="name">Dr.${user[0].name}</span>
 									  
 								  </div>
@@ -263,3 +263,28 @@ function allVariablesForToCompare(subcription) {
 				
 			}
 			}
+
+// load the doctor subscription and patients treated
+
+async function loadDoctorPatients(){
+	const {data, error} =  await supabase.from('subscriptions').select('*').eq('doctorid', logUser);
+	localStorage.setItem('patients', JSON.stringify(data));
+	
+	if(error){
+		console.log('we got an error', error);
+	}
+}
+loadDoctorPatients();
+
+//check if the doctor have 4 patients
+
+function verifiedDoctor(){
+	const subscriptions = JSON.parse(localStorage.getItem('patients'));
+	
+	 if(subscriptions.length >=4){
+		return `<span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verified Doctor</span></span>`
+	}else{
+		return` <span class="verify notverified"> <i class="fas fa-times-circle"></i> <span class="verify-text">Not verified</span></span>`
+	}
+	
+}

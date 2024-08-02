@@ -216,6 +216,46 @@
             .working-hours label {
                 font-weight: normal;
             }
+            .loading{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                top: 0;
+               background: rgba(0, 0, 0, 0.5);
+                z-index: 100;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .loading-text{
+                font-size: 18px;
+                color: #1c1b2e;
+                font-weight: 500;
+                margin-bottom: 0.4rem;
+            }
+            .hide{
+                display: none;
+            }
+            /* HTML: <div class="loader"></div> */
+.loader {
+  height: 30px;
+  aspect-ratio: 2.5;
+  --_g: no-repeat radial-gradient(farthest-side,#000 90%,#0000);
+  background:var(--_g), var(--_g), var(--_g), var(--_g);
+  background-size: 20% 50%;
+  animation: l43 1s infinite linear; 
+}
+@keyframes l43 {
+  0%     {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+  16.67% {background-position: calc(0*100%/3) 0   ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+  33.33% {background-position: calc(0*100%/3) 100%,calc(1*100%/3) 0   ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+  50%    {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 100%,calc(2*100%/3) 0   ,calc(3*100%/3) 50% }
+  66.67% {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 100%,calc(3*100%/3) 0   }
+  83.33% {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 100%}
+  100%   {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+}
             @media screen and (max-width: 1500px) {
 				.container{
 					margin-left: 300px;
@@ -261,9 +301,22 @@
 				</div>
 
 				<section class="main-section">
+
+
                     <header>
                         
                     </header>
+
+                    <!-- the loading animatin on the screen. -->
+                     
+                    <div class="loading hide">
+                      <div class="anime-text">
+                        <p class="loading-text">Please Wait</p>
+                        <div class="loader"></div>
+                      </div>
+
+                    </div>
+
                 
                     <main class="container">
                         <form class="edit-form" id="edit-doctor-profile-form">

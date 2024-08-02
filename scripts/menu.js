@@ -66,35 +66,17 @@ function generateSideBar(id, type) {
         	<i class="fa hideSideBar fa-bars"></i>
       </div>
       <ul class="sidebar-left_nav-items">
-        <a href="${
-					type !== "doctor" ? `/pages/dashboard.html` : `/pages/dashboard.html`
-				}">
+        <a href="/pages/dashboard.html"
           <li class="sidebar-left-item active">
             <span><i class="fas fa-tachometer-alt"></i></span> Dashboard
           </li>
         </a>
         
-        <a href="/pages/plans.html">
-          <li class="sidebar-left-item">
-            <span><i class="fas fa-calendar-check"></i></span> Plans
-          </li>
-        </a>
+       ${showPLansToUsers(type)}
         
-        <a href="${
-					userId !== logUser
-						? `/pages/messages.html?id=${logUser}`
-						: `/pages/messages.html?id=${userId}`
-				}">
-          <li class="sidebar-left-item">
-            <span><i class="fas fa-envelope"></i></span> Message
-          </li>
-        </a>
+        ${showPatientAndDoctors(type)}
         
-        <a href="/pages/doctors.html" target="_blank" rel="noopener noreferrer">
-          <li class="sidebar-left-item">
-            <span><i class="fas fa-user-md"></i></span> Doctors
-          </li>
-        </a>
+        ${showChatRoomToUser(type)}
 
         <a href="${
 					type !== "doctor"
@@ -106,11 +88,7 @@ function generateSideBar(id, type) {
           </li>
         </a>
         
-        <a href="/pages/billing.html">
-          <li class="sidebar-left-item">
-            <span><i class="fas fa-file-invoice-dollar"></i></span> Billing
-          </li>
-        </a>
+               ${showWithdrawal(type)}     
         
         <a href="${
 					userId !== logUser || type !== "doctor"
@@ -265,10 +243,86 @@ async function getUserAvater() {
 		.select("userAvatar")
 		.eq("id", logUser);
 	if (data) {
-		console.log("this is the user photo", data);
-		renderHearder(data[0].userAvatar);
+		
 	} else {
 		console.log("this is the error", error);
 	}
 }
 getUserAvater();
+
+
+//we need to check who is logging to then we render the plan page if doctor, show plans if patient show plans.
+
+function showPLansToUsers(type){
+	if(type === 'patient'){
+		return `  <a href="/pages/manageplan.html">
+		<li class="sidebar-left-item">
+		  <span><i class="fas fa-calendar-check"></i></span> Plans
+		</li>
+	  </a>`
+	}
+	else{
+	
+	return `  <a href="/pages/plans.html">
+	<li class="sidebar-left-item">
+	  <span><i class="fas fa-calendar-check"></i></span> Plans
+	</li>
+  </a>`
+	
+}
+}
+
+//show the patient chat room
+function showPatientAndDoctors(type){
+	if(type === 'patient'){
+		return ` <a href="/pages/patientchatroom.html">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-user-md"></i></span> My Doctors
+          </li>
+        </a> `
+	}
+	else{
+	
+	return ` <a href="/pages/mypatients.html">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-users"></i></span> Patients
+          </li>
+        </a>`
+	
+}
+}
+
+//show the patient chat room
+function showWithdrawal(type){
+	if(type === 'doctor'){
+		return ` <a href="/pages/withdrawal/index.html">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-file-invoice-dollar"></i></span> Withdrawal
+          </li>
+        </a>`
+	}else{
+		return ''
+	}
+
+}
+
+//show chat to the users.
+function showChatRoomToUser(type){
+	if(type === 'doctor'){
+		return `<a href="/pages/doctorchatroom.html" target="_blank" rel="noopener noreferrer">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-comments"></i>
+</span> Chat
+          </li>
+        </a>`
+	}else{
+		return `<a href="/pages/patientchatroom.html" target="_blank" rel="noopener noreferrer">
+          <li class="sidebar-left-item">
+            <span><i class="fas fa-comments"></i>
+</span> Chat
+          </li>
+        </a>`
+	}
+}
+
+
