@@ -1,12 +1,14 @@
 const userProfile = document.querySelector(".profile-content");
 
-function formatPhone(phone) {
+function formatPhone(phoneNumber) {
+  const phone = phoneNumber.toString();
   const first = phone.slice(0, 3);
   const middle = phone.slice(3, 6);
   const last = phone.slice(6);
   return `${first} ${middle} ${last}`;
 }
 const logUser = JSON.parse(localStorage.getItem('activeId'));
+import { showLoading} from '../scripts/custom_alert.js'
 console.log('active',logUser);
 const loggedUser = logUser;
 
@@ -19,11 +21,13 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function getUserDetails() {
+  showLoading()
   try {
     const { data, error } = await supabase
       .from("users")
       .select("*")
       .eq("id", logUser);
+      showLoading('hideLoading')
     if (error) {
       console.log(error);
     }
@@ -38,7 +42,7 @@ getUserDetails();
 
 function renderProfile(user) {
   
-  const phone = user[0].phone;
+  const phone = user[0].phone
   const userPhone = formatPhone(phone);
 console.log('login user', user[0].id)
 console.log('active id', loggedUser);

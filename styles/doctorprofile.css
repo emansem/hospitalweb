@@ -206,6 +206,13 @@ cursor: not-allowed;
     @media screen and (max-width: 920px) {
         .container{
             margin-left: 100px;
+            margin-right: 3rem;
+        }
+        .main-page{
+            margin-right: 1rem !important;
+        }
+        .doctor-profile{
+            margin-right: 3rem !important;
         }
     }
     @media screen and (max-width: 840px) {

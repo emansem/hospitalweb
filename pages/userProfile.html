@@ -1,6 +1,6 @@
 <!-- @format -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -27,74 +27,52 @@
 		<link rel="stylesheet" href="/admin/style/profileDetails.css" />
 
 		<style>
-		
+			.main-page {
+				margin-right: 1rem;
+			}
 		</style>
 	</head>
 	<body>
+		<!-- Dashboard Container -->
 		<div class="dashboard-container">
+			<!-- Sidebar Left -->
 			<div class="siderbar-left"></div>
 
+			<!-- Main Page Content -->
 			<div class="main-page">
-				<!---header seaction-->
-
+				<div class="loading hideLoading">
+					<div class="loading-text">
+				     Please wait loading
+					</div>
+				</div>
+				<!-- Header Section -->
 				<div class="header">
-				
+					<!-- Header content goes here -->
 				</div>
 
+				<!-- Main Section -->
 				<section class="main-section">
+					<!-- Section Header -->
 					<header></header>
 
+					<!-- Main Container -->
 					<main class="container">
-					
-							<div class="doctor-profile">
-								<div class="profile-content"></div>
-								  <div class="doctor__profile--body">
-							  <div class="headings"><span class="userName2">Eman</span> Recent History</div>
-									<div class="content-wrapper">
-							 
-										<div class="recent__user--item1">
-										
-											<div class="user-info">
-												<span class="user-name">Renew subscriptions - <span class="type-of-action">40$</span> </span>
-												<span class="user-type">Date:<span class="type type2">12/09/2002</span></span>
-											</div>
-										</div>
-										
-										
-										<div class="recent__user--item2">
-										
-											<a class="see-more" href=""> <i class="fas fa-angle-right"></i></a>
-										</div>
-									</div>
-					
-									
-									<div class="content-wrapper">
-										<div class="recent__user--item1">
-										
-											<div class="user-info">
-												<span class="user-name">Booked New- <span class="type-of-action">Appointment</span> With <a href="" class="userName2">Eman sem</a></span>
-												<span class="user-type">Date:<span class="type type2">12/09/2002</span></span>
-											</div>
-										</div>
-										
-										
-										<div class="recent__user--item2">
-										
-											<a class="see-more" href=""> <i class="fas fa-angle-right"></i></a>
-										</div>
-									</div>
-					
-								  </div>
-								  <div class="doctor__profile--footer"></div>
-								</div>
-						
+						<!-- Doctor Profile Section -->
+						<div class="doctor-profile">
+							<!-- Profile Content -->
+							<div class="profile-content"></div>
+
+							<!-- Doctor Profile Body -->
+							<div class="doctor__profile--body"></div>
+						</div>
 					</main>
 				</section>
 			</div>
-
-			
 		</div>
+
+		<!-- JavaScript Modules -->
 		<script type="module" src="/scripts/menu.js"></script>
 		<script type="module" src="/scripts/userProfile.js"></script>
+		<!-- <script type="module" src="/scripts/custom_alert.js"></script> -->
 	</body>
 </html>

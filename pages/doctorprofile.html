@@ -32,76 +32,90 @@
     color: #f03030;
     border-radius: 50%;
 }
+
+			.main-page {
+				margin-right: 1rem;
+			}
+	
     </style>
 </head>
 <body>
-   
-
-   
-
+    <!-- Dashboard Container -->
     <div class="dashboard-container">
+        
+        <!-- Sidebar Left -->
         <div class="siderbar-left">
-          
-          
-            </div>
+            <!-- Sidebar content goes here -->
         </div>
-        <div class="main-page">
-            <!---header seaction-->
+    </div>
 
-            <div class="header">
-                <div class="loading hideLoading">
-					<div class="loading-text">
-				Please wait loading
-					</div>
-				</div>
-              <!-- show custome alert bars here -->
-				
+    <!-- Main Page Content -->
+    <div class="main-page">
+        
+        <!-- Header Section -->
+        <div class="header">
+            
+            <!-- Loading Indicator -->
+            <div class="loading hideLoading">
+                <div class="loading-text">
+                    Please wait loading
+                </div>
             </div>
-            <div id="request-pay" class="popup__wrapper hideForm">
-                <div class="popup__box--wrapper sucess-pay">
-                    <div class="popup__box sucess-pay">
-                        <div class="popup__header sucess-pay-heaing">
-                            <i class="fas warn-icon fa-exclamation-triangle notice-icon"></i>
-                        </div>
-                        <div class="popup__body sucess-body">
-                            <p class="popup__body--text sucesstext">
-                                To contact a doctor, please subscribe to our service first. 
-                                you will pay <span class="fee">$10 per month</span> to use our service, this help us to maintain the website ❤️
-                            </p>
-                           
-                        </div>
-                        <div class="popup__footer">
-                            <button class="accept footer__btn">Subscribe Now</button>
-                            <button class="refuse footer__btn">Maybe Later</button>
-                        </div>
+            
+            <!-- Custom Alert Bars -->
+            <!-- Additional custom alerts can be added here -->
+
+        </div>
+
+        <!-- Subscription Popup -->
+        <div id="request-pay" class="popup__wrapper hideForm">
+            <div class="popup__box--wrapper sucess-pay">
+                <div class="popup__box sucess-pay">
+                    <div class="popup__header sucess-pay-heaing">
+                        <i class="fas warn-icon fa-exclamation-triangle notice-icon"></i>
+                    </div>
+                    <div class="popup__body sucess-body">
+                        <p class="popup__body--text sucesstext">
+                            To contact a doctor, please subscribe to our service first. 
+                            You will pay <span class="fee">$10 per month</span> to use our service. This helps us to maintain the website ❤️
+                        </p>
+                    </div>
+                    <div class="popup__footer">
+                        <button class="accept footer__btn">Subscribe Now</button>
+                        <button class="refuse footer__btn">Maybe Later</button>
                     </div>
                 </div>
             </div>
-         
-            <!---hero section seaction-->
-          
-
-            <!---appointMent section seaction-->
-            <secttion class="main-section">
-                <main class="container">
-
-                    <header></header>
-                     
-                      <div class="doctor-profile">
-                       <div class="profile-content"></div>
-                          <div class="doctor__profile--body">
-                    
-                
-                </main>
-            </secttion>
         </div>
-       
-          </div>
+
+        <!-- Hero Section -->
+        <!-- Content for hero section goes here -->
+
+        <!-- Appointment Section -->
+        <secttion class="main-section">
+            <main class="container">
+                
+                <!-- Section Header -->
+                <header></header>
+                
+                <!-- Doctor Profile Section -->
+                <div class="doctor-profile">
+                    
+                    <!-- Profile Content -->
+                    <div class="profile-content"></div>
+                    
+                    <!-- Doctor Profile Body -->
+                    <div class="doctor__profile--body"></div>
+                    
+                </div>
+                
+            </main>
+        </secttion>
     </div>
-  
-   
+
+    <!-- JavaScript Modules -->
     <script type="module" src="/scripts/doctor/doctorprofile.js"></script>
     <script type="module" src="/scripts/menu.js"></script>
-  
 </body>
+
 </html>
