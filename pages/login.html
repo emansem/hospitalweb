@@ -23,6 +23,7 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		/>
 		<link rel="stylesheet" href="/styles/register.css" />
+		<link rel="stylesheet" href="/styles/withdrawal.css" />
 		<style>
 			/* HTML: <div class="loader"></div> */
 /* HTML: <div class="loader"></div> */
@@ -56,7 +57,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="register-container">
+		<!-- <div class="register-container">
 			<div class="form-wrapper">
 				<div class="cta-action">
 					<div>
@@ -107,7 +108,47 @@
 					</div>
 				</form>
 			</div>
+		</div> -->
+		<div class="content__popup-wrapper">
+			<div class="geteway--container registerContainer">
+				<form id="loginform"  class="setup-gateway form">
+					<h3 class="headings-gateway">Welcome Back <br> Login to continue</h3>
+					
+					<div class="gateaway__form--items">
+						<label for="email">Email</label>
+						<input
+							class="gateway__form-item"
+							name="email"
+							type="email"
+							placeholder="Enter your emal"
+							required
+						/>
+					</div>
+					
+					<div class="gateaway__form--items">
+						<label for="passowrd">Password</label>
+							<input
+							class="gateway__form-item"
+							id="Password"
+								name="password"
+								type="password"
+								minlength="7"
+								placeholder="Enter your passowrd" required
+							/>
+					</div>
+				
+					<div id="gateaway__form--btn" class="gateaway__form--btn">
+						<button class="addMethod-btn add-Btn submitBtn">Login</button>
+					</div>
+					<div>
+						<p class="action-text">
+						Donot Have an account? <a href="/pages/register.html">Register Here</a>
+						</p>
+					</div>
+				</form>
+			</div>
 		</div>
+
 
 		<!-- <script type="module" src="/scripts/auth.js"></script> -->
 		<script type="module" src="/scripts/login.js"></script>
