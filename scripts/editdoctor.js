@@ -1,6 +1,7 @@
 /** @format */
 import { previewimage } from "../scripts/data.js";
 import { showSucessAlert } from "../scripts/custom_alert.js";
+import {failedsAlert} from "../scripts/custom_alert.js";
 const updateForm = document.getElementById("edit-doctor-profile-form");
 
 const logUser = JSON.parse(localStorage.getItem("activeId"));
@@ -14,7 +15,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const loading = document.querySelector('.loading');
 const updateBtn =document.querySelector('.updateBtn');
 
-
+// console.log(failedsAlert('hello'))
 
 previewimage();
 
@@ -59,33 +60,37 @@ function editUserProfile() {
   const bio = updateForm.bio.value;
   const languages = updateForm.languages.value;
   const imageFile = updateForm.profileImage.files[0];
+ if (imageFile && languages !== '' && bio!==''){
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const userAvatar = event.target.result;
+    document.getElementById("profile-image-preview").src =
+      event.target.result;
 
-  if (imageFile) {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      const userAvatar = event.target.result;
-      document.getElementById("profile-image-preview").src =
-        event.target.result;
-
-      const updateDoctor = {
-        bio: bio,
-        userAvatar: userAvatar,
-        hospitalName: clinicName,
-        languages: languages,
-      };
-
-      sendDoctorDetails(updateDoctor);
-      console.log(updateDoctor);
+    const updateDoctor = {
+      bio: bio,
+      userAvatar: userAvatar,
+      hospitalName: clinicName,
+      languages: languages,
     };
-    reader.readAsDataURL(imageFile);
-  }
+
+    sendDoctorDetails(updateDoctor);
+    console.log(updateDoctor);
+  };
+  reader.readAsDataURL(imageFile);
+  return
+ }else{
+
+ }
+ failedsAlert('Please all fields are required');
+ return
 }
 
 updateForm.addEventListener("submit", function (e) {
   
   e.preventDefault();
   editUserProfile();
-
+  
   
 });
 

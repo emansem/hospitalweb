@@ -1121,17 +1121,33 @@ display: flex;
 
 
 }
+.faild__alert{
+	position: fixed;
+	background-color: #f177778c;
+	top: 50;
+	right: 0;
+	width: 40%;
+	z-index: 100;
+	display: none;
+	transition: all 0.3s ease-in-out;
+	animation: slideIn 1s  ease-out;
+}
 
 .removeAnimationAlert{
 
 animation: slideOut 1s  ease-out;
 }
+.failedProgressBar,
 .progressBar{
 	width: 100%;
 	height: 5px;
 	background-color: #00796B;
 	transition: all 1s linear;
 }
+.failedProgressBar{
+	background-color: #f01919;
+}
+
 .custom__alert--items{
 	
 	display: flex;
@@ -1144,6 +1160,10 @@ animation: slideOut 1s  ease-out;
 	align-items: center;
 	padding: 1rem;
 	flex: 1;
+}
+.close-alertFaild .fa-times{
+	color: #f01919;
+	cursor: pointer;
 }
 .alert-message{
 	font-size: 1rem;
@@ -1247,6 +1267,7 @@ display: none;
 		.withdrawal__account--items{
 			width: 700px;
 		}
+		.faild__alert,
 		.custom__alert--wrapper{
 			
 			width: 80%;
