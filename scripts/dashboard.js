@@ -6,11 +6,11 @@ const supabaseKey =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
 
 // DOM element selections
-const popupWrapper = document.querySelector(".popup__wrapper");
+
 const reports = document.querySelector(".reports-wrapper");
 const doctors = document.querySelector(".doctors");
-const appointments = document.querySelector(".appointments");
-const doctorH = document.querySelector(".docctor-heading");
+// const appointments = document.querySelector(".appointments");
+// const doctorH = document.querySelector(".docctor-heading");
 
 // Import and initialize Supabase client
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
@@ -18,8 +18,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Get user information from local storage
 const logUser = JSON.parse(localStorage.getItem("activeId"));
-const getStoreUsers = JSON.parse(localStorage.getItem("id"));
-const patientLog = getStoreUsers.find((user) => user.id === logUser);
+import { showLoading } from "../scripts/custom_alert.js";
+
+
 
 // Function to fetch and display user information
 async function getUserInfo() {
@@ -64,7 +65,9 @@ function heroSection(user) {
             <p class="greet">Welcome Back,</p>
             <h3 class="userName"><span>${user.type === "doctor" ? "Dr" : "Dear"}.</span> ${user.name}</h3>
             <p class="appointMent">
-                ${user.type === "doctor" ? `You have ${user.appointments_pending} total <span> appointments</span> today` : ``}
+                ${user.type === "doctor" ? `Connect with <span> patients</span> who need your care` : `Find the <span 
+
+>Expert Care</span> you deserve`}
             </p>
         </div>
         <div class="hero-image">
@@ -114,12 +117,19 @@ function addDoctorstoDashboard(users) {
 }
 
 // Function to fetch and display doctors
+
 async function getDoctors() {
+	showLoading('loading')
 	const { data, error } = await supabase
 		.from("users")
 		.select("*")
 		.eq("type", "doctor");
 	console.log("doctor that have paid", data);
+	if(data || data.length !==0 ){
+		setTimeout(function(){
+			showLoading('hideLoading')
+		},500);
+	}
 	if (error) console.log(error);
 
 	
@@ -130,8 +140,36 @@ async function getDoctors() {
 getDoctors();
 
 // Function to display doctor's data
-function getDoctorData(user) {
+async function getDoctorData(user) {
+	showLoading()
+	const { data, error } = await supabase
+		.from("withdrawals")
+		.select("*")
+		.eq("doctorid", loggedUser);
+	if (data || data.length !== 0) {
+		const totalWithdrawal = data.length;
+
+		let sum = 0;
+		for (let amount of data) {
+			sum += amount.amount;
+		}
+		renderDoctorReport(sum, totalWithdrawal, user);
+		setTimeout(function(){
+			showLoading('hideLoading')
+		},500);
+	
+	} else {
+		console.log("there is no data");
+	}
+	if (error) {
+		console.log("this is an error", error);
+	}
 	console.log(user);
+	
+}
+
+//render the doctor data on the dashboard
+function renderDoctorReport(sum, totalWithdrawal, user){
 	reports.innerHTML = `
 
 	<div class="report__item item">
@@ -139,17 +177,17 @@ function getDoctorData(user) {
 									<i class="fas fa-users"></i>
 								</div>
 								<div class="report__text">
-									<span class="count"> ${user.patientsTreated}</span>
+									<span class="count"> ${user.patientsTreated || 0}</span>
 									<span class="count-text">Total Patients</span>
 								</div>
 							</div>
 							<div class="report__item item">
 								<div class="report__icons">
-									<i class="fas fa-hourglass-half"></i>
+									<i class="fas fa-calculator"></i>
 								</div>
 								<div class="report__text">
-									<span class="count"> ${user.appointments_pending}</span>
-									<span class="count-text">Pending Appointments</span>
+									<span class="count"> ${totalWithdrawal|| 0}</span>
+									<span class="count-text">Total Withdrawal</span>
 								</div>
 							</div>
 							<div class="report__item item">
@@ -157,8 +195,8 @@ function getDoctorData(user) {
 									<i class="fas fa-check-circle"></i>
 								</div>
 								<div class="report__text">
-									<span class="count"> ${user.appointments_finished}</span>
-									<span class="count-text">Active Appointments</span>
+									<span class="count"> $${sum || 0}</span>
+									<span class="count-text">Approved Withdrawal</span>
 								</div>
 							</div>
 
@@ -176,85 +214,5 @@ function getDoctorData(user) {
 
 `;
 }
-
-// Function to check user payment status
-// async function checkUserPaySatus() {
-// 	const { data, error } = await supabase
-// 		.from("users")
-// 		.select("*")
-// 		.eq("id", logUser);
-// 	console.log(data);
-    
-// 	if (data[0].pay_id !== null || patientLog.type === "patient") {
-// 		popupWrapper.classList.add("requestpay");
-// 	} else if (data[0].pay_id === null && patientLog.type === "doctor") {
-// 		popupWrapper.classList.add("requestpay");
-//         console.log('datea' ,data)
-// 		setTimeout(function (e) {
-// 			popupWrapper.classList.remove("requestpay");
-// 		}, 2000);
-// 	}
-// 	if (error) {
-// 		console.log("error", error);
-// 	}
-// }
-
-// checkUserPaySatus();
-
-// // Event listener for popup actions
-// popupWrapper.addEventListener("click", function (e) {
-// 	const targetEl = e.target.textContent;
-// 	console.log(targetEl);
-// 	if (targetEl === "Subscribe Now") {
-// 		window.location.href = "/pages/payment.html";
-// 	} else if (targetEl === "Maybe Later") {
-// 		popupWrapper.style.display = "none";
-// 	}
-// });
-
-
-// async function checkExpireDate(){
-//     try {
-//         const {data, error} = await supabase.from('users').select("*").eq('id', logUser);
-//         if (error) {
-//             console.log('Error fetching payment history:', error);
-//             return;
-//         }
-//       const expireAt = data[0].next_pay_date;
-//       const createdAt = Date.now();
-      
-      
-//         if(createdAt >  new Date(expireAt)){
-//             console.log('You have not paid yet');
-//             console.log('this is the data', data)
-//             updateIdtoNull(data[0].id);
-//         }else{
-//             console.log('You have paid', data);
-            
-//         }
-        
-//     } catch (err) {
-//         console.error('Error in checkNextPayDayValue:', err);
-//     }
-//     return false;
-    
-// }
-// checkExpireDate()
-// document.addEventListener('DOMContentLoaded', function(e){
-//     checkExpireDate();
-// })
-
-// // upadet the paid to null if the user subscription have expired;
-
-// async function updateIdtoNull(id){
-//     const {data, error} = await supabase.from('users').update({pay_id : null}).eq('id', id);
-//     console.log('hello',data)
-//     if(error){
-//         console.log('Error updating', error);
-//     }
-       
-    
-// }
-
 
 

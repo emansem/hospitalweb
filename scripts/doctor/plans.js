@@ -20,7 +20,9 @@ const plansContainer = document.querySelector(".payment_methods-wrapper");
 const upadtePlanForm = document.querySelector(".updateForm");
 const addNewMethodOverlay = document.querySelector(".addNew__method--overlay");
 const openSucessForm = document.querySelector("#success");
-
+import { showLoading } from "../custom_alert.js";
+import { showSucessAlert } from "../custom_alert.js";
+import { failedsAlert } from "../custom_alert.js";
 // create or add a new plan this is the function that will allow doctors to add new paynment plans we have pay once or monthly
 async function addnewPlan(plan) {
   const { data, error } = await supabase
@@ -28,12 +30,12 @@ async function addnewPlan(plan) {
     .insert([plan])
     .select("*");
   if (data && data.length !== 0) {
-    openSucessForm.classList.remove("closeForm");
+    showSucessAlert(`Your '${data[0].type}' Was added successfully!`)
     addNewPlanForm.reset();
     setTimeout(function() {
       window.location.reload();
-    }, 1000);
-    console.log("new plan data", data);
+    }, 1500);
+   return
   } else {
     console.log("this is the error", error);
   }
@@ -70,9 +72,15 @@ addNewPlanForm.addEventListener("submit", function(e) {
       option3: option3
     }
   };
-  console.log(plan);
+  if(amount ==='' || option1==='' || option2 ==='' || option3 === ''){
+    failedsAlert('All fields are required');
+    return;
+  }else{
+    console.log(plan);
 
-  addnewPlan(plan);
+    addnewPlan(plan);
+  }
+ 
 });
 
 // this is to update the plan to change any input field
@@ -95,11 +103,17 @@ upadtePlanForm.addEventListener("submit", function(e) {
       option3: option3
     }
   };
-  console.log(plan);
+  if(amount ==='' || option1==='' || option2 ==='' || option3 === ''){
+    failedsAlert('All fields are required');
+    return;
+  }else{
+    console.log(plan);
 
-  const planId = localStorage.getItem("planid");
-
-  upadtePlan(planId, plan);
+    const planId = localStorage.getItem("planid");
+  
+    upadtePlan(planId, plan);
+  }
+  
 });
 
 //close the form;
@@ -160,6 +174,8 @@ function getActionButtions(button) {
 
 // update , change the plan  or change the status to deactive;
 async function upadtePlan(id, plan_types) {
+showLoading()
+
   const { data, error } = await supabase
     .from("doctor__plans")
     .update(plan_types)
@@ -168,6 +184,12 @@ async function upadtePlan(id, plan_types) {
   setTimeout(function(e) {
     location.reload();
   }, 100);
+  if(data){
+    setTimeout(function(){
+			showLoading('hideLoading')
+		},500);
+	
+  }
   if (error) {
     console.log("error", error);
   } else {
@@ -212,11 +234,15 @@ getAllPlanTypes();
 
 // get all plan  and render them to the web page
 async function getAllPlans() {
+  showLoading()
   document.querySelector(".paymentNumbers").innerHTML = '';
   const { data, error } = await supabase
     .from("doctor__plans")
     .select("*")
     .eq("doctorId", doctorId);
+    setTimeout(function(){
+			showLoading('hideLoading')
+		},500);
   if (data && data.length !== 0) {
     console.log("data receive from plan ", data);
     const plans = data;

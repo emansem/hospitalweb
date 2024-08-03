@@ -4,6 +4,7 @@ const failedProgressBar = document.querySelector('.failedProgressBar');
 const alertMessage = document.querySelector('.alert-message');
 const failedAlerMessage = document.querySelector('.failedAler-Message');
 const faild__alert = document.querySelector('.faild__alert');
+const loading = document.querySelector('.loading');
 console.log(alertMessage)
 let sum = 10;
 const duration = 2000;
@@ -49,4 +50,9 @@ export function failedsAlert(message){
            
         }
     }, interval);
+}
+
+//show the loading on the screen.
+ export function showLoading(type = 'loading'){
+loading.classList = type;
 }

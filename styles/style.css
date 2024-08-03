@@ -78,6 +78,38 @@ body{
 	overflow-y: scroll;
 	
 } */
+ .loading{
+	position: fixed;
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: white;
+	z-index: 100;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+ }
+ @keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+ .loading-text{
+	font-size: 18px;
+	font-weight: 600;
+	font-family: var(--font-heading);
+	color: #00796B;
+	animation: pulse 2s ease-in-out infinite;
+ }
+ .hideLoading{
+	display: none;
+ }
 
 .siderbar-left {
 	width: 250px;
@@ -1262,6 +1294,9 @@ display: none;
 			margin-left: 200px;
 		
 		}
+		.hero{
+			margin-left: -1rem !important;
+		}
 		.reports{
 			padding: 1rem;
 		}
@@ -1275,6 +1310,9 @@ display: none;
 			
 		
 		
+		}
+		.appointMent{
+			font-size: 16px;
 		}
 	
 		
