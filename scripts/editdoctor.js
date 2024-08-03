@@ -1,5 +1,6 @@
 /** @format */
 import { previewimage } from "../scripts/data.js";
+import { showSucessAlert } from "../scripts/custom_alert.js";
 const updateForm = document.getElementById("edit-doctor-profile-form");
 const doctorForm = document.getElementById("edit-doctor-profile-form");
 const logUser = JSON.parse(localStorage.getItem("activeId"));
@@ -13,6 +14,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const loading = document.querySelector('.loading');
 
 
+showSucessAlert('good job')
 previewimage();
 
 async function sendDoctorDetails(updatedUser) {
