@@ -3,7 +3,6 @@
 // const loginform = document.getElementById("loginform");
 const logUser = JSON.parse(localStorage.getItem("activeId"));
 
-
 const topDoctor = document.querySelector(".appt");
 const title = document.querySelector(".title");
 console.log(title);
@@ -14,22 +13,22 @@ const supabaseKey =
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const sideBar = document.querySelector(".siderbar-left");
-//validate the users 
-function validateUsers(){
-const accessToken = localStorage.getItem('accessToken');
+//validate the users
+async function validateUsers() {
+	const accessToken = localStorage.getItem("accessToken");
+	const { data, error } = await supabase
+		.from("users")
+		.select("*")
+		.eq("id", logUser);
 
-if(accessToken){
-	return;
+	if (data.length !== 0 && data && accessToken && data[0].id === logUser) {
+		return;
+	} else {
+		window.location.href = "/pages/login.html";
+	}
 }
-else{
-	alert('Please login to continue')
-	window.location.href = "/pages/login.html";
-	
-}
-return accessToken;
-}
+
 validateUsers();
-
 
 // check the type of user that login and see if he have anaccount
 
@@ -38,12 +37,12 @@ async function LogUserType() {
 		.from("users")
 		.select("*")
 		.eq("id", logUser);
-		// getAppoinments(data[0].type)
-   
+	// getAppoinments(data[0].type)
+
 	if (data.length !== 0) {
 		generateSideBar(logUser, data[0].type);
-		renderHearder(data[0].userAvatar)
-	} 
+		renderHearder(data[0].userAvatar);
+	}
 }
 LogUserType();
 
@@ -128,9 +127,6 @@ function logUserout() {
 	}, 1000);
 }
 
-
-
-
 // get the best doctors with high ratings
 async function getTopDoctors() {
 	topDoctor.innerHTML = `<p class="top-doctor-heading">Top Doctors</p>
@@ -160,8 +156,6 @@ async function getTopDoctors() {
       </div>
     `;
 }
-
-
 
 // render the header to all the pages.
 const header = document.querySelector(".header");
@@ -198,7 +192,6 @@ function renderHearder(avater) {
 	}
 }
 
-
 /* <img src="${
                  user[0].userAvatar || "https://shorturl.at/8TClo"
                }" alt="User Avatar"> */
@@ -209,86 +202,75 @@ async function getUserAvater() {
 		.select("userAvatar")
 		.eq("id", logUser);
 	if (data) {
-		
 	} else {
 		console.log("this is the error", error);
 	}
 }
 getUserAvater();
 
-
 //we need to check who is logging to then we render the plan page if doctor, show plans if patient show plans.
 
-function showPLansToUsers(type){
-	if(type === 'patient'){
+function showPLansToUsers(type) {
+	if (type === "patient") {
 		return `  <a href="/pages/manageplan.html">
 		<li class="sidebar-left-item">
 		  <span><i class="fas fa-calendar-check"></i></span> Plans
 		</li>
-	  </a>`
-	}
-	else{
-	
-	return `  <a href="/pages/plans.html">
+	  </a>`;
+	} else {
+		return `  <a href="/pages/plans.html">
 	<li class="sidebar-left-item">
 	  <span><i class="fas fa-calendar-check"></i></span> Plans
 	</li>
-  </a>`
-	
-}
+  </a>`;
+	}
 }
 
 //show the patient chat room
-function showPatientAndDoctors(type){
-	if(type === 'patient'){
+function showPatientAndDoctors(type) {
+	if (type === "patient") {
 		return ` <a href="/pages/patientchatroom.html">
           <li class="sidebar-left-item">
             <span><i class="fas fa-user-md"></i></span> My Doctors
           </li>
-        </a> `
-	}
-	else{
-	
-	return ` <a href="/pages/mypatients.html">
+        </a> `;
+	} else {
+		return ` <a href="/pages/mypatients.html">
           <li class="sidebar-left-item">
             <span><i class="fas fa-users"></i></span> Patients
           </li>
-        </a>`
-	
-}
+        </a>`;
+	}
 }
 
 //show the patient chat room
-function showWithdrawal(type){
-	if(type === 'doctor'){
+function showWithdrawal(type) {
+	if (type === "doctor") {
 		return ` <a href="/pages/withdrawal/index.html">
           <li class="sidebar-left-item">
             <span><i class="fas fa-file-invoice-dollar"></i></span> Withdrawal
           </li>
-        </a>`
-	}else{
-		return ''
+        </a>`;
+	} else {
+		return "";
 	}
-
 }
 
 //show chat to the users.
-function showChatRoomToUser(type){
-	if(type === 'doctor'){
+function showChatRoomToUser(type) {
+	if (type === "doctor") {
 		return `<a href="/pages/doctorchatroom.html" target="_blank" rel="noopener noreferrer">
           <li class="sidebar-left-item">
             <span><i class="fas fa-comments"></i>
 </span> Chat
           </li>
-        </a>`
-	}else{
+        </a>`;
+	} else {
 		return `<a href="/pages/patientchatroom.html" target="_blank" rel="noopener noreferrer">
           <li class="sidebar-left-item">
             <span><i class="fas fa-comments"></i>
 </span> Chat
           </li>
-        </a>`
+        </a>`;
 	}
 }
-
-

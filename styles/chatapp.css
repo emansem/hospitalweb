@@ -28,9 +28,9 @@ body {
 }
 
 .sidebar {
-    width: 300px;
+    width: 200px;
     background: var(--color-dark);
-    padding: 1rem;
+   padding: 1rem;
     box-shadow: var(--box-shadow);
     overflow-y: auto;
     display: flex;
@@ -52,6 +52,9 @@ body {
     margin: 0;
     flex: 1;
     overflow-y: auto;
+}
+.sendBtn{
+    
 }
 
 .doctorLinkId{
@@ -165,16 +168,19 @@ body {
     color: #fff;
 }
 
-.chat-input button {
+.sendBtn {
     background: var(--color-accent);
     border: none;
-    border-radius: 50%;
+   
     color: #fff;
-    padding: 0.75rem;
+  height: 40px;
+  width: 120px;
     font-size: 1.2em;
+    border-radius: 2.5rem;
     cursor: pointer;
     transition: background 0.3s;
 }
+
 
 .chat-input button:hover {
     background: var(--color-light);
@@ -182,25 +188,40 @@ body {
 
 @media (max-width: 768px) {
     .sidebar {
-        width: 100%;
-        height: 60px;
-        flex-direction: row;
-        overflow: hidden;
+       
+       width: 80px;
+       overflow-y: auto;
+     
+       
     }
-
-    .sidebar-header {
+    .sendBtn {
+        width: 80px;
+        font-size: 14px;
+    }
+    .name{
         display: none;
+    }
+    .chatMeesage-input{
+       width: 10px !important;
+    }
+    .sidebar-header
+
+    .sidebar {
+        width: 150px;
     }
 
     .patient-list {
         display: flex;
-        flex-direction: row;
-        overflow-x: auto;
+        
     }
 
     .patient-item {
         margin: 0 0.5rem;
         flex: none;
+        padding: 0.1rem;
+    }
+    .doctorLinkId{
+        padding: 0;
     }
 
     .chat-container {
@@ -215,13 +236,9 @@ body {
     }
 
     .chat-messages {
-        margin-top: 60px;
+        margin-top: 100px;
         margin-bottom: 60px;
     }
 
-    .chat-input {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
+    
 }
