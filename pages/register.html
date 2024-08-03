@@ -24,83 +24,44 @@
 		/>
 		<link rel="stylesheet" href="/styles/register.css" />
 		<link rel="stylesheet" href="/styles/withdrawal.css" />
+		<!-- <link rel="stylesheet" href="/styles/style.css"> -->
+		<!-- <link rel="stylesheet" href="/styles/style.css" /> -->
 	</head>
 	<body>
-		<!-- <div class="register-container">
+	  <!-- Success Alert -->
+      <div class="custom__alert--wrapper">
+        <div class="custom__alert--items">
+            <div class="custom__alert--item1">
+                <i class=" fa fa-circle-check"></i>
+                <p class="alert-message"></p>
+            </div>
+            <div class="custom__alert--item2">
+                <span class="close-alert"><i class=" fa fa-times"></i></span>
+                
+            </div>
+        </div>
+        <div class="progressBar">
+            
+        </div>
+     </div>
 
-
-			<div class="form-wrapper">
-				<div class="cta-action">
-					<div>
-						<img class="logo" src="/logo.png" alt="" />
-						<p class="createHeading">Create An Account to Continue</p>
-					</div>
-				
-				</div>
-				<form action="" class="form">
-					<div class="heading">
-						<div class="form-title"></div>
-						<div class="form sub-title"></div>
-					</div>
-					<div class="form-fields">
-						<div>
-							<label for="name">Full Name</label>
-							<input class="form-item" name="fName" type="text" placeholder="Enter your name" required />
-						</div>
-						<div>
-							
-						</div>
-						<div>
-							<label for="phone">Phone Number</label>
-							<input class="form-item" name="phone" type="tel" placeholder="Enter your Number" minlength="9" required />
-						</div>
-						<div>
-							<label for="role">Choose role</label>
-							<select class="form-item" name="userRole" id="userRole" required>
-								<option value="doctor">Doctor</option>
-								<option value="patient">Patient</option>
-							</select>
-						</div>
-						<div>
-							<label for="gender">Select gender</label>
-							<select class="form-item" name="gender" id="gender" required>
-								<option value="male">Male</option>
-								<option value="female">Female</option>
-							</select>
-						</div>
-						<div>
-							<label for="passowrd">Password</label>
-							<input
-                            class="form-item"
-							id="Password"
-								name="password"
-								type="password"
-								minlength="7"
-								placeholder="Enter your passowrd" required
-							/>
-						</div>
-						<div>
-							<label for="cfPassowrd">Confirm Password</label>
-							<input
-                            class="form-item"
-							id="cfpassword"
-								name="cfpassword"
-								type="password"
-								placeholder="Confirm Your Password" required
-							/>
-						</div>
-					</div>
-					<div class="btn">
-						<button class="submitBtn">Register Now</button>
-					</div>
-					<div>
-						<p class="action-text">
-							Have an account? <a href="/pages/login.html">login here</a>
-						</p>
-					</div>
-				</form>
-			</div>
-		</div> -->
+      <!-- Failure Alert -->
+      <div class="faild__alert">
+        <div class="custom__alert--items">
+            <div class="custom__alert--item1 ">
+                <i class=" fa fa-warning"></i>
+                <p class="alert-message failedAler-Message"></p>
+            </div>
+            <div class="custom__alert--item2">
+                <span class="close-alertFaild"><i class=" fa fa-times"></i></span>
+                
+            </div>
+        </div>
+        <div class="failedProgressBar">
+            
+        </div>
+     </div>
+		
 
 		<div class="content__popup-wrapper">
 			<div class="geteway--container registerContainer">
@@ -185,6 +146,7 @@
 		</div>
 
 		<script type="module" src="/scripts/register.js"></script>
+		<script type="module" src="/scripts/custom_alert.js"></script>
 	
 
 		<script></script>

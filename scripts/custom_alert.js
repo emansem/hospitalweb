@@ -6,9 +6,9 @@ const failedAlerMessage = document.querySelector('.failedAler-Message');
 const faild__alert = document.querySelector('.faild__alert');
 const loading = document.querySelector('.loading');
 console.log(alertMessage)
-let sum = 10;
+
 const duration = 2000;
-const interval = 100;
+const interval = 50;
 let width = 100;
 const decrement = (100/(duration/interval)); 
 
