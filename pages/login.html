@@ -24,6 +24,7 @@
 		/>
 		<link rel="stylesheet" href="/styles/register.css" />
 		<link rel="stylesheet" href="/styles/withdrawal.css" />
+		<link rel="stylesheet" href="/styles/style.css">
 		<style>
 			/* HTML: <div class="loader"></div> */
 /* HTML: <div class="loader"></div> */
@@ -57,58 +58,40 @@
 		</style>
 	</head>
 	<body>
-		<!-- <div class="register-container">
-			<div class="form-wrapper">
-				<div class="cta-action">
-					<div>
-						<img class="logo" src="/logo.png" alt="" />
-					</div>
-					<div class="wlc-text">
-						<h2>welcome Back to our <span>Hospital</span></h2>
-						<p>
-							Our app connents you with the best doctors who can help you and
-							listen to your problem.
-						</p>
-					</div>
-				</div>
-				<form  action="" id="loginform" class="form ">
-					<div class="heading">
-						<div class="form-title"></div>
-						<div class="form sub-title"></div>
-					</div>
-					
-						<div  class="form-fields ">
-					
-							<div>
-								<label for="phone">Email</label>
-								<input class="form-item" name="email" required type="email" placeholder="Enter your Email" />
-							</div>
-							
-							<div class="form-items">
-								<label for="passowrd">Password</label>
-								<input
-								class="form-item"
-									name="password"
-									id="password"
-									type="password"
-									required
-									placeholder="Enter your passowrd"
-								/>
-							</div>
-							
-						</div>
-				
-					<div class="btn">
-						<button class="submitBtn">Login</button>
-					</div>
-					<div>
-						<p class="action-text">
-						Donot Have an account? <a href="/pages/register.html">Register Here</a>
-						</p>
-					</div>
-				</form>
-			</div>
-		</div> -->
+	  <!-- Success Alert -->
+      <div class="custom__alert--wrapper">
+        <div class="custom__alert--items">
+            <div class="custom__alert--item1">
+                <i class=" fa fa-circle-check"></i>
+                <p class="alert-message"></p>
+            </div>
+            <div class="custom__alert--item2">
+                <span class="close-alert"><i class=" fa fa-times"></i></span>
+                
+            </div>
+        </div>
+        <div class="progressBar">
+            
+        </div>
+     </div>
+
+      <!-- Failure Alert -->
+      <div class="faild__alert">
+        <div class="custom__alert--items">
+            <div class="custom__alert--item1 ">
+                <i class=" fa fa-warning"></i>
+                <p class="alert-message failedAler-Message"></p>
+            </div>
+            <div class="custom__alert--item2">
+                <span class="close-alertFaild"><i class=" fa fa-times"></i></span>
+                
+            </div>
+        </div>
+        <div class="failedProgressBar">
+            
+        </div>
+     </div>
+			
 		<div class="content__popup-wrapper">
 			<div class="geteway--container registerContainer">
 				<form id="loginform"  class="setup-gateway form">
