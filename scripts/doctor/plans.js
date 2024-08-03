@@ -20,6 +20,8 @@ const plansContainer = document.querySelector(".payment_methods-wrapper");
 const upadtePlanForm = document.querySelector(".updateForm");
 const addNewMethodOverlay = document.querySelector(".addNew__method--overlay");
 const openSucessForm = document.querySelector("#success");
+const upadetFormOverlay = document.querySelector('.upadetForm-overlay');
+
 import { showLoading } from "../custom_alert.js";
 import { showSucessAlert } from "../custom_alert.js";
 import { failedsAlert } from "../custom_alert.js";
@@ -275,3 +277,9 @@ function displayPlanTypes(plantype) {
 
   updateMethod.innerHTML = options;
 }
+
+
+//render the update the form.
+
+
+//get all form values and add to them

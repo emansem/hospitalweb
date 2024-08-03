@@ -17,6 +17,7 @@ const supabaseKey =
 // Import and initialize Supabase client
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
+import { showLoading } from "../custom_alert.js";
 
 // Get DOM element slectors for html
 // const requestPay = document.getElementById("request-pay");
@@ -24,6 +25,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to fetch doctor details
 async function getDoctorDetails(conditon) {
+	showLoading()
   const { data, error } = await supabase
     .from("users")
     .select("*")

@@ -36,6 +36,7 @@ const withdrawalFormSubmit = document.querySelector(".withdrawalForm");
 const withdrawalHistoryContainer = document.querySelector(
 	".withdrawalContainer"
 );
+import { showLoading } from "../custom_alert.js";
 
 //get the payment methods and add to the select input.
 
@@ -103,10 +104,12 @@ function collectUserInput() {
 
 //send the form inputs  on the web server.
 async function saveWithdrawalDetails(accounDetails) {
+	
 	const { data, error } = await supabase
 		.from("gateway_setup")
 		.insert([accounDetails])
 		.select();
+		
 	if (data && data.length !== 0) {
 		showSucessAlert("Your account details was added successfully!");
 
@@ -195,10 +198,14 @@ function renderWithdrawalDetails(withdrawalDetails) {
 
 //get user withddrawal accoun details
 async function getWithdrawalAccountDetails() {
+	showLoading()
 	const { data, error } = await supabase
 		.from("gateway_setup")
 		.select("*")
 		.eq("doctorid", loggedUser);
+		setTimeout(function(){
+			showLoading('hideLoading')
+		},500);
 	if (!data || data.length === 0) {
 		console.log("we couldnot get your data sir");
 		return;
