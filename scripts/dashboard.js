@@ -98,12 +98,12 @@ function addDoctorstoDashboard(users) {
                                     <span class="rating1">
                                         <li>
                                             <i class="fas fa-star"></i>
-                                            <span class="count"> ${doctor.rating}.5</span>
+                                            <span class="count"> ${doctor.rating || 0}.5</span>
                                         </li>
                                     </span>
                                 </div>
                                 <div class="doc-hospital">
-                                    <span>${doctor.hospitalName}</span>
+                                    <span>${doctor.hospitalName || 'No Name'}</span>
                                 </div>
                             </div>
                         </div>

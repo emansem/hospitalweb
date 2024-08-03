@@ -60,7 +60,7 @@ function createPatientListItem(patient) {
 	listItem.innerHTML = `
   <a class= 'doctorLinkId' href='#${patient.id}' >
     <img src="${patient.userAvatar || "https://shorturl.at/8TClo"}" alt="${patient.name}">
-    <span>${patient.name}</span></a>
+    <span class='name'>${patient.name}</span></a>
 `;
 
 	return listItem;

@@ -189,7 +189,7 @@ body {
 @media (max-width: 768px) {
     .sidebar {
        
-       width: 80px;
+       width: 100px;
        overflow-y: auto;
      
        
@@ -212,14 +212,11 @@ body {
 
     .patient-list {
         display: flex;
-        
+       flex-direction: column;
+       width: 100%;
     }
 
-    .patient-item {
-        margin: 0 0.5rem;
-        flex: none;
-        padding: 0.1rem;
-    }
+  
     .doctorLinkId{
         padding: 0;
     }
