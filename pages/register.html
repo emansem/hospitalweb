@@ -1,6 +1,6 @@
 <!-- @format -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -23,10 +23,12 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		/>
 		<link rel="stylesheet" href="/styles/register.css" />
-		
+		<link rel="stylesheet" href="/styles/withdrawal.css" />
 	</head>
 	<body>
-		<div class="register-container">
+		<!-- <div class="register-container">
+
+
 			<div class="form-wrapper">
 				<div class="cta-action">
 					<div>
@@ -46,8 +48,7 @@
 							<input class="form-item" name="fName" type="text" placeholder="Enter your name" required />
 						</div>
 						<div>
-							<label for="email">Email</label>
-							<input class="form-item" name="email" type="email" placeholder="Enter your emal" required/>
+							
 						</div>
 						<div>
 							<label for="phone">Phone Number</label>
@@ -99,13 +100,93 @@
 					</div>
 				</form>
 			</div>
+		</div> -->
+
+		<div class="content__popup-wrapper">
+			<div class="geteway--container registerContainer">
+				<form class="setup-gateway form">
+					<h3 class="headings-gateway">Create Your account</h3>
+					<div class="gateaway__form--items">
+						<label for="name">Full Name</label>
+						<input
+							class="gateway__form-item"
+							name="fName"
+							type="text"
+							placeholder="Enter your name"
+							required
+						/>
+					</div>
+					<div class="gateaway__form--items">
+						<label for="email">Email</label>
+						<input
+							class="gateway__form-item"
+							name="email"
+							type="email"
+							placeholder="Enter your emal"
+							required
+						/>
+					</div>
+					<div class="gateaway__form--items">
+						<label for="phone">Phone Number</label>
+						<input
+							class="gateway__form-item"
+							name="phone"
+							type="tel"
+							placeholder="Enter your Number"
+							minlength="9"
+							required
+						/>
+					</div>
+					<div class="gateaway__form--items">
+						<label for="method">Choose Method</label>
+						<select class="gateway__form-item" name="userRole" id="userRole">
+							<option value="doctor">Doctor</option>
+								<option value="patient">Patient</option>
+						</select>
+					</div>
+					<div class="gateaway__form--items">
+						<label for="gender">Select gender</label>
+							<select  class="gateway__form-item" name="gender" id="gender" required>
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+					</div>
+					<div class="gateaway__form--items">
+						<label for="passowrd">Password</label>
+							<input
+							class="gateway__form-item"
+							id="Password"
+								name="password"
+								type="password"
+								minlength="7"
+								placeholder="Enter your passowrd" required
+							/>
+					</div>
+					<div class="gateaway__form--items">
+						<label for="cfPassowrd">Confirm Password</label>
+							<input
+							class="gateway__form-item"
+							id="cfpassword"
+								name="cfpassword"
+								type="password"
+								placeholder="Confirm Your Password" required
+							/>
+					</div>
+					<div id="gateaway__form--btn" class="gateaway__form--btn">
+						<button class="addMethod-btn add-Btn submitBtn">Register Now</button>
+					</div>
+					<div>
+						<p class="action-text">
+							Have an account? <a href="/pages/login.html">login here</a>
+						</p>
+					</div>
+				</form>
+			</div>
 		</div>
+
 		<script type="module" src="/scripts/register.js"></script>
 	
-		
 
-		<script>
-		
-		</script>
+		<script></script>
 	</body>
 </html>
