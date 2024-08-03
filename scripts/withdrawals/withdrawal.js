@@ -7,6 +7,9 @@ const supabaseKey =
 
 // Import and initialize Supabase client
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
+import { showSucessAlert } from "../custom_alert.js";
+import { failedsAlert } from "../custom_alert.js";
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 const loggedUser = JSON.parse(localStorage.getItem("activeId"));
 const setupAccountForm = document.querySelector(".setup-gateway");
@@ -23,14 +26,16 @@ const success = document.querySelector(".success");
 const withdrawlaDetailsContainer = document.querySelector(
 	".withdrawal__account--infor"
 );
-console.log(withdrawForm);
+
 const withdrawalMethodSelect = document.querySelector("#withdrawalMethod");
 const withdrawalButtons = document.querySelector(".withdrawalButtons");
 const balance = document.querySelector(".balance");
 const withdrawalReports = document.querySelector(".withdrawal__reports");
 const sucessfulWithdrawalPopup = document.querySelector(".sucessfu-withdrawal");
 const withdrawalFormSubmit = document.querySelector(".withdrawalForm");
-const withdrawalHistoryContainer = document.querySelector('.withdrawalContainer');
+const withdrawalHistoryContainer = document.querySelector(
+	".withdrawalContainer"
+);
 
 //get the payment methods and add to the select input.
 
@@ -85,11 +90,11 @@ function collectUserInput() {
 		accounDetails.pin === "" ||
 		accounDetails.name === ""
 	) {
-		warn.innerHTML = "All fields are required";
+		failedsAlert(" please All fields are required, Try again");
 		return;
 	}
 	if (accounDetails.pin.length > 5 || accounDetails.pin.length < 5) {
-		warn.innerHTML = "Your pin code must be 5 digits";
+		failedsAlert(" Your pin must be 5 digits");
 	} else {
 		console.log(accounDetails);
 		saveWithdrawalDetails(accounDetails);
@@ -103,6 +108,14 @@ async function saveWithdrawalDetails(accounDetails) {
 		.insert([accounDetails])
 		.select();
 	if (data && data.length !== 0) {
+		showSucessAlert("Your account details was added successfully!");
+
+		setTimeout(function () {
+			setupGateContainer.classList.add("hide-setup-popup");
+			location.reload();
+		}, 500);
+		parseInt(localStorage.setItem("pin", data[0].pin));
+
 		console.log("this is the withdrawal account details here ", data);
 	} else {
 		console.log("you have no data", data);
@@ -128,14 +141,6 @@ setupGateBtns.addEventListener("click", function (e) {
 		return;
 	} else if (btnContent === "Add Now") {
 		collectUserInput();
-		setupAccountForm.reset();
-		setTimeout(function () {
-			setupGateContainer.classList.add("hide-setup-popup");
-		}, 500);
-		setTimeout(function () {
-			success.classList.remove("hideForm");
-		}, 1500);
-
 		return;
 	}
 });
@@ -200,7 +205,6 @@ async function getWithdrawalAccountDetails() {
 	} else {
 		console.log("this is your data here boss", data);
 		renderWithdrawalDetails(data);
-		parseInt(localStorage.setItem("pin", data[0].pin));
 	}
 	if (error) {
 		console.error("You got and error here bro", error);
@@ -225,18 +229,16 @@ withdrawalButtons.addEventListener("click", function (e) {
 		return;
 	} else if (withdrawaalBtn === "Withdraw") {
 		getWithdrawalInputDetails();
-		
 	}
 });
 
 //render the reports on the web page
 
-async function renderReport(withdrawalBalance,total) {
+async function renderReport(withdrawalBalance, total) {
 	const { data, error } = await supabase
 		.from("users")
 		.select("totalEarnings")
 		.eq("id", loggedUser);
-	console.log(data);
 
 	const currency = "XAF";
 
@@ -250,7 +252,7 @@ async function renderReport(withdrawalBalance,total) {
 	}).format(withdrawalBalance);
 	balance.innerHTML = formatCurrency;
 	localStorage.setItem("amount", data[0].totalEarnings);
-	console.log(formatCurrency);
+
 	withdrawalReports.innerHTML = `<div class="withdrawal__report--items">
 								<div class="withdrawal__reports--item">
 									<div class="report-contents">
@@ -275,27 +277,22 @@ async function renderReport(withdrawalBalance,total) {
 							</div>`;
 }
 
-
 //fetch the total withdrawal the doctor have made alredy
 
 async function getTotalWithdrawal() {
-
 	const { data, error } = await supabase
 		.from("withdrawals")
 		.select("*")
 		.eq("doctorid", loggedUser);
 	if (data || data.length !== 0) {
-		console.log("this is the data", data);
 		const totalWithdrawal = data.length;
-		
-		let sum = 0
-		for(let  amount of data){
-			sum += amount.amount
-			
+
+		let sum = 0;
+		for (let amount of data) {
+			sum += amount.amount;
 		}
 		renderReport(sum, totalWithdrawal);
 		renderWithdrawalHistory(data);
-
 	} else {
 		console.log("there is no data");
 	}
@@ -311,25 +308,26 @@ function getWithdrawalInputDetails() {
 	const totalAmount = localStorage.getItem("amount");
 	const pindCode = localStorage.getItem("pin");
 	const withdrawalPassword = Number(pindCode);
-const pin = withdrawalFormSubmit.pin.value
+	const pin = withdrawalFormSubmit.pin.value;
 	const myBalance = Number(totalAmount);
 	const withdrawalInformation = {
 		method: withdrawalFormSubmit.method.value,
-		
+
 		amount: withdrawalFormSubmit.amount.value,
 		doctorid: loggedUser,
 		description: "Withdrawal Was succesful",
 	};
 	const curreentPin = Number(pin);
-	if (withdrawalInformation.amount > myBalance || myBalance < 0) {
-		alert("You Donot have insufficient Balance");
+	if (withdrawalInformation.amount > myBalance || myBalance <= 0) {
+		failedsAlert("You donot have enough balance!");
 		return;
 	} else if (curreentPin !== withdrawalPassword) {
-		alert("Your Pin code is correct");
+		failedsAlert("Your Pin code is correct!");
+
 		return;
 	} else {
-		console.log(withdrawalInformation);
-		createNewWithdrawalAccount(withdrawalInformation);decrementUserBalance(withdrawalInformation.amount);
+		createNewWithdrawalAccount(withdrawalInformation);
+		decrementUserBalance(withdrawalInformation.amount);
 	}
 }
 //insert a new withdrawal details in the withdrawal page
@@ -340,7 +338,7 @@ async function createNewWithdrawalAccount(withddrawalDetails) {
 		.insert([withddrawalDetails])
 		.select();
 	if (data && data.length !== 0) {
-        setTimeout(() => {
+		setTimeout(() => {
 			withdrawalContainer.classList.add("hide-withdrawal");
 		}, 500);
 		setTimeout(() => {
@@ -358,60 +356,56 @@ async function createNewWithdrawalAccount(withddrawalDetails) {
 
 console.log(withdrawalMethodSelect);
 
-
 //restrict users for acessing this web page.
 
-async function checkUserType(){
-	const {data, error} = await supabase.from('users').select('*').eq('id', loggedUser);
-	if(data && data.length !==0){
-		console.log('this is user data', data);
-		if(data[0].type === 'patient'){
-			location.href = `/pages/404page.html`
-			return
-		}else{
+async function checkUserType() {
+	const { data, error } = await supabase
+		.from("users")
+		.select("*")
+		.eq("id", loggedUser);
+	if (data && data.length !== 0) {
+		console.log("this is user data", data);
+		if (data[0].type === "patient") {
+			location.href = `/pages/404page.html`;
+			return;
+		} else {
 			return;
 		}
-		
-	}else{
-		console.log('no user found');
+	} else {
+		console.log("no user found");
 	}
-	if(error){
-		console.error('this is the error for the user', error);
+	if (error) {
+		console.error("this is the error for the user", error);
 	}
-
 }
 
-
-document.addEventListener('DOMContentLoaded', checkUserType)
-
+document.addEventListener("DOMContentLoaded", checkUserType);
 
 checkUserType();
 
 //reduce the balance  each time  user make a withdrawal.
-async function decrementUserBalance(amount){
-	const {data, error} = await supabase.rpc('decrement_balance', {
-		user_id:loggedUser,
-		balance:amount
+async function decrementUserBalance(amount) {
+	const { data, error } = await supabase.rpc("decrement_balance", {
+		user_id: loggedUser,
+		balance: amount,
 	});
-	if(data && data.length !==0){
-		console.log('this is the user return balance')
-	}else{
-		console.log('there is no data here bro')
+	if (data && data.length !== 0) {
+		return;
+	} else {
+		console.log("there is no data here bro");
 	}
-	if(error){
-		console.error('we got an error sir', error);
+	if (error) {
+		console.error("we got an error sir", error);
 	}
 }
 
 //render all the withdrawal history on the doctor page.
 
-
-function renderWithdrawalHistory(histories){
-	
-histories.forEach(withdrawalHistory=>{
-	const dateNow =  withdrawalHistory.created_at.split('T')[0];
-	console.log(dateNow);
-	withdrawalHistoryContainer.innerHTML+=` <div class="content-wrapper">
+function renderWithdrawalHistory(histories) {
+	histories.forEach((withdrawalHistory) => {
+		const dateNow = withdrawalHistory.created_at.split("T")[0];
+		console.log(dateNow);
+		withdrawalHistoryContainer.innerHTML += ` <div class="content-wrapper">
                      
                                     <div class="recent__user--item1">
                                     
@@ -423,22 +417,6 @@ histories.forEach(withdrawalHistory=>{
                                     
                                     
                                     
-                                </div>`
-})
+                                </div>`;
+	});
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

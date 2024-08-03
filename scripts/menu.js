@@ -19,12 +19,12 @@ function validateUsers(){
 const accessToken = localStorage.getItem('accessToken');
 
 if(accessToken){
-	console.log('good job');
+	return;
 }
 else{
 	alert('Please login to continue')
 	window.location.href = "/pages/login.html";
-	return;
+	
 }
 return accessToken;
 }
@@ -42,6 +42,7 @@ async function LogUserType() {
    
 	if (data.length !== 0) {
 		generateSideBar(logUser, data[0].type);
+		renderHearder(data[0].userAvatar)
 	} 
 }
 LogUserType();
@@ -160,42 +161,7 @@ async function getTopDoctors() {
     `;
 }
 
-// get doctors recents appointment and render on the page.
 
-// function renderDoctorRencentAppointment(userPhoto, people) {
-//   console.log(people)
-//   if(people.length === 0){
-//     appointments.innerHTML === " No Appointment Found";
-//   }
-//   hideAppt.style.display = "block";
-//   people.forEach(item => {
-//       appointments.innerHTML += `
-//     <div class="apt-wrapper">
-//     <div class="patient-item1">
-//       <div class="patient-avater">
-//       <img src="${userPhoto || "https://shorturl.at/8TClo"}" alt="" />
-//       </div>
-//       <div class="apt-time-name">
-//       <span class="patient-name">
-//         ${item.name}
-//       </span>
-//       <span class="apt-time">
-//         <span> ${item.time}</span>
-//       </span>
-//       </div>
-//     </div>
-//     <div class="apt-seemore">
-//       <i class="fas fa-angle-right"></i>
-//     </div>
-//     </div>
-//   `;
-//   });
-
-   
-  
-  
-
-// }
 
 // render the header to all the pages.
 const header = document.querySelector(".header");
@@ -232,7 +198,7 @@ function renderHearder(avater) {
 	}
 }
 
-renderHearder();
+
 /* <img src="${
                  user[0].userAvatar || "https://shorturl.at/8TClo"
                }" alt="User Avatar"> */

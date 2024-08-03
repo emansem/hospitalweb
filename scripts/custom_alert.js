@@ -27,7 +27,7 @@ const decrement = (100/(duration/interval));
             // customAlertWrapper.classList.add('removeAnimationAlert');
            setTimeout(() => {
             customAlertWrapper.style.display = 'none';
-           }, 1500);
+           }, 2000);
            
         }
     }, interval);

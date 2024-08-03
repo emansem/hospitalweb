@@ -109,6 +109,7 @@ body{
 	transition: all 0.3s linear;
 	letter-spacing: 0.5px;
 	position: relative;
+	z-index: 92;
 }
 .sidebar-left-item .fas {
 	color: var(--color-accent);
@@ -164,7 +165,7 @@ body{
 	margin-left: 250px;
 	background-color: #fff;
 	box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-	z-index: 99;
+	z-index: 90;
 	align-items: center;
 
 	height: 100px;

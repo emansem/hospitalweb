@@ -41,7 +41,7 @@
 		rgba(48, 47, 66, 0.8) 0%,
 		rgba(28, 27, 46, 1) 100%
 	);
-	
+
 	display: flex;
 	justify-content: space-between;
 	padding: 2rem;
@@ -142,35 +142,35 @@
 	color: var(--color-accent);
 }
 
-.user-name{
+.user-name {
 	color: #555;
 	font-size: 18px;
 	font-weight: 500;
 	font-family: var(--font-heading);
 }
 
-.user-type{
+.user-type {
 	font-size: 17px;
 	color: #888;
 	font-family: var(--font-body);
 }
-.time{
+.time {
 	font-family: var(--font-heading);
 	color: #666;
 	font-size: 14px;
 	font-weight: 500;
 }
-.recent__user--item2{
+.recent__user--item2 {
 	display: flex;
 	justify-content: space-between;
 	gap: 1rem;
 }
-.type2{
+.type2 {
 	padding-inline: 0.3rem;
 }
-.see-more{
+.see-more {
 	color: #f1f1f3;
-	background-color: #00796B;
+	background-color: #00796b;
 	height: 30px;
 	width: 30px;
 	text-align: center;
@@ -179,19 +179,19 @@
 	justify-content: center;
 	font-size: 16px;
 	text-decoration: none;
-	
+
 	font-weight: 800;
 	border-radius: 50%;
-	
+
 	transition: all 0.3s linear;
 }
-.see-more:hover{
+.see-more:hover {
 	color: #32d487;
 }
-.recent__user--item2{
+.recent__user--item2 {
 	align-items: center;
 }
-.profile-header-details{
+.profile-header-details {
 	box-shadow: var(--box-shadow3);
 	background: var(--background);
 	padding: 2rem;
@@ -199,23 +199,52 @@
 	align-items: center;
 	gap: 1rem;
 }
-.profile__details-item{
+.profile__details-item {
 	display: flex;
 	/* align-items: center; */
 	gap: 2rem;
 	flex-direction: column;
 	padding-block: 0.4rem;
 }
-.key{
+.key {
 	color: var(--color-accent);
 	font-size: 18px;
 	font-weight: 500;
 	font-family: var(--font-heading);
 }
-.value{
+.value {
 	font-family: var(--font-heading);
 	color: #f2f2f1;
 	font-weight: 400;
 	letter-spacing: 0.4px;
 	font-size: 16px;
+}
+
+@media screen and (max-width: 1200px) {
+	.header__left--user-photo {
+		min-height: 100px;
+		min-width: 100px;
+
+		height: 100px;
+
+		width: 100px;
+	}
+	.name{
+		font-size: 20px;
+	}
+	.verify.notverified{
+		font-size: 16px;
+	}
+	.update-profile {
+		background-color: var(--color-accent);
+		padding: 1rem;
+		font-size: 14px;
+	
+	
+	}
+	.doctor__profile--wrapper {
+		flex-direction: column;
+		gap: 1.4rem;
+		align-items: flex-start;
+	}
 }
