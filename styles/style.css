@@ -1129,11 +1129,20 @@ display: flex;
 	color: #08401a;
 }
 .custom__alert--item2{
-background-color: #00796B;
-	padding: 1.2rem;
+/* background-color: #00796B; */
+	padding: 1.2rem 0.8rem;
 }
 .close-alert{
 	cursor: pointer;
+}
+.close-alert .fa-times{
+	color: #00796B;
+	font-size: 16px;
+	font-weight: 800;
+	background-color: #32d487;
+	padding: 0.1rem 0.2rem;
+	cursor: pointer;
+	border-radius: 50%;
 }
 /*  the media querries for the web page */
 @media screen and (max-width: 1290px) {
