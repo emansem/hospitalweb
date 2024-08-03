@@ -121,17 +121,18 @@ function renderPlans(plans) {
   plans.forEach((plan, index) => {
     const planWrapper = document.createElement("div");
 
-    planWrapper.classList.add("page-item");
+    planWrapper.classList.add("page-item", 'plan-item');
     // methodsItem.setAttribute("id", method.id);
     planWrapper.innerHTML = `
        <div class="page-number">${index + 1}</div>
             <div class="page-name">${plan.type}</div>
+             <div class="page-name">$${plan.amount}</div>
             <div class="${plan.status === "active"
               ? "status"
               : "inactive"}"><span>${plan.status}</span></div>
          <div  id=${plan.id} class="action-buttons">
             <button class="actionBtn edit-page">Update</button>
-             <a href ='/pages/preview.html?d=${plan.id}' class="actionBtn edit-page">Preview</a>
+             <a href ='/pages/preview.html?d=${plan.id}' class="actionBtn preview">Preview</a>
            <button  class="actionBtn delete">Delete</button>
          </div>
        `;
@@ -202,7 +203,7 @@ async function getAllPlanTypes() {
     document.querySelector(".paymentNumbers").innerHTML = data.length;
   } else if (!data || data.length === 0) {
     console.log("we couldnot get the data");
-    plantypeContainer.innerHTML = "No data found , Add a new method";
+  
   } else {
     console.log("this is the error", error);
   }
@@ -226,7 +227,7 @@ async function getAllPlans() {
     document.querySelector(".paymentNumbers").innerHTML = data.length;
   } else if (!data || data.length === 0) {
     console.log("we couldnot get the data");
-    plansContainer.innerHTML = "No data found , Add a new plan";
+    plansContainer.innerHTML = `<div class='alert-notice'> No plan found, add a new plan</div>`
     document.querySelector(".paymentNumbers").innerHTML = 0;
   } else {
     console.log("this is the error", error);

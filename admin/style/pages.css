@@ -54,6 +54,7 @@
     padding: 0.8rem;
     align-items: center;
     gap: 1rem;
+    background-origin: var(--box-shadow1);
 }
 .action-buttons{
     
@@ -138,3 +139,10 @@ margin-bottom: 2rem;
 .new:hover{
     background-color: #6dd8a7;
 }
+@media screen and (max-width: 900px) {
+.actionBtn{
+    padding: 0.4rem;
+}
+
+	
+	}
