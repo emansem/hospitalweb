@@ -7,13 +7,16 @@ const supabaseKey =
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/+esm";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const patientId = JSON.parse(localStorage.getItem('activeId'));
+import { showLoading} from '../scripts/custom_alert.js'
 const planContainer = 
 document.querySelector('.plan-wrap');
 
 //get all users subscription and render to them
 
 async function  getAllPatientSubscription(){
+  showLoading()
     const {data , error} = await supabase.from('subscriptions').select('*').eq('patientid', patientId);
+    showLoading('hideLoading')
     if(data.length ===0){
         planContainer.innerHTML =`<div class='headings' >NO Subscription Found</div>`
     }else if(data.length !==0 && data){
@@ -37,7 +40,7 @@ getAllPatientSubscription();
 
 //get the usbscription information
  async function getSubscriptionInfo(subscriptions, ids){
-planContainer.innerHTML = ''
+  planContainer.innerHTML = ''
     const {data, error} = await supabase.from('users').select("*").in('id', ids);
    console.log('this is the data', subscriptions);
    getSubscriptionsDetailsAndNames(subscriptions, data);

@@ -53,183 +53,231 @@
     </style>
 </head>
 <body>
-  <!-- Main Dashboard Container -->
-  <div class="dashboard-container">
-      
-      <!-- Sidebar Section -->
-      <div class="sidebar-left">
-          <!-- Sidebar content goes here -->
-      </div>
-      
-      <!-- Loading Screen -->
-      <div class="loading hideLoading">
-          <div class="loading-text">
-              Please wait loading
-          </div>
-      </div>
-      
-      <!-- Success Alert -->
-      <div class="custom__alert--wrapper">
-        <div class="custom__alert--items">
-            <div class="custom__alert--item1">
-                <i class=" fa fa-circle-check"></i>
-                <p class="alert-message"></p>
-            </div>
-            <div class="custom__alert--item2">
-                <span class="close-alert"><i class=" fa fa-times"></i></span>
-                
-            </div>
-        </div>
-        <div class="progressBar">
-            
-        </div>
-     </div>
+   
 
-      <!-- Failure Alert -->
-      <div class="faild__alert">
-        <div class="custom__alert--items">
-            <div class="custom__alert--item1 ">
-                <i class=" fa fa-warning"></i>
-                <p class="alert-message failedAler-Message"></p>
-            </div>
-            <div class="custom__alert--item2">
-                <span class="close-alertFaild"><i class=" fa fa-times"></i></span>
-                
-            </div>
-        </div>
-        <div class="failedProgressBar">
-            
-        </div>
-     </div>
+   
 
-      <!-- Main Page Content -->
-      <div class="main-page">
+    <div class="dashboard-container">
+        <div class="siderbar-left">
           
-          <!-- Header Section -->
-          <div class="header">
-              <!-- Header content goes here -->
-          </div>
           
-          <!-- Success Popup -->
-          <div id="success" class="popup__wrapper success closeForm">
-              <div class="popup__box--wrapper success-pay">
-                  <div class="popup__box success-pay">
-                      <div class="popup__header success-pay-heading">
-                          <i class="fas fa-check-circle success-icon"></i>
-                      </div>
-                      <div class="popup__body success-body">
-                          <p class="popup__body--text successText">
-                              Your Plan of <span class="fee">Monthly</span> <span>Subscription</span> was successfully added to your plan list.
-                          </p>
-                          <button class="cancel accept footer__btn">Close</button>
-                      </div>
-                  </div>
+            </div>
+        </div>
+        <div class="loading hideLoading">
+					<div class="loading-text">
+				Please wait loading
+					</div>
+				</div>
+        <div class="custom__alert--wrapper">
+          <div class="custom__alert--items">
+              <div class="custom__alert--item1">
+                  <i class=" fa fa-circle-check"></i>
+                  <p class="alert-message"></p>
+              </div>
+              <div class="custom__alert--item2">
+                  <span class="close-alert"><i class=" fa fa-times"></i></span>
+                  
               </div>
           </div>
-     
-          <!-- Appointment Section -->
-          <section class="main-section">
+          <div class="progressBar">
               
-              <!-- Add New Plan Form Overlay -->
-              <div id="hidAddNewMethodForm" class="addNew__method--overlay">
-                  <form action="" class="form-popup addNewPlan">
-                      <div class="headings">A New Plan Type</div>
-                      <div class="form-group">
-                          <label for="plantype">Plan Name</label>
-                          <select id="method-type" class="form-group-item" name="plantype">
-                              <option value="select">Select A Plan Type</option>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="amount">Plan amount</label>
-                          <input name="amount" type="number" class="form-group-item" placeholder="Enter Amount"/>
-                      </div>
-                      <div class="form-group">
-                          <label for="optional1">Plan Features1</label>
-                          <input name="optional1" type="text" class="form-group-item" placeholder="Ex: 24/7 Support"/>
-                      </div>
-                      <div class="form-group">
-                          <label for="optional2">Plan Features2</label>
-                          <input name="optional2" type="text" class="form-group-item" placeholder="100% Fast Reply"/>
-                      </div>
-                      <div class="form-group">
-                          <label for="optional3">Plan Features3</label>
-                          <input name="optional3" type="text" class="form-group-item" placeholder="Hum bro"/>
-                      </div>
-                      <div class="form-group">
-                          <div class="submit-buttons">
-                              <span class="submitBtn close">Close</span>
-                              <button class="submitBtn save">Save Now</button>
-                          </div>
-                      </div>
-                  </form>
-              </div>
+          </div>
+       </div>
 
-              <!-- Update Plan Form Overlay -->
-              <div id="hideUpdateForm" class="updateForm-overlay">
-                  <form action="" class="form-popup updateForm">
-                      <div class="headings">Update Plan Type</div>
-                      <div class="form-group">
-                          <label for="plantype">Plan Name</label>
-                          <select id="updateMethod" class="form-group-item" name="plantype">
-                              <option value="select">Select A Plan Type</option>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="amount">Plan amount</label>
-                          <input name="amount" type="number" class="form-group-item" placeholder="Enter Amount"/>
-                      </div>
-                      <div class="form-group">
-                          <label for="optional1">Plan Features1</label>
-                          <input name="optional1" type="text" class="form-group-item" placeholder="Ex: 24/7 Support"/>
-                      </div>
-                      <div class="form-group">
-                          <label for="optional2">Plan Features2</label>
-                          <input name="optional2" type="text" class="form-group-item" placeholder="100% Fast Reply"/>
-                      </div>
-                      <div class="form-group">
-                          <label for="optional3">Plan Features3</label>
-                          <input name="optional3" type="text" class="form-group-item" placeholder="Hum bro"/>
-                      </div>
-                      <div class="form-group">
-                          <label for="status">Change Status</label>
-                          <select class="form-group-item" name="status" id="status">
-                              <option value="active">Active</option>
-                              <option value="inactive">Inactive</option>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <div class="submit-buttons">
-                              <span class="submitBtn closeUpdateForm">Close</span>
-                              <button class="submitBtn save">Save Now</button>
-                          </div>
-                      </div>
-                  </form>
+       <div class="faild__alert ">
+          <div class="custom__alert--items">
+              <div class="custom__alert--item1 ">
+                  <i class=" fa fa-warning"></i>
+                  <p class="alert-message failedAler-Message"></p>
               </div>
+              <div class="custom__alert--item2">
+                  <span class="close-alertFaild"><i class=" fa fa-times"></i></span>
+                  
+              </div>
+          </div>
+          <div class="failedProgressBar">
               
-              <!-- Main Page Section -->
-              <div class="main-page">
-                  <div class="page-container">
-                      <div class="pages">
-                          <div class="pages-wrapper">
-                              <div class="pages-header">
-                                  <div class="headings">Total Plan Types: <span class="paymentNumbers"></span></div>
-                                  <div class="action-buttons">
-                                      <button class="actionBtn new">Add New Plan</button>
-                                  </div>
-                              </div>
-                              <div class="payment_methods-wrapper">
-                                  <!-- Payment methods content goes here -->
-                              </div>
-                          </div>
-                      </div>
+          </div>
+       </div>
+        <div class="main-page">
+            <!---header seaction-->
+
+            <div class="header">
+             </div>
+            
+              <!---hero section seaction-->
+              <div id="success" class="popup__wrapper success closeForm">
+                <div class="popup__box--wrapper sucess-pay">
+                  <div class="popup__box sucess-pay">
+                    <div class="popup__header sucess-pay-heaing">
+                      <i class="fas fa-check-circle succes-icon"></i>
+                    </div>
+                    <div class="popup__body sucess-body">
+                      <p class="popup__body--text sucesstext">
+                       Your Plan of <span class="fee">Monthly  </span> <span>Subscription</span>  was successfully added to your plan list.
+                       
+                      </p>
+  
+                      <button class="cancel accept footer__btn">Close</button>
+                    </div>
                   </div>
+                </div>
               </div>
+       
+
+        <!---appointMent section seaction-->
+        <secttion class="main-section">
+          <div
+            id="hidAddNewMethodForm"
+            class="addNew__method--overlay">
+            <form action="" class="form-popup addNewPlan">
+              <div class="headings">A New Plan Type</div>
+              <div class="form-group">
+                <label for="plantype">Plan Name</label>
+                <select id="method-type" class="form-group-item" name="plantype">
+                  <option   value="select">Select A Plan Type</option>
+                </select>
               
-          </section>
+               
+              </div>
+              <div class="form-group">
+                <label for="amount">Plan amount</label>
+
+                 <input
+				     name="amount"
+				    type="number"
+				    class="form-group-item"
+			      placeholder="Enter Amount"/>
+              </div>
+              <div class="form-group">
+                <label for="optional1">Plan Features1</label>
+
+                 <input
+				     name="optional1"
+				    type="text"
+				    class="form-group-item"
+			      placeholder="Ex: 24/7 Support"/>
+              </div>
+              <div class="form-group">
+                <label for="optional2">Plan Features2</label>
+
+                 <input
+				     name="optional2"
+				    type="text"
+				    class="form-group-item"
+			      placeholder="100% Fast Reply"/>
+              </div>
+              <div class="form-group">
+                <label for="optional3">Plan Features3</label>
+
+                 <input
+				     name="optional3"
+				    type="text"
+				    class="form-group-item"
+			      placeholder="Hum bro"/>
+              </div>
+			  
+
+              <div class="form-group">
+                <div class="submit-buttons">
+                  <span class="submitBtn close">Close</span>
+                  <button class="submitBtn save">Save Now</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+		  <!-- this is to update a new payment method -->
+
+		  <div id="hideUpdateForm"
+		  class="upadetForm-overlay">
+		  <form action="" class="form-popup updateForm">
+			<div class="headings">Update Plan Type</div>
+
+      <div class="form-group">
+        <label for="plantype">Plan Name</label>
+        <select id="updateMethod" class="form-group-item" name="plantype">
+          <option   value="select">Select A Plan Type</option>
+        </select>
+      
+       
       </div>
-  </div>
-</body>
+      <div class="form-group">
+        <label for="amount">Plan amount</label>
+
+         <input
+     name="amount"
+    type="number"
+    class="form-group-item"
+    placeholder="Enter Amount"/>
+      </div>
+      <div class="form-group">
+        <label for="optional1">Plan Features1</label>
+
+         <input
+     name="optional1"
+    type="text"
+    class="form-group-item"
+    placeholder="Ex: 24/7 Support"/>
+      </div>
+      <div class="form-group">
+        <label for="optional2">Plan Features2</label>
+
+         <input
+     name="optional2"
+    type="text"
+    class="form-group-item"
+    placeholder="100% Fast Reply"/>
+      </div>
+      <div class="form-group">
+        <label for="optional3">Plan Features3</label>
+
+         <input
+     name="optional3"
+    type="text"
+    class="form-group-item"
+    placeholder="Hum bro"/>
+      </div>
+
+
+			<div class="form-group">
+			  <label for="status">Change Staus</label>
+			<select class="form-group-item" name="status" id="status">
+			  <option value="active">Active</option>
+			  <option value="inactive">Inactive</option>
+			</select>
+			</div>
+
+			<div class="form-group">
+			  <div class="submit-buttons">
+				<span class="submitBtn closUpdateForm">Close</span>
+				<button class="submitBtn save">Save Now</button>
+			  </div>
+			</div>
+		  </form>
+		</div>
+    <div class="main-page"></div>
+          <div class="page-container">
+            <div class="pages">
+              <div class="pages-wrapper">
+                <div class="pages-header">
+                  <div class="headings">Total Plan Types: <span class="paymentNumbers"></span></div>
+                  <div class="action-buttons">
+                    <button class="actionBtn new"> Add New Plan</button>
+                  </div>
+                </div>
+                <div class="payment_methods-wrapper">
+                  
+                    
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+       
+          </div>
+</body> 
 
   
    
