@@ -13,7 +13,7 @@ const decrement = (100/(duration/interval));
 //show the sucess alert 
 
  export function showSucessAlert(message){
-   
+    customAlertWrapper.style.display = 'block';
     alertMessage.innerHTML = message;
     const intervalId = setInterval(() => {
         width-=decrement;
@@ -29,3 +29,4 @@ const decrement = (100/(duration/interval));
         }
     }, interval);
 }
+

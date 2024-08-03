@@ -1113,9 +1113,9 @@ display: flex;
 	background-color: #32d4869f;
 	top: 50;
 	right: 0;
-	width: 30%;
+	width: 40%;
 	z-index: 100;
-	/* display: none; */
+	display: none;
 	transition: all 0.3s ease-in-out;
 	animation: slideIn 1s  ease-out;
 
@@ -1143,6 +1143,7 @@ animation: slideOut 1s  ease-out;
 	gap: 0.4rem;
 	align-items: center;
 	padding: 1rem;
+	flex: 1;
 }
 .alert-message{
 	font-size: 1rem;
@@ -1248,7 +1249,7 @@ display: none;
 		}
 		.custom__alert--wrapper{
 			
-			width: 70%;
+			width: 80%;
 			
 		
 		
