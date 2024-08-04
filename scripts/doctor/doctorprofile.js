@@ -6,6 +6,7 @@ const logUser = JSON.parse(localStorage.getItem("activeId"));
 const queryString = window.location.search.split("=");
 const profileContainer = document.querySelector(".profile-content");
 const doctorId = Number(queryString[1]);
+const popupWrapper = document.querySelector('.popup__wrapper');
 
 // the expire time and create a count down;
 
@@ -40,6 +41,7 @@ async function getDoctorDetails(conditon) {
 			.eq("id", doctorId);
 
 		renderDoctorProfileToUsers(data, conditon);
+		document.querySelector('.doctorName').innerHTML =`Dr. ${ data[0].name}`
 	} else if (checkCurrentUserType === "doctor") {
 		const { data, error } = await supabase
 			.from("users")
@@ -118,9 +120,21 @@ function renderDoctorProfileToUsers(user, conditon) {
 
 function requestPay(contactBtb){
 	contactBtb.addEventListener('click', function(e){
-			console.log(contactBtb)	     
+			popupWrapper.id = '';     
 	})
 }
+
+//close the form ask the user topay
+popupWrapper.addEventListener('click', function(e){
+	const actionButton = e.target.textContent;
+	if(actionButton ==='Maybe Later'){
+		popupWrapper.id = 'request-pay';
+	}
+	else if(actionButton === 'Subscribe Now'){
+   window.location.href = `/pages/doctorplans.html?id=${doctorId}`
+	}
+
+})
 
 // render profile todoctors only because it can conflict when user visit their profile
 
@@ -259,7 +273,7 @@ function checkIfPatientBoughtAplan(
 		);
 	}
 }
-// /pages/doctorplans.html?id=${doctorId}
+// 
 // load the doctor subscription and patients treated
 
 async function loadDoctorPatients() {

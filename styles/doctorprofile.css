@@ -9,6 +9,7 @@
     --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     --font-body: 'Poppins', sans-serif;
     --font-heading: 'Inter', sans-serif;
+    --background: linear-gradient(135deg, #1c1b2e, #2d2b41);
 }
 
 body {
@@ -198,8 +199,32 @@ cursor: not-allowed;
     color: var(--color-dark);
     font-weight: 500;
 }
+#request-pay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    transition: all 0.4s ease-in-out;
+}
+.request__payitem{
+background: var(--background);
+padding-top: 1rem;
+padding-bottom: 3rem;
+border-radius: 0.8rem;
+margin-block: 3rem;
+
+}
+.popup_item{
+    margin-block: 2rem;
+    
+}
 .contact-me:hover{
     background-color: #47f1a4fa !important;
+}
+.footer__btn{
+    font-size: 16px;
+    padding: 0.8rem 1rem;
+    font-weight: 500;
 }
 
 .contact-info {
@@ -208,6 +233,20 @@ cursor: not-allowed;
     border-radius: 5px;
     margin-top: 1rem;
 }
+@keyframes scaleIn {
+    0%{
+        transform: scale(0.1);
+    }
+   
+    100%{
+        transform: scale(1.1);
+    }
+}
+.request__payitem{
+    animation: scaleIn 1s ease-in;
+}
+
+
 @media screen and (max-width: 1500px) {
         .container{
             margin-left: 300px;
