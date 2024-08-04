@@ -29,9 +29,11 @@
 			<div class="header">
 				<div class="header--wrapper">
 					<div class="logo-section">
+						<i class="fa fa-bars"></i>
 						<img class="logo" src="/logo.png" alt="" />
 					</div>
 					<div class="menus">
+						<i class="fa fa-times"></i>
 						<li class="menu-item">
 							<a href="#about">About Us</a>
 						</li>
@@ -41,7 +43,6 @@
 						<li class="menu-item">
 							<a href="#doctor"> Become a Doctor </a>
 						</li>
-						
 					</div>
 					<div class="login-section">
 						<a class="btn login-Btn" href="/pages/login.html">LogIn</a>
@@ -196,18 +197,36 @@
 							</div>
 						</div>
 						<div class="cta__footer">
-							<a href="/pages/register.html" class="btn cta__btn">Get started its free</a>
+							<a href="/pages/register.html" class="btn cta__btn"
+								>Get started its free</a
+							>
 						</div>
 					</div>
 				</div>
 			</section>
-			
-	<!--the footer section-->
-	<footer class="footer">
-		<p class="footertext">
-			© Hospital web app | All right reserved
-		</p>
-	</footer>
+
+			<!--the footer section-->
+			<footer class="footer">
+				<p class="footertext">© Hospital web app | All right reserved</p>
+			</footer>
 		</div>
+
+		<script>
+			const openNav = document.querySelector(".fa-bars");
+			const closeNav = document.querySelector(".fa-times");
+			const navBar = document.querySelector(".menus");
+
+			openNav.addEventListener("click", function (e) {
+				navBar.style.display = "flex";
+				navBar.classList.remove("menus-slideback");
+			});
+
+			closeNav.addEventListener("click", function (e) {
+				navBar.classList.add("menus-slideback");
+				setTimeout(() => {
+					navBar.style.display = "none";
+				}, 800);
+			});
+		</script>
 	</body>
 </html>

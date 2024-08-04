@@ -399,10 +399,9 @@ margin-right: 2rem;
 
 .doctors {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	font-family: var(--font-body);
+	padding-right: 2rem;
 	gap: 1rem;
-	margin-bottom: 2rem;
+	grid-template-columns: repeat(4, 1fr);
 }
 .doctor-items {
 	box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
@@ -1122,6 +1121,23 @@ display: flex;
 .renew a{
 	color: #f1f2f1;
 }
+.footer {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1rem;
+
+	padding-top: 0.4rem;
+}
+.footertext {
+	font-size: 14px;
+	color: #777;
+	font-weight: 400;
+	font-family: var(--font-heading);
+	border-top: 1px solid #999;
+	width: 80%;
+	text-align: center;
+	padding-top: 0.8rem;
+}
 /* animations for the fidein from right */
 @keyframes slideOut {
 	from{
@@ -1267,7 +1283,11 @@ display: none;
 .sidebar-right{
 	display: none;
 }
-
+.doctors {
+	
+	margin-left: 270px;
+	grid-template-columns: repeat(3, 1fr);
+}
 
 }
 
@@ -1311,6 +1331,10 @@ display: none;
 		
 		
 		}
+		.doctors{
+			margin-left: 70px;
+			grid-template-columns: repeat(2, 1fr);
+		}
 		.appointMent{
 			font-size: 16px;
 		}
@@ -1325,7 +1349,9 @@ display: none;
 			padding-left: 1rem;
 		
 		}
-	
+	.doctors{
+		margin-left: 10px;
+	}
 		.popup__box--wrapper{
 			margin-inline: 1rem;
 		}
@@ -1359,25 +1385,49 @@ display: none;
 		
 		}
 @media screen and (max-width: 574px) {
+	@keyframes slideInLeft {
+		from {
+			transform: translateX(-100%);
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+	.fa-times{
+		font-size: 24px;
+	}
 	.main-page{
 		
 		margin-right: 0;
 		margin-left: 0px;
 	
 	}
+	@keyframes slideBACK {
+		from {
+		  transform: translateX(0%);
+		}
+		to {
+		  transform: translateX(-100%);
+		}
+	  }
 	.search{
 		flex-basis: 60%;
 		margin-right: -30px;
 	}
 	.siderbar-left{
 		display: none;
+		animation: slideInLeft 1s ease-in-out;
+	}
+	.slideBacK{
+animation: slideBACK 1s ease-in-out;
 	}
 	.fa-bars{
 		font-size: 24px;
 		cursor: pointer;
 	}
+	
 	.hideSideBar{
-display: block;
+      display: block;
 	}
 	.openNav{
 		display: block;
@@ -1425,5 +1475,9 @@ display: block;
 		width: 20px;
 		height: 20px;
 		text-align: center;
+	}
+	.doctors{
+		margin-left: 10px;
+		grid-template-columns: repeat(1, 1fr);
 	}
 	}

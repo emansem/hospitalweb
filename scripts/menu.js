@@ -63,7 +63,7 @@ function generateSideBar(id, type) {
     <div class="sidebar-left__nav-top">
       <div class="logo">
         <img src="/logo.png" alt="logo" />
-        	<i class="fa hideSideBar fa-bars"></i>
+        	<i class="fa hideSideBar fa-times"></i>
       </div>
       <ul class="sidebar-left_nav-items">
         <a href="/pages/dashboard.html"
@@ -111,8 +111,13 @@ function generateSideBar(id, type) {
 	console.log(hideSideBar);
 	hideSideBar.addEventListener("click", function (e) {
 		e.preventDefault();
-		sideBar.style.display = "none";
+		sideBar.classList.add('slideBacK');
+		
+		setTimeout(function(){
+			sideBar.style.display = "none";
+		}, 800);
 	});
+
 	const logout = document.querySelector(".logout");
 	logout.addEventListener("click", function (e) {
 		e.preventDefault();
@@ -182,7 +187,7 @@ function renderHearder(avater) {
 	const openNav = document.querySelector(".openNav");
 	if (openNav) {
 		openNav.addEventListener("click", function (e) {
-			//   e.preventDefault();
+			sideBar.classList.remove('slideBacK');
 			console.log(e.target);
 			sideBar.style.display = "block";
 			console.log("hello");

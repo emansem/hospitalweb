@@ -70,9 +70,7 @@ function heroSection(user) {
 >Expert Care</span> you deserve`}
             </p>
         </div>
-        <div class="hero-image">
-            <img src="/images/doctor.png" alt="" srcset="" />
-        </div>`;
+        `;
 }
 
 const loggedUser = localStorage.getItem("activeId");
