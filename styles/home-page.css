@@ -1,0 +1,88 @@
+:root {
+  --color-primary: #8563c1; /* Purple */
+  --color-secondary: #f4f9f6; /* Light Green */
+  --color-accent: #32d487; /* Green */
+  --color-dark: #1c1b2e; /* Dark Blue */
+  --color-light: #6dd8a7; /* Light Green */
+  --yellow-color: #f2c332;
+  --yellow-dark-color: #e3b21f;
+  --dark-color: #2e374e;
+  --color-dark-transparent: rgba(28, 27, 46, 0.5);
+  /* Gradients */
+  --gradient-primary: linear-gradient(45deg, #8563c1, #32d487);
+  --gradient-secondary: linear-gradient(45deg, #f4f9f6, #6dd8a7);
+  --gradient-dark: linear-gradient(45deg, #1c1b2e, #8563c1);
+  --background: linear-gradient(135deg, #1c1b2e, #2d2b41);
+  /* Fonts */
+  --font-body: "Roboto", sans-serif;
+
+  --font-heading: "Inter", sans-serif;
+  --color1-transparent: rgba(46, 55, 78, 0);
+  --color2-transparent: rgba(31, 38, 54, 0);
+  --color3-transparent: rgba(18, 24, 35, 0);
+  --color4-transparent: rgba(11, 15, 22, 0);
+  --box-shadow1: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+  --box-shadow2: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  --box-shadow3: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  --box-shadow4: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: 0;
+  list-style: none;
+}
+.header {
+  background: var(--background);
+
+  padding: 0.8rem 1rem;
+}
+.header--wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.8rem;
+}
+
+.menus {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.4rem;
+}
+.menu-item a {
+  font-size: 18px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: 0.5;
+  color: var(--color-accent);
+  transition: all 0.4s ease-in-out;
+}
+.menu-item a:hover {
+  color: var(--color-light);
+}
+.login-Btn{
+    color: var(--color-secondary);
+    border: 1px solid var(--color-accent);
+    padding: 0.6rem 2rem;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: var(--font-heading);
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+

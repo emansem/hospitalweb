@@ -24,12 +24,11 @@ async function getAllPatients(){
 }else{
 	
 	const ids = data.map(id=>id.patientid);
-data.forEach(date=>{
-	const dates = date.created_at;
-	const time = dates.split('T')[0]
 
-	getAllPatientsDetails(ids, time); 
-})
+	console.log(data);
+
+	getAllPatientsDetails(ids, data); 
+
 
 }
 if(error){
@@ -39,7 +38,17 @@ if(error){
 //render those patients on the web page.
  getAllPatients()
  function renderAllPatients(patients, time){
+	const dateTime = new Map();
+     time.forEach(date=>{
+		dateTime.set(date.patientid, date.created_at.split('T')[0])
+	 })
+	
+	
+
 	patients.forEach(patient => {
+	const date = dateTime.get(patient.id)
+	
+		
 		patientListsWrapper.innerHTML+= `
 		<div class="recent__users--wrapper">
 							<div class="recent__user--item">
@@ -48,7 +57,7 @@ if(error){
 								</div>
 								<div class="user-info">
 									<span class="user-name">${patient.name}</span>
-									<span class="user-type">Subscribed on<span class="type type2"> ${time}</span></span>
+									<span class="user-type">Subscribed on<span class="type type2"> ${date}</span></span>
 								</div>
 							</div>
 							<div class="recent__user--item2">
@@ -74,5 +83,6 @@ async function getAllPatientsDetails(ids, dateCreated){
 
 		
 	renderAllPatients(data, dateCreated)	
+	console.log(dateCreated[0].created_at)
 	}
 }

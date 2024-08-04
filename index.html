@@ -22,94 +22,57 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		/>
-		<link rel="stylesheet" href="/styles/register.css" />
-		<style>
-			/* HTML: <div class="loader"></div> */
-/* HTML: <div class="loader"></div> */
-.loader {
-  width: 20px;
-  aspect-ratio: 1;
-  display: grid;
-}
-.loader::before,
-.loader::after {
-  content: "";
-  grid-area: 1/1;
-  border-radius: 50%;
-  background: repeating-radial-gradient(farthest-side,#0000 0%,#000 1% 10%,#0000 11% 30%);
-  -webkit-mask: repeating-conic-gradient(#000 0 36deg,#0000 0 72deg);
-  animation: l19 4s infinite linear;
-}
-.loader::after {
-  -webkit-mask: repeating-conic-gradient(#0000 0 36deg,#000 0 72deg);
-  animation-direction: reverse;
-}
-@keyframes l19 {
-  100% {transform:rotate(1turn)}
-}
-.submitBtn{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.2rem;
-}
-		</style>
+ <link rel="stylesheet" href="/styles/home-page.css">
+		
+		
 	</head>
-	<body>
-		<div class="register-container">
-			<div class="form-wrapper">
-				<div class="cta-action">
-					<div>
-						<img class="logo" src="/logo.png" alt="" />
-					</div>
-					<div class="wlc-text">
-						<h2>welcome Back to our <span>Hospital</span></h2>
-						<p>
-							Our app connents you with the best doctors who can help you and
-							listen to your problem.
-						</p>
-					</div>
+<body>
+	<div class="homepage">
+		<div class="header">
+			<div class="header--wrapper">
+				<div class="logo-section">
+					<h1 class="logo">Hospital</h1>
 				</div>
-				<form  action="" id="loginform" class="form ">
-					<div class="heading">
-						<div class="form-title"></div>
-						<div class="form sub-title"></div>
-					</div>
-					
-						<div  class="form-fields ">
-					
-							<div>
-								<label for="phone">Phone Number</label>
-								<input class="form-item" name="phone" required type="tel" placeholder="Enter your Number" />
-							</div>
-							
-							<div class="form-items">
-								<label for="passowrd">Password</label>
-								<input
-								class="form-item"
-									name="password"
-									id="password"
-									type="password"
-									required
-									placeholder="Enter your passowrd"
-								/>
-							</div>
-							
-						</div>
-				
-					<div class="btn">
-						<button class="submitBtn">Login</button>
-					</div>
-					<div>
-						<p class="action-text">
-						Donot Have an account? <a href="/pages/register.html">Register Here</a>
-						</p>
-					</div>
-				</form>
+				<div class="menus">
+					<li class="menu-item">
+						<a href="#about">About Us</a>
+					</li>
+					<li class="menu-item">
+						<a href="#service"> Our Services</a>
+					</li>
+					<li class="menu-item">
+						<a href="#doctors"> Doctors </a>
+					</li>
+					<li class="menu-item">
+						<a href="#reviews"> Reviews </a>
+					</li>
+				</div>
+				<div class="login-section">
+					<a  class="login-Btn" href="/pages/login.html">LogIn</a>>
+				</div>
 			</div>
 		</div>
+		
+		<!-- here is our hero section -->
+		 <section class="hero-section">
+			
+                <div class="hero__section--item1">
+					<h3 class="hero__section--heading">
+						We Care About Your Health.
+					</h3>
+					<p class="hero__section--message">
+						Check Now your Health width our professional doctors, Completed and morethen facilities services
+					</p>
+					<button class="action-btn" >Get started</button>
+				</div>
+				<div class="hero__section--item2">
+					<div class="hero-image">
+						<img src="/images/hero-image.png" alt="">
+					</div>
+				</div>
+		 </section>
+	</div>
+</body>
 
-		<!-- <script type="module" src="/scripts/auth.js"></script> -->
-		<script type="module" src="/scripts/login.js"></script>
 		
 </html>
