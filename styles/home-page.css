@@ -361,14 +361,14 @@ align-items: center;
 }
 .cta__item--body{
   display: flex;
-  gap: 2rem;
+ justify-content: space-between;
+ gap: 2rem;
 }
 .cta__list--item{
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  
+ margin-block: 0.8rem;
+ display: flex;
+ align-items: center;
+ gap: 0.4rem;
 }
 .cta__footer{
  
@@ -398,4 +398,29 @@ align-items: center;
 }
 .cta-heading{
   color: var(--color-accent) !important;
+}
+.sub-headingCTA{
+  font-size: 16px;
+  color: #f6f9f6;
+  font-family: var(--font-body);
+  letter-spacing: 0.4px;
+  font-family: 400;
+  line-height: 1.4;
+}
+.footer{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+ 
+  padding-top: 0.4rem;
+}
+.footertext{
+  font-size: 14px;
+  color: #777;
+  font-weight: 400;
+  font-family: var(--font-heading);
+  border-top: 1px solid #999;
+  width: 80%;
+  text-align: center;
+  padding-top: 0.8rem;
 }
