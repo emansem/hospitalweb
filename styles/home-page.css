@@ -34,10 +34,18 @@
   text-decoration: 0;
   list-style: none;
 }
+body{
+  margin-top: 8rem;
+  overflow-x: hidden;
+}
 .header {
-  background: var(--background);
-
-  padding: 0.8rem 1rem;
+ position: fixed;
+ top: 0;
+ right: 0;
+ left: 0;
+ background-color: #fff;
+  padding: 0.4rem 1rem;
+  box-shadow: var(--box-shadow3);
 }
 .header--wrapper {
   display: flex;
@@ -45,19 +53,25 @@
   justify-content: space-between;
   padding: 0.4rem 0.8rem;
 }
+.logo{
+  height: 70px;
+  width: 150px;
+  object-fit: cover;
+  cursor: pointer;
+}
 
 .menus {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  padding: 0.4rem;
+  padding: 0.2rem;
 }
 .menu-item a {
   font-size: 18px;
   font-family: var(--font-heading);
   font-weight: 500;
   letter-spacing: 0.5;
-  color: var(--color-accent);
+  color: var(--color-dark);
   transition: all 0.4s ease-in-out;
 }
 .menu-item a:hover {
@@ -65,23 +79,29 @@
 }
 .login-Btn{
     color: var(--color-secondary);
-    border: 1px solid var(--color-accent);
+  border: none;
     padding: 0.6rem 2rem;
     display: inline-block;
     font-size: 18px;
     font-weight: 500;
     font-family: var(--font-heading);
-    border-radius: 0.4rem;
+    border-radius: 0.2rem;
     cursor: pointer;
+
+    background: var(--background);
+    transition: all 0.4s linear;
+}
+.login-Btn:hover{
+transform: scale(1.1);
 }
 
+/* the hero section here */
 
 
 
 
 
-
-
+ß
 
 
 
