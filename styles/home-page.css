@@ -46,14 +46,15 @@ body {
 	right: 0;
 	left: 0;
 	background-color: #fff;
-	padding: 0.4rem 1rem;
+padding-block: 0.8rem;
 	box-shadow: var(--box-shadow3);
 }
 .header--wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0.4rem 0.8rem;
+margin: 0 auto;
+width: 85%;
 }
 .logo {
 	height: 70px;
@@ -101,7 +102,7 @@ body {
 }
 
 /* the hero section here */
-.hero-section {
+.section {
 	max-width: 80%;
 margin-inline: auto;
 padding-top: 8rem;
@@ -129,6 +130,10 @@ padding-top: 8rem;
 .action-btn {
 	background-color: var(--color-accent);
 	margin-top: 1.6rem;
+  transition: all 0.4s linear;
+}
+.action-btn:hover{
+  background-color: var(--color-light);
 }
 .hero__section--item1 {
 	flex: 2 0 0;
