@@ -108,15 +108,18 @@ function renderDoctorProfileToUsers(user, conditon) {
 						</div>
 						</section>
 					  </div>`;
+					  const contactBtn = document.querySelector('.contact-me');
+					requestPay(contactBtn)
+			  
+	
+}
 
-	// const btn = document.querySelector(".btn");
+//add event tothe web page.
 
-	// if (btn) {
-	// 	btn.addEventListener("click", function (e) {
-	// 		e.preventDefault();
-	// 		// reQuestPay();
-	// 	});
-	// }
+function requestPay(contactBtb){
+	contactBtb.addEventListener('click', function(e){
+			console.log(contactBtb)	     
+	})
 }
 
 // render profile todoctors only because it can conflict when user visit their profile
@@ -152,20 +155,7 @@ function renderDoctorProfile(user) {
 						}</p>
 						</section>
 						
-						<div class="stats">
-						<div class="stat-item">
-						  <h3>${user[0].patientsTreated}+</h3>
-						  <p>Patients Treated</p>
-						</div>
-						<div class="stat-item">
-						  <h3>4.9/5</h3>
-						  <p>Rating</p>
-						</div>
-						<div class="stat-item">
-						  <h3>250+</h3>
-						  <p>Total Reviews</p>
-						</div>
-						</div>
+						
 						
 						<section class="section">
 						<h3>Contact Information</h3>
@@ -175,7 +165,9 @@ function renderDoctorProfile(user) {
 						  <p><strong>Languages:</strong> ${user[0].languages}</p>
 						</div>
 						</section>
+						${verifiedDoctor2()}
 					  </div>`;
+					
 }
 
 // we have to get all the subscription for the patient and check.
@@ -209,7 +201,7 @@ getPatientSubsciptions();
 function allVariablesForToCompare(subcription) {
 	if (subcription.length === 0) {
 		let contactBtb;
-		contactBtb = `<a href ='/pages/doctorplans.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Contact Me</a>`;
+		contactBtb = `<button class='contact-me' style="margin-left: 1rem;">Chat now</button>`;
 		getDoctorDetails(contactBtb);
 
 		return;
@@ -263,11 +255,11 @@ function checkIfPatientBoughtAplan(
 		
 
 		getDoctorDetails(
-			`<a href ='/pages/doctorplans.html?id=${doctorId}' class='btn' style="margin-left: 1rem;">Contact Me</a>`
+			`<button class='contact-me' style="margin-left: 1rem;">Chat now</button>`
 		);
 	}
 }
-
+// /pages/doctorplans.html?id=${doctorId}
 // load the doctor subscription and patients treated
 
 async function loadDoctorPatients() {
@@ -292,5 +284,21 @@ function verifiedDoctor() {
 		return `<span class="verify"> <i class="fa-solid fa-check-circle"></i> <span class="verify-text">Verified Doctor</span></span>`;
 	} else {
 		return ` <span class="verify notverified"> <i class="fas fa-times-circle"></i> <span class="verify-text">Not verified</span></span>`;
+	}
+}
+function verifiedDoctor2() {
+	const subscriptions = JSON.parse(localStorage.getItem("patients"));
+
+	if (subscriptions.length >= 4) {
+		return ``;
+	} else {
+		return ` <div class="stats">
+							<div class="verify-notice">
+                                <i class="fa fa-warning"></i>
+                                <p class="alert-details">
+                                    To get verified, you need at least 4 patients who have subscribed
+                                </p>
+                            </div>
+						</div>`;
 	}
 }

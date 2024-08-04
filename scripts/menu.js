@@ -5,7 +5,7 @@ const logUser = JSON.parse(localStorage.getItem("activeId"));
 
 const topDoctor = document.querySelector(".appt");
 const title = document.querySelector(".title");
-console.log(title);
+
 const supabaseUrl = "https://pooghdwrsjfvcuagtcvu.supabase.co";
 const supabaseKey =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvb2doZHdyc2pmdmN1YWd0Y3Z1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzMjYyNTAsImV4cCI6MjAzNjkwMjI1MH0.F7QURC-4NdgaGi82WGYAZ5r3m5UYVRCLwDAMS9Uc7vs";
@@ -41,14 +41,14 @@ async function LogUserType() {
 
 	if (data.length !== 0) {
 		generateSideBar(logUser, data[0].type);
-		renderHearder(data[0].userAvatar);
+		renderHearder(data[0].userAvatar, data[0].type);
 	}
 }
 LogUserType();
 
 function generateSideBar(id, type) {
 	const userId = Number(id);
-	console.log(type, " this is the user");
+
 	let url;
 
 	if (type === "doctor") {
@@ -164,7 +164,8 @@ async function getTopDoctors() {
 
 // render the header to all the pages.
 const header = document.querySelector(".header");
-function renderHearder(avater) {
+function renderHearder(avater, type) {
+
 	header.innerHTML = `<h1 class="header-logo">Dashboard</h1>
 					<div class="openNav">
 						<i class="fa fa-bars"></i>
@@ -181,20 +182,19 @@ function renderHearder(avater) {
 							<i class="far fas fa-bell"></i>
 						</div>
 						<div class="user-avater">
-						<img src="${avater || "https://shorturl.at/8TClo"}" alt="User Avatar">
+						<a href='${type === 'patient' ? '/pages/userProfile.html' : "/pages/doctorprofile.html"}'>
+						<img src="${avater || "https://shorturl.at/8TClo"}" alt="User Avatar"></a>
 						</div>
 					</div>`;
 	const openNav = document.querySelector(".openNav");
-	if (openNav) {
+	
 		openNav.addEventListener("click", function (e) {
 			sideBar.classList.remove('slideBacK');
 			console.log(e.target);
 			sideBar.style.display = "block";
-			console.log("hello");
+			
 		});
-	} else {
-		console.log("hello");
-	}
+	
 }
 
 /* <img src="${

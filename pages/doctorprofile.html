@@ -1,11 +1,16 @@
-<!DOCTYPE html>
+<!-- @format -->
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title >Doctor | Professional Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Doctor | Professional Profile</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
@@ -22,98 +27,106 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		/>
 		<link rel="stylesheet" href="/styles/style.css" />
-        <link rel="stylesheet" href="/styles/doctorprofile.css">
-        <link rel="stylesheet" href="/admin/style/profileDetails.css">
-    <style>
-       .doctor-profile{
-	margin-top: 5px !important;
-}
-.fa-times-circle{
-    color: #f03030;
-    border-radius: 50%;
-}
-
-			
-	
-    </style>
-</head>
-<body>
-    <!-- Dashboard Container -->
-    <div class="dashboard-container">
-        
-        <!-- Sidebar Left -->
-        <div class="siderbar-left">
-            <!-- Sidebar content goes here -->
-        </div>
-    </div>
-
-    <!-- Main Page Content -->
-    <div class="main-page">
-        
-        <!-- Header Section -->
-        <div class="header">
-            
-            <!-- Loading Indicator -->
-            <div class="loading hideLoading">
-                <div class="loading-text">
-                    Please wait loading
-                </div>
-            </div>
-            
-            <!-- Custom Alert Bars -->
-            <!-- Additional custom alerts can be added here -->
-
-        </div>
-
-        <!-- Subscription Popup -->
-        <div id="request-pay" class="popup__wrapper hideForm">
-            <div class="popup__box--wrapper sucess-pay">
-                <div class="popup__box sucess-pay">
-                    <div class="popup__header sucess-pay-heaing">
-                        <i class="fas warn-icon fa-exclamation-triangle notice-icon"></i>
-                    </div>
-                    <div class="popup__body sucess-body">
-                        <p class="popup__body--text sucesstext">
-                            To contact a doctor, please subscribe to our service first. 
-                            You will pay <span class="fee">$10 per month</span> to use our service. This helps us to maintain the website ❤️
-                        </p>
-                    </div>
-                    <div class="popup__footer">
-                        <button class="accept footer__btn">Subscribe Now</button>
-                        <button class="refuse footer__btn">Maybe Later</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Hero Section -->
-        <!-- Content for hero section goes here -->
-
-        <!-- Appointment Section -->
-        <secttion class="main-section">
-            <main class="container">
+		<link rel="stylesheet" href="/styles/doctorprofile.css" />
+		<link rel="stylesheet" href="/admin/style/profileDetails.css" />
+		<style>
+			.doctor-profile {
+				margin-top: 5px !important;
+			}
+			.fa-times-circle {
+				color: #f03030;
+				border-radius: 50%;
+			}
+            .stats{
+                display: flex;
+                justify-content: center;
                 
-                <!-- Section Header -->
-                <header></header>
-                
-                <!-- Doctor Profile Section -->
-                <div class="doctor-profile">
-                    
-                    <!-- Profile Content -->
-                    <div class="profile-content"></div>
-                    
-                    <!-- Doctor Profile Body -->
-                    <div class="doctor__profile--body"></div>
-                    
-                </div>
-                
-            </main>
-        </secttion>
-    </div>
+            }
+            .verify-notice{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                font-size: 20px;
+                padding: 1rem;
+                border-radius: 0.8rem;
+                background-color: #f030303c;
+            }
+            .fa-warning{
+                color: #f03030;
+            }
+            .alert-details{
+                font-size: 16px !important;
+            }
+		</style>
+	</head>
+	<body>
+		<!-- Dashboard Container -->
+		<div class="dashboard-container">
+			<!-- Sidebar Left -->
+			<div class="siderbar-left">
+				<!-- Sidebar content goes here -->
+			</div>
+		</div>
 
-    <!-- JavaScript Modules -->
-    <script type="module" src="/scripts/doctor/doctorprofile.js"></script>
-    <script type="module" src="/scripts/menu.js"></script>
-</body>
+		<!-- Main Page Content -->
+		<div class="main-page">
+			<!-- Header Section -->
+			<div class="header">
+				<!-- Loading Indicator -->
+				<div class="loading hideLoading">
+					<div class="loading-text">Please wait loading</div>
+				</div>
 
+				<!-- Custom Alert Bars -->
+				<!-- Additional custom alerts can be added here -->
+			</div>
+
+			<!-- Subscription Popup -->
+			<div id="request-pay" class="popup__wrapper hideForm">
+				<div class="popup__box--wrapper sucess-pay">
+					<div class="popup__box sucess-pay">
+						<div class="popup__header sucess-pay-heaing">
+							<i class="fas warn-icon fa-exclamation-triangle notice-icon"></i>
+						</div>
+						<div class="popup__body sucess-body">
+							<p class="popup__body--text sucesstext">
+								To contact a doctor, please subscribe to our service first. You
+								will pay <span class="fee">$10 per month</span> to use our
+								service. This helps us to maintain the website ❤️
+							</p>
+						</div>
+						<div class="popup__footer">
+							<button class="accept footer__btn">Subscribe Now</button>
+							<button class="refuse footer__btn">Maybe Later</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Hero Section -->
+			<!-- Content for hero section goes here -->
+
+			<!-- Appointment Section -->
+			<secttion class="main-section">
+				<main class="container">
+					<!-- Section Header -->
+					<header></header>
+
+					<!-- Doctor Profile Section -->
+					<div class="doctor-profile">
+						<!-- Profile Content -->
+						<div class="profile-content"></div>
+
+						<!-- Doctor Profile Body -->
+						<div class="doctor__profile--body"></div>
+						
+					</div>
+				</main>
+			</secttion>
+		</div>
+
+		<!-- JavaScript Modules -->
+		<script type="module" src="/scripts/doctor/doctorprofile.js"></script>
+		<script type="module" src="/scripts/menu.js"></script>
+	</body>
 </html>

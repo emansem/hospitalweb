@@ -186,6 +186,21 @@ cursor: not-allowed;
 .section {
     margin-bottom: 2rem;
 }
+.contact-me{
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease-in;
+    padding: 0.8rem 1rem;
+    background-color: var(--color-light);
+    border-radius: 0.4rem;
+    font-size: 16px;
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+    font-weight: 500;
+}
+.contact-me:hover{
+    background-color: #47f1a4fa !important;
+}
 
 .contact-info {
     background-color: var(--color-gray);
@@ -211,6 +226,9 @@ cursor: not-allowed;
         }
         .main-page{
             margin-right: 1rem !important;
+        }
+        .alert-details{
+            font-size: 14px !important;
         }
         
     }
