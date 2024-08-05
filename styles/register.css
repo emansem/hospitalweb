@@ -36,17 +36,17 @@ body {
 	min-height: 100vh;
 	display: grid;
 	place-content: center;
-	background-color: #f4f9f6;
+	background-color: #fff;
 }
 .logo {
 	height: 200px;
 }
 /* register form*/
 .registerContainer{
-    box-shadow: var(--box-shadow2) !important;
+    box-shadow: var(--box-shadow3) !important;
 }
 .content__popup-wrapper{
- background-color: #f1f1ff46 !important;
+ background-color: #f1f1f1!important;
 }
 .cta-action {
 	flex-basis: 40%;
