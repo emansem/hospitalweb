@@ -31,10 +31,10 @@ Medical web app is a comprehensive web application designed to facilitate seamle
 
 ## Preview
 
-![Medical web app preview](https://i.postimg.cc/PfZ7QkZq/Screenshot-from-2024-08-05-11-22-45.png);
+![Medical web app preview image](https://i.postimg.cc/PfZ7QkZq/Screenshot-from-2024-08-05-11-22-45.png);
 
 ## Preview the website here
-
+![Medical web app preview line](https://medwebapp.codingissues.top/);
 
 ## Getting Started
 
