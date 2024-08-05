@@ -289,7 +289,7 @@ async function getChargesAndCommissions(amount) {
 
 //render the amount and charges on the web page
 async function renderAmountAndCharges(charges, amount) {
-  const patientCharge =  (charges/100);
+  const patientCharge =  (charges/100)*amount;
   const totalAmount = patientCharge + amount;
   paymentAmountWrapper.innerHTML = ` <div>
                     <span class="amountText">Payment amount:</span>
