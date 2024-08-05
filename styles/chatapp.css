@@ -153,6 +153,7 @@ body {
 .chat-input {
     display: flex;
     padding: 1rem;
+    align-items: center;
     background: var(--color-dark);
     border-top: 1px solid var(--color-dark-transparent);
 }
@@ -186,6 +187,7 @@ body {
     background: var(--color-light);
 }
 
+
 @media (max-width: 768px) {
     .sidebar {
        
@@ -194,11 +196,19 @@ body {
      
        
     }
-    .sendBtn {
-        width: 80px;
+    .sidebar-header{
         font-size: 14px;
+        margin-top: 1rem;
     }
-    .name{
+    .chat-container{
+        padding: 0.2rem;
+    }
+    .sendBtn {
+        width: 60px;
+        font-size: 12px;
+        height: 20px;
+    }
+    .doctorLinkId .name{
         display: none;
     }
     .chatMeesage-input{
@@ -215,7 +225,9 @@ body {
        flex-direction: column;
        width: 100%;
     }
-
+.name{
+    font-size: 14px;
+}
   
     .doctorLinkId{
         padding: 0;
@@ -230,6 +242,7 @@ body {
         top: 0;
         width: 100%;
         z-index: 1;
+     
     }
 
     .chat-messages {
