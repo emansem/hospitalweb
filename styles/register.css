@@ -38,12 +38,25 @@ body {
 	place-content: center;
 	background-color: #fff;
 }
+#account__wrapper{
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow-y: auto;
+	padding-block: 4rem;
+}
+#account__wrapper::-webkit-scrollbar{
+	display: none;
+}
 .logo {
 	height: 200px;
 }
 /* register form*/
 .registerContainer{
     box-shadow: var(--box-shadow3) !important;
+	margin-block: 6rem !important;
+	background-color: #fff !important;
 }
 .content__popup-wrapper{
  background-color: #f1f1f1!important;
